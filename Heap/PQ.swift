@@ -20,8 +20,6 @@ class PQueue<K : Comparable, V> {
 		} else {
 			return i < j // max heap
 		}
-			
-
 	}
 
 	private func proclateDown(position : Int) {

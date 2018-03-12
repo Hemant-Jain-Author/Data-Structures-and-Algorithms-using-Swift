@@ -61,7 +61,3 @@ while i < length/2 {
 	}
 	i += 1
 }
-
-/*
-https://stackoverflow.com/questions/25846561/printing-optional-variable
-*/

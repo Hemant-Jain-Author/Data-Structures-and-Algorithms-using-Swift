@@ -1,34 +1,4 @@
-func main() {
-	var str = "my name is hemant jain"
-	str = reverseWords(str)
-	print(str)
-
-	print(matchExp("*world?", "hello worldi"))
-
-	var i = 1
-	while i < 100 {
-		print(isPrime(i))
-		i += 1
-	}
-	print(isUniqueChar("aple"))
-	print(isPalindrome("aplelpa"))
-	print(isPalindrome("applppe"))
-	print(isPalindrome("apllpa"))
-	print(isPermutation("apllpa", "pllpaa"))
-	print(isPermutation("apllpa", "apllpaa"))
-	print(pow(2, 10))
-
-	printAnagram("12345")
-	print(shuffle("aaaabbbb"))
-	print(strcmp("a", "b"))
-	print(strcmp("b", "a"))
-	print(strcmp("a", "a"))
-	print(strcmp("ba", "baaa"))
-	print(strcmp("bad", "bae"))
-	print(strcmp("bad", "baa"))
-}
-
-func matchExpUtil(_ exp : String, _ str : String, _ i : Int, _ j : Int) -> Bool {
+func matchExpUtil(_ exp : inout [Character], _ str : inout [Character], _ i : Int, _ j : Int) -> Bool {
 	if i == exp.count && j == str.count {
 		return true
 	}
@@ -36,37 +6,42 @@ func matchExpUtil(_ exp : String, _ str : String, _ i : Int, _ j : Int) -> Bool 
 		return false
 	}
 	if exp[i] == "?" || exp[i] == str[j] {
-		return matchExpUtil(exp, str, i+1, j+1)
+		return matchExpUtil(&exp, &str, i+1, j+1)
 	}
 	if exp[i] == "*" {
-		return matchExpUtil(exp, str, i+1, j) || matchExpUtil(exp, str, i, j+1) || matchExpUtil(exp, str, i+1, j+1)
+		return matchExpUtil(&exp, &str, i+1, j) || 
+		matchExpUtil(&exp, &str, i, j+1) || 
+		matchExpUtil(&exp, &str, i+1, j+1)
 	}
 	return false
 }
 
 func matchExp(_ exp : String, _ str : String) -> Bool {
-	return matchExpUtil(exp, str, 0, 0)
+	var ex = Array(exp)
+	var st = Array(str)
+	return matchExpUtil(&ex, &st, 0, 0)
 }
 
-func match(_ source : String, _ pattern : String) -> Int {
+func match(_ src : String, _ ptn : String) -> Bool {
+	var source = Array(src)
+	var pattern = Array(ptn)
 	var iSource = 0
 	var iPattern = 0
-	var sourceLen = source.count
-	var patternLen = pattern.count
+	let sourceLen = source.count
+	let patternLen = pattern.count
 	while iSource < sourceLen {
 		if source[iSource] == pattern[iPattern] {
 			iPattern += 1
 		}
 		if iPattern == patternLen {
-			return 1
+			return true
 		}
 		iSource += 1
 	}
-	return 0
+	return false
 }
 
 func isPrime(_ n : Int) -> Bool {
-	print(n)
 	var answer = false
 	if n > 1 {
 		answer = true
@@ -95,20 +70,20 @@ func myAtoi(str : String) -> Int {
 }
 */
 func isUniqueChar(_ str : String) -> Bool {
-	var mp = [Character, Bool]()
+	var mp : [Character: Bool] = [:]
 	for char in str {
 		if mp[char] != false {
 			print("Duplicate detected!")
 			return false
 		}
-		mp[c] = true
+		mp[char] = true
 	}
 	print("No duplicate detected!")
 	return true
 }
 
 func isPermutation(_ s1 : String, _ s2 : String) -> Bool {
-	var count = [Character,Int]()
+	var count : [Character:Int] = [:]
 	if s2.count != s1.count {
 		print(s1, "&", s2, "are not permutation")
 		return false
@@ -117,7 +92,7 @@ func isPermutation(_ s1 : String, _ s2 : String) -> Bool {
 		if count[ch] == nil {
 			count[ch] = 1
 		} else {
-			count[ch] += 1
+			count[ch]! += 1
 		}
 	}
 	for ch in s2  {
@@ -125,14 +100,15 @@ func isPermutation(_ s1 : String, _ s2 : String) -> Bool {
 		print("\(s1) & \(s2) are not permutation")
 			return false
 		} else {
-			count[ch] -= 1
+			count[ch]! -= 1
 		}
 	}
 	print("\(s1) & \(s2) are permutation")
 	return true
 }
 
-func isPalindrome(_ str : String) -> Bool {
+func isPalindrome(_ st : String) -> Bool {
+	var str = Array(st)
 	var i = 0
 	var j = str.count - 1
 	while i < j && str[i] == str[j] {
@@ -140,10 +116,10 @@ func isPalindrome(_ str : String) -> Bool {
 		j -= 1
 	}
 	if i < j {
-		print("String is not a Palindrome")
+		print("String is not a Palindrome",terminator:"")
 		return false
 	}
-	print("String is a Palindrome")
+	print("String is a Palindrome",terminator:"")
 	return true
 }
 
@@ -160,10 +136,12 @@ func pow(_ x : Int, _ n : Int) -> Int {
 	}
 }
 
-func strcmp(a : String, b : String) -> Int {
+func strcmp(_ str1 : String, _ str2 : String) -> Int {
+	var a = Array(str1)
+	var b = Array(str2)
 	var index = 0
-	var len1 = a.count
-	var len2 = b.count
+	let len1 = a.count
+	let len2 = b.count
 	var minlen = len1
 	if len1 > len2 {
 		minlen = len2
@@ -180,7 +158,11 @@ func strcmp(a : String, b : String) -> Int {
 	} else if len2 == index {
 		return 1
 	}
-	return (Int)(a[index]) - (Int)(b[index])
+	if (a[index] > b[index]) {
+		return 1
+	} else {
+		return 0
+	}
 }
 
 // func reverseString(a : String) -> String {
@@ -189,9 +171,21 @@ func strcmp(a : String, b : String) -> Int {
 // 	return String(chars)
 // }
 
-func reverseString(a : String) {
+func reverseString(_ a : String) -> String {
+	var arr = Array(a)
 	var lower = 0
-	var upper = a.count - 1
+	var upper = arr.count - 1
+	while lower < upper {
+		arr.swapAt(lower, upper)
+		lower += 1
+		upper -= 1
+	}
+	return String(arr)
+}
+
+func reverseStringRange(_ a : inout [Character], _ start : Int, _ stop : Int) {
+	var lower = start
+	var upper = stop
 	while lower < upper {
 		a.swapAt(lower, upper)
 		lower += 1
@@ -199,23 +193,16 @@ func reverseString(a : String) {
 	}
 }
 
-func reverseStringRange(a : String, lower : Int, upper : Int) {
-	while lower < upper {
-		a.swapAt(lower, upper)
-		lower += 1
-		upper -= 1
-	}
-}
-
-func reverseWords(_ str : String) -> String {
-	var length = str.count
+func reverseWords(_ st : String) -> String {
+	var str = Array(st)
+	let length = str.count
 	var upper = -1
 	var lower = 0
 	var i = 0
 
 	while i < length {
 		if str[i] == " " {
-			reverseStringRange(str, lower, upper)
+			reverseStringRange(&str, lower, upper)
 			lower = i + 1
 			upper = i
 		} else {
@@ -223,26 +210,27 @@ func reverseWords(_ str : String) -> String {
 		}
 		i += 1
 	}
-	reverseStringRange(str, lower, upper)
-	reverseStringRange(str, 0, length-1)
-	return str
+	reverseStringRange(&str, lower, upper)
+	reverseStringRange(&str, 0, length-1)
+	return String(str)
 }
 
-func printAnagram(_ a : inout String) {
+func printAnagram(_ a : String) {
 	let n = a.count
-	printAnagramUtil(a, n, n)
+	var arr = Array(a)
+	printAnagramUtil(&arr, n, n)
 }
 
-func printAnagramUtil(_ a : inout [Int], _ max : Int, _ n : Int) {
+func printAnagramUtil(_ a : inout [Character], _ max : Int, _ n : Int) {
 	if max == 1 {
-		print(a)
+		print(String(a))
 	}
 	var i = -1
 	while i < max-1 {
 		if i != -1 {
 			a.swapAt(i,max-1)
 		}
-		printAnagramUtil(a, max-1, n)
+		printAnagramUtil(&a, max-1, n)
 		if i != -1 {
 			a.swapAt(i,max-1)
 		}
@@ -250,11 +238,12 @@ func printAnagramUtil(_ a : inout [Int], _ max : Int, _ n : Int) {
 	}
 }
 
-func shuffle(_ arr : inout String) -> String {
-	var n = arr.count / 2
+func shuffle(_ str : String) -> String {
+	var arr = Array(str)
+	let n = arr.count / 2
 	var count = 0
 	var k = 1
-	var temp, temp2 : Int
+	var temp : Character, temp2 : Character
 	var i = 1
 	while i < n {
 		k = i
@@ -275,7 +264,30 @@ func shuffle(_ arr : inout String) -> String {
 		}
 		i = i + 2
 	}
-	return arr
+	return String(arr)
 }
 
-main()
+var str = "my name is hemant jain"
+str = reverseWords(str)
+print(str)
+print(matchExp("*world?", "hello worldi"))
+var i = 1
+while i < 100 {
+	print("\(i) is prime : \(isPrime(i))")
+	i += 1
+}
+print(isUniqueChar("aple"))
+print(isPalindrome("aplelpa"))
+print(isPalindrome("applppe"))
+print(isPalindrome("apllpa"))
+print(isPermutation("apllpa", "pllpaa"))
+print(isPermutation("apllpa", "apllpaa"))
+print(pow(2, 10))
+printAnagram("12345")
+print(shuffle("aaaabbbb"))
+print(strcmp("a", "b"))
+print(strcmp("b", "a"))
+print(strcmp("a", "a"))
+print(strcmp("ba", "baaa"))
+print(strcmp("bad", "bae"))
+print(strcmp("bad", "baa"))

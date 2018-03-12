@@ -132,7 +132,14 @@ func kmpFindCount(text : String, pattern : String) -> Int {
 
 let st1 = "hello, world! world hello wor world"
 let st2 = "world"
-print("bruteforceSearch return : \(bruteforceSearch(text : st1, pattern : st2))")
-print("RobinKarp return : \(robinKarp(text : st1, pattern : st2))")
-print("KMP return : \(kmp(text : st1, pattern : st2))")
-print("KMPFindCount return : \(kmpFindCount(text : st1, pattern : st2))")
+print("Bruteforce search return : \(bruteforceSearch(text : st1, pattern : st2))")
+print("RobinKarp search return : \(robinKarp(text : st1, pattern : st2))")
+print("KMP search return : \(kmp(text : st1, pattern : st2))")
+print("KMP Find Count return : \(kmpFindCount(text : st1, pattern : st2))")
+
+/*
+Bruteforce search return : 7
+RobinKarp search return : 7
+KMP search return : 7
+KMP Find Count return : 3
+*/

@@ -21,11 +21,9 @@ if let val = dict["Apple"] {
 }
 
 /*
-
-Banana ->  30
 Mango ->  50
+Banana ->  30
 Apple ->  40
 Apples price: 40
 Apples are out of chart.
-
 */
