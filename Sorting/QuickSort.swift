@@ -28,11 +28,11 @@ func quickSortUtil(arr : inout [Int], start : Int, stop : Int) {
 }
 
 
-func quicksort(Arr : inout [Int], start : Int, stop : Int) {
+func quicksort2(Arr : inout [Int], start : Int, stop : Int) {
 	if start < stop {
 		let p = partition(Arr : &Arr, start : start, stop : stop)
-        quicksort(Arr : &Arr, start : start, stop : p)
-        quicksort(Arr : &Arr, start : p + 1, stop : stop)
+        quicksort2(Arr : &Arr, start : start, stop : p)
+        quicksort2(Arr : &Arr, start : p + 1, stop : stop)
 	}
 }
 
@@ -56,6 +56,10 @@ func partition(Arr : inout [Int], start : Int, stop : Int) -> Int {
         Arr.swapAt(i, j)
 	}
 }
+
+
+
+
 
 /*
 var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]

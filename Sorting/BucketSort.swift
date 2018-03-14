@@ -3,7 +3,6 @@ func bucketSort(_ data : inout [Int], _ lowerRange : Int, _ upperRange : Int) {
 	let size = data.count
 	var count = [Int](repeating: 0, count : rng )
 	var i = 0
-
 	while i < size {
 		count[data[i]-lowerRange]+=1
 		i+=1

@@ -1,3 +1,11 @@
+func less(_ value1 : Int, _ value2 : Int) -> Bool {
+	return value1 < value2
+}
+	
+func more(_ value1 : Int, _ value2 : Int) -> Bool {
+	return value1 > value2
+}
+
 //bubbleSort sorting method.
 func bubbleSort(_ arr :inout [Int]) {
 	let size = arr.count
@@ -5,7 +13,7 @@ func bubbleSort(_ arr :inout [Int]) {
 	while i < (size - 1) {
 		var j = 0
 		while j < size-i-1 {
-			if (arr[j] > arr[j+1]) {
+			if more(arr[j], arr[j+1]) {
 				arr.swapAt(j, j+1)
 			}
 			j+=1
@@ -23,7 +31,7 @@ func bubbleSort2(_ arr :inout [Int]) {
 		swapped = 0
 		var j = 0
 		while j < size-i-1 {
-			if (arr[j] > arr[j+1]) {
+			if more(arr[j], arr[j+1]) {
 				arr.swapAt(j, j+1)
 				swapped = 1
 			}
@@ -48,6 +56,7 @@ for i in 1...20 {
     let startTime = Date()
     bubbleSort(&testArray)
     let endTime = Date()
+	print(testArray)
     let timeInterval: Double = endTime.timeIntervalSince(startTime)
     print("Array size = \(i*100), Time interval = \(timeInterval) sec")
 }

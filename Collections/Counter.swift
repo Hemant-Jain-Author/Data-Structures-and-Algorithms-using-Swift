@@ -55,7 +55,9 @@ print(mp.get("b"))
 true
 true
 false
-2 true
-1 true
-0 false
+(value: 2, flag: true)
+(value: 1, flag: true)
+(value: 0, flag: false)
+false
+(value: 0, flag: false)
 */

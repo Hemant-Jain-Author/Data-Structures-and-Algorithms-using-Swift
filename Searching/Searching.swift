@@ -43,19 +43,28 @@ func binarysearch(_ data : [Int], _ value : Int) -> Bool {
 	return false
 }
 
-func binarysearchRecursive(_ data : [Int], _ low : Int, _ high : Int, _ value : Int) -> Bool {
-	if low > high {
+func binarySearchRecursive(_ data : inout [Int], _ value : Int) -> Bool {
+	return binarySearchRecursive(&data, 0, data.count, value)
+}
+
+func binarySearchRecursive(_ data : inout [Int], _ low : Int, _ high : Int, _ value : Int) -> Bool {
+	if(low > high) {
 		return false
 	}
-	let mid = low + (high-low)/2
+
+	let mid = low + (high-low)/2 // To afunc the overflow
 	if data[mid] == value {
 		return true
 	} else if data[mid] < value {
-		return binarysearchRecursive(data, mid+1, high, value)
+		return binarySearchRecursive(&data, mid+1, high, value)
 	} else {
-		return binarysearchRecursive(data, low, mid-1, value)
+		return binarySearchRecursive(&data, low, mid-1, value)
 	}
 }
+
+var arr2 = [1,3,5,6,8,9,11,14,17,18]
+print(binarySearchRecursive(&arr2, 9))
+print(binarySearchRecursive(&arr2, 7))
 
 func printRepeating(_ data : [Int]) {
 	let size = data.count
@@ -75,7 +84,7 @@ func printRepeating(_ data : [Int]) {
 
 func printRepeating2(_ dataIn : [Int]) {
 	let size = dataIn.count
-	var data = dataIn.sorted(by : <) // Sort(data,size)
+	var data = dataIn.sorted(by : <) // Sort(data)
 	print("\nRepeating elements are : ", terminator:" ")
 	var i = 1
 	while i < size {
@@ -122,7 +131,7 @@ func printRepeating4(_ data : [Int], _ intrange : Int) {
 	}
 }
 
-func getMax(_ data : [Int]) -> Int {
+func getMaxCount(_ data : [Int]) -> Int {
 	let size = data.count
 	var max = data[0]
 	var count = 1
@@ -146,7 +155,7 @@ func getMax(_ data : [Int]) -> Int {
 	return max
 }
 
-func getMax2(_ dataIn : [Int]) -> Int {
+func getMaxCount2(_ dataIn : [Int]) -> Int {
 	let size = dataIn.count
 	var data = dataIn.sorted(by : <) // Sort(data,size)
 	var max = data[0]
@@ -170,7 +179,7 @@ func getMax2(_ dataIn : [Int]) -> Int {
 	return max
 }
 
-func getMax3(_ data : [Int], _ dataRange : Int) -> Int {
+func getMaxCount3(_ data : [Int], _ dataRange : Int) -> Int {
 	var max = data[0]
 	var maxCount = 1
 	let size = data.count
@@ -598,7 +607,6 @@ func maxProfit(_ stocks : [Int]) {
 		if stocks[i] < stocks[curMin] {
 			curMin = i
 		}
-
 		currProfit = stocks[i] - stocks[curMin]
 		if currProfit > maxProfit {
 			buy = curMin
@@ -706,14 +714,12 @@ func firstRepeated(_ data : [Int]) -> Int {
 func checkPermutation(_ dataIn1 : [Int], _ dataIn2 : [Int]) -> Bool {
 	let size1 = dataIn1.count
 	let size2 = dataIn2.count
-
 	if size1 != size2 {
 		return false
 	}
 
 	let data1 = dataIn1.sorted(by : >)
 	let data2 = dataIn2.sorted(by : >)
-
 	var i = 0 
 	while i < size1 {
 		if data1[i] != data2[i] {
@@ -736,12 +742,11 @@ func search(_ data : [Int], _ key : Int) -> Bool {
 func checkPermutation2(_ data1 : [Int], _ data2 : [Int]) -> Bool {
 	let size1 = data1.count
 	let size2 = data2.count
-	var h = [Int:Int]()
-
 	if size1 != size2 {
 		return false
 	}
 
+	var h = [Int:Int]()
 	var i = 0 
 	while i < size1 {
 		h[data1[i],default:0] += 1
@@ -768,7 +773,6 @@ func removeDuplicates(_ dataIn : [Int]) -> Int {
 	var data = dataIn.sorted(by : <)
 	var i = 1
 	var j = 0
-
 	while  i < size {
 		if data[i] != data[j] {
 			j += 1

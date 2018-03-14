@@ -15,6 +15,9 @@ func selectionSort(_ arr : inout [Int]) {
 		i+=1
 	}
 }
+var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
+selectionSort(&data)
+print(data)
 
 func selectionSort2(_ arr : inout [Int]) {
 	let size = arr.count
@@ -33,9 +36,7 @@ func selectionSort2(_ arr : inout [Int]) {
 	}
 }
 
-var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
-selectionSort(&data)
-print(data)
+
 var data2 = [9, 1, 8, 2, 7, 3, 6, 4, 5]
 selectionSort2(&data2)
 print(data2)
