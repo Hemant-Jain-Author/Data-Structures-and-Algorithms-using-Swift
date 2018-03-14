@@ -1,13 +1,13 @@
-struct Stack<T> {
+class Stack<T> {
 	var stk = [T]()
 	
 	public init() {}
 
-	public mutating func push(_ value : T) {
+	public func push(_ value : T) {
 		stk.append(value)
 	}
 	
-	public mutating func pop() -> T? {
+	public func pop() -> T? {
 		return stk.popLast()
 	}
 	
@@ -28,13 +28,13 @@ struct Stack<T> {
 	}
 }
 
-struct Queue<T> {
+class Queue<T> {
 	fileprivate var que = [T]()
 	fileprivate var head : Int = 0
 
 	public init() {}
 
-	public mutating func add(_ value : T) {
+	public func add(_ value : T) {
 		que.append(value)
 	}
 	
@@ -46,7 +46,7 @@ struct Queue<T> {
  		return que.count - head
  	}
 
-	public mutating func remove() -> T? {
+	public func remove() -> T? {
 		guard head < que.count else { 
 			return nil 
 		}
@@ -198,8 +198,7 @@ public class BinaryTree {
 	}
 	
 	public func printBredthFirst() {
-		var que = Queue<Node>()
-	
+		let que = Queue<Node>()
 		if self.root != nil {
 			que.add(self.root!)
 		}

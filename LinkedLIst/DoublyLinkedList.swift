@@ -37,7 +37,7 @@ class DoublyLinkedList{
 	
 	public func peek() -> Int {
 		if self.isEmpty() {
-			print("EmptyListException")
+			print("Empty List Error")
 		}
 		return self.head!.value
 	}
@@ -70,7 +70,7 @@ class DoublyLinkedList{
 	
 	public func removeHead() -> (value : Int, flag : Bool) {
 		if self.isEmpty() {
-			print("EmptyListException")
+			print("Empty List Error")
 			return (0, false)
 		}
 	

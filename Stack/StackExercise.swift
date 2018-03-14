@@ -1,13 +1,13 @@
-struct Stack<T> {
+class Stack<T> {
 	var stk = [T]()
 	
 	public init() {}
 
-	public mutating func push(_ value : T) {
+	public func push(_ value : T) {
 		stk.append(value)
 	}
 	
-	public mutating func pop() -> T? {
+	public func pop() -> T? {
 		return stk.popLast()
 	}
 	
@@ -29,7 +29,7 @@ struct Stack<T> {
 }
 
 func isBalancedParenthesis(expn : String) -> Bool {
-	var stk = Stack<Character>()
+	let stk = Stack<Character>()
 	var val : Character?
 	for ch in expn {
 		switch ch {
@@ -92,7 +92,7 @@ func reverseStack(stk : inout Stack<Int>) {
 
 
 func postfixEvaluate(expn : String) -> Int {
-	var stk = Stack<Int>()
+	let stk = Stack<Int>()
 	let expArr = expn.split(separator : " ")
 	for tkn in expArr {
 		if let value = Int(tkn) {
@@ -146,7 +146,7 @@ func precedence(_ x : Character) -> Int {
 
 func infixToPostfix(expn : String) -> String {
 	print(expn)
-	var stk = Stack<Character>()
+	let stk = Stack<Character>()
 	var output = ""
 	var out : Character?
 
@@ -260,7 +260,7 @@ func stockSpanRange(arr : [Int]) -> [Int] {
 
 
 func stockSpanRange2(arr : [Int]) -> [Int] {
-	var stk = Stack<Int>()
+	let stk = Stack<Int>()
 	var SR = Array(repeating: 0, count: arr.count)
 	stk.push(0)
 	SR[0] = 1
@@ -316,7 +316,7 @@ func getMaxArea(arr : [Int]) -> Int {
 
 func getMaxArea2(arr : [Int]) -> Int {
 	let size = arr.count
-	var stk = Stack<Int>()
+	let stk = Stack<Int>()
 	var maxArea = 0
 	var Top = 0
 	var TopArea = 0

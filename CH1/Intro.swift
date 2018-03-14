@@ -218,7 +218,7 @@ var point = coord(x:10, y:10)
 print("X axis coord value is  \(point.x)")
 print("Y axis coord value is  \(point.y)")
 
-struct Student  {
+class Student  {
 	var rollNo : Int
 	var firstName : String
 	var lastName : String

@@ -1,4 +1,4 @@
-public class StringTree {
+class StringTree {
 	class Node {
 		var value : String
 		var count : Int
@@ -22,11 +22,11 @@ public class StringTree {
 
 	var root : Node?
 
-	func display() {
+	public func display() {
 		self.displayUtil(curr : self.root)
 	}
 	
-	func displayUtil(curr : Node?) {
+	private func displayUtil(curr : Node?) {
 		guard let curr = curr else {
 			return
 		}
@@ -36,11 +36,11 @@ public class StringTree {
 		self.displayUtil(curr : curr.rChild)
 	}
 	
-	func insert(_ value : String) {
+	public func insert(_ value : String) {
 		self.root = self.insertUtil(value : value, curr : self.root)
 	}
 	
-	func insertUtil(value : String, curr : Node?) -> Node {
+	private func insertUtil(value : String, curr : Node?) -> Node {
 		guard let curr = curr else {
 			let temp = Node(value)
 			return temp
@@ -55,17 +55,17 @@ public class StringTree {
 		return curr
 	}
 	
-	func freeTree() {
+	public  func freeTree() {
 		self.root = nil
 	}
 	
-	func find(_ value : String) -> Bool {
+	public func find(_ value : String) -> Bool {
 		let ret = self.findUtil(curr : self.root, value : value)
 		print("find \(value) Return \(ret)")
 		return ret
 	}
 	
-	func findUtil(curr : Node?, value : String) -> Bool {
+	private func findUtil(curr : Node?, value : String) -> Bool {
 		guard let curr = curr else {
 			return false
 		}
@@ -80,11 +80,11 @@ public class StringTree {
 		return self.findUtil(curr : curr.rChild, value : value)
 	}
 	
-	func frequency(_ value : String) -> Int {
+	public func frequency(_ value : String) -> Int {
 		return self.frequencyUtil(curr : self.root, value : value)
 	}
 	
-	func frequencyUtil(curr : Node?, value : String) -> Int {
+	private func frequencyUtil(curr : Node?, value : String) -> Int {
 		guard let curr = curr else {
 			return 0
 		}

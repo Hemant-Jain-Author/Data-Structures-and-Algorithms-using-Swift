@@ -34,7 +34,7 @@ class Stack {
 	
 	public func peek() -> (value : Int, flag  : Bool) {
 		if self.isEmpty() {
-			print("StackEmptyException")
+			print("Stack Empty Error")
 			return (0, false)
 		}
 		return (self.head!.value, true)
@@ -47,7 +47,7 @@ class Stack {
 	
 	public func pop() -> (value:Int, flag:Bool) {
 		if self.isEmpty() {
-			print("StackEmptyException")
+			print("Stack Empty Error")
 			return (0, false)
 		}
 	

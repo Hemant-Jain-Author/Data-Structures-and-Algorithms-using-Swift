@@ -37,7 +37,7 @@ class DoublyCircularLinkedList{
 	
 	public func peekHead() -> Int {
 		if self.isEmpty() {
-			print("EmptyListException")
+			print("Empty List Error")
 		}
 		return self.head!.value
 	}
@@ -119,7 +119,7 @@ class DoublyCircularLinkedList{
 	
 	public func removeHead() -> (value : Int, flag : Bool) {
 		if self.count == 0 {
-			print("EmptyListException")
+			print("Empty List Error")
 			return (0, false)
 		}
 	
@@ -141,7 +141,7 @@ class DoublyCircularLinkedList{
 	
 	public func removeTail() -> (value : Int, flag : Bool) {
 		if self.count == 0 {
-			print("EmptyListException")
+			print("Empty List Error")
 			return (0, false)
 		}
 	

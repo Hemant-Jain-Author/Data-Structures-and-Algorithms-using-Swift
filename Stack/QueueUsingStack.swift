@@ -1,13 +1,13 @@
-struct Stack<T> {
+class Stack<T> {
 	var stk = [T]()
 	
 	public init() {}
 
-	public mutating func push(_ value : T) {
+	public func push(_ value : T) {
 		stk.append(value)
 	}
 	
-	public mutating func pop() -> T {
+	public func pop() -> T {
 		return stk.removeLast()
 	}
 	

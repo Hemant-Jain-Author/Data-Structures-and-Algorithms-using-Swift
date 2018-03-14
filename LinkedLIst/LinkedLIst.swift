@@ -43,7 +43,7 @@ public func isEmpty() -> Bool {
 
 public func peek() -> (value : Int, flag : Bool) {
 	guard let head = self.head else {
-		print("EmptyListException")
+		print("Empty List Error")
 		return (0, false)
 	}
 	return (head.value, true)
@@ -88,7 +88,6 @@ public func sortedInsert(value : Int) {
 	while curr!.next != nil && curr!.next!.value < value {
 		curr = curr!.next
 	}
-
 	newNode.next = curr!.next
 	curr!.next = newNode
 }
@@ -106,7 +105,7 @@ public func isPresent(data : Int) -> Bool {
 
 public func removeHead() -> (value : Int, flag : Bool) {
 	guard let head = self.head else {
-		print("EmptyListException")
+		print("Empty List Error")
 		return (0, false)
 	}
 	let value = head.value
@@ -118,16 +117,14 @@ public func removeHead() -> (value : Int, flag : Bool) {
 public func deleteNode(delValue : Int) -> Bool {
 	var temp = self.head
 	if self.isEmpty() {
-		print("EmptyListException")
+		print("Empty List Error")
 		return false
 	}
-
 	if delValue == self.head!.value {
 		self.head = self.head!.next
 		self.count -= 1
 		return true
 	}
-
 	while temp!.next != nil {
 		if temp!.next!.value == delValue {
 			temp!.next = temp!.next!.next

@@ -1,13 +1,13 @@
-struct Stack {
+class Stack {
 	var stk = [Int]()
 	
 	public init() {}
 
-	public mutating func push(_ value : Int) {
+	public func push(_ value : Int) {
 		stk.append(value)
 	}
 	
-	public mutating func pop() -> Int? {
+	public func pop() -> Int? {
 		if stk.isEmpty {
 			return nil
 		}

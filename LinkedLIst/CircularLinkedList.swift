@@ -22,23 +22,23 @@ class CircularLinkedList{
 		self.count = 0
 	}
 
-	func size() -> Int {
+	public func size() -> Int {
 		return self.count
 	}
 	
-	func isEmpty() -> Bool {
+	public func isEmpty() -> Bool {
 		return self.count == 0
 	}
 	
-	func peek() -> Int {
+	public func peek() -> Int {
 		if self.isEmpty() {
-			print("EmptyListException")
+			print("Empty List Error")
 			return 0
 		}
 		return self.tail!.next!.value
 	}
 	
-	func addHead(_ value : Int) {
+	public func addHead(_ value : Int) {
 		let temp = Node(value, nil)
 		if self.isEmpty() {
 			self.tail = temp
@@ -50,7 +50,7 @@ class CircularLinkedList{
 		self.count+=1 
 	}
 	
-	func addTail(_ value : Int) {
+	public func addTail(_ value : Int) {
 		let temp = Node(value, nil)
 		if self.isEmpty() {
 			self.tail = temp
@@ -63,9 +63,9 @@ class CircularLinkedList{
 		self.count+=1 
 	}
 	
-	func removeHead() -> Int {
+	public func removeHead() -> Int {
 		if self.isEmpty() {
-			print("EmptyListException")
+			print("Empty List Error")
 			return 0
 		}
 		let value = self.tail!.next!.value
@@ -79,7 +79,7 @@ class CircularLinkedList{
 		return value
 	}
 	
-	func isPresent(_ data : Int) -> Bool {
+	public func isPresent(_ data : Int) -> Bool {
 		var temp = self.tail
 		var i = 0 
 		while i < self.count {
@@ -92,7 +92,7 @@ class CircularLinkedList{
 		return false
 	}
 	
-	func display() {
+	public func display() {
 		if self.isEmpty() {
 			return
 		}
@@ -104,12 +104,12 @@ class CircularLinkedList{
 		print(temp!.value)
 	}
 	
-	func freeList() {
+	public func freeList() {
 		self.tail = nil
 		self.count = 0
 	}
 	
-	func removeNode(_ key : Int) -> Bool {
+	public func removeNode(_ key : Int) -> Bool {
 		if self.isEmpty() {
 			return false
 		}
@@ -144,7 +144,7 @@ class CircularLinkedList{
 		return false
 	}
 	
-	func copyListReversed() -> CircularLinkedList {
+	public func copyListReversed() -> CircularLinkedList {
 		let cl = CircularLinkedList()
 		var curr = self.tail!.next
 		let head = curr
@@ -160,7 +160,7 @@ class CircularLinkedList{
 		return cl
 	}
 	
-	func copyList() -> CircularLinkedList {
+	public func copyList() -> CircularLinkedList {
 		let cl = CircularLinkedList()
 		var curr = self.tail!.next
 		let head = curr

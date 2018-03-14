@@ -1,10 +1,10 @@
-struct Queue<T> {
+class Queue<T> {
 	fileprivate var que = [T]()
 	fileprivate var head : Int = 0
 
 	public init() {}
 
-	public mutating func add(_ value : T) {
+	public func add(_ value : T) {
 		que.append(value)
 	}
 	
@@ -16,7 +16,7 @@ struct Queue<T> {
     	return que.count - head
   	}
 
-	public mutating func remove() -> T? {
+	public func remove() -> T? {
 		guard head < que.count else { 
 			return nil 
 		}

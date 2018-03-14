@@ -97,16 +97,16 @@ class PQueue<K : Comparable, V> {
 	}
 }
 
-struct Stack<T> {
+class Stack<T> {
 	var stk = [T]()
 	
 	public init() {}
 
-	public mutating func push(_ value : T) {
+	public func push(_ value : T) {
 		stk.append(value)
 	}
 	
-	public mutating func pop() -> T? {
+	public func pop() -> T? {
 		return stk.popLast()
 	}
 	
@@ -128,13 +128,13 @@ struct Stack<T> {
 }
 
 
-struct Queue<T> {
+class Queue<T> {
 	private var que = [T]()
 	private var head : Int = 0
 
 	public init() {}
 
-	public mutating func add(_ value : T) {
+	public func add(_ value : T) {
 		que.append(value)
 	}
 	
@@ -146,7 +146,7 @@ struct Queue<T> {
     	return que.count - head
   	}
 
-	public mutating func remove() -> T? {
+	public func remove() -> T? {
 		guard head < que.count else { 
 			return nil 
 		}
@@ -388,8 +388,7 @@ class Graph{
 	public func dfsStack() {
 		let count = self.count
 		var visited = Array(repeating : 0, count : count)
-		var stk = Stack<Int>()
-	
+		let stk = Stack<Int>()
 		visited[1] = 1
 		stk.push(1)
 	
@@ -420,7 +419,7 @@ class Graph{
 	}
 	
 	public func bfsQueue(index : Int, visited : inout [Int]) {
-		var que = Queue<Int>()
+		let que = Queue<Int>()
 		visited[index] = 1
 		que.add(index)
 	
@@ -455,7 +454,7 @@ class Graph{
 		let count = self.count
 		var distance = Array(repeating : Int.max, count : count)
 		var path = Array(repeating : 0, count : count)
-		var que = Queue<Int>()
+		let que = Queue<Int>()
 		que.add(source)
 		distance[source] = 0
 		path[source] = source
