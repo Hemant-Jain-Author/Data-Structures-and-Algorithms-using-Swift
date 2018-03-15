@@ -32,7 +32,16 @@ class Stack {
 	}
 }
 
+var s = Stack()
+s.push(1)
+s.push(2)
+s.push(3)
+let temp = s.pop()
+if(temp != nil) {
+	print(temp!)
+}
 
+/*
 var s = Stack()
 var length = 10
 var i = 0
@@ -45,11 +54,8 @@ i = 0
  while i < length {
 	let temp = s.pop()
 	if(temp != nil) {
-		print(temp!)// as Any)
+		print(temp!)
 	}
 	i += 1
 }
-
-/*
-https://stackoverflow.com/questions/25846561/printing-optional-variable
 */

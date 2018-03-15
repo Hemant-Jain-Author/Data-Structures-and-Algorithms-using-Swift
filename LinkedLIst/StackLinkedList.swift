@@ -68,6 +68,15 @@ class Stack {
 	}
 }
 
+// Testing code
+var s = Stack()
+s.push(1)
+s.push(2)
+s.push(3)
+let temp = s.pop()
+print(temp.value)
+
+/*
 let s = Stack()
 var i = 1
 while i <= 100 {
@@ -80,3 +89,4 @@ while i <= 120 {
 	print(s.pop().value, terminator:" ")
 	i += 1
 }
+*/

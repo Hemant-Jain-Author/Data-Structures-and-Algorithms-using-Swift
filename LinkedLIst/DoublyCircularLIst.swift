@@ -41,47 +41,8 @@ class DoublyCircularLinkedList{
 		}
 		return self.head!.value
 	}
-	
-	public func isPresent(key: Int) -> Bool {
-		var temp = self.head
-		if self.head == nil {
-			return false
-		}
-	
-		while true {
-			if temp!.value == key {
-				return true
-			}
-			temp = temp!.next
-			if temp === self.head {
-				break
-			}
-		}
-		return false
-	}
-	
-	public func freeList() {
-		self.head = nil
-		self.tail = nil
-		self.count = 0
-	}
-	
-	public func display() {
-		if self.isEmpty() {
-			return
-		}
-		print("List size is ::", self.count)
-		print("List content :: ")
-		var temp = self.head
-		while true {
-			print(temp!.value, terminator: " ")
-			temp = temp!.next
-			if temp === self.head {
-				break
-			}
-		}
-		print()
-	}
+	//Other methods
+}	
 	
 	public func addHead(value: Int) {
 		let newNode = Node(value)
@@ -115,6 +76,47 @@ class DoublyCircularLinkedList{
 			self.tail = newNode
 		}
 		self.count+=1 
+	}
+
+	public func display() {
+		if self.isEmpty() {
+			return
+		}
+		print("List size is ::", self.count)
+		print("List content :: ")
+		var temp = self.head
+		while true {
+			print(temp!.value, terminator: " ")
+			temp = temp!.next
+			if temp === self.head {
+				break
+			}
+		}
+		print()
+	}
+
+	public func isPresent(key: Int) -> Bool {
+		var temp = self.head
+		if self.head == nil {
+			return false
+		}
+	
+		while true {
+			if temp!.value == key {
+				return true
+			}
+			temp = temp!.next
+			if temp === self.head {
+				break
+			}
+		}
+		return false
+	}
+	
+	public func freeList() {
+		self.head = nil
+		self.tail = nil
+		self.count = 0
 	}
 	
 	public func removeHead() -> (value : Int, flag : Bool) {

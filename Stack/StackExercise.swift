@@ -57,19 +57,16 @@ func isBalancedParenthesis(expn : String) -> Bool {
 	return stk.isEmpty
 }
 
-func main() {
-	var expn = "{()}[]"
-	var value = isBalancedParenthesis(expn : expn)
-	print("Given Expn: \(expn)")
-	print("isBalancedParenthesis: \(value)")
-	expn = "{()}[][][()][][]{)"
-	value = isBalancedParenthesis(expn : expn)
-	print("Given Expn: \(expn)")
-	print("isBalancedParenthesis: \(value)")
-}
+// Testing code
 
-//main()
-
+var expn = "{()}[]"
+var value = isBalancedParenthesis(expn : expn)
+print("Given Expn: \(expn)")
+print("isBalancedParenthesis: \(value)")
+expn = "{()}[][][()][][]{)"
+value = isBalancedParenthesis(expn : expn)
+print("Given Expn: \(expn)")
+print("isBalancedParenthesis: \(value)")
 
 func insertAtBottom(stk : inout Stack<Int>, value : Int) {
 	if stk.isEmpty {
@@ -118,15 +115,11 @@ func postfixEvaluate(expn : String) -> Int {
 	return stk.pop()!
 }
 
-func main9() {
-	let expn = "6 5 2 3 + 8 * + 3 + *"
-	let value = postfixEvaluate(expn: expn)
-	print("Given Postfix Expn: \(expn)")
-	print("Result after Evaluation: \(value)")
-}
-
-main9()
-
+// Testing code
+let expn = "6 5 2 3 + 8 * + 3 + *"
+let value = postfixEvaluate(expn: expn)
+print("Given Postfix Expn: \(expn)")
+print("Result after Evaluation: \(value)")
 
 func precedence(_ x : Character) -> Int {
 	if x == "(" {
@@ -189,57 +182,11 @@ func infixToPostfix(expn : String) -> String {
 	return output
 }
 
-func main3() {
-	let expn = "10+((3))*5/(16-4)"
-	let value = infixToPostfix(expn : expn)
-	print("Infix Expn: \(expn)")
-	print("Postfix Expn: \(value)")
-}
-
-//main3()
-
-/*
-func InfixToPrefix(expn : String) -> String {
-	var expn = reverseString(expn:expn)
-	expn = replaceParanthesis(expn:expn)
-	expn = infixToPostfix(expn:expn)
-	expn = reverseString(expn:expn)
-	return expn
-}
-func reverseString(expn : String) -> String {
-	var lower = 0
-	var upper = expn.count - 1
-	while lower < upper {
-		expn.swapAt(lower, upper)
-		lower+=1
-		upper-=1
-	}
-	return expn
-}
-
-func replaceParanthesis(expn : String) -> String {
-	var lower = 0
-	var upper = expn.count - 1
-	while lower <= upper {
-		if expn[lower] == "(" {
-			expn[lower] = ")"
-		} else if expn[lower] == ")" {
-			expn[lower] = "("
-		}
-		lower+=1
-	}
-	return expn
-}
-
-func main4() {
-	let expn = "10+((3))*5/(16-4)"
-	let value = InfixToPrefix(expn:expn)
-	print("Infix Expn: \(expn)")
-	print("Prefix Expn: \(value)")
-}
-
-main4()
-*/
+// Testing code
+let expn = "10+((3))*5/(16-4)"
+let value = infixToPostfix(expn : expn)
+print("Infix Expn: \(expn)")
+print("Postfix Expn: \(value)")
 
 func stockSpanRange(arr : [Int]) -> [Int] {
 	var SR = Array(repeating: 0, count: arr.count)
@@ -257,7 +204,6 @@ func stockSpanRange(arr : [Int]) -> [Int] {
 	}
 	return SR
 }
-
 
 func stockSpanRange2(arr : [Int]) -> [Int] {
 	let stk = Stack<Int>()
@@ -280,15 +226,11 @@ func stockSpanRange2(arr : [Int]) -> [Int] {
 	return SR
 }
 
-func main6() {
-	let stock = [4, 6, 8, 12, 2, 1, 7, 8]
-	print(stock)
-	print(stockSpanRange(arr:stock))
-	print(stockSpanRange2(arr:stock))
-}
-
-//main6()
-
+// Testing code
+let stock = [4, 6, 8, 12, 2, 1, 7, 8]
+print(stock)
+print(stockSpanRange(arr:stock))
+print(stockSpanRange2(arr:stock))
 
 func getMaxArea(arr : [Int]) -> Int {
 	let size = arr.count
@@ -343,11 +285,8 @@ func getMaxArea2(arr : [Int]) -> Int {
 	return maxArea
 }
 
-func main7() {
-	let stock = [4, 6, 8, 12, 2, 1, 7, 8]
-	print(stock)
-	print(getMaxArea(arr:stock))
-	print(getMaxArea2(arr:stock))
-}
-
-//main7()
+// Testing code
+let stock = [4, 6, 8, 12, 2, 1, 7, 8]
+print(stock)
+print(getMaxArea(arr:stock))
+print(getMaxArea2(arr:stock))
