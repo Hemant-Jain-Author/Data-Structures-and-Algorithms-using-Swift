@@ -31,7 +31,7 @@ func binarysearch(_ data : [Int], _ value : Int) -> Bool {
 	var mid = 0
 
 	while low <= high {
-		mid = low + (high-low)/2
+		mid = (low + high)/2
 		if data[mid] == value {
 			return true
 		} else if data[mid] < value {
@@ -52,7 +52,7 @@ func binarySearchRecursive(_ data : inout [Int], _ low : Int, _ high : Int, _ va
 		return false
 	}
 
-	let mid = low + (high-low)/2 // To afunc the overflow
+	let mid = (low + high) / 2
 	if data[mid] == value {
 		return true
 	} else if data[mid] < value {

@@ -4,18 +4,18 @@ class Queue<T> {
 
 	public init() {}
 
+	public var isEmpty: Bool {
+		return count == 0
+	}
+
+	public var count: Int {
+		return que.count - head
+	}
+	
 	public func add(_ value : T) {
 		que.append(value)
 	}
 	
-	public var isEmpty: Bool {
-    	return count == 0
-  	}
-
-  	public var count: Int {
-    	return que.count - head
-  	}
-
 	public func remove() -> T? {
 		guard head < que.count else { 
 			return nil 
@@ -29,8 +29,7 @@ class Queue<T> {
 			que.removeFirst(head)
 			head = 0
 			print("array size modified.")
-		}
-		
+		}		
 		return element
 	}
 
@@ -42,6 +41,23 @@ class Queue<T> {
 	}
 }
 
+
+// Testing code
+var q = Queue<Int>()
+q.add(1)
+q.add(2)
+q.add(3)
+var temp = q.remove()
+if(temp != nil) {
+	print(temp!)
+}
+temp = q.remove()
+if(temp != nil) {
+	print(temp!)
+}
+
+
+/*
 var s = Queue<Int>()
 var length = 100
 var i = 0
@@ -58,3 +74,4 @@ while i < length*2 {
 	}
 	i += 1
 }
+*/

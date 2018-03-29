@@ -12,7 +12,7 @@ func insert(_ s : String) {
 		return
 	}
 
-	let str : [Character] = Array(s.lowercased())
+	let str : [Character] = Array(s) /*s.lowercased() is other option.*/
 	self.root = self.insertUtil(node : self.root, str : str, index : 0)
 }
 
@@ -60,7 +60,7 @@ func find(_ s : String) -> Bool {
 	if s == "" {
 		return false
 	}
-	let str : [Character] = Array(s.lowercased())
+	let str : [Character] = Array(s) /* s.lowercased() */
 	return self.findUtil(curr : self.root, str : str, index : 0)
 }
 
@@ -82,6 +82,7 @@ let a = "apple"
 let b = "app"
 let c = "appletree"
 let d = "tree"
+print (t)
 t.insert(a)
 t.insert(d)
 print(t.find(a))
