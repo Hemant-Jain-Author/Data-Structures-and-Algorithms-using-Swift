@@ -146,8 +146,8 @@ func HeapSort(arrInput : inout [Int]) {
 	}
 }
 
+// Testing code
 var arr = [1, 9, 6, 7, 8, -1, 2, 4, 5, 3]
-print(arr)
 var hp = Heap(isMin : true)
 let n = arr.count
 var i = 0
@@ -160,7 +160,6 @@ while i < n {
 	print(hp.remove(),terminator:" ")
 	i+=1
 }
-print()
 
 arr = [1, 9, 6, 7, 8, -1, 2, 4, 5, 3]
 hp = Heap(arrInput : arr, isMin : true)
@@ -171,6 +170,7 @@ while i < n {
 }
 
 print()
+// Testing code
 arr = [1, 9, 6, 7, 8, -1, 2, 4, 5, 3]
 HeapSort(arrInput:&arr)
 print(arr)

@@ -49,7 +49,6 @@ class TST {
 		return ret
 	}
 
-
 	func findUtil(curr : Node?, word : [Character], wordIndex : Int) -> Bool {
 		guard let curr = curr else {
 			return false
@@ -66,8 +65,6 @@ class TST {
 			return self.findUtil(curr : curr.equal, word : word, wordIndex : wordIndex+1)
 		}
 	}
-
-
 }
 
 let tt = TST()

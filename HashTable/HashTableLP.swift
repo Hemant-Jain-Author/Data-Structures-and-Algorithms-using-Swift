@@ -15,7 +15,8 @@ class HashTable {
 		self.Arr = Array(repeating:0, count:(tSize + 1))
 		self.Flag = Array(repeating:NodeState.EmptyNode, count:(tSize + 1))
 	}
-	
+	//other function 
+
 	func computeHash(key : Int) -> Int {
 		// This is most simple hash function
 		// more complex hash function can be used
@@ -89,45 +90,18 @@ class HashTable {
 	}
 }
 
-
+// Testing code
 var ht = HashTable(tSize:1000)
 print(ht.add(89))
 print(ht.add(18))
-print(ht.add(49))
-print(ht.add(58))
-print(ht.add(69))
-print(ht.add(89))
-print(ht.add(18))
-print(ht.add(49))
-print(ht.add(58))
-print(ht.add(69))
-ht.display()
 print("89 found : \(ht.find(89))")
 print(ht.remove(89))
-print(ht.remove(18))
-print(ht.remove(49))
-print(ht.remove(58))
-print(ht.remove(69))
 ht.display()
-
-
 /*
+true
+true
+89 found : true
+true
 Values Stored in HashTable are::
-Node at index [18 ] :: 18
-Node at index [19 ] :: 18
-Node at index [49 ] :: 49
-Node at index [50 ] :: 49
-Node at index [58 ] :: 58
-Node at index [59 ] :: 58
-Node at index [69 ] :: 69
-Node at index [70 ] :: 69
-Node at index [89 ] :: 89
-Node at index [90 ] :: 89
-
-Values Stored in HashTable are::
-Node at index [19 ] :: 18
-Node at index [50 ] :: 49
-Node at index [59 ] :: 58
-Node at index [70 ] :: 69
-Node at index [90 ] :: 89
+Node at index [ 18  ] ::  18
 */

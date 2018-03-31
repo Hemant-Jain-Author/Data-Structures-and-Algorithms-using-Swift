@@ -153,7 +153,7 @@ class MedianHeap{
 	}	
 }
 
-
+// Testing code
 var arr = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1, 9, 2, 8, 3, 7, 4, 6, 5, 10, 10]
 var hp = MedianHeap()
 

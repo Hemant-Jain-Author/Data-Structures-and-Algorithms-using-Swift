@@ -228,7 +228,7 @@ class Graph{
 			i+=1
 		}
 	}
-
+}
 	public func dijkstra(source : Int) {
 		let count = self.count
 		var previous = Array(repeating : -1, count : count)
@@ -391,7 +391,6 @@ class Graph{
 		let stk = Stack<Int>()
 		visited[1] = 1
 		stk.push(1)
-	
 		while stk.count != 0 {
 			let temp = stk.pop()
 			var list = self.VertexList[temp!]
@@ -512,25 +511,23 @@ class Graph{
 	}	
 }
 
+// Testing code
+let g = Graph(9)
+g.AddBiEdge(source:0, destination:2, cost:1)
+g.AddBiEdge(source:1, destination:2, cost:5)
+g.AddBiEdge(source:1, destination:3, cost:7)
+g.AddBiEdge(source:1, destination:4, cost:9)
+g.AddBiEdge(source:3, destination:2, cost:2)
+g.AddBiEdge(source:3, destination:5, cost:4)
+g.AddBiEdge(source:4, destination:5, cost:6)
+g.AddBiEdge(source:4, destination:6, cost:3)
+g.AddBiEdge(source:5, destination:7, cost:1)
+g.AddBiEdge(source:6, destination:7, cost:7)
+g.AddBiEdge(source:7, destination:8, cost:17)
+//g.display()
+g.dijkstra(source:1)
+g.Prims()
 
-func main() {
-	let g = Graph(9)
-	g.AddBiEdge(source:0, destination:2, cost:1)
-	g.AddBiEdge(source:1, destination:2, cost:5)
-	g.AddBiEdge(source:1, destination:3, cost:7)
-	g.AddBiEdge(source:1, destination:4, cost:9)
-	g.AddBiEdge(source:3, destination:2, cost:2)
-	g.AddBiEdge(source:3, destination:5, cost:4)
-	g.AddBiEdge(source:4, destination:5, cost:6)
-	g.AddBiEdge(source:4, destination:6, cost:3)
-	g.AddBiEdge(source:5, destination:7, cost:1)
-	g.AddBiEdge(source:6, destination:7, cost:7)
-	g.AddBiEdge(source:7, destination:8, cost:17)
-	//g.display()
-	g.dijkstra(source:1)
-	g.Prims()
-}
-main()
 /*
 func main2() {
 	let g = Graph(6)

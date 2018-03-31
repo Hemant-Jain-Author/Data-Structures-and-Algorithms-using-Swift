@@ -6,7 +6,7 @@ class Trie {
 	}
 
 	var root = Node()
-
+}
 func insert(_ s : String) {
 	if s == "" {
 		return
@@ -75,21 +75,14 @@ func findUtil(curr : Node?, str : [Character], index : Int) -> Bool {
 }
 }
 
-
-
+// Testing code
 let t = Trie()
 let a = "apple"
 let b = "app"
 let c = "appletree"
 let d = "tree"
-print (t)
 t.insert(a)
 t.insert(d)
-print(t.find(a))
-print(t.find(b))
-print(t.find(c))
-print(t.find(d))
-t.remove(d)
 print(t.find(a))
 print(t.find(b))
 print(t.find(c))

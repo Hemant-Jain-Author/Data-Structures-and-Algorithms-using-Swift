@@ -9,14 +9,12 @@ func fibonacci2(n : Int) -> Int {
 	var first = 0
 	var second = 1
 	var temp = 0
-
+	var i = 2
 	if n == 0 {
 		return first
 	} else if n == 1 {
 		return second
 	}
-
-	var i = 2
 	while i <= n {
 		temp = first + second
 		first = second
@@ -25,6 +23,7 @@ func fibonacci2(n : Int) -> Int {
 	}
 	return temp
 }
+
 import Foundation
 let start = Date()
 let val = fibonacci(n:30) 

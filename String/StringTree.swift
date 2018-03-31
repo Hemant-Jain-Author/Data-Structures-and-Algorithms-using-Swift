@@ -114,7 +114,6 @@ print(tt.find("applkhjkhkj"))
 print(tt.find("grapes"))
 print(tt.find("mango"))
 
-tt.display()
 print("frequency returned ::  \(tt.frequency("apple"))")
 print("frequency returned ::  \(tt.frequency("banana"))")
 print("frequency returned ::  \(tt.frequency("mango"))")
