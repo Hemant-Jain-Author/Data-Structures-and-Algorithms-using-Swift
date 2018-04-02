@@ -1,6 +1,7 @@
 func quickSelect(_ arr : inout [Int], _ key : Int) -> Int {
 	let size = arr.count
-	quickSelectUtil(arr : &arr, start : 0, stop : size-1, key : key)
+	// Kth element is at k-1 index.
+	quickSelectUtil(arr : &arr, start : 0, stop : size-1, key : key - 1)
 	return arr[key-1]
 }
 
@@ -9,18 +10,15 @@ func quickSelectUtil(arr : inout [Int], start : Int, stop : Int, key : Int) {
 		return
 	}
 	let pivot = arr[start]
-	var lower = start+1
+	var lower = start
 	var upper = stop
 
-	while lower < upper {
-		while arr[lower] <= pivot && lower < upper {
-			lower+=1
-		}
-		while arr[upper] > pivot && lower <= upper {
-			upper-=1
-		}
-		if lower < upper {
+	while lower <= upper {
+		if(arr[lower] > pivot) {
 			arr.swapAt(upper, lower)
+			upper -= 1
+		} else {
+			lower += 1
 		}
 	}
 	arr.swapAt(upper, start) // upper is the pivot position
@@ -33,4 +31,7 @@ func quickSelectUtil(arr : inout [Int], start : Int, stop : Int, key : Int) {
 }
 
 var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
-print(quickSelect(&data, 7))
+for i in 1...9 {
+	print(quickSelect(&data, i))
+	data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
+}
