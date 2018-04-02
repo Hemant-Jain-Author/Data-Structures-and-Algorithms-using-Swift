@@ -38,6 +38,7 @@ func mergeSort(_ arr : inout [Int]) {
 	mergeSrt(arr : &arr, tempArray : &tempArray, lowerIndex : 0, upperIndex : size-1)
 }
 
+// Testing code
 /*
 var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
 mergeSort(&data)
@@ -45,20 +46,37 @@ print(data)
 */
 
 import Foundation
+#if os(Windows)
+public func arc4random_uniform(_ max: UInt32) -> Int32 {
+  return (rand() % Int32(max-1))
+}
+#endif
 
 func randArray(n:Int ) -> [Int] {
     var result:[Int] = []
     for _ in 0..<n {
-        result.append(Int(rand() % 100))
+        result.append(Int(arc4random_uniform(100)))
     }
     return result
 }
-
-for i in 1...10 {
+func validator(_ arr : inout [Int]) {
+	let size = arr.count
+	var i = 0
+	while i < size-2 {
+		if(arr[i] > arr[i+1]) {
+			print("Not sorted at index \(i)")
+			print(arr)
+			return
+		}
+		i += 1
+	}
+}
+for i in 1...20 {
     var testArray: [Int] = randArray(n: i * 100)
     let startTime = Date()
     mergeSort(&testArray)
     let endTime = Date()
     let timeInterval: Double = endTime.timeIntervalSince(startTime)
     print("Array size = \(i*100), Time interval = \(timeInterval) sec")
+	validator(&testArray)
 }

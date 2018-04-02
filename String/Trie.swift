@@ -6,7 +6,7 @@ class Trie {
 	}
 
 	var root = Node()
-}
+
 func insert(_ s : String) {
 	if s == "" {
 		return

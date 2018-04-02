@@ -116,10 +116,10 @@ func postfixEvaluate(expn : String) -> Int {
 }
 
 // Testing code
-let expn = "6 5 2 3 + 8 * + 3 + *"
-let value = postfixEvaluate(expn: expn)
+expn = "6 5 2 3 + 8 * + 3 + *"
+let res = postfixEvaluate(expn: expn)
 print("Given Postfix Expn: \(expn)")
-print("Result after Evaluation: \(value)")
+print("Result after Evaluation: \(res)")
 
 func precedence(_ x : Character) -> Int {
 	if x == "(" {
@@ -183,10 +183,10 @@ func infixToPostfix(expn : String) -> String {
 }
 
 // Testing code
-let expn = "10+((3))*5/(16-4)"
-let value = infixToPostfix(expn : expn)
+expn = "10+((3))*5/(16-4)"
+let value1 = infixToPostfix(expn : expn)
 print("Infix Expn: \(expn)")
-print("Postfix Expn: \(value)")
+print("Postfix Expn: \(value1)")
 
 func stockSpanRange(arr : [Int]) -> [Int] {
 	var SR = Array(repeating: 0, count: arr.count)
@@ -227,7 +227,7 @@ func stockSpanRange2(arr : [Int]) -> [Int] {
 }
 
 // Testing code
-let stock = [4, 6, 8, 12, 2, 1, 7, 8]
+var stock = [4, 6, 8, 12, 2, 1, 7, 8]
 print(stock)
 print(stockSpanRange(arr:stock))
 print(stockSpanRange2(arr:stock))
@@ -286,7 +286,7 @@ func getMaxArea2(arr : [Int]) -> Int {
 }
 
 // Testing code
-let stock = [4, 6, 8, 12, 2, 1, 7, 8]
+stock = [4, 6, 8, 12, 2, 1, 7, 8]
 print(stock)
 print(getMaxArea(arr:stock))
 print(getMaxArea2(arr:stock))

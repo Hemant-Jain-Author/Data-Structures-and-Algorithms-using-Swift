@@ -799,12 +799,12 @@ func removeDuplicates(_ dataIn : [Int]) -> Int {
 		printRepeating4(second, 100)
 		printRepeating4(first, 100)
 
-		print(getMax(first))
-		print(getMax(second))
-		print(getMax2(first))
-		print(getMax2(second))
-		print(getMax3(first,100))
-		print(getMax3(second,100))
+		print(getMaxCount(first))
+		print(getMaxCount(second))
+		print(getMaxCount2(first))
+		print(getMaxCount2(second))
+		print(getMaxCount3(first,100))
+		print(getMaxCount3(second,100))
 	
 		let third = [1, 3, 5, 7, 9, 7, 25, 21, 30]
 		let forth = [1, 3, 3, 7, 3, 7, 2, 3, 3]

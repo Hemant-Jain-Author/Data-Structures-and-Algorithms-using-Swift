@@ -42,8 +42,7 @@ class DoublyCircularLinkedList{
 		return self.head!.value
 	}
 	//Other methods
-}	
-	
+
 	public func addHead(value: Int) {
 		let newNode = Node(value)
 		if self.count == 0 {

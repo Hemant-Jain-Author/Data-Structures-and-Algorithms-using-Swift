@@ -50,7 +50,7 @@ func gcd(_ m : Int, _ n : Int) -> Int {
 	return gcd(n, m%n)
 }
 
-print("GCD 5 3 \(GCD(5,3))")
+print("gcd 5 3 \(gcd(5,3))")
 
 func permutation(_ data : inout [Int], _ i : Int, _ length : Int) {
 	if length == i {
@@ -220,8 +220,14 @@ print("Y axis coord value is  \(point.y)")
 
 class Student  {
 	var rollNo : Int
-	var firstName : String
+	var firstName : String 
 	var lastName : String
+
+	public init(rollNo:Int, firstName:String,lastName:String) {
+		self.rollNo = rollNo
+		self.firstName = firstName
+		self.lastName = lastName
+	}
 
 	func getFirstName() -> String {
 		return self.firstName
