@@ -28,16 +28,11 @@ print(data)
 */
 
 import Foundation
-#if os(Windows)
-public func arc4random_uniform(_ max: UInt32) -> Int32 {
-  return (rand() % Int32(max-1))
-}
-#endif
 
 func randArray(n:Int ) -> [Int] {
     var result:[Int] = []
     for _ in 0..<n {
-        result.append(20 + Int(arc4random_uniform(10)))
+        result.append(20 + Int.random(in: 1..<10))
     }
     return result
 }

@@ -58,26 +58,21 @@ func partition(arr : inout [Int], start : Int, stop : Int) -> Int {
 	}
 }
 
-/*
+
 var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
 quickSort(&data)
 print(data)
-*/
 
 import Foundation
-#if os(Windows)
-public func arc4random_uniform(_ max: UInt32) -> Int32 {
-  return (rand() % Int32(max-1))
-}
-#endif
 
 func randArray(n:Int ) -> [Int] {
     var result:[Int] = []
     for _ in 0..<n {
-        result.append(Int(arc4random_uniform(100)))
+        result.append(Int.random(in: 1..<100))
     }
     return result
 }
+
 func validator(_ arr : inout [Int]) {
 	let size = arr.count
 	var i = 0
@@ -90,7 +85,8 @@ func validator(_ arr : inout [Int]) {
 		i += 1
 	}
 }
-for i in 1...20 {
+
+for i in 1...200 {
     var testArray: [Int] = randArray(n: i * 100)
     let startTime = Date()
     quickSort(&testArray)
