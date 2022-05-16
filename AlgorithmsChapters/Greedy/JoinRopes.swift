@@ -133,72 +133,55 @@ class Heap {
     }
 }
 
-func HeapSort(_ array : inout [Int], _ inc : Bool) {
-    // Create max heap for increasing order sorting.
-    let hp : Heap = Heap(&array, !inc);
-    var i : Int = 0;
-	while (i < array.count) {
-		array[array.count - i - 1] = hp.remove();
-		i += 1;
-	}
-}
-
-let hp : Heap = Heap(true);
-hp.add(1);
-hp.add(6);
-hp.add(5);
-hp.add(7);
-hp.add(3);
-hp.add(4);
-hp.add(2);
-hp.printHeap();
-while (!hp.isEmpty()) {    
-	print(String(hp.remove()), terminator: " ");
-}
-
-var arr : [Int] = [1, 9, 6, 7, 8, -1, 2, 4, 5, 3];
-HeapSort(&arr, true);
-print(arr)
+func joinRopes(_ ropes : inout [Int], _ size : Int) -> Int {
+    ropes.sort();
+    var i : Int = 0, j : Int = size - 1;
+    while (i < j) {
+        let temp : Int = ropes[i];
+        ropes[i] = ropes[j];
+        ropes[j] = temp;
+        i += 1;j -= 1;
+    }
     
-func IsMinHeap(_ arr : [Int]) -> Bool {
-	let size = arr.count
-	var i = 0
-	while i <= (size-2)/2 {
-		if 2*i+1 < size {
-			if arr[i] > arr[2*i+1] {
-				return false
-			}
-		}
-		if 2*i+2 < size {
-			if arr[i] > arr[2*i+2] {
-				return false
-			}
-		}
-		i+=1
-	}
-	return true
+    var total : Int = 0;
+    var value : Int = 0;
+    var index : Int;
+    var length : Int = size;
+    while (length >= 2) {
+        value = ropes[length - 1] + ropes[length - 2];
+        total += value;
+        index = length - 2;
+        while (index > 0 && ropes[index - 1] < value) {
+            ropes[index] = ropes[index - 1];
+            index -= 1;
+        }
+        ropes[index] = value;
+        length -= 1;
+    }
+    return total;
 }
 
-func IsMaxHeap(_ arr : [Int]) -> Bool {
-	let size = arr.count
-	var i = 0
-	while i <= (size-2)/2 {
-		if 2*i+1 < size {
-			if arr[i] < arr[2*i+1] {
-				return false
-			}
-		}
-		if 2*i+2 < size {
-			if arr[i] < arr[2*i+2] {
-				return false
-			}
-		}
-		i+=1
-	}
-	return true
+func joinRopes2(_ ropes : inout [Int], _ size : Int) -> Int {
+    let pq = Heap(true);
+    var i : Int = 0;
+    while (i < size) {
+        pq.add(ropes[i]);
+        i += 1;
+    }
+    
+    var total : Int = 0;
+    var value : Int = 0;
+    while (pq.length() > 1) {
+        value = pq.remove();
+        value += pq.remove();
+        pq.add(value);
+        total += value;
+    }
+    return total;
 }
-let bb = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(IsMinHeap(bb))
-let cc = [9, 8, 7, 6, 5, 4, 3, 2, 1]
-print(IsMaxHeap(cc))
-print(IsMaxHeap(bb))
+
+// Testing code.
+var ropes : [Int] = [4, 3, 2, 6];
+print("Total : " + String(joinRopes( &ropes,ropes.count)));
+var rope2 : [Int] = [4, 3, 2, 6];
+print("Total : " + String(joinRopes2( &rope2,rope2.count)));

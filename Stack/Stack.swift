@@ -18,17 +18,19 @@ class Stack {
 		if stk.isEmpty {
 			return nil
 		}
-		let length = stk.count
-		let res = stk[length-1]
-		return res
+		return stk.last!
 	}
 	
-	public func isEmpty() -> Bool {
+	public var isEmpty : Bool {
 		return stk.isEmpty
 	}
 	
-	public func length() -> Int {
+	public var count : Int {
 		return stk.count
+	}
+
+	public func display() {
+		print(stk)	
 	}
 }
 
@@ -36,26 +38,15 @@ var s = Stack()
 s.push(1)
 s.push(2)
 s.push(3)
-let temp = s.pop()
-if(temp != nil) {
-	print(temp!)
+
+while !s.isEmpty {
+	let temp : Int = s.pop()!
+	print(temp)
 }
 
-/*
-var s = Stack()
-var length = 10
-var i = 0
- while i < length {
-	s.push(i)
-	i += 1
+s.push(11)
+s.push(12)
+s.push(13)
+while let temp = s.pop() {
+	print(temp)
 }
-print(s.length())
-i = 0
- while i < length {
-	let temp = s.pop()
-	if(temp != nil) {
-		print(temp!)
-	}
-	i += 1
-}
-*/

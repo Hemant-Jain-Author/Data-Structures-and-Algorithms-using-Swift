@@ -133,72 +133,52 @@ class Heap {
     }
 }
 
-func HeapSort(_ array : inout [Int], _ inc : Bool) {
-    // Create max heap for increasing order sorting.
-    let hp : Heap = Heap(&array, !inc);
-    var i : Int = 0;
-	while (i < array.count) {
-		array[array.count - i - 1] = hp.remove();
-		i += 1;
-	}
+func IntComp(_ first : Int, _ second : Int) -> Bool {
+	return first > second;
 }
 
-let hp : Heap = Heap(true);
-hp.add(1);
-hp.add(6);
-hp.add(5);
-hp.add(7);
-hp.add(3);
-hp.add(4);
-hp.add(2);
-hp.printHeap();
-while (!hp.isEmpty()) {    
-	print(String(hp.remove()), terminator: " ");
+func chotaBhim(_ cups : inout [Int]) -> Int {
+	let size : Int = cups.count;
+	var time : Int = 60;
+	cups =	cups.sorted(by: IntComp);
+	var total : Int = 0;
+	var index : Int;
+	var temp : Int;
+	while (time > 0)
+	{
+		total += cups[0];
+		cups[0] = Int(ceil(Double(cups[0])/2));
+		index = 0;
+		temp = cups[0];
+		while (index < size - 1 && temp < cups[index + 1])
+		{
+			cups[index] = cups[index + 1];
+			index += 1;
+		}
+		cups[index] = temp;
+		time -= 1;
+	}
+	return total;
 }
 
-var arr : [Int] = [1, 9, 6, 7, 8, -1, 2, 4, 5, 3];
-HeapSort(&arr, true);
-print(arr)
-    
-func IsMinHeap(_ arr : [Int]) -> Bool {
-	let size = arr.count
-	var i = 0
-	while i <= (size-2)/2 {
-		if 2*i+1 < size {
-			if arr[i] > arr[2*i+1] {
-				return false
-			}
-		}
-		if 2*i+2 < size {
-			if arr[i] > arr[2*i+2] {
-				return false
-			}
-		}
-		i+=1
+func chotaBhim2(_ cups : inout [Int]) -> Int {
+	var time : Int = 60;
+	let pq = Heap(&cups, false)
+	var total : Int = 0;
+	var value : Int;
+
+	while (time > 0) {
+		value = pq.remove();
+		total += value;
+		value = Int(ceil(Double(value) / 2.0));
+		pq.add(value);
+		time -= 1;
 	}
-	return true
+	return total;
 }
 
-func IsMaxHeap(_ arr : [Int]) -> Bool {
-	let size = arr.count
-	var i = 0
-	while i <= (size-2)/2 {
-		if 2*i+1 < size {
-			if arr[i] < arr[2*i+1] {
-				return false
-			}
-		}
-		if 2*i+2 < size {
-			if arr[i] < arr[2*i+2] {
-				return false
-			}
-		}
-		i+=1
-	}
-	return true
-}
-let bb = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(IsMinHeap(bb))
-let cc = [9, 8, 7, 6, 5, 4, 3, 2, 1]
-print(IsMaxHeap(cc))
-print(IsMaxHeap(bb))
+// Testing code.
+var cups : [Int] = [2, 1, 7, 4, 2];
+print("Total : " + String(chotaBhim( &cups)));
+var cups2 : [Int] = [2, 1, 7, 4, 2];
+print("Total : " + String(chotaBhim2( &cups2)));

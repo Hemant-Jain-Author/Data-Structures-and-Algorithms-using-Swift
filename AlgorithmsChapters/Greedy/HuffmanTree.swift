@@ -103,48 +103,72 @@ class Heap < T: Comparable > {
 		}
         print();
     }
+}
 
-    func delete(_ value : T) -> Bool {
-		var i : Int = 0;
-		while (i < self.size) {
-			if (self.arr[i] == value) {
-				self.arr[i] = self.arr[self.size - 1];
-				self.size -= 1;
-				self.arr.removeLast();
-				self.percolateUp(i);
-				self.percolateDown(i);
-				return true;
-			}
-			i += 1;
-		}
-        return false;
+
+class HuffmanTree {
+    class Node : Comparable {
+        var c : Character;
+        var freq : Int;
+        var left : Node?;
+        var right : Node?;
+
+        init(_ ch : Character, _ fr : Int, _ l : Node?, _ r : Node?) {
+            self.c = ch;
+            self.freq = fr;
+            self.left = l;
+            self.right = r;
+        }
+
+        static func < (lhs: Node, rhs: Node) -> Bool {
+            return lhs.freq < rhs.freq
+        }
+
+        static func == (lhs: Node, rhs: Node) -> Bool {
+            return lhs.freq == rhs.freq
+        }
+    }
+
+    var root : Node? = nil;
+
+    init(_ arr : inout [Character], _ freq : inout [Int]) {
+        let n : Int = arr.count;
+        let pq = Heap<Node>(true);
+        var i : Int = 0;
+
+        while (i < n) {
+            let node : Node = Node(arr[i], freq[i], nil, nil);
+            pq.add(node);
+            i += 1;
+        }
+        
+        while (pq.length() > 1) {
+            let lt : Node = pq.remove()!;
+            let rt : Node = pq.remove()!;
+            let nd : Node = Node("+", lt.freq + rt.freq, lt, rt);
+            pq.add(nd);
+        }
+        self.root = pq.peek();
+    }
+
+    func printHuffmanTree(_ root : Node?, _ s : String) {
+        if (root!.left == nil && root!.right == nil && root!.c != "+") {
+            print(String(root!.c) + " = " + s);
+            return;
+        }
+
+        self.printHuffmanTree(root!.left, s + "0");
+        self.printHuffmanTree(root!.right, s + "1");
+    }
+
+    func printHuffmanTree() {
+        print("Char = Huffman code");
+        self.printHuffmanTree(self.root,"");
     }
 }
 
-func HeapSort(_ array : inout [Int], _ inc : Bool) {
-    // Create max heap for increasing order sorting.
-    let hp : Heap = Heap<Int>(&array, !inc);
-    var i : Int = 0;
-	while (i < array.count) {
-		array[array.count - i - 1] = hp.remove()!;
-		i += 1;
-	}
-}
-
-var hp = Heap<Int>(true);
-hp.add(1);
-hp.add(6);
-hp.add(5);
-hp.add(7);
-hp.add(3);
-hp.add(4);
-hp.add(2);
-hp.display();
-while (!hp.isEmpty()) {    
-	print(hp.remove()!, terminator: " ");
-}
-print()
-var arr : [Int] = [1, 9, 6, 7, 8, -1, 2, 4, 5, 3];
-HeapSort(&arr, true);
-print(arr)
-
+// Testing code.
+var ar : [Character] = ["A", "B", "C", "D", "E"];
+var fr : [Int] = [30, 25, 21, 14, 10];
+let hf : HuffmanTree = HuffmanTree(&ar, &fr);
+hf.printHuffmanTree();

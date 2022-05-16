@@ -8,18 +8,24 @@ class Stack<T> {
 	}
 	
 	public func pop() -> T? {
-		return stk.popLast()
+		if stk.isEmpty  { 
+			return nil 
+		}
+		return stk.removeLast()
 	}
 	
 	public func top() -> T? {
-		return stk.last
+		if stk.isEmpty {
+			return nil
+		}
+		return stk.last!
 	}
 	
 	public func display() {
 		print(stk)	
 	}
 
-	public var isEmpty: Bool {
+	public var isEmpty : Bool {
 		return stk.isEmpty
 	}
 	

@@ -8,18 +8,24 @@ class Stack<T> {
 	}
 	
 	public func pop() -> T? {
-		return stk.popLast()
+		if stk.isEmpty  { 
+			return nil 
+		}
+		return stk.removeLast()
 	}
 	
 	public func top() -> T? {
-		return stk.last
+		if stk.isEmpty {
+			return nil
+		}
+		return stk.last!
 	}
 	
 	public func display() {
 		print(stk)	
 	}
 
-	public var isEmpty: Bool {
+	public var isEmpty : Bool {
 		return stk.isEmpty
 	}
 	
@@ -29,20 +35,19 @@ class Stack<T> {
 }
 
 
+var s = Stack<Int>()
+s.push(1)
+s.push(2)
+s.push(3)
 
-let s = Stack<Int>()
-var length = 10
-var i = 0
- while i < length {
-	s.push(i)
-	i += 1
+while !s.isEmpty {
+	let temp : Int = s.pop()!
+	print(temp)
 }
-print(s.count)
-i = 0
- while i <= length {
-	let temp = s.pop()
-	if(temp != nil) {
-		print(temp!)
-	}
-	i += 1
+
+s.push(11)
+s.push(12)
+s.push(13)
+while let temp = s.pop() {
+	print(temp)
 }
