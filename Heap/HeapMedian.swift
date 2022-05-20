@@ -1,153 +1,155 @@
-class Heap {
-	var size : Int
-	var arr : [Int]
-	var isMin : Bool
+class Heap < T: Comparable > {
+    private var size : Int; // Number of elements in Heap
+    private var arr : [T?]; // The Heap array
+    private var isMinHeap : Bool;
 
-	public init(arrInput : [Int], isMin : Bool) {
-		self.size = arrInput.count
-		self.arr = [1]
-		self.arr.append(contentsOf : arrInput)
-		self.isMin = isMin
-		var i = (self.size / 2)
-		while i > 0 {
-			self.proclateDown(parent : i)
-			i-=1
-		}
-	}
-	
-	public init(isMin : Bool) {
-		self.arr = [1]
-		self.size = 0
-		self.isMin = isMin
-	}
-	
-	private func proclateDown(parent : Int) {
-		let lChild = 2 * parent
-		let rChild = lChild + 1
-		var small = -1
-		if lChild <= self.size {
-			small = lChild
-		}
-		if rChild <= self.size && self.comp(lChild, rChild) {
-			small = rChild
-		}
-		if small != -1 && self.comp(parent, small) {
-			self.arr.swapAt(parent, small)
-			self.proclateDown(parent : small)
-		}
-	}
-	
+    init(_ isMin : Bool) {
+        self.arr = [];
+        self.size = 0;
+        self.isMinHeap = isMin;
+    }
 
-	private func comp(_ i : Int, _ j : Int) -> Bool { // always i < j in use
-		if self.isMin == true {
-			return self.arr[i] > self.arr[j] // swaps while min heap
+    init(_ array : inout [T], _ isMin : Bool) {
+        self.size = array.count;
+        self.arr = array;
+        self.isMinHeap = isMin;
+
+		// Build Heap operation over array
+		var i : Int = (self.size / 2);
+		while (i >= 0) {
+			self.percolateDown(i);
+			i -= 1;
 		}
-		return self.arr[i] < self.arr[j] // swap while max heap.
-	}
-	
-	private func proclateUp(child : Int) {
-		let parent = child / 2
-		if parent == 0 {
-			return
-		}
-		if self.comp(parent, child) {
+    }
+
+    func comp(_ first : T, _ second : T) -> Bool {
+        if (self.isMinHeap) {
+            return first > second;
+        } else {
+            return first < second;
+        }
+    }
+
+    // Other Methods.
+    func percolateDown(_ parent : Int) {
+        let lChild : Int = 2 * parent + 1;
+        let rChild : Int = lChild + 1;
+        var child : Int = -1;
+        if (lChild < self.size) {
+            child = lChild;
+        }
+
+        if (rChild < self.size && self.comp(arr[lChild]!, arr[rChild]!)) {
+            child = rChild;
+        }
+
+        if (child != -1 && self.comp(arr[parent]!, arr[child]!)) {
+            self.arr.swapAt(parent, child)
+			self.percolateDown(child);
+        }
+    }
+
+    func percolateUp(_ child : Int) {
+        let parent : Int = (child - 1) / 2;
+        if (parent >= 0 && self.comp(arr[parent]!, arr[child]!)) {
 			self.arr.swapAt(child, parent)
-			self.proclateUp(child : parent)
-		}
-	}
-	
-	public func add(value : Int) {
-		self.size+=1
+            self.percolateUp(parent);
+        }
+    }
+
+    func isEmpty() -> Bool {
+        return (self.size == 0);
+    }
+
+    func length() -> Int {
+        return self.size;
+    }
+
+    func peek() -> T? {
+        if (self.isEmpty()) {
+            print("Heap empty exception.");
+			return nil
+        }
+        return self.arr[0];
+    }
+
+    func add(_ value : T) {
+		self.size += 1
 		self.arr.append(value)
-		self.proclateUp(child : self.size)
-	}
-	
-	public func remove() -> Int {
-		if self.isEmpty {
-			print("HeapEmptyException.")
-			return 0
-		}
-		let value = self.arr[1]
-		self.arr[1] = self.arr[self.size]
-		self.size-=1
-		self.proclateDown(parent : 1)
-		//self.arr = self.arr[0 : self.size+1]
-		return value
-	}
-	
-	public func Print() {
-		print("Printing Heap size :\(self.size) :: ")
-		var i = 1
-		while i <= self.size {
-			print(self.arr[i],terminator:"")
-			i+=1
-		}
-		print()
-	}
+        self.percolateUp(self.size - 1);
+    }
 
-	public var isEmpty : Bool {
-		return self.size == 0
-	}
+    func remove() -> T? {
+        if (self.isEmpty()) {
+            print("Heap empty exception.")
+			return nil;
+        }
+        let value = self.arr[0];
+        self.arr[0] = self.arr[self.size - 1];
+        self.size -= 1;
+		self.arr.removeLast();
+        self.percolateDown(0);
+        return value;
+    }
 
-	public func count() -> Int {
-		return self.size
-	}	
-	public func peek() -> Int {
-		if self.isEmpty {
-			print("Heap empty exception.")
-			return 0
+    func display() {
+        print("Heap : ",terminator: "");
+		var i : Int = 0;
+		while (i < self.size) {
+			print(self.arr[i]!, terminator: " ");
+			i += 1;
 		}
-		return self.arr[1]
-	}
+        print();
+    }
 }
 
 class MedianHeap{
-	var minHeap : Heap
-	var maxHeap : Heap
+	var minHeap : Heap<Int>
+	var maxHeap : Heap<Int>
 
 	public init() {
-		minHeap = Heap(isMin:true)
-		maxHeap = Heap(isMin:false)
+		minHeap = Heap<Int>(true)
+		maxHeap = Heap<Int>(false)
 	}
 	
-	public func insert(value : Int) {
-		if maxHeap.isEmpty {
-			self.maxHeap.add(value:value)
+	public func insert(_ value : Int) {
+		if maxHeap.isEmpty() {
+			self.maxHeap.add(value)
 		} else {
-			let top = self.maxHeap.peek()
+			let top = self.maxHeap.peek()!
 			if top >= value {
-				self.maxHeap.add(value:value)
+				self.maxHeap.add(value)
 			} else {
-				self.minHeap.add(value:value)
+				self.minHeap.add(value)
 			}
 		}
 		// size balancing
-		if self.maxHeap.count() > self.minHeap.count()+1 {
-			let value = self.maxHeap.remove()
-			self.minHeap.add(value:value)
+		if self.maxHeap.length() > self.minHeap.length()+1 {
+			let value = self.maxHeap.remove()!
+			self.minHeap.add(value)
 		}
 	
-		if self.minHeap.count() > self.maxHeap.count()+1 {
-			let value = self.minHeap.remove()
-			self.maxHeap.add(value:value)
+		if self.minHeap.length() > self.maxHeap.length()+1 {
+			let value = self.minHeap.remove()!
+			self.maxHeap.add(value)
 		}
 	}
 	
 	public func getMedian() -> Int {
-		if self.maxHeap.count() == 0 && self.minHeap.count() == 0 {
+		if self.maxHeap.length() == 0 && self.minHeap.length() == 0 {
 			print("HeapEmptyException")
 			return 0
 		}
 	
-		if self.maxHeap.count() == self.minHeap.count() {
-			let val1 = self.maxHeap.peek()
-			let val2 = self.minHeap.peek()
+		if self.maxHeap.length() == self.minHeap.length() {
+			let val1 = self.maxHeap.peek()!
+			let val2 = self.minHeap.peek()!
 			return (val1 + val2) / 2
-		} else if self.maxHeap.count() > self.minHeap.count() {
-			let val1 = self.maxHeap.peek()
+		} else if self.maxHeap.length() > self.minHeap.length() {
+			let val1 = self.maxHeap.peek()!
 			return val1
 		} else {
-			let val2 = self.minHeap.peek()
+			let val2 = self.minHeap.peek()!
 			return val2
 		}
 	}	
@@ -158,6 +160,6 @@ var arr = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1, 9, 2, 8, 3, 7, 4, 6, 5, 10, 10]
 var hp = MedianHeap()
 
 for value in arr {
-	hp.insert(value:value)
+	hp.insert(value)
 	print("Median after insertion of \(value) is  \(hp.getMedian())")
 }

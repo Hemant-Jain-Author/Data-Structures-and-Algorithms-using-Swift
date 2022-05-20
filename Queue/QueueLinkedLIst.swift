@@ -1,18 +1,13 @@
-class Queue {
+class Queue<T> {
 	var head : Node?
 	var tail : Node?
 	var count : Int
 
 	class Node {
-		var value : Int
+		var value : T
 		var next : Node?
 
-		public init(_ val : Int) {
-			self.value = val
-			self.next = nil
-		}
-
-		public init(_ val : Int, _ nxt : Node?) {
+		public init(_ val : T, _ nxt : Node? = nil) {
 			self.value = val
 			self.next = nxt
 		}
@@ -31,16 +26,16 @@ class Queue {
 		return self.count == 0
 	}
 	
-	public func peek() -> (value:Int, flag:Bool) {
+	public func peek() -> T? {
 		if self.isEmpty() {
 			print("QueueEmptyException")
-			return (0, false)
+			return nil
 		}
 	
-		return (self.head!.value, true)
+		return self.head!.value
 	}
 	
-	public func add(value : Int) {
+	public func add(_ value : T) {
 		let temp = Node(value)
 		if self.head == nil {
 			self.head = temp
@@ -52,36 +47,32 @@ class Queue {
 		self.count += 1
 	}
 	
-	public func remove() -> (value:Int, flag:Bool) {
+	public func remove() -> T? {
 		if self.isEmpty() {
 			print("QueueEmptyException")
-			return (0, false)
+			return nil
 		}
 	
 		let value = self.head!.value
 		self.head = self.head!.next
 		self.count -= 1
-		return (value, true)
+		return value
 	}
 	
 	public func display() {
 		var temp = self.head
+		print("Queue :: ", terminator:"")
 		while temp != nil {
+			
 			print(temp!.value, terminator:" ")
 			temp = temp!.next
 		}
 	}
 }
 
-let q = Queue()
-var i = 1
-while i <= 10 {
-	q.add(value:i)
-	i += 1
-}
-
-i = 1
-while i <= 5 {
-	print(q.remove())
-	i += 1
-}
+let que : Queue<Int> = Queue<Int>();
+que.add(1);
+que.add(2);
+que.add(3);
+print("Queue remove : " + String(que.remove()!));
+print("Queue remove : " + String(que.remove()!));

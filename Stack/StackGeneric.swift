@@ -45,9 +45,3 @@ while !s.isEmpty {
 	print(temp)
 }
 
-s.push(11)
-s.push(12)
-s.push(13)
-while let temp = s.pop() {
-	print(temp)
-}

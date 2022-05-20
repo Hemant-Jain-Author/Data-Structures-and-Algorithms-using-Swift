@@ -1,58 +1,62 @@
-import java.util.ArrayDeque;
 
-public class Stack {
-	ArrayDeque<Integer> que1 = new ArrayDeque<Integer>();
-	ArrayDeque<Integer> que2 = new ArrayDeque<Integer>();
-	int size = 0;
+class Stack {
+	private var que1 : [Int] = [Int]();
+    private var que2 : [Int] = [Int]();
+	var size : Int = 0;
 
-	public void push(int value) {
-		que1.add(value);
+	public init() {}
+
+	func push(_ value : Int) {
+		que1.append(value);
 		size += 1;
 	}
 
-	public int pop() {
-		int value = 0, s = size;
+	func pop() -> Int {
+		var value : Int = 0;
+		var s : Int = size;
 		while (s > 0) {
-			value = que1.peek();
-			que1.remove();
-			if (s > 1)
-				que2.add(value);
-			s--;
+			value = que1.first!;
+			que1.removeFirst();
+			if (s > 1) {
+				que2.append(value);
+			}
+			s -= 1;
 		}
-		ArrayDeque<Integer> temp = que1;
+		let temp = que1;
 		que1 = que2;
 		que2 = temp;
 		size -= 1;
 		return value;
 	}
 
-	public void push2(int value) {
-		que1.add(value);
+	func push2(_ value : Int) {
+		que1.append(value);
 		size += 1;
 	}
 
-	public int pop2() {
-		int value = 0, s = size;
+	func pop2() -> Int{
+		var value = 0
+		var s = size;
 		while (s > 0) {
-			value = que1.peek();
-			que1.remove();
-			if (s > 1)
-				que1.add(value);
-			s--;
+			value = que1.first!;
+			que1.removeFirst();
+			if (s > 1) {
+				que1.append(value);
+			}
+			s -= 1;
 		}
 		size -= 1;
 		return value;
 	}
-
-	public static void main(String[] args) {
-		Stack stk = new Stack();
-		stk.push(1);
-		stk.push(2);
-		stk.push(3);
-		System.out.println("Stack pop : " + stk.pop());
-		System.out.println("Stack pop : " + stk.pop());
-	}
 }
+
+let stk : Stack = Stack();
+stk.push(1);
+stk.push(2);
+stk.push(3);
+print("Stack pop : ", stk.pop());
+print("Stack pop : ", stk.pop());
+
 
 /*
 Stack pop : 3

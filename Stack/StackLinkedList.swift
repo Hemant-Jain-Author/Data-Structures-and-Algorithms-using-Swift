@@ -1,19 +1,14 @@
 
 
-class Stack {
+class Stack<T> {
 	var head : Node?
 	var count : Int
 
 	class Node {
-		var value : Int
+		var value : T
 		var next : Node?
 
-		public init(_ val : Int) {
-			self.value = val
-			self.next = nil
-		}
-
-		public init(_ val : Int, _ nxt : Node?) {
+		public init(_ val : T, _ nxt : Node? = nil) {
 			self.value = val
 			self.next = nxt
 		}
@@ -32,34 +27,34 @@ class Stack {
 		return self.count == 0
 	}
 	
-	public func peek() -> (value : Int, flag  : Bool) {
+	public func peek() -> T? {
 		if self.isEmpty() {
 			print("Stack Empty Error")
-			return (0, false)
+			return nil
 		}
-		return (self.head!.value, true)
+		return self.head!.value
 	}
 	
-	public func push(_ value : Int) {
+	public func push(_ value : T) {
 		self.head = Node(value, self.head)
 		self.count += 1
 	}
 	
-	public func pop() -> (value:Int, flag:Bool) {
+	public func pop() -> T? {
 		if self.isEmpty() {
 			print("Stack Empty Error")
-			return (0, false)
+			return nil
 		}
 	
 		let value = self.head!.value
 		self.head = self.head!.next
 		self.count -= 1
-		return (value, true)
+		return value
 	}
 	
 	public func display() {
 		var temp = self.head
-		print("Value stored in stck are :: ")
+		print("Stack :: ", terminator:"")
 		while temp != nil {
 			print(temp!.value, terminator:" ")
 			temp = temp!.next
@@ -69,24 +64,10 @@ class Stack {
 }
 
 // Testing code
-var s = Stack()
+var s = Stack<Int>()
 s.push(1)
 s.push(2)
 s.push(3)
-let temp = s.pop()
-print(temp.value)
+print("Stack pop : " + String(s.pop()!));
+print("Stack pop : " + String(s.pop()!));
 
-/*
-let s = Stack()
-var i = 1
-while i <= 100 {
-	s.push(i)
-	i += 1
-}
-print("popped values are :: ")
-i = 1
-while i <= 120 {
-	print(s.pop().value, terminator:" ")
-	i += 1
-}
-*/
