@@ -1,38 +1,31 @@
 import Foundation;
 // Also known as Activity Selection Weighted.
-class Job
-{
+class Job {
 	var start : Int;
 	var stop : Int;
 	var value : Int;
 
-	init(_ s : Int, _ f : Int, _ v : Int)
-	{
+	init(_ s : Int, _ f : Int, _ v : Int) {
 		self.start = s;
 		self.stop = f;
 		self.value = v;
 	}
 }
 
-func JobCompare(_ j1 : Job?, _ j2 : Job?) -> Bool
-{
+func JobCompare(_ j1 : Job?, _ j2 : Job?) -> Bool {
 	return j1!.stop < j2!.stop;
 }
 
-func maxValueJobUtil(_ arr : inout [Job?], _ n : Int) -> Int
-{
+func maxValueJobUtil(_ arr : inout [Job?], _ n : Int) -> Int {
 	// Base case
-	if (n == 1)
-	{
+	if (n == 1) {
 		return arr[0]!.value;
 	}
 	// Find Value when current job is included
 	var incl : Int = arr[n - 1]!.value;
 	var j : Int = n - 1;
-	while (j >= 0)
-	{
-		if (arr[j]!.stop <= arr[n - 1]!.start)
-		{
+	while (j >= 0) {
+		if (arr[j]!.stop <= arr[n - 1]!.start) {
 			incl += maxValueJobUtil( &arr,j + 1);
 			break;
 		}
@@ -42,41 +35,34 @@ func maxValueJobUtil(_ arr : inout [Job?], _ n : Int) -> Int
 	let excl : Int = maxValueJobUtil( &arr,n - 1);
 	return max(incl,excl);
 }
-func maxValueJobs(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int
-{
+
+func maxValueJobs(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int {
 	var act : [Job?] = Array(repeating: nil, count: n);
 
 	var i : Int = 0;
-	while (i < n)
-	{
+	while (i < n) {
 		act[i] = Job(s[i], f[i], v[i]);
 		i += 1;
 	}
 	
-	act = act.sorted(by:JobCompare);
-	// sort according to finish time.
+	act = act.sorted(by:JobCompare); // sort according to finish time.
 	return maxValueJobUtil( &act,n);
 }
 
-func maxValueJobUtilTD(_ dp : inout [Int], _ arr : inout [Job?], _ n : Int) -> Int
-{
+func maxValueJobUtilTD(_ dp : inout [Int], _ arr : inout [Job?], _ n : Int) -> Int {
 	// Base case
-	if (n == 0)
-	{
+	if (n == 0) {
 		return 0;
 	}
-	if (dp[n - 1] != 0)
-	{
+	if (dp[n - 1] != 0) {
 		return dp[n - 1];
 	}
 	// Find Value when current job is included
 	var incl : Int = arr[n - 1]!.value;
 
 		var j : Int = n - 2;
-		while (j >= 0)
-		{
-			if (arr[j]!.stop <= arr[n - 1]!.start)
-			{
+		while (j >= 0) {
+			if (arr[j]!.stop <= arr[n - 1]!.start) {
 				incl += maxValueJobUtilTD( &dp, &arr,j + 1);
 				break;
 			}
@@ -87,13 +73,12 @@ func maxValueJobUtilTD(_ dp : inout [Int], _ arr : inout [Job?], _ n : Int) -> I
 	dp[n - 1] = max(incl,excl);
 	return dp[n - 1];
 }
-func maxValueJobsTD(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int
-{
+
+func maxValueJobsTD(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int {
 	var act : [Job?] = Array(repeating: nil, count: n);
 
 	var i : Int = 0;
-	while (i < n)
-	{
+	while (i < n) {
 		act[i] = Job(s[i], f[i], v[i]);
 		i += 1;
 	}
@@ -102,13 +87,11 @@ func maxValueJobsTD(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n
 	var dp : [Int] = Array(repeating: 0, count: n);
 	return maxValueJobUtilTD( &dp, &act,n);
 }
-func maxValueJobsBU(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int
-{
+func maxValueJobsBU(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int {
 	var act : [Job?] = Array(repeating: nil, count: n);
 
 	var i : Int = 0;
-	while (i < n)
-	{
+	while (i < n) {
 		act[i] = Job(s[i], f[i], v[i]);
 		i += 1;
 	}
@@ -120,14 +103,11 @@ func maxValueJobsBU(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n
 	dp[0] = act[0]!.value;
 
 	i = 1;
-	while (i < n)
-	{
+	while (i < n) {
 		var incl : Int = act[i]!.value;
 		var j : Int = i - 1;
-		while (j >= 0)
-		{
-			if (act[j]!.stop <= act[i]!.start)
-			{
+		while (j >= 0) {
+			if (act[j]!.stop <= act[i]!.start) {
 				incl += dp[j];
 				break;
 			}
@@ -147,3 +127,8 @@ let n : Int = start.count;
 print(maxValueJobs( &start, &finish, &value,n));
 print(maxValueJobsTD( &start, &finish, &value,n));
 print(maxValueJobsBU( &start, &finish, &value,n));
+/* 
+17
+17
+17
+ */

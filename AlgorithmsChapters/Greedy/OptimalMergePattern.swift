@@ -33,8 +33,7 @@ class Heap {
     }
 
     // Other Methods.
-    func percolateDown(_ parent : Int)
-    {
+    func percolateDown(_ parent : Int) {
         let lChild : Int = 2 * parent + 1;
         let rChild : Int = lChild + 1;
         var child : Int = -1;
@@ -52,8 +51,7 @@ class Heap {
         }
     }
 
-    func percolateUp(_ child : Int)
-    {
+    func percolateUp(_ child : Int) {
         let parent : Int = (child - 1) / 2;
         if (parent >= 0 && self.compare(parent,child)) {
             let temp : Int = self.arr[child];
@@ -118,8 +116,7 @@ class Heap {
 		var i : Int = 0;
 		while (i < self.size)
 		{
-			if (self.arr[i] == value)
-			{
+			if (self.arr[i] == value) {
 				self.arr[i] = self.arr[self.size - 1];
 				self.size -= 1;
 				self.arr.removeLast();
@@ -161,3 +158,4 @@ func merge(_ lists : inout [Int], _ size : Int) -> Int {
 var lists : [Int] = [4, 3, 2, 6];
 print("Total : " + String(merge(&lists, lists.count)));
 
+// Total : 29

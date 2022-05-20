@@ -18,11 +18,11 @@ class Counter<T: Hashable > {
 		return keyExists
 	}
 	
-	public func get(_ key : T) -> (value:Int, flag:Bool) {
+	public func get(_ key : T) -> Int {
 		guard let val = dict[key] else {
-			return (0, false)
+			return 0
 		}
-		return (val, true)
+		return val
 	}
 	
 	public func remove(_ key : T) {
@@ -41,23 +41,26 @@ let mp = Counter<String>()
 mp.add("a")
 mp.add("b")
 mp.add("a")
-print(mp.find("a"))
-print(mp.find("b"))
-print(mp.find("c"))
-print(mp.get("a"))
-print(mp.get("b"))
-print(mp.get("c"))
+
+print("Find :", mp.find("a"))
+print("Find :", mp.find("b"))
+print("Find :", mp.find("c"))
+
+print("Get :", mp.get("a"))
+print("Get :", mp.get("b"))
+print("Get :", mp.get("c"))
+
 mp.remove("b")
-print(mp.find("b"))
-print(mp.get("b"))
+print("Find :", mp.find("b"))
+print("Get :", mp.get("b"))
 
 /*
-true
-true
-false
-(value: 2, flag: true)
-(value: 1, flag: true)
-(value: 0, flag: false)
-false
-(value: 0, flag: false)
+Find : true
+Find : true
+Find : false
+Get : 2
+Get : 1
+Get : 0
+Find : false
+Get : 0
 */

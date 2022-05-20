@@ -33,8 +33,7 @@ class Heap {
     }
 
     // Other Methods.
-    func percolateDown(_ parent : Int)
-    {
+    func percolateDown(_ parent : Int) {
         let lChild : Int = 2 * parent + 1;
         let rChild : Int = lChild + 1;
         var child : Int = -1;
@@ -52,8 +51,7 @@ class Heap {
         }
     }
 
-    func percolateUp(_ child : Int)
-    {
+    func percolateUp(_ child : Int) {
         let parent : Int = (child - 1) / 2;
         if (parent >= 0 && self.compare(parent,child)) {
             let temp : Int = self.arr[child];
@@ -105,8 +103,7 @@ class Heap {
     func printHeap() {
         print("Heap : ",terminator: "");
 		var i : Int = 0;
-		while (i < self.size)
-		{
+		while (i < self.size) {
 			print(String(self.arr[i]), terminator: " ");
 			i += 1;
 		}
@@ -116,10 +113,8 @@ class Heap {
     func delete(_ value : Int) -> Bool
     {
 		var i : Int = 0;
-		while (i < self.size)
-		{
-			if (self.arr[i] == value)
-			{
+		while (i < self.size) {
+			if (self.arr[i] == value) {
 				self.arr[i] = self.arr[self.size - 1];
 				self.size -= 1;
 				self.arr.removeLast();
@@ -144,14 +139,12 @@ func chotaBhim(_ cups : inout [Int]) -> Int {
 	var total : Int = 0;
 	var index : Int;
 	var temp : Int;
-	while (time > 0)
-	{
+	while (time > 0) {
 		total += cups[0];
 		cups[0] = Int(ceil(Double(cups[0])/2));
 		index = 0;
 		temp = cups[0];
-		while (index < size - 1 && temp < cups[index + 1])
-		{
+		while (index < size - 1 && temp < cups[index + 1]) {
 			cups[index] = cups[index + 1];
 			index += 1;
 		}
@@ -182,3 +175,7 @@ var cups : [Int] = [2, 1, 7, 4, 2];
 print("Total : " + String(chotaBhim( &cups)));
 var cups2 : [Int] = [2, 1, 7, 4, 2];
 print("Total : " + String(chotaBhim2( &cups2)));
+/* 
+Total : 76
+Total : 76 
+*/

@@ -10,14 +10,11 @@ func findWays(_ n : Int, _ m : Int, _ V : Int) -> Int {
 
 	i = 2;
 	// i is number of dice, j is Value, k value of dice.
-	while (i <= n)
-	{
+	while (i <= n) {
 		j = 1;
-		while (j <= V)
-		{
+		while (j <= V) {
 			k = 1;
-			while (k <= j && k <= m)
-			{
+			while (k <= j && k <= m) {
 				dp[i][j] += dp[i - 1][j - k];
 				k += 1;
 			}
@@ -28,4 +25,6 @@ func findWays(_ n : Int, _ m : Int, _ V : Int) -> Int {
 	return dp[n][V];
 }
 
-print(String(DiceThrow.findWays(3,6,6)) + " ",terminator: "");
+print(String(findWays(3,6,6)) + " ",terminator: "");
+
+// 10

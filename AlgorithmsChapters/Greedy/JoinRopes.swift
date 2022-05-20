@@ -33,8 +33,7 @@ class Heap {
     }
 
     // Other Methods.
-    func percolateDown(_ parent : Int)
-    {
+    func percolateDown(_ parent : Int) {
         let lChild : Int = 2 * parent + 1;
         let rChild : Int = lChild + 1;
         var child : Int = -1;
@@ -52,8 +51,7 @@ class Heap {
         }
     }
 
-    func percolateUp(_ child : Int)
-    {
+    func percolateUp(_ child : Int) {
         let parent : Int = (child - 1) / 2;
         if (parent >= 0 && self.compare(parent,child)) {
             let temp : Int = self.arr[child];
@@ -105,8 +103,7 @@ class Heap {
     func printHeap() {
         print("Heap : ",terminator: "");
 		var i : Int = 0;
-		while (i < self.size)
-		{
+		while (i < self.size) {
 			print(String(self.arr[i]), terminator: " ");
 			i += 1;
 		}
@@ -116,10 +113,8 @@ class Heap {
     func delete(_ value : Int) -> Bool
     {
 		var i : Int = 0;
-		while (i < self.size)
-		{
-			if (self.arr[i] == value)
-			{
+		while (i < self.size) {
+			if (self.arr[i] == value) {
 				self.arr[i] = self.arr[self.size - 1];
 				self.size -= 1;
 				self.arr.removeLast();
@@ -185,3 +180,7 @@ var ropes : [Int] = [4, 3, 2, 6];
 print("Total : " + String(joinRopes( &ropes,ropes.count)));
 var rope2 : [Int] = [4, 3, 2, 6];
 print("Total : " + String(joinRopes2( &rope2,rope2.count)));
+/* 
+Total : 29
+Total : 29
+ */

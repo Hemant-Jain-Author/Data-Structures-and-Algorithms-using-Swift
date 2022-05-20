@@ -1,7 +1,6 @@
 import Foundation;
 
-func fastestWayBU2(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _ x : inout [Int], _ n : Int) -> Int
-{
+func fastestWayBU2(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _ x : inout [Int], _ n : Int) -> Int {
 	var f1 : [Int] = Array(repeating: 0, count: n);
 	var f2 : [Int] = Array(repeating: 0, count: n);
 	
@@ -22,8 +21,7 @@ func fastestWayBU2(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], 
 	return min(f1[n - 1] + x[0],f2[n - 1] + x[1]);
 }
 
-func fastestWayBU(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _ x : inout [Int], _ n : Int) -> Int
-{
+func fastestWayBU(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _ x : inout [Int], _ n : Int) -> Int {
 	var f : [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: 2);
 	
 	// Time taken to leave first station.
@@ -44,8 +42,7 @@ func fastestWayBU(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _
 	return min(f[0][n - 1] + x[0],f[1][n - 1] + x[1]);
 }
 
-func fastestWayTD(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _ x : inout [Int], _ n : Int) -> Int
-{
+func fastestWayTD(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _ x : inout [Int], _ n : Int) -> Int {
 	var f : [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: 2);
 	
 	// Time taken to leave first station.
@@ -56,8 +53,7 @@ func fastestWayTD(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _
 	return min(f[0][n - 1] + x[0],f[1][n - 1] + x[1]);
 }
 
-func fastestWayTD(_ f : inout [[Int]], _ a : inout [[Int]], _ t : inout [[Int]], _ i : Int)
-{
+func fastestWayTD(_ f : inout [[Int]], _ a : inout [[Int]], _ t : inout [[Int]], _ i : Int) {
 	if (i == 0) {
 		return;
 	}

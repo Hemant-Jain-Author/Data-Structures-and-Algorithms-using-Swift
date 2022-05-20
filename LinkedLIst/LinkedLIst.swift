@@ -1,60 +1,40 @@
 class List {
-	var head : Node?
-	var count : Int
+	private var head : Node? = nil;
+    private var size : Int = 0;
 
 	class Node {
 		var value : Int
 		var next : Node?
 
-		init(_ val : Int) {
-			self.value = val
-			self.next = nil
-		}
-
-		init(_ val : Int, _ nxt : Node?) {
+		init(_ val : Int, _ nxt : Node? = nil) {
 			self.value = val
 			self.next = nxt
 		}
 	}
 
-	public init() {
-		self.head = nil
-		self.count = 0
+	public func size() -> Int {
+		return self.count
 	}
 
-// Sum returns the sum of the list elements.
-public func sum() -> Int {
-	var temp = self.head
-	var sum = 0
-	while temp != nil {
-		sum += temp!.value
-		temp = temp!.next
+	public func isEmpty() -> Bool {
+		return (self.count == 0)
 	}
-	return sum
-}
 
-public func size() -> Int {
-	return self.count
-}
-
-public func isEmpty() -> Bool {
-	return (self.count == 0)
-}
-
-public func peek() -> (value : Int, flag : Bool) {
-	guard let head = self.head else {
-		print("Empty List Error")
-		return (0, false)
+	public func peek() -> (value : Int, flag : Bool) {
+		guard let head = self.head else {
+			print("Empty List Error")
+			return (0, false)
+		}
+		return (head.value, true)
 	}
-	return (head.value, true)
-}
-
-public func addHead(value : Int) {
+	// Other Methods.
+	
+public func addHead(_ value : Int) {
 	self.head = Node(value, self.head)
 	self.count += 1
 }
 
-public func addTail(value : Int) {
+public func addTail(_ value : Int) {
 	var curr = self.head
 	let newNode = Node(value, nil)
 	if curr == nil {
@@ -76,7 +56,17 @@ public func display() {
 	print("")
 }
 
-public func sortedInsert(value : Int) {
+public func sum() -> Int {
+	var temp = self.head
+	var sum = 0
+	while temp != nil {
+		sum += temp!.value
+		temp = temp!.next
+	}
+	return sum
+}
+
+public func sortedInsert(_ value : Int) {
 	let newNode = Node(value, nil)
 	var curr = self.head
 
@@ -92,7 +82,7 @@ public func sortedInsert(value : Int) {
 	curr!.next = newNode
 }
 
-public func isPresent(data : Int) -> Bool {
+public func find(_ data : Int) -> Bool {
 	var temp = self.head
 	while temp != nil {
 		if temp!.value == data {
@@ -114,7 +104,7 @@ public func removeHead() -> (value : Int, flag : Bool) {
 	return (value, true)
 }
 
-public func deleteNode(delValue : Int) -> Bool {
+public func deleteNode(_ delValue : Int) -> Bool {
 	var temp = self.head
 	if self.isEmpty() {
 		print("Empty List Error")
@@ -136,21 +126,25 @@ public func deleteNode(delValue : Int) -> Bool {
 	return false
 }
 
-public func deleteNodes(delValue : Int) {
+public func deleteNodes(_ delValue : Int) -> Bool {
 	var currNode = self.head
+	var retVal : Bool = false;
 	while currNode != nil && currNode!.value == delValue {
 		self.head = currNode!.next
 		currNode = self.head
+		retVal = true;
 	}
 
 	while currNode != nil {
 		let nextNode = currNode!.next
 		if nextNode != nil && nextNode!.value == delValue {
 			currNode!.next = nextNode!.next
+			retVal = true;
 		} else {
 			currNode = nextNode
 		}
 	}
+	return retVal;
 }
 
 public func freeList() {
@@ -239,7 +233,7 @@ public func copyList() -> List {
 	return ll2
 }
 
-public func compareList(ll : List) -> Bool {
+public func compareList(_ ll : List) -> Bool {
 	return compareListUtil(head1 : self.head, head2 : ll.head)
 }
 
@@ -263,7 +257,7 @@ public func findLength() -> Int {
 	return count
 }
 
-public func nthNodeFromBegining(index : Int) -> (value : Int, flag : Bool) {
+public func nthNodeFromBegining(_ index : Int) -> (value : Int, flag : Bool) {
 	if index > self.size() || index < 1 {
 		print("TooFewNodes")
 		return (0, false)
@@ -277,17 +271,17 @@ public func nthNodeFromBegining(index : Int) -> (value : Int, flag : Bool) {
 	return (curr!.value, true)
 }
 
-public func nthNodeFromEnd(index : Int) -> (value : Int, flag : Bool) {
+public func nthNodeFromEnd(_ index : Int) -> (value : Int, flag : Bool) {
 	let size = self.count
 	if size != 0 && size < index {
 		print("TooFewNodes")
 		return (0, false)
 	}
 	let startIndex = size - index + 1
-	return nthNodeFromBegining(index : startIndex)
+	return nthNodeFromBegining(startIndex)
 }
 
-public func nthNodeFromEnd2(index : Int) -> (value : Int, flag : Bool) {
+public func nthNodeFromEnd2(_ index : Int) -> (value : Int, flag : Bool) {
 	var count = 1
 	var forward = self.head
 	var curr = self.head
@@ -318,8 +312,26 @@ public func makeLoop() {
 		temp = temp!.next
 	}
 }
-
-public func loopDetect() -> Bool {
+/*
+func loopDetect() -> Bool
+{
+	var curr : Node? = self.head;
+	let hs : Set<Node> = Set<Node>();
+	while (curr != nil)
+	{
+		if (hs.contains(curr))
+		{
+			print("loop found");
+			return true;
+		}
+		hs.insert(curr);
+		curr = curr!.next;
+	}
+	print("loop not found");
+	return false;
+}
+*/
+public func loopDetect2() -> Bool {
 	var slowPtr = self.head
 	var fastPtr = self.head
 
@@ -406,9 +418,9 @@ public func loopPointDetect() -> Node? {
 }
 
 
-public func findIntersection(h1 : Node?, h2 : Node?) -> Node? {
-	var head = h1
-	var head2 = h2
+public func findIntersection(_ ll2 : List) -> Node? {
+	var head = self.head;
+	var head2 = ll2.head;
 	var l1 = 0
 	var l2 = 0
 	var tempHead = head
@@ -440,16 +452,363 @@ public func findIntersection(h1 : Node?, h2 : Node?) -> Node? {
 	}
 	return head
 }
+
+    func compareList(_ ll : List?) -> Bool
+    {
+        return self.compareList(self.head,ll!.head);
+    }
+
+    func compareList(_ head1 : Node?, _ head2 : Node?) -> Bool
+    {
+        if (head1 == nil && head2 == nil)
+        {
+            return true;
+        }
+        else
+        if ((head1 == nil) || (head2 == nil) || (head1!.value != head2!.value))
+        {
+            return false;
+        }
+        else
+        {
+            return self.compareList(head1!.next,head2!.next);
+        }
+    }
+
+    func compareList2(_ ll2 : List?) -> Bool
+    {
+        var head1 : Node? = self.head;
+        var head2 : Node? = ll2!.head;
+        while (head1 != nil && head2 != nil)
+        {
+            if (head1!.value != head2!.value)
+            {
+                return false;
+            }
+            head1 = head1!.next;
+            head2 = head2!.next;
+        }
+        if (head1 == nil && head2 == nil)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    func nthNodeFromBeginning(_ index : Int) -> Int
+    {
+        if (index > self.size() || index < 1)
+        {
+            return Int.max;
+        }
+        var count : Int = 0;
+        var curr : Node? = self.head;
+        while (curr != nil && count < index - 1)
+        {
+            count += 1;
+            curr = curr!.next;
+        }
+        return curr!.value;
+    }
+
+	func bubbleSort()
+    {
+        var curr : Node?;
+        var end : Node? = nil;
+        var temp : Int;
+        if (self.head == nil || self.head!.next == nil)
+        {
+            return;
+        }
+        var flag : Bool = true;
+        while (flag)
+        {
+            flag = false;
+            curr = self.head;
+            while (!(curr!.next===end))
+            {
+                if (curr!.value > curr!.next!.value)
+                {
+                    flag = true;
+                    temp = curr!.value;
+                    curr!.value = curr!.next!.value;
+                    curr!.next!.value = temp;
+                }
+                curr = curr!.next;
+            }
+            end = curr;
+        }
+    }
+    func selectionSort()
+    {
+        var curr : Node?;
+        var end : Node? = nil;
+        var maxNode : Node?;
+        var temp : Int;
+        var max : Int;
+        if (self.head == nil || self.head!.next == nil)
+        {
+            return;
+        }
+        while (!(self.head===end))
+        {
+            curr = self.head;
+            max = curr!.value;
+            maxNode = curr;
+            while (!(curr!.next===end))
+            {
+                if (max < curr!.next!.value)
+                {
+                    maxNode = curr!.next;
+                    max = curr!.next!.value;
+                }
+                curr = curr!.next;
+            }
+            end = curr;
+            if (curr!.value < max)
+            {
+                temp = curr!.value;
+                curr!.value = max;
+                maxNode!.value = temp;
+            }
+        }
+    }
+    func insertionSort()
+    {
+        var curr : Node?;
+        var stop : Node?;
+        var temp : Int;
+        if (self.head == nil || self.head!.next == nil)
+        {
+            return;
+        }
+        stop = self.head!.next;
+        while (stop != nil)
+        {
+            curr = self.head;
+            while (!(curr===stop))
+            {
+                if (curr!.value > stop!.value)
+                {
+                    temp = curr!.value;
+                    curr!.value = stop!.value;
+                    stop!.value = temp;
+                }
+                curr = curr!.next;
+            }
+            stop = stop!.next;
+        }
+    }
+
 }
 
-var lst = List()
-lst.addHead(value:1)
-lst.addHead(value:2)
-lst.addHead(value:3)
-lst.display()
-var lst2 = lst.copyList()
-print(lst.compareList(ll:lst2))
-var lst3 = lst.copyListReversed()
-lst3.display()
-print(lst.isPresent(data:7))
-print(lst.isPresent(data:4))
+func main1()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.display();
+	print("Size : " + String(ll.size()));
+	print("Size : " + String(ll.findLength()));
+	print("Is empty : " + String(ll.isEmpty()));
+	//print("Peek : " + String(ll.peek()));
+	ll.addTail(4);
+	ll.display();
+}
+// 3 2 1 
+// Size : 3
+// Size : 3
+// Is empty : false
+// Peek : 3
+// 3 2 1 4
+
+func main2()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.display();
+	print("find : " + String(ll.find(2)));
+	_ = ll.removeHead();
+	ll.display();
+}
+// 3 2 1 
+// find : true
+// 2 1
+
+func main3()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(1);
+	ll.addHead(3);
+	ll.display();
+	print("deleteNode : " + String(ll.deleteNode(2)));
+	ll.display();
+	print("deleteNodes : " + String(ll.deleteNodes(1)));
+	ll.display();
+}
+// 3 1 2 1 2 1 
+// deleteNode : true
+// 3 1 1 2 1 
+// deleteNodes : true
+// 3 2
+
+func main4()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.display();
+	ll.reverse();
+	ll.display();
+	ll.reverseRecurse();
+	ll.display();
+	let l2 : List = ll.copyList();
+	l2.display();
+	let l3 : List = ll.copyListReversed();
+	l3.display();
+}
+// 3 2 1 
+// 1 2 3 
+// 3 2 1 
+// 3 2 1 
+// 1 2 3
+
+func main5()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.display();
+	let l2 : List = ll.copyList();
+	l2.display();
+	let l3 : List = ll.copyListReversed();
+	l3.display();
+	print("compareList : " + String(ll.compareList(l2)));
+	print("compareList : " + String(ll.compareList2(l2)));
+	print("compareList : " + String(ll.compareList(l3)));
+	print("compareList : " + String(ll.compareList2(l3)));
+}
+// 3 2 1 
+// 3 2 1 
+// 1 2 3 
+// compareList : true
+// compareList : true
+// compareList : false
+// compareList : false
+
+func main6()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.addHead(4);
+	ll.display();
+	print(ll.nthNodeFromBeginning(2));
+	print(ll.nthNodeFromEnd(2));
+	print(ll.nthNodeFromEnd2(2));
+}
+// 3 2 1 
+// 2
+// 2
+// 2
+
+func main7()
+{
+	let ll : List = List();
+	ll.sortedInsert(1);
+	ll.sortedInsert(2);
+	ll.sortedInsert(3);
+	ll.display();
+	ll.sortedInsert(1);
+	ll.sortedInsert(2);
+	ll.sortedInsert(3);
+	ll.display();
+	ll.removeDuplicate();
+	ll.display();
+}
+// 1 2 3 
+// 1 1 2 2 3 3 
+// 1 2 3
+
+func main8()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.display();
+	ll.makeLoop();
+	//print(ll.loopDetect());
+	print(ll.loopDetect2());
+	print(ll.reverseListLoopDetect());
+	print(ll.loopTypeDetect());
+	ll.removeLoop();
+	print(ll.reverseListLoopDetect());
+}
+// 3 2 1 
+// loop found
+// circular list loop found
+// loop not found
+
+func main9()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(2);
+	let ll2 : List = List();
+	ll2.addHead(3);
+	ll2.head!.next = ll.head;
+	ll.addHead(4);
+	ll2.addHead(5);
+	ll.display();
+	ll2.display();
+	let nd : List.Node? = ll.findIntersection(ll2);
+	if (nd != nil)
+	{
+		print("Intersection:: " + String(nd!.value));
+	}
+}
+// 4 2 1 
+// 5 3 2 1 
+// Intersection:: 2
+
+func main10()
+{
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(10);
+	ll.addHead(9);
+	ll.addHead(7);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.addHead(5);
+	ll.addHead(4);
+	ll.addHead(6);
+	ll.addHead(8);
+	ll.display();
+	// ll.bubbleSort();
+	// ll.selectionSort();
+	ll.insertionSort();
+	ll.display();
+}
+
+main1();
+main2();
+main3();
+main4();
+main5();
+main6();
+main7();
+main8();
+main9();
+main10();

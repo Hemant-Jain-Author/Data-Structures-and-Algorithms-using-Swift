@@ -1,256 +1,273 @@
+import Foundation;
 
-public class SPLAYTree {
-	private Node root;
+class SPLAYTree {
+    private var root : Node?;
 
-	private static class Node {
-		int data;
-		Node left, right, parent;
+    class Node {
+        var data : Int;
+        var left : Node?;
+        var right : Node?;
+        var parent : Node?;
 
-		public Node(int d, Node l, Node r) {
-			data = d;
-			left = l;
-			right = r;
-			parent = null;
-		}
-	}
+        init(_ d : Int, _ l : Node?, _ r : Node?) {
+            self.data = d;
+            self.left = l;
+            self.right = r;
+            self.parent = nil;
+        }
+    }
 
-	public SPLAYTree() {
-		root = null;
-	}
+    init() {
+        self.root = nil;
+    }
 
-	public void printTree() {
-		printTree(root, "", false);
-		System.out.println();
-	}
+    func printTree() {
+        self.printTree(self.root,"",false);
+        print();
+    }
 
-	private void printTree(Node node, String indent, boolean isLeft) {
-		if (node == null)
-			return;
-		if (isLeft) {
-			System.out.print(indent + "L:");
-			indent += "|  ";
-		} else {
-			System.out.print(indent + "R:");
-			indent += "   ";
-		}
+    func printTree(_ node : Node?, _ indent : String, _ isLeft : Bool) {
+        if (node == nil) {
+            return;
+        }
+		var indent = indent;
+        if (isLeft) {
+            print(indent + "L:",terminator: "");
+            indent += "|  ";
+        } else {
+            print(indent + "R:",terminator: "");
+            indent += "   ";
+        }
 
-		System.out.println(node.data);
-		printTree(node.left, indent, true);
-		printTree(node.right, indent, false);
-	}
+        print(node!.data);
+        self.printTree(node!.left,indent,true);
+        self.printTree(node!.right,indent,false);
+    }
 
-	// Function to right rotate subtree rooted with x
-	Node rightRotate(Node x) {
-		Node y = x.left;
-		Node T = y.right;
+    // Function to right rotate subtree rooted with x
+    func rightRotate(_ x : Node?) -> Node? {
+        let y : Node? = x!.left;
+        let T : Node? = y!.right;
 
-		// Rotation
-		y.parent = x.parent;
-		y.right = x;
-		x.parent = y;
-		x.left = T;
-		if (T != null)
-			T.parent = x;
+        // Rotation
+        y!.parent = x!.parent;
+        y!.right = x;
+        x!.parent = y;
+        x!.left = T;
 
-		if (y.parent != null && y.parent.left == x)
-			y.parent.left = y;
-		else if (y.parent != null && y.parent.right == x)
-			y.parent.right = y;
-		// Return new root
-		return y;
-	}
+        if (T != nil) {
+            T!.parent = x;
+        }
 
-	// Function to left rotate subtree rooted with x
-	Node leftRotate(Node x) {
-		Node y = x.right;
-		Node T = y.left;
+        if (y!.parent != nil && y!.parent!.left === x) {
+            y!.parent!.left = y;
+        } else if (y!.parent != nil && y!.parent!.right === x) {
+            y!.parent!.right = y;
+        }
 
-		// Rotation
-		y.parent = x.parent;
-		y.left = x;
-		x.parent = y;
-		x.right = T;
-		if (T != null)
-			T.parent = x;
+        // Return new root
+        return y;
+    }
 
-		if (y.parent != null && y.parent.left == x)
-			y.parent.left = y;
-		else if (y.parent != null && y.parent.right == x)
-			y.parent.right = y;
-		// Return new root
-		return y;
-	}
+    // Function to left rotate subtree rooted with x
+    func leftRotate(_ x : Node?) -> Node? {
+        let y : Node? = x!.right;
+        let T : Node? = y!.left;
 
-	Node parent(Node node) {
-		if (node == null || node.parent == null)
-			return null;
-		return node.parent;
-	}
+        // Rotation
+        y!.parent = x!.parent;
+        y!.left = x;
+        x!.parent = y;
+        x!.right = T;
 
-	public void splay(Node node) {
-		Node parent, grand;
-		while (node != root) {
-			parent = parent(node);
-			grand = parent(parent);
-			if (parent == null) { // rotations had created new root, always last condition.
-				root = node;
-			} else if (grand == null) { // single rotation case.
-				if (parent.left == node) {
-					node = rightRotate(parent);
-				} else {
-					node = leftRotate(parent);
-				}
-			} else if (grand.left == parent && parent.left == node) { // Zig Zig case.
-				rightRotate(grand);
-				node = rightRotate(parent);
-			} else if (grand.right == parent && parent.right == node) { // Zag Zag case.
-				leftRotate(grand);
-				node = leftRotate(parent);
-			} else if (grand.left == parent && parent.right == node) { //Zig Zag case.
-				leftRotate(parent);
-				node = rightRotate(grand);
-			} else if (grand.right == parent && parent.left == node) { // Zag Zig case.
-				rightRotate(parent);
-				node = leftRotate(grand);
-			}
-		}
-	}
+        if (T != nil) {
+            T!.parent = x;
+        }
 
-	public boolean find(int data) {
-		Node curr = root;
-		while (curr != null) {
-			if (curr.data == data) {
-				splay(curr);
-				return true;
-			} else if (curr.data > data) {
-				curr = curr.left;
-			} else {
-				curr = curr.right;
-			}
-		}
-		return false;
-	}
+        if (y!.parent != nil && y!.parent!.left === x) {
+            y!.parent!.left = y;
+        } else if (y!.parent != nil && y!.parent!.right === x) {
+            y!.parent!.right = y;
+        }
 
-	public void insert(int data) {
-		Node newNode = new Node(data, null, null);
-		if (root == null) {
-			root = newNode;
-			return;
-		}
+        // Return new root
+        return y;
+    }
 
-		Node node = root;
-		Node parent = null;
-		while (node != null) {
-			parent = node;
-			if (node.data > data) {
-				node = node.left;
-			} else if (node.data < data) {
-				node = node.right;
-			} else {
-				splay(node); // duplicate insertion not allowed but splaying for it.
-				return;
-			}
-		}
+    func parent(_ node : Node?) -> Node? {
+        if (node == nil || node!.parent == nil) {
+            return nil;
+        }
+        return node!.parent;
+    }
 
-		newNode.parent = parent;
-		if (parent.data > data) {
-			parent.left = newNode;
-		} else {
-			parent.right = newNode;
-		}
-		splay(newNode);
-	}
+    func splay(_ node : Node?) {
+        var parent : Node?;
+        var grand : Node?;
+		var node = node;
 
-	public Node findMinNode(Node curr) {
-		Node node = curr;
-		if (node == null) {
-			return null;
-		}
-		while (node.left != null) {
-			node = node.left;
-		}
-		return node;
-	}
+        while (!(node===self.root)) {
+            parent = self.parent(node);
+            grand = self.parent(parent);
+            if (parent == nil) { // rotations had created new root, always last condition.
+                self.root = node;
+            } else if (grand == nil) { // single rotation case.
+                if (parent!.left === node) {
+                    node = self.rightRotate(parent);
+                } else {
+                    node = self.leftRotate(parent);
+                }
+            } else if (grand!.left === parent && parent!.left === node) {  // Zig Zig case.
+                _ = self.rightRotate(grand);
+                node = self.rightRotate(parent);
+            } else if (grand!.right === parent && parent!.right === node) {  // Zag Zag case.
+                _ = self.leftRotate(grand);
+                node = self.leftRotate(parent);
+            } else if (grand!.left === parent && parent!.right === node) {  // Zig Zag case.
+                _ = self.leftRotate(parent);
+                node = self.rightRotate(grand);
+            } else if (grand!.right === parent && parent!.left === node) {  // Zag Zig case.
+                _ = self.rightRotate(parent);
+                node = self.leftRotate(grand);
+            }
+        }
+    }
 
-	public void delete(int data) {
-		Node node = root;
-		Node parent = null;
-		Node next = null;
-		while (node != null) {
-			if (node.data == data) {
-				parent = node.parent;
-				if (node.left == null && node.right == null) {
-					next = null;
-				} else if (node.left == null) {
-					next = node.right;
-				} else if (node.right == null) {
-					next = node.left;
-				}
+    func find(_ data : Int) -> Bool {
+        var curr : Node? = self.root;
+        while (curr != nil) {
+            if (curr!.data == data) {
+                self.splay(curr);
+                return true;
+            } else if (curr!.data > data) {
+                curr = curr!.left;
+            } else {
+                curr = curr!.right;
+            }
+        }
+        return false;
+    }
 
-				if (node.left == null || node.right == null) {
-					if (node == root) {
-						root = next;
-						return;
-					}
-					if (parent.left == node) {
-						parent.left = next;
-					} else {
-						parent.right = next;
-					}
-					if (next != null)
-						next.parent = parent;
-					break;
-				}
+    func insert(_ data : Int) {
+        let newNode : Node? = Node(data, nil, nil);
+        if (self.root == nil) {
+            self.root = newNode;
+            return;
+        }
 
-				Node minNode = findMinNode(node.right);
-				data = minNode.data;
-				node.data = data;
-				node = node.right;
+        var node : Node? = self.root;
+        var parent : Node? = nil;
+        while (node != nil) {
+            parent = node;
+            if (node!.data > data) {
+                node = node!.left;
+            } else if (node!.data < data) {
+                node = node!.right;
+            } else {
+                self.splay(node);
+                // duplicate insertion not allowed but splaying for it.
+                return;
+            }
+        }
 
-			} else if (node.data > data) {
-				parent = node;
-				node = node.left;
-			} else {
-				parent = node;
-				node = node.right;
-			}
-		}
-		splay(parent); // Splaying for the parent of the node deleted.
-	}
+        newNode!.parent = parent;
+        if (parent!.data > data) {
+            parent!.left = newNode;
+        } else {
+            parent!.right = newNode;
+        }
+        self.splay(newNode);
+    }
+    func findMinNode(_ curr : Node?) -> Node? {
+        var node : Node? = curr;
+        if (node == nil) {
+            return nil;
+        }
 
-	public void printInOrder() {
-		printInOrder(root);
-		System.out.println();
-	}
+        while (node!.left != nil) {
+            node = node!.left;
+        }
+        return node;
+    }
 
-	private void printInOrder(Node node)/* In order */
-	{
-		if (node != null) {
-			printInOrder(node.left);
-			System.out.print(node.data + " ");
-			printInOrder(node.right);
-		}
-	}
+    func delete(_ data : Int) {
+        var node : Node? = self.root;
+        var parent : Node? = nil;
+        var next : Node? = nil;
+		var data = data;
+        while (node != nil) {
+            if (node!.data == data) {
+                parent = node!.parent;
+                if (node!.left == nil && node!.right == nil) {
+                    next = nil;
+                } else if (node!.left == nil) {
+                    next = node!.right;
+                } else if (node!.right == nil) {
+                    next = node!.left;
+                }
+                if (node!.left == nil || node!.right == nil) {
+                    if (node === self.root) {
+                        self.root = next;
+                        return;
+                    }
 
-	public static void main(String[] arg) {
-		SPLAYTree tree = new SPLAYTree();
-		tree.insert(5);
-		tree.insert(4);
-		tree.insert(6);
-		tree.insert(3);
-		tree.insert(2);
-		tree.insert(1);
-		tree.insert(3);
-		tree.printTree();
+                    if (parent!.left === node) {
+                        parent!.left = next;
+                    } else {
+                        parent!.right = next;
+                    }
 
-		System.out.println("Value 2 found: " + tree.find(2));
-		tree.delete(2);
-		tree.delete(5);
-		tree.printTree();
-	}
+                    if (next != nil) {
+                        next!.parent = parent;
+                    }
+                    break;
+                }
+
+                let minNode : Node? = self.findMinNode(node!.right);
+                data = minNode!.data;
+                node!.data = data;
+                node = node!.right;
+            } else if (node!.data > data) {
+                parent = node;
+                node = node!.left;
+            } else {
+                parent = node;
+                node = node!.right;
+            }
+        }
+        self.splay(parent);
+    }
+
+    func printInOrder() {
+        self.printInOrder(self.root);
+        print();
+    }
+
+    func printInOrder(_ node : Node?) {
+        // In order
+        if (node != nil) {
+            self.printInOrder(node!.left);
+            print(String(node!.data) + " ",terminator: "");
+            self.printInOrder(node!.right);
+        }
+    }   
 }
 
-/*
+let tree : SPLAYTree = SPLAYTree();
+tree.insert(5);
+tree.insert(4);
+tree.insert(6);
+tree.insert(3);
+tree.insert(2);
+tree.insert(1);
+tree.insert(3);
+tree.printTree();
+print("Value 2 found: " + String(tree.find(2)));
+tree.delete(2);
+tree.delete(5);
+tree.printTree();
+
+/* 
 R:3
    L:2
    |  L:1
@@ -262,5 +279,5 @@ Value 2 found: true
 R:4
    L:3
    |  L:1
-   R:6 
-*/
+   R:6
+ */

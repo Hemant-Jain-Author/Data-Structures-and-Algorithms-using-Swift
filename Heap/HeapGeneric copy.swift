@@ -59,16 +59,16 @@ class Heap < T: Comparable > {
         }
     }
 
-    func isEmpty() -> Bool {
+    public var isEmpty : Bool {
         return (self.size == 0);
     }
 
-    func length() -> Int {
+    public var length : Int {
         return self.size;
     }
 
     func peek() -> T? {
-        if (self.isEmpty()) {
+        if (self.isEmpty) {
             print("Heap empty exception.");
 			return nil
         }
@@ -82,7 +82,7 @@ class Heap < T: Comparable > {
     }
 
     func remove() -> T? {
-        if (self.isEmpty()) {
+        if (self.isEmpty) {
             print("Heap empty exception.")
 			return nil;
         }
@@ -103,79 +103,41 @@ class Heap < T: Comparable > {
 		}
         print();
     }
-}
 
-class HuffmanTree {
-    class Node : Comparable {
-        var c : Character;
-        var freq : Int;
-        var left : Node?;
-        var right : Node?;
-
-        init(_ ch : Character, _ fr : Int, _ l : Node?, _ r : Node?) {
-            self.c = ch;
-            self.freq = fr;
-            self.left = l;
-            self.right = r;
-        }
-
-        static func < (lhs: Node, rhs: Node) -> Bool {
-            return lhs.freq < rhs.freq
-        }
-
-        static func == (lhs: Node, rhs: Node) -> Bool {
-            return lhs.freq == rhs.freq
-        }
-    }
-
-    var root : Node? = nil;
-
-    init(_ arr : inout [Character], _ freq : inout [Int]) {
-        let n : Int = arr.count;
-        let pq = Heap<Node>(true);
-        var i : Int = 0;
-
-        while (i < n) {
-            let node : Node = Node(arr[i], freq[i], nil, nil);
-            pq.add(node);
-            i += 1;
-        }
-        
-        while (pq.length() > 1) {
-            let lt : Node = pq.remove()!;
-            let rt : Node = pq.remove()!;
-            let nd : Node = Node("+", lt.freq + rt.freq, lt, rt);
-            pq.add(nd);
-        }
-        self.root = pq.peek();
-    }
-
-    func printHuffmanTree(_ root : Node?, _ s : String) {
-        if (root!.left == nil && root!.right == nil && root!.c != "+") {
-            print(String(root!.c) + " = " + s);
-            return;
-        }
-        self.printHuffmanTree(root!.left, s + "0");
-        self.printHuffmanTree(root!.right, s + "1");
-    }
-
-    func printHuffmanTree() {
-        print("Char = Huffman code");
-        self.printHuffmanTree(self.root,"");
+    func delete(_ value : T) -> Bool {
+		var i : Int = 0;
+		while (i < self.size) {
+			if (self.arr[i] == value) {
+				self.arr[i] = self.arr[self.size - 1];
+				self.size -= 1;
+				self.arr.removeLast();
+				self.percolateUp(i);
+				self.percolateDown(i);
+				return true;
+			}
+			i += 1;
+		}
+        return false;
     }
 }
 
-// Testing code.
-var ar : [Character] = ["A", "B", "C", "D", "E"];
-var fr : [Int] = [30, 25, 21, 14, 10];
-let hf : HuffmanTree = HuffmanTree(&ar, &fr);
-hf.printHuffmanTree();
+func main() {
+    let pq = Heap<Int>(true);
+    pq.add(1);
+    pq.add(6);
+    pq.add(5);
+    pq.add(7);
+    pq.add(3);
+    pq.add(4);
+    pq.add(2);
+    pq.display();
+    while (!pq.isEmpty) {    
+        print(pq.remove()!, terminator: " ");
+    }
+    print()
+}
 
-/* 
-Char = Huffman code
-C = 00
-E = 010
-D = 011
-B = 10
-A = 11
- */
+
+main()
+
+

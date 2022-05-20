@@ -1,9 +1,23 @@
-var evenNumbers: Set<Int> = [2, 4, 6, 8]
-evenNumbers.insert(0) 
-print(evenNumbers.contains(2))
-print(evenNumbers.contains(3))
+// Create a hash set.
+var hs : Set<String> = Set<String>();
 
-/*
-true
-false
-*/
+// Add elements to the hash set.
+hs.insert("Banana");
+hs.insert("Apple");
+hs.insert("Mango");
+
+print("Grapes present : " + String(hs.contains("Grapes")));
+print("Apple present : " + String(hs.contains("Apple")));
+print(hs);
+
+hs.remove("Apple");
+print("Apple present : " + String(hs.contains("Apple")));
+print(hs);
+
+/* 
+Grapes present : false
+Apple present : true
+["Apple", "Mango", "Banana"]
+Apple present : false
+["Mango", "Banana"]
+ */

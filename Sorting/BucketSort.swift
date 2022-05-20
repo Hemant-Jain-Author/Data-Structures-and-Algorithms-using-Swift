@@ -1,59 +1,68 @@
-func bucketSort(_ data : inout [Int], _ lowerRange : Int, _ upperRange : Int) {
-	let rng = upperRange - lowerRange
-	let size = data.count
-	var count = [Int](repeating: 0, count : rng )
-	var i = 0
-	while i < size {
-		count[data[i]-lowerRange]+=1
-		i+=1
-	}
+import Foundation;
 
-	var j = 0
-	i = 0
-	while i < rng {
-		while count[i] > 0 {
-			data[j] = i + lowerRange
-			j+=1
-			count[i]-=1
-		}
-		i+=1
-	}
+// Allowed values from 0 to maxValue.
+func bucketSort(_ arr : inout [Int], _ maxValue : Int) {
+    let numBucket : Int = 5;
+    bucketSort( &arr,maxValue,numBucket);
 }
 
-// Testing code
-/*
-var data = [23, 24, 22, 21, 26, 25, 27, 28, 21, 21]
-bucketSort(&data, 20, 30)
-print(data)
-*/
-
-import Foundation
-
-func randArray(n:Int ) -> [Int] {
-    var result:[Int] = []
-    for _ in 0..<n {
-        result.append(20 + Int.random(in: 1..<10))
+func bucketSort(_ arr : inout [Int], _ maxValue : Int, _ numBucket : Int) {
+    let length : Int = arr.count;
+    if (length == 0) {
+        return;
     }
-    return result
+
+    var bucket :  [ [Int]] =  [ [Int]]();
+    var i : Int = 0;
+    // Create empty buckets
+    while (i < numBucket) {
+        bucket.append( [Int]());
+        i += 1;
+    }
+    
+    let div : Int = Int(ceil(Double(maxValue) / Double(numBucket)));
+    i = 0;
+    // Add elements into the buckets
+    while (i < length) {
+        if (arr[i] < 0 || arr[i] > maxValue) {
+            print("Value out of range.");
+            return;
+        }
+        var bucketIndex : Int = (arr[i] / div);
+        // Maximum value will be assigned to last bucket.
+        if (bucketIndex >= numBucket) {
+            bucketIndex = numBucket - 1;
+        }
+        bucket[bucketIndex].append(arr[i]);
+        i += 1;
+    }
+    
+    i = 0;
+    // Sort the elements of each bucket.
+    while (i < numBucket) {
+        bucket[i] = bucket[i].sorted(by: <);
+        i += 1;
+    }
+    
+    // Populate output from the sorted subarray.
+    var index : Int = 0;
+    var count : Int;
+
+    i = 0;
+    while (i < numBucket) {
+        let temp :  [Int] = bucket[i];
+        count = temp.count;
+        var  j : Int = 0;
+        while (j < count) {
+            arr[index] = temp[j];
+            index += 1
+            j += 1;
+        }
+        i += 1;
+    }
 }
-func validator(_ arr : inout [Int]) {
-	let size = arr.count
-	var i = 0
-	while i < size-2 {
-		if(arr[i] > arr[i+1]) {
-			print("Not sorted at index \(i)")
-			print(arr)
-			return
-		}
-		i += 1
-	}
-}
-for i in 1...20 {
-    var testArray: [Int] = randArray(n: i * 100)
-    let startTime = Date()
-	bucketSort(&testArray, 20, 30)
-    let endTime = Date()
-    let timeInterval: Double = endTime.timeIntervalSince(startTime)
-    print("Array size = \(i*100), Time interval = \(timeInterval) sec")
-	validator(&testArray)
-}
+
+var array : [Int] = [1, 34, 7, 99, 5, 23, 45, 88, 77, 19, 91, 100];
+let maxValue : Int = 100;
+bucketSort( &array,maxValue);
+print(array);

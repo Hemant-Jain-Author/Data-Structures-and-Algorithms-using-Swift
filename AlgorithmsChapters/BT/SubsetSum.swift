@@ -1,7 +1,6 @@
 import Foundation;
 
-func printSubset(_ flags : inout [Bool], _ arr : inout [Int], _ size : Int)
-{
+func printSubset(_ flags : inout [Bool], _ arr : inout [Int], _ size : Int) {
 	var i : Int = 0;
 	while (i < size) {
 		if (flags[i]) {
@@ -12,14 +11,12 @@ func printSubset(_ flags : inout [Bool], _ arr : inout [Int], _ size : Int)
 	print();
 }
 
-func subsetSum(_ arr : inout [Int], _ n : Int, _ target : Int)
-{
+func subsetSum(_ arr : inout [Int], _ n : Int, _ target : Int) {
 	var flags : [Bool] = Array(repeating: false, count: n);
 	subsetSum( &arr,n, &flags,0,0,target);
 }
 
-func subsetSum(_ arr : inout [Int], _ n : Int, _ flags : inout [Bool], _ sum : Int, _ curr : Int, _ target : Int)
-{
+func subsetSum(_ arr : inout [Int], _ n : Int, _ flags : inout [Bool], _ sum : Int, _ curr : Int, _ target : Int) {
 	if (target == sum) { // Solution found.
 		printSubset( &flags, &arr,n);
 		return;

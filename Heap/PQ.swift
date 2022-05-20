@@ -1,117 +1,136 @@
-class PQueue<K : Comparable, V> {
-	struct Element {
-		var key : K
-		var value : V
-	}
-	var elements : Array<Element?>
-	var count : Int
-	var isMinHeap : Bool
+import Foundation;
 
-	public init(isMinHeap : Bool) {
-		self.elements = Array()
-		self.elements.append(nil) // dummmy first element
-		self.count = 0
-		self.isMinHeap = isMinHeap
-	}
-	
-	private func comp(_ i : K, _ j : K) ->Bool { // always i < j in use
-		if( self.isMinHeap ) {
-			return i > j // min heap
-		} else {
-			return i < j // max heap
-		}
-	}
+class PriorityQueue < T: Comparable > {
+    private var size : Int; // Number of elements in PriorityQueue
+    private var arr : [T?]; // The Heap array
+    private var isMinHeap : Bool;
 
-	private func proclateDown(position : Int) {
-		let lChild = 2 * position
-		let rChild = lChild + 1
-		var small = -1
-	
-		if lChild <= self.count {
-			small = lChild
+    init(_ isMin : Bool) {
+        self.arr = [];
+        self.size = 0;
+        self.isMinHeap = isMin;
+    }
+
+    init(_ array : inout [T], _ isMin : Bool) {
+        self.size = array.count;
+        self.arr = array;
+        self.isMinHeap = isMin;
+
+		// Build Heap operation over array
+		var i : Int = (self.size / 2);
+		while (i >= 0) {
+			self.percolateDown(i);
+			i -= 1;
 		}
-	
-		if rChild <= self.count && self.comp(self.elements[lChild]!.key, self.elements[rChild]!.key) {
-			small = rChild
-		}
-	
-		if small != -1 && self.comp(self.elements[position]!.key, self.elements[small]!.key) {
-			self.elements.swapAt(position, small)
-			self.proclateDown(position : small)
-		}
-	}
-	
-	private func proclateUp(position : Int) {
-		let parent = position / 2
-		if parent == 0 {
-			return
-		}
-	
-		if self.comp(self.elements[parent]!.key, self.elements[position]!.key) {
-			self.elements.swapAt(position, parent)
-			self.proclateUp(position : parent)
-		}
-	}
-	
-	public func add(key : K, value : V) {
-		let item = Element(key : key, value : value)
-		self.elements.append(item)
-		self.count+=1
-		self.proclateUp(position : self.count)
-	}
-	
-	public func remove() -> V? {
-		if self.isEmpty {
-			print("Heap Empty Error.")
+    }
+
+    func comp(_ first : T, _ second : T) -> Bool {
+        if (self.isMinHeap) {
+            return first > second;
+        } else {
+            return first < second;
+        }
+    }
+
+    // Other Methods.
+    func percolateDown(_ parent : Int) {
+        let lChild : Int = 2 * parent + 1;
+        let rChild : Int = lChild + 1;
+        var child : Int = -1;
+        if (lChild < self.size) {
+            child = lChild;
+        }
+
+        if (rChild < self.size && self.comp(arr[lChild]!, arr[rChild]!)) {
+            child = rChild;
+        }
+
+        if (child != -1 && self.comp(arr[parent]!, arr[child]!)) {
+            self.arr.swapAt(parent, child)
+			self.percolateDown(child);
+        }
+    }
+
+    func percolateUp(_ child : Int) {
+        let parent : Int = (child - 1) / 2;
+        if (parent >= 0 && self.comp(arr[parent]!, arr[child]!)) {
+			self.arr.swapAt(child, parent)
+            self.percolateUp(parent);
+        }
+    }
+
+    public var isEmpty : Bool {
+        return (self.size == 0);
+    }
+
+    public var length : Int {
+        return self.size;
+    }
+
+    func peek() -> T? {
+        if (self.isEmpty) {
+            print("PriorityQueue empty exception.");
 			return nil
+        }
+        return self.arr[0];
+    }
+
+    func add(_ value : T) {
+		self.size += 1
+		self.arr.append(value)
+        self.percolateUp(self.size - 1);
+    }
+
+    func remove() -> T? {
+        if (self.isEmpty) {
+            print("PriorityQueue empty exception.")
+			return nil;
+        }
+        let value = self.arr[0];
+        self.arr[0] = self.arr[self.size - 1];
+        self.size -= 1;
+		self.arr.removeLast();
+        self.percolateDown(0);
+        return value;
+    }
+
+    func display() {
+        print("PriorityQueue : ",terminator: "");
+		var i : Int = 0;
+		while (i < self.size) {
+			print(self.arr[i]!, terminator: " ");
+			i += 1;
 		}
-		let value = self.elements[1]!.value
-		self.elements[1] = self.elements[self.count]
-		self.elements.removeLast()
-		self.count-=1
-		self.proclateDown(position:1)
-		return value
-	}
-	
-	public func display() {
-		let n = self.count
-		var i = 1
-		while i <= n {
-			print(self.elements[i]!.value, terminator:" ")
-			i+=1
+        print();
+    }
+
+    func delete(_ value : T) -> Bool {
+		var i : Int = 0;
+		while (i < self.size) {
+			if (self.arr[i] == value) {
+				self.arr[i] = self.arr[self.size - 1];
+				self.size -= 1;
+				self.arr.removeLast();
+				self.percolateUp(i);
+				self.percolateDown(i);
+				return true;
+			}
+			i += 1;
 		}
-		print()
-	}
-	
-	public var isEmpty : Bool {
-		return (self.count == 0)
-	}
-	
-	public func peek() -> V? {
-		if self.isEmpty {
-			return nil
-		}
-		return self.elements[1]!.value
-	}
+        return false;
+    }
 }
 
-var a = [1, 9, 6, 7, 8, -1, 2, 4, 5, 3]
-var pq = PQueue<Int,Int>(isMinHeap: true)
-for val in a {
-	pq.add(key : val, value : val)
+var pq = PriorityQueue<Int>(true);
+pq.add(1);
+pq.add(6);
+pq.add(5);
+pq.add(7);
+pq.add(3);
+pq.add(4);
+pq.add(2);
+pq.display();
+while (!pq.isEmpty) {    
+	print(pq.remove()!, terminator: " ");
 }
-
-while let value = pq.remove() {
-	print(value,terminator:" ")
-}
-
-var b = ["apple", "banana", "mango", "grapes", "pears", "lemmon"]
-var pq2 = PQueue<String,String>(isMinHeap: false)
-for val in b {
-	pq2.add(key : val, value : val)
-}
-
-while let value = pq2.remove() {
-	print(value,terminator:" ")
-}
-
+print()

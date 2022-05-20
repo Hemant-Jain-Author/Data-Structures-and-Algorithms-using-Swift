@@ -1,9 +1,7 @@
 import Foundation;
 // Towers Of Hanoi problem.
-func tohUtil(_ num : Int, _ from : Character, _ to : Character, _ temp : Character)
-{
-	if (num < 1)
-	{
+func tohUtil(_ num : Int, _ from : Character, _ to : Character, _ temp : Character) {
+	if (num < 1) {
 		return;
 	}
 	TOH.tohUtil(num - 1,from,temp,to);
@@ -11,8 +9,7 @@ func tohUtil(_ num : Int, _ from : Character, _ to : Character, _ temp : Charact
 	TOH.tohUtil(num - 1,temp,to,from);
 }
 
-func toh(_ num : Int)
-{
+func toh(_ num : Int) {
 	print("The sequence of moves involved in the Tower of Hanoi are :");
 	TOH.tohUtil(num,"A","C","B");
 }

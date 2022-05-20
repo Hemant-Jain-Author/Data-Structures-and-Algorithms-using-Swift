@@ -11,8 +11,8 @@ func MatrixChainMulBruteForce(_ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 	// count of multiplications for each parenthesis
 	// placement and return the minimum count
 	while (k < j) {
-		let count : Int = MatrixCM.MatrixChainMulBruteForce( &p,i,k) + 
-		MatrixCM.MatrixChainMulBruteForce( &p,k + 1,j) + p[i - 1] * p[k] * p[j];
+		let count : Int = MatrixChainMulBruteForce( &p,i,k) + 
+		MatrixChainMulBruteForce( &p,k+1,j) + p[i-1]*p[k]*p[j];
 
 		if (count < min) {
 			min = count;
@@ -23,7 +23,7 @@ func MatrixChainMulBruteForce(_ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 }
 
 func MatrixChainMulBruteForce(_ p : inout [Int], _ n : Int) -> Int {
-	return MatrixCM.MatrixChainMulBruteForce( &p, 1, n - 1);
+	return MatrixChainMulBruteForce( &p, 1, n - 1);
 }
 
 func MatrixChainMulTD(_ p : inout [Int], _ n : Int) -> Int {
@@ -33,7 +33,7 @@ func MatrixChainMulTD(_ p : inout [Int], _ n : Int) -> Int {
 		dp[i][i] = 0;
 		i += 1;
 	}
-	return MatrixCM.MatrixChainMulTD( &dp, &p,1,n - 1);
+	return MatrixChainMulTD( &dp, &p,1,n - 1);
 }
 
 // Function for matrix chain multiplication
@@ -44,7 +44,7 @@ func MatrixChainMulTD(_ dp : inout [[Int]], _ p : inout [Int], _ i : Int, _ j : 
 	}
 	var k : Int = i;
 	while (k < j) {
-		dp[i][j] = min(dp[i][j],MatrixCM.MatrixChainMulTD( &dp, &p,i,k) + MatrixCM.MatrixChainMulTD( &dp, &p,k + 1,j) + p[i - 1] * p[k] * p[j]);
+		dp[i][j] = min(dp[i][j],MatrixChainMulTD( &dp, &p,i,k) + MatrixChainMulTD( &dp, &p,k + 1,j) + p[i - 1] * p[k] * p[j]);
 		k += 1;
 	}
 	return dp[i][j];
@@ -64,8 +64,7 @@ func MatrixChainMulBU(_ p : inout [Int], _ n : Int) -> Int {
 		// l is length of range.
 		while (j < n) {
 			var k : Int = i;
-			while (k < j)
-			{
+			while (k < j) {
 				dp[i][j] = min(dp[i][j],dp[i][k] + p[i-1]*p[k]*p[j] + dp[k+1][j]);
 				k += 1;
 			}
@@ -82,15 +81,15 @@ func PrintOptPar(_ n : Int, _ pos : inout [[Int]], _ i : Int, _ j : Int) {
 		print("M" + String(pos[i][i]) + " ",terminator: "");
 	} else {
 		print("( ",terminator: "");
-		MatrixCM.PrintOptPar(n, &pos,i,pos[i][j]);
-		MatrixCM.PrintOptPar(n, &pos,pos[i][j] + 1,j);
+		PrintOptPar(n, &pos,i,pos[i][j]);
+		PrintOptPar(n, &pos,pos[i][j] + 1,j);
 		print(") ",terminator: "");
 	}
 }
 
 func PrintOptimalParenthesis(_ n : Int, _ pos : inout [[Int]]) {
 	print("OptimalParenthesis : ",terminator: "");
-	MatrixCM.PrintOptPar(n, &pos,1,n - 1);
+	PrintOptPar(n, &pos,1,n - 1);
 	print("");
 }
 
@@ -99,23 +98,19 @@ func MatrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
 	var pos : [[Int]] = Array(repeating: Array(repeating: Int.max, count: n), count: n);
 
 	var i : Int = 1;
-	while (i < n)
-	{
+	while (i < n) {
 		dp[i][i] = 0;
 		pos[i][i] = i;
 		i += 1;
 	}
 
 	var l : Int = 1;
-	while (l < n)
-	{
+	while (l < n) {
 		var i : Int = 1, j : Int = i + l;
 		// l is length of range.
-		while (j < n)
-		{
+		while (j < n) {
 			var k : Int = i;
-			while (k < j)
-			{
+			while (k < j) {
 				dp[i][j] = min(dp[i][j],dp[i][k] + p[i - 1] * p[k] * p[j] + dp[k + 1][j]);
 				pos[i][j] = k;
 				k += 1;
@@ -124,17 +119,17 @@ func MatrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
 		}
 		l += 1;
 	}
-	MatrixCM.PrintOptimalParenthesis(n, &pos);
+	PrintOptimalParenthesis(n, &pos);
 	return dp[1][n - 1];
 }
 
 // Driver Code
 var arr : [Int] = [1, 2, 3, 4];
 let n : Int = arr.count;
-print("Matrix Chain Multiplication is: " + String(MatrixCM.MatrixChainMulBruteForce( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(MatrixCM.MatrixChainMulTD( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(MatrixCM.MatrixChainMulBU( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(MatrixCM.MatrixChainMulBU2( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(MatrixChainMulBruteForce( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(MatrixChainMulTD( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(MatrixChainMulBU( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(MatrixChainMulBU2( &arr,n)));
 
 /*
 Matrix Chain Multiplication is: 18

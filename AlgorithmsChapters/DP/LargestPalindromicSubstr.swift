@@ -26,11 +26,11 @@ func largestPalinSubstr(_ str : String) -> Int {
 			} else {
 				dp[i][j] = 0;
 			}
-			i += 1;j += 1;
+			i += 1;
+			j += 1;
 		}
 		l += 1;
 	}
-	
 	let str2 = (str.prefix(start + max)).suffix(max)
 	print("Max Length Palindromic Substrings : " + str2);
 	return max;
@@ -38,3 +38,8 @@ func largestPalinSubstr(_ str : String) -> Int {
 
 let str : String = "ABCAUCBCxxCBA";
 print("Max Palindromic Substrings len: " + String(LargestPalindromicSubstr.largestPalinSubstr(str)));
+
+/* 
+Max Length Palindromic Substrings : BCxxCB
+Max Palindromic Substrings len: 6
+ */

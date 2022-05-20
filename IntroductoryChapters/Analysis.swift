@@ -1,4 +1,6 @@
-func fun1(n: Int) -> Int {
+import Foundation
+
+func fun1(_ n : Int) -> Int {
 	var m = 0
 	var i : Int = 0 
 	while i < n { 
@@ -8,7 +10,7 @@ func fun1(n: Int) -> Int {
 	return m
 }
 
-func fun2(n : Int) -> Int {
+func fun2(_ n : Int) -> Int {
 	var m = 0
 	var i : Int = 0 
 	while i < n { 
@@ -22,41 +24,7 @@ func fun2(n : Int) -> Int {
 	return m
 }
 
-func fun3(n : Int) -> Int {
-	var m = 0
-	var i : Int = 0 
-	while i < n {
-		var j : Int = 0 
-		while j < i {
-			m += 1
-			j += 1
-		}
-		i += 1
-	}
-	return m
-}
-
-func fun4(n : Int) -> Int {
-	var m = 0
-	var i = 1
-	while i < n {
-		m += 1
-		i = i * 2
-	}
-	return m
-}
-
-func fun5(n : Int) -> Int {
-	var m = 0
-	var i = n
-	while i > 0 {
-		m += 1
-		i = i / 2
-	}
-	return m
-}
-
-func fun6(n : Int) -> Int {
+func fun3(_ n : Int) -> Int {
 	var m = 0
 	var i : Int = 0 
 	while i < n { 
@@ -74,7 +42,41 @@ func fun6(n : Int) -> Int {
 	return m
 }
 
-func fun7(n : Int) -> Int {
+func fun4(_ n : Int) -> Int {
+	var m = 0
+	var i : Int = 0 
+	while i < n {
+		var j : Int = 0 
+		while j < i {
+			m += 1
+			j += 1
+		}
+		i += 1
+	}
+	return m
+}
+
+func fun5(_ n : Int) -> Int {
+	var m = 0
+	var i = 1
+	while i < n {
+		m += 1
+		i = i * 2
+	}
+	return m
+}
+
+func fun6(_ n : Int) -> Int {
+	var m = 0
+	var i = n
+	while i > 0 {
+		m += 1
+		i = i / 2
+	}
+	return m
+}
+
+func fun7(_ n : Int) -> Int {
 	var m = 0
 	var i : Int = 0 
 	while i < n { 
@@ -96,8 +98,8 @@ func fun7(n : Int) -> Int {
 	}
 	return m
 }
-import Foundation
-func fun8(n : Int) -> Int {
+
+func fun8(_ n : Int) -> Int {
 	var m = 0
 	var i : Int = 0 
 	while i < n { 
@@ -113,7 +115,7 @@ func fun8(n : Int) -> Int {
 	return m
 }
 
-func fun9(n : Int) -> Int {
+func fun9(_ n : Int) -> Int {
 	var m = 0
 	var i = n
 	while i > 0 {
@@ -127,7 +129,21 @@ func fun9(n : Int) -> Int {
 	return m
 }
 
-func fun10(n : Int) -> Int {
+func fun10(_ n : Int) -> Int {
+	var m = 0
+	var i = 1
+	while i <= n {
+		var j : Int = 0
+		while j <= i {
+			m += 1
+			j+=1
+		}
+		i *= 2
+	}
+	return m
+}
+
+func fun11(_ n : Int) -> Int {
 	var m = 0
 	var i : Int = 0 
 	while i < n { 
@@ -141,7 +157,7 @@ func fun10(n : Int) -> Int {
 	return m
 }
 
-func fun11(n : Int) -> Int {
+func fun12(_ n : Int) -> Int {
 	var m = 0
 	var i : Int = 0 
 	while i < n { 
@@ -159,7 +175,7 @@ func fun11(n : Int) -> Int {
 	return m
 }
 
-func fun12(n : Int) -> Int {
+func fun13(_ n : Int) -> Int {
 	var j = 0
 	var m = 0
 	var i : Int = 0 
@@ -173,46 +189,32 @@ func fun12(n : Int) -> Int {
 	return m
 }
 
-func fun13(n : Int) -> Int {
-	var m = 0
-	var i = 1
-	while i <= n {
-		var j : Int = 0
-		while j <= i {
-			m += 1
-			j+=1
-		}
-		i *= 2
-	}
-	return m
-}
-
-print("N = 100, Number of instructions O(n):: \(fun1(n:100))")
-print("N = 100, Number of instructions O(n^2):: \(fun2(n:100))")
-print("N = 100, Number of instructions O(n^2):: \(fun3(n:100))")
-print("N = 100, Number of instructions O(log(n)):: \(fun4(n:100))")
-print("N = 100, Number of instructions O(log(n)):: \(fun5(n:100))")
-print("N = 100, Number of instructions O(n^3):: \(fun6(n:100))")
-print("N = 100, Number of instructions O(n^2):: \(fun7(n:100))")
-print("N = 100, Number of instructions O(n^(3/2)):: \(fun8(n:100))")
-print("N = 100, Number of instructions O(log(n)):: \(fun9(n:100))")
-print("N = 100, Number of instructions O(n^2):: \(fun10(n:100))")
-print("N = 100, Number of instructions O(n^3):: \(fun11(n:100))")
-print("N = 100, Number of instructions O(n):: \(fun12(n:100))")
-print("N = 100, Number of instructions O(n):: \(fun13(n:100))")
+print("N = 100, Number of instructions in O(n):: \(fun1(100))");
+print("N = 100, Number of instructions in O(n^2):: \(fun2(100))");
+print("N = 100, Number of instructions in O(n^3):: \(fun3(100))");
+print("N = 100, Number of instructions in O(n^2):: \(fun4(100))");
+print("N = 100, Number of instructions in O(log(n)):: \(fun5(100))");
+print("N = 100, Number of instructions in O(log(n)):: \(fun6(100))");
+print("N = 100, Number of instructions in O(n^2):: \(fun7(100))");
+print("N = 100, Number of instructions in O(n^(3/2)):: \(fun8(100))");
+print("N = 100, Number of instructions in O(n):: \(fun9(100))");
+print("N = 100, Number of instructions in O(n):: \(fun10(100))");
+print("N = 100, Number of instructions in O(n^2):: \(fun11(100))");
+print("N = 100, Number of instructions in O(n^3):: \(fun12(100))");
+print("N = 100, Number of instructions in O(n):: \(fun13(100))");
 
 /*
-N = 100, Number of instructions O(n):: 100
-N = 100, Number of instructions O(n^2):: 10000
-N = 100, Number of instructions O(n^2):: 4950
-N = 100, Number of instructions O(log(n)):: 7
-N = 100, Number of instructions O(log(n)):: 7
-N = 100, Number of instructions O(n^3):: 1000000
-N = 100, Number of instructions O(n^2):: 20000
-N = 100, Number of instructions O(n^(3/2)):: 1000
-N = 100, Number of instructions O(log(n)):: 197
-N = 100, Number of instructions O(n^2):: 4950
-N = 100, Number of instructions O(n^3):: 166650
-N = 100, Number of instructions O(n):: 100
-N = 100, Number of instructions O(n):: 134
+N = 100, Number of instructions in O(n):: 100
+N = 100, Number of instructions in O(n^2):: 10000
+N = 100, Number of instructions in O(n^3):: 1000000
+N = 100, Number of instructions in O(n^2):: 4950
+N = 100, Number of instructions in O(log(n)):: 7
+N = 100, Number of instructions in O(log(n)):: 7
+N = 100, Number of instructions in O(n^2):: 20000
+N = 100, Number of instructions in O(n^(3/2)):: 1000
+N = 100, Number of instructions in O(n):: 197
+N = 100, Number of instructions in O(n):: 134
+N = 100, Number of instructions in O(n^2):: 4950
+N = 100, Number of instructions in O(n^3):: 166650
+N = 100, Number of instructions in O(n):: 100
 */

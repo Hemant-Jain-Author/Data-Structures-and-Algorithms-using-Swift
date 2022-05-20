@@ -1,49 +1,39 @@
 import Foundation;
 
-func print(_ Q : inout [Int], _ n : Int)
-{
+func feasible(_ Q : inout [Int], _ k : Int) -> Bool {
 	var i : Int = 0;
-	while (i < n)
-	{
-		print(" " + String(Q[i]),terminator: "");
-		i += 1;
-	}
-
-	print(" ");
-}
-
-func feasible(_ Q : inout [Int], _ k : Int) -> Bool
-{
-	var i : Int = 0;
-	while (i < k)
-	{
-		if (Q[k] == Q[i] || abs(Q[i] - Q[k]) == abs(i - k))
-		{
+	while (i < k) {
+		if (Q[k] == Q[i] || abs(Q[i] - Q[k]) == abs(i - k)) {
 			return false;
 		}
 		i += 1;
 	}
 	return true;
 }
-func nQueens(_ Q : inout [Int], _ k : Int, _ n : Int)
-{
-	if (k == n)
-	{
-		NQueen.print( &Q,n);
+
+func nQueens(_ Q : inout [Int], _ k : Int, _ n : Int) {
+	if (k == n) {
+		print(Q);
 		return;
 	}
 
 	var i : Int = 0;
-	while (i < n)
-	{
+	while (i < n) {
 		Q[k] = i;
-		if (NQueen.feasible( &Q,k))
-		{
-			NQueen.nQueens( &Q,k + 1,n);
+		if (feasible( &Q,k)) {
+			nQueens( &Q,k + 1,n);
 		}
 		i += 1;
 	}
 }
 
 var Q : [Int] = Array(repeating: 0, count: 8);
-NQueen.nQueens( &Q,0,8);
+nQueens( &Q,0,8);
+
+/* 
+[0, 4, 7, 5, 2, 6, 1, 3]
+[0, 5, 7, 2, 6, 3, 1, 4]
+...
+[7, 2, 0, 5, 1, 4, 6, 3]
+[7, 3, 0, 2, 5, 1, 6, 4]
+ */

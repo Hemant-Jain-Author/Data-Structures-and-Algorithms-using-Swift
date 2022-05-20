@@ -6,10 +6,8 @@ func makePairs(_ nuts : inout [Int], _ bolts : inout [Int]) {
 }
 
 // Quick sort kind of approach.
-func makePairs(_ nuts : inout [Int], _ bolts : inout [Int], _ low : Int, _ high : Int)
-{
-	if (low < high)
-	{
+func makePairs(_ nuts : inout [Int], _ bolts : inout [Int], _ low : Int, _ high : Int) {
+	if (low < high) {
 		// Choose first element of bolts array as pivot to partition nuts.
 		let pivot : Int = partition( &nuts,low,high,bolts[low]);
 		// Using nuts[pivot] as pivot to partition bolts.

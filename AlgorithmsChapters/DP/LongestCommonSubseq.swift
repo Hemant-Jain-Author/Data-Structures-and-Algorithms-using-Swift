@@ -1,7 +1,6 @@
 import Foundation;
 
-func LCSubStr(_ st1 : String, _ st2 : String) -> Int
-{
+func LCSubStr(_ st1 : String, _ st2 : String) -> Int {
 	var X : [Character] = Array(st1);
 	let Y : [Character] = Array(st2);
 	let m : Int = st1.count;
@@ -10,13 +9,10 @@ func LCSubStr(_ st1 : String, _ st2 : String) -> Int
 	var p : [[Int]] = Array(repeating: Array(repeating: 0, count: n + 1), count: m + 1);
 
 	var i : Int = 1;
-	// For printing the substring.
 	// Fill dp array in bottom up fashion.
-	while (i <= m)
-	{
+	while (i <= m) {
 		var j : Int = 1;
-		while (j <= n)
-		{
+		while (j <= n) {
 			if (X[i - 1] == Y[j - 1]) {
 				dp[i][j] = dp[i - 1][j - 1] + 1;
 				p[i][j] = 0;
@@ -30,13 +26,12 @@ func LCSubStr(_ st1 : String, _ st2 : String) -> Int
 		i += 1;
 	}
 	
-	PrintLCS( &p, &X,m,n);
-	print("\n");
+	PrintLCS(&p, &X,m,n);
+	print()
 	return dp[m][n];
 }
 
-func PrintLCS(_ p : inout [[Int]], _ X : inout [Character], _ i : Int, _ j : Int)
-{
+func PrintLCS(_ p : inout [[Int]], _ X : inout [Character], _ i : Int, _ j : Int) {
 	if (i == 0 || j == 0) {
 		return;
 	}
@@ -50,7 +45,11 @@ func PrintLCS(_ p : inout [[Int]], _ X : inout [Character], _ i : Int, _ j : Int
 	}
 }
 
-
 let X : String = "carpenter";
 let Y : String = "sharpener";
 print(LCSubStr(X,Y));
+
+/* 
+arpener
+7
+ */

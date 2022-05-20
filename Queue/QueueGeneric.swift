@@ -4,7 +4,7 @@ class Queue<T> {
 	public init() {}
 
 	public var isEmpty: Bool {
-		return count == 0
+		return que.count == 0
 	}
 
 	public var count: Int {

@@ -1,7 +1,6 @@
 import Foundation;
 
-func printSolution(_ colour : inout [Int], _ V : Int)
-{
+func printSolution(_ colour : inout [Int], _ V : Int) {
 	print("Assigned colours are::", terminator: "");
 	var i : Int = 0;
 	while (i < V) {
@@ -12,33 +11,25 @@ func printSolution(_ colour : inout [Int], _ V : Int)
 }
 
 // Check if the whole graph is coloured properly.
-func isSafe2(_ graph : inout [[Bool]], _ colour : inout [Int], _ V : Int) -> Bool
-{
+func isSafe2(_ graph : inout [[Bool]], _ colour : inout [Int], _ V : Int) -> Bool {
 		var i : Int = 0;
-		while (i < V)
-		{
-
+		while (i < V) {
 			var j : Int = i + 1;
-			while (j < V)
-			{
+			while (j < V) {
 				if (graph[i][j] && colour[j] == colour[i])
 				{
 					return false;
 				}
 				j += 1;
 			}
-			
 			i += 1;
 		}
 	return true;
 }
 
-func graphColouring2(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour : inout [Int], _ i : Int) -> Bool
-{
-	if (i == V)
-	{
-		if (isSafe2( &graph, &colour,V))
-		{
+func graphColouring2(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour : inout [Int], _ i : Int) -> Bool {
+	if (i == V) {
+		if (isSafe2( &graph, &colour,V)) {
 			printSolution( &colour,V);
 			return true;
 		}
@@ -46,11 +37,9 @@ func graphColouring2(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour : 
 	}
 	var j : Int = 1;
 	// Assign each colour from 1 to m
-	while (j <= m)
-	{
+	while (j <= m) {
 		colour[i] = j;
-		if (graphColouring2( &graph,V,m, &colour,i + 1))
-		{
+		if (graphColouring2( &graph,V,m, &colour,i + 1)) {
 			return true;
 		}
 		j += 1;
@@ -59,48 +48,36 @@ func graphColouring2(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour : 
 	return false;
 }
 
-func graphColouring2(_ graph : inout [[Bool]], _ V : Int, _ m : Int) -> Bool
-{
+func graphColouring2(_ graph : inout [[Bool]], _ V : Int, _ m : Int) -> Bool {
 	var colour : [Int] = Array(repeating: 0, count: V);
-	if (graphColouring2( &graph,V,m, &colour,0))
-	{
+	if (graphColouring2( &graph,V,m, &colour,0)) {
 		return true;
 	}
 	return false;
 }
 
 // Is it safe to colour vth vertice with c colour.
-func isSafe(_ graph : inout [[Bool]], _ V : Int, _ colour : inout [Int], _ v : Int, _ c : Int) -> Bool
-{
-
+func isSafe(_ graph : inout [[Bool]], _ V : Int, _ colour : inout [Int], _ v : Int, _ c : Int) -> Bool {
 	var i : Int = 0;
-	while (i < V)
-	{
-		if (graph[v][i] == true && c == colour[i])
-		{
+	while (i < V) {
+		if (graph[v][i] == true && c == colour[i]) {
 			return false;
 		}
 		i += 1;
 	}
-
 	return true;
 }
 
-func graphColouringUtil(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour : inout [Int], _ i : Int) -> Bool
-{
-	if (i == V)
-	{
+func graphColouringUtil(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour : inout [Int], _ i : Int) -> Bool {
+	if (i == V) {
 		printSolution( &colour,V);
 		return true;
 	}
 	var j : Int = 1;
-	while (j <= m)
-	{
-		if (isSafe( &graph,V, &colour,i,j))
-		{
+	while (j <= m) {
+		if (isSafe( &graph,V, &colour,i,j)) {
 			colour[i] = j;
-			if (graphColouringUtil( &graph,V,m, &colour,i + 1))
-			{
+			if (graphColouringUtil( &graph,V,m, &colour,i + 1)) {
 				return true;
 			}
 		}
@@ -109,11 +86,9 @@ func graphColouringUtil(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour
 	return false;
 }
 
-func graphColouring(_ graph : inout [[Bool]], _ V : Int, _ m : Int) -> Bool
-{
+func graphColouring(_ graph : inout [[Bool]], _ V : Int, _ m : Int) -> Bool {
 	var colour : [Int] = Array(repeating: 0, count: V);
-	if (graphColouringUtil( &graph,V,m, &colour,0))
-	{
+	if (graphColouringUtil( &graph,V,m, &colour,0)) {
 		return true;
 	}
 	return false;
@@ -135,3 +110,8 @@ if (!graphColouring2( &graph,V,m)) {
 if (!graphColouring( &graph,V,m)) {
 	print("Solution does not exist");
 }
+
+/* 
+Assigned colours are::1 2 1 2 3 
+Assigned colours are::1 2 1 2 3  
+*/

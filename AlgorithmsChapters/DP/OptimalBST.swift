@@ -22,8 +22,7 @@ func optBstCost(_ keys : inout [Int], _ freq : inout [Int]) -> Int {
 	return optBstCost( &freq,0,n - 1);
 }
 
-func optBstCostTD(_ keys : inout [Int], _ freq : inout [Int]) -> Int
-{
+func optBstCostTD(_ keys : inout [Int], _ freq : inout [Int]) -> Int {
 	let n : Int = freq.count;
 	var cost : [[Int]] = Array(repeating: Array(repeating: Int.max, count: n), count: n);
 	var i : Int = 0;

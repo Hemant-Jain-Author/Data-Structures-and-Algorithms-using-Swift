@@ -14,8 +14,7 @@ func maxVal(_ maxi: inout [[Int]], _ i : Int, _ j : Int) -> Int {
 	return maxi[i][j];
 }
 
-func minCostBstTD(_ dp : inout [[Int]], _ maxi: inout [[Int]], _ i : Int, _ j : Int, _ arr : inout [Int]) -> Int
-{
+func minCostBstTD(_ dp : inout [[Int]], _ maxi: inout [[Int]], _ i : Int, _ j : Int, _ arr : inout [Int]) -> Int {
 	if (j <= i) {
 		return 0;
 	}
@@ -50,8 +49,7 @@ func minCostBstBU(_ arr : inout [Int]) -> Int {
 	var maxi: [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: n);
 
 	var i : Int = 0;
-	while (i < n)
-	{
+	while (i < n) {
 		maxi[i][i] = arr[i];
 		i += 1;
 	}
@@ -60,12 +58,10 @@ func minCostBstBU(_ arr : inout [Int]) -> Int {
 	while (l < n) {
 		var i : Int = 0, j : Int = i + l;
 		// l is length of range.
-		while (j < n)
-		{
+		while (j < n) {
 			dp[i][j] = Int.max;
 			var k : Int = i;
-			while (k < j)
-			{
+			while (k < j) {
 				dp[i][j] = min(dp[i][j],dp[i][k] + dp[k + 1][j] + maxi[i][k] * maxi[k + 1][j]);
 				maxi[i][j] = max(maxi[i][k], maxi[k + 1][j]);
 				k += 1;

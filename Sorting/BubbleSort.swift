@@ -1,82 +1,50 @@
+import Foundation;
 
 func less(_ value1 : Int, _ value2 : Int) -> Bool {
-	return value1 < value2
-}
-	
-func more(_ value1 : Int, _ value2 : Int) -> Bool {
-	return value1 > value2
+    return value1 < value2;
 }
 
-//bubbleSort sorting method.
-func bubbleSort(_ arr :inout [Int]) {
-	let size = arr.count
-	var i = 0
-	while i < (size - 1) {
-		var j = 0
-		while j < size-i-1 {
-			if more(arr[j], arr[j+1]) {
-				arr.swapAt(j, j+1)
-			}
-			j+=1
-		}
-		i+=1
-	}
+func greater(_ value1 : Int, _ value2 : Int) -> Bool {
+    return value1 > value2;
 }
 
-//bubbleSort2 sorting method.
-func bubbleSort2(_ arr :inout [Int]) {
-	let size = arr.count
-	var swapped = 1
-	var i = 0
-	while i < (size - 1) && swapped == 1 {
-		swapped = 0
-		var j = 0
-		while j < size-i-1 {
-			if more(arr[j], arr[j+1]) {
-				arr.swapAt(j, j+1)
-				swapped = 1
-			}
-			j+=1
-		}
-		i+=1
-	}
-}
-
-
-// Testing code 
-/*
-var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
-bubbleSort2(&data)
-print(data)
-*/
-
-import Foundation
-
-func randArray(n:Int ) -> [Int] {
-    var result:[Int] = []
-    for _ in 0..<n {
-        result.append(Int.random(in: 1..<100))
+func bubbleSort(_ arr : inout [Int]) {
+    let size : Int = arr.count;
+    var i : Int = 0;
+    while (i < (size - 1)) {
+        var j : Int = 0;
+        while (j < size - i - 1) {
+            if greater(arr[j],arr[j + 1]) {
+                arr.swapAt(j, j+1) // Swapping
+            }
+            j += 1;
+        }
+        i += 1;
     }
-    return result
 }
-func validator(_ arr : inout [Int]) {
-	let size = arr.count
-	var i = 0
-	while i < size-2 {
-		if(arr[i] > arr[i+1]) {
-			print("Not sorted at index \(i)")
-			print(arr)
-			return
-		}
-		i += 1
-	}
+
+func bubbleSort2(_ arr : inout [Int]) {
+    let size : Int = arr.count;
+    var swapped : Int = 1;
+    var i : Int = 0;
+    while (i < (size - 1) && swapped == 1) {
+        swapped = 0;
+        var j : Int = 0;
+        while (j < size - i - 1) {
+            if greater(arr[j],arr[j + 1]) {
+                arr.swapAt(j, j+1) // Swapping
+                swapped = 1;
+            }
+            j += 1;
+        }
+        i += 1;
+    }
 }
-for i in 1...20 {
-    var testArray: [Int] = randArray(n: i * 100)
-    let startTime = Date()
-    bubbleSort(&testArray)
-    let endTime = Date()
-    let timeInterval: Double = endTime.timeIntervalSince(startTime)
-    print("Array size = \(i*100), Time interval = \(timeInterval) sec")
-	validator(&testArray)
-}
+
+var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+bubbleSort( &array);
+print(array)
+
+var array2 : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+bubbleSort2( &array2);
+print(array2)

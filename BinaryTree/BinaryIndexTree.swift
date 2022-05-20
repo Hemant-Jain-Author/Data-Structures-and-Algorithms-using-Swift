@@ -1,86 +1,76 @@
-import java.util.*;
+import Foundation;
 
-public class BinaryIndexTree {
-	int BIT[];
-	int size;
+class BinaryIndexTree {
+    var BIT : [Int];
+    var size : Int;
 
-	BinaryIndexTree(int arr[]) {
-		size = arr.length;
-		BIT = new int[size + 1];
-		Arrays.fill(BIT, 0);
-
-		// Populating bit. 
-		for (int i = 0; i < size; i++)
-			update(i, arr[i]);
-	}
-
-	public void set(int arr[], int index, int val) {
-		int diff = val - arr[index];
-		arr[index] = val;
-
-		// Difference is propagated.
-		update(index, diff);
-	}
-
-	private void update(int index, int val) {
-		// Index in bit is 1 more than the input array.
-		index = index + 1;
-
-		// Traverse to ancestors of nodes.
-		while (index <= size) {
-			// Add val to current node of Binary Index Tree.
-			BIT[index] += val;
-
-			// Next element which need to store val.
-			index += index & (-index);
+    init(_ arr : inout [Int]) {
+        self.size = arr.count;
+        self.BIT = Array(repeating: 0, count: self.size + 1);
+		var i : Int = 0;
+		// Populating bit.
+		while (i < self.size) {
+			self.update(i,arr[i]);
+			i += 1;
 		}
-	}
+    }
 
-	// Range sum in the range start to end.
-	int rangeSum(int start, int end) {
-		// Check for error conditions.
-		if (start > end || start < 0 || end > size - 1) {
-			System.out.println("Invalid Input.");
-			return -1;
-		}
+    func set(_ arr : inout [Int], _ index : Int, _ val : Int) {
+        let diff : Int = val - arr[index];
+        arr[index] = val;
+        self.update(index,diff); // Difference is propagated.
+    }
 
-		return prefixSum(end) - prefixSum(start - 1);
-	}
+    func update(_ index : Int, _ val : Int) {
+        // Index in bit is 1 more than the input array.
+        var index = index + 1;
 
-	// Prefix sum in the range 0 to index.
-	int prefixSum(int index) {
-		int sum = 0;
-		index = index + 1;
+        // Traverse to ancestors of nodes.
+        while (index <= self.size) {
+            // Add val to current node of Binary Index Tree.
+            self.BIT[index] += val;
+            // Next element which need to store val.
+            index += index & (-index);
+        }
+    }
 
-		// Traverse ancestors of Binary Index Tree nodes.
-		while (index > 0) {
-			// Add current element to sum.
-			sum += BIT[index];
+    // Range sum in the range start to end.
+    func rangeSum(_ start : Int, _ end : Int) -> Int {
+        // Check for error conditions.
+        if (start > end || start < 0 || end > self.size - 1) {
+            print("Invalid Input.");
+            return -1;
+        }
+        return self.prefixSum(end) - self.prefixSum(start - 1);
+    }
 
-			// Parent index calculation.
-			index -= index & (-index);
-		}
-		return sum;
-	}
-
-	// Main function
-	public static void main(String args[]) {
-		int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-		BinaryIndexTree tree = new BinaryIndexTree(arr);
-
-		System.out.println("Sum of elements in range(0, 5): " + tree.prefixSum(5));
-		System.out.println("Sum of elements in range(2, 5): " + tree.rangeSum(2, 5));
-
-		// Set fourth element to 10.
-		tree.set(arr, 3, 10);
-
-		// Find sum after the value is updated
-		System.out.println("Sum of elements in range(0, 5): " + tree.prefixSum(5));
-	}
+    // Prefix sum in the range 0 to index.
+    func prefixSum(_ index : Int) -> Int {
+        var sum : Int = 0;
+        var index = index + 1;
+        // Traverse ancestors of Binary Index Tree nodes.
+        while (index > 0) {
+            // Add current element to sum.
+            sum += self.BIT[index];
+            // Parent index calculation.
+            index -= index & (-index);
+        }
+        return sum;
+    }
 }
 
-/*
+// Main function
+var arr : [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+let tree : BinaryIndexTree = BinaryIndexTree(&arr);
+print("Sum of elements in range(0, 5): " + String(tree.prefixSum(5)));
+print("Sum of elements in range(2, 5): " + String(tree.rangeSum(2,5)));
+// Set fourth element to 10.
+tree.set( &arr,3,10);
+// Find sum after the value is updated
+print("Sum of elements in range(0, 5): " + String(tree.prefixSum(5)));
+
+/* 
 Sum of elements in range(0, 5): 21
 Sum of elements in range(2, 5): 18
 Sum of elements in range(0, 5): 27
-*/
+ */

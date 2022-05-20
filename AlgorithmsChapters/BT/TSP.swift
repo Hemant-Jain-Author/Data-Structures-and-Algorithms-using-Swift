@@ -1,17 +1,13 @@
 import Foundation;
 
 // Function to find the minimum weight Hamiltonian Cycle
-func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int, _ pCost : Int, _ visited : inout [Bool], _ ans : inout Int, _ ansPath : inout [Int]) -> Int
-{
-	if (pCost > ans)
-	{
+func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int, _ pCost : Int, _ visited : inout [Bool], _ ans : inout Int, _ ansPath : inout [Int]) -> Int {
+	if (pCost > ans) {
 		return ans;
 	}
 	let curr : Int = path[pSize - 1];
-	if (pSize == n)
-	{
-		if (graph[curr][0] > 0 && ans > pCost + graph[curr][0])
-		{
+	if (pSize == n) {
+		if (graph[curr][0] > 0 && ans > pCost + graph[curr][0]) {
 			ans = pCost + graph[curr][0];
 
 			var i : Int = 0;
@@ -26,10 +22,8 @@ func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int
 	}
 
 	var i : Int = 0;
-	while (i < n)
-	{
-		if (visited[i] == false && graph[curr][i] > 0)
-		{
+	while (i < n) {
+		if (visited[i] == false && graph[curr][i] > 0) {
 			visited[i] = true;
 			path[pSize] = i;
 			ans = tsp( &graph,n, &path,pSize + 1,pCost + graph[curr][i], &visited, &ans, &ansPath);

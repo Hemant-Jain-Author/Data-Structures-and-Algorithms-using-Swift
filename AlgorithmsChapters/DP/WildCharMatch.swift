@@ -50,11 +50,9 @@ func matchExpUtilDP(_ exp : inout [Character], _ str : inout [Character], _ m : 
 
 	i = 1;
 	// Fill the table in bottom-up fashion
-	while (i <= m)
-	{
+	while (i <= m) {
 		var j : Int = 1;
-		while (j <= n)
-		{
+		while (j <= n) {
 			// If we see a '*' in pattern:
 			// 1) We ignore '*' character and consider next character in the pattern.
 			// 2) We ignore one character in the input str and consider next character.

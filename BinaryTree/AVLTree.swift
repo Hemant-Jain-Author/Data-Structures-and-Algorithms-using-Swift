@@ -1,274 +1,242 @@
+import Foundation;
 
-public class AVLTree {
-	private Node root;
+class AVLTree {
+    private var root : Node?;
+    class Node {
+        var data : Int;
+        var left : Node?;
+        var right : Node?;
+        var height : Int;
 
-	private static class Node {
-		private int data;
-		private Node left;
-		private Node right;
-		private int height;
+        init(_ d : Int, _ l : Node?, _ r : Node?) {
+            self.data = d;
+            self.left = l;
+            self.right = r;
+            self.height = 0;
+        }
+    }
 
-		public Node(int d, Node l, Node r) {
-			data = d;
-			left = l;
-			right = r;
-			height = 0;
-		}
-	}
+    init() {
+        self.root = nil;
+    }
 
-	public AVLTree() {
-		root = null;
-	}
+    func height(_ n : Node?) -> Int {
+        if (n == nil) {
+            return -1;
+        }
+        return n!.height;
+    }
 
-	int height(Node n) {
-		if (n == null)
-			return -1;
-		return n.height;
-	}
+    func getBalance(_ node : Node?) -> Int {
+        return (node == nil) ? 0 : self.height(node!.left) - self.height(node!.right);
+    }
 
-	int getBalance(Node node) {
-		return (node == null) ? 0 : height(node.left) - height(node.right);
-	}
+    func printTree() {
+        self.printTree(self.root,"",false);
+        print();
+    }
 
-	public void printTree() {
-		printTree(root, "", false);
-		System.out.println();
-	}
+    func printTree(_ node : Node?, _ indent : String, _ isLeft : Bool) {
+        var indent : String = indent;
+		guard let node = node else {
+            return;
+        }
 
-	private void printTree(Node node, String indent, boolean isLeft) {
-		if (node == null)
-			return;
-		if (isLeft) {
-			System.out.print(indent + "L:");
-			indent += "|  ";
-		} else {
-			System.out.print(indent + "R:");
-			indent += "   ";
-		}
+        if (isLeft) {
+            print(indent + "L:",terminator: "");
+            indent += "|  ";
+        } else {
+            print(indent + "R:",terminator: "");
+            indent += "   ";
+        }
+        print(String(node.data) + "(" + String(node.height) + ")");
+        self.printTree(node.left,indent,true);
+        self.printTree(node.right,indent,false);
+    }
 
-		System.out.println(node.data + "(" + node.height + ")");
-		printTree(node.left, indent, true);
-		printTree(node.right, indent, false);
-	}
+    func insert(_ data : Int) {
+        self.root = self.insert(self.root,data);
+    }
 
-	public void insert(int data) {
-		root = insert(root, data);
-	}
+    func insert(_ node : Node?, _ data : Int) -> Node? {
+        guard let node = node else {
+            return Node(data, nil, nil);
+        }
 
-	private Node insert(Node node, int data) {
-		if (node == null)
-			return new Node(data, null, null);
+        if (node.data > data) {
+            node.left = self.insert(node.left,data);
+        } else if (node.data < data) {
+            node.right = self.insert(node.right,data);
+        } else {
+            return node; // Duplicate data not allowed
+        }
 
-		if (node.data > data) {
-			node.left = insert(node.left, data);
-		} else if (node.data < data) {
-			node.right = insert(node.right, data);
-		} else { // Duplicate data not allowed
-			return node;
-		}
+        node.height = max(self.height(node.left),self.height(node.right)) + 1;
+        let balance : Int = self.getBalance(node);
 
-		node.height = max(height(node.left), height(node.right)) + 1;
-		int balance = getBalance(node);
+        if (balance > 1) {
+            if (data < node.left!.data) { // Left Left Case
+                return self.rightRotate(node);
+            }
+            if (data > node.left!.data) { // Left Right Case
+                return self.leftRightRotate(node);
+            }
+        }
 
-		if (balance > 1) {
-			if (data < node.left.data) // Left Left Case
-			{
-				return rightRotate(node);
-			}
-			if (data > node.left.data) // Left Right Case
-			{
-				return leftRightRotate(node);
-			}
-		}
+        if (balance < -1) {
+            if (data > node.right!.data) { // Right Right Case
+                return self.leftRotate(node);
+            }
+            if (data < node.right!.data) { // Right Left Case
+                return self.rightLeftRotate(node);
+            }
+        }
+        return node;
+    }
 
-		if (balance < -1) {
-			if (data > node.right.data) // Right Right Case
-			{
-				return leftRotate(node);
-			}
-			if (data < node.right.data) // Right Left Case
-			{
-				return rightLeftRotate(node);
-			}
-		}
-		return node;
-	}
-
-	// Function to right rotate subtree rooted with x
-	Node rightRotate(Node x) {
-		Node y = x.left;
-		Node T = y.right;
-
-		// Rotation
-		y.right = x;
-		x.left = T;
-
-		// Update heights
-		x.height = max(height(x.left), height(x.right)) + 1;
-		y.height = max(height(y.left), height(y.right)) + 1;
-
-		// Return new root
-		return y;
-	}
-
-	// Function to left rotate subtree rooted with x
-	Node leftRotate(Node x) {
-		Node y = x.right;
-		Node T = y.left;
-
-		// Rotation
-		y.left = x;
-		x.right = T;
-
-		// Update heights
-		x.height = max(height(x.left), height(x.right)) + 1;
-		y.height = max(height(y.left), height(y.right)) + 1;
-
-		// Return new root
-		return y;
-	}
-
-	// Function to right then left rotate subtree rooted with x
-	Node rightLeftRotate(Node x) {
-		x.right = rightRotate(x.right);
-		return leftRotate(x);
-	}
-
-	// Function to left then right rotate subtree rooted with x
-	Node leftRightRotate(Node x) {
-		x.left = leftRotate(x.left);
-		return rightRotate(x);
-	}
-
-	public void delete(int data) {
-		root = delete(root, data);
-	}
-
-	private Node delete(Node node, int data) {
-		if (node == null)
-			return null;
-
-		if (node.data == data) {
-			if (node.left == null && node.right == null) {
-				return null;
-			} else if (node.left == null) {
-				return node.right; // no need to modify height
-			} else if (node.right == null) {
-				return node.left; // no need to modify height
-			} else {
-				Node minNode = findMin(node.right);
-				node.data = minNode.data;
-				node.right = delete(node.right, minNode.data);
-			}
-		} else {
-			if (node.data > data) {
-				node.left = delete(node.left, data);
-			} else {
-				node.right = delete(node.right, data);
-			}
-		}
-
-		node.height = max(height(node.left), height(node.right)) + 1;
-		int balance = getBalance(node);
-
-		if (balance > 1) {
-			if (data >= node.left.data) { // Left Left Case 
-				return rightRotate(node);
-			}
-			if (data < node.left.data) { // Left Right Case
-				return leftRightRotate(node);
-			}
-		}
-
-		if (balance < -1) {
-			if (data <= node.right.data) // Right Right Case 
-			{
-				return leftRotate(node);
-			}
-			if (data > node.right.data) // Right Left Case
-			{
-				return rightLeftRotate(node);
-			}
-		}
-		return node;
-	}
-
-	public Node findMin(Node curr) {
-		Node node = curr;
-		if (node == null) {
-			return null;
-		}
-
-		while (node.left != null) {
-			node = node.left;
-		}
-		return node;
-	}
-
-	int max(int a, int b) {
-		return (a > b) ? a : b;
-	}
-
-	public static void main(String[] arg) {
-		AVLTree t = new AVLTree();
-		t.insert(1);
-		t.insert(2);
-		t.insert(3);
-		t.insert(4);
-		t.insert(5);
-		t.insert(6);
-		t.insert(7);
-		t.insert(8);
-		t.printTree();
-
-		/*
-		R:4(3)
-		L:2(1)
-		|  L:1(0)
-		|  R:3(0)
-		R:6(2)
-		L:5(0)
-		R:7(1)
-		 R:8(0)
+    // Function to right rotate subtree rooted with x
+    func rightRotate(_ x : Node?) -> Node? {
+        let y : Node? = x!.left;
+        let T : Node? = y!.right;
 		
-		*/
+        // Rotation
+        y!.right = x;
+        x!.left = T;
 
-		t.delete(5);
-		t.printTree();
+        // Update heights
+        x!.height = max(self.height(x!.left),self.height(x!.right)) + 1;
+        y!.height = max(self.height(y!.left),self.height(y!.right)) + 1;
 
-		/*
-		R:4(2)
-		L:2(1)
-		|  L:1(0)
-		|  R:3(0)
-		R:7(1)
-		L:6(0)
-		R:8(0)
-		
-		*/
+        // Return new root
+        return y;
+    }
 
-		t.delete(1);
-		t.printTree();
+    // Function to left rotate subtree rooted with x
+    func leftRotate(_ x : Node?) -> Node? {
+        let y : Node? = x!.right;
+        let T : Node? = y!.left;
 
-		/*
-		R:4(2)
-		L:2(1)
-		|  R:3(0)
-		R:7(1)
-		L:6(0)
-		R:8(0)
-		
-		*/
+        // Rotation
+        y!.left = x;
+        x!.right = T;
 
-		t.delete(2);
-		t.printTree();
+        // Update heights
+        x!.height = max(self.height(x!.left),self.height(x!.right)) + 1;
+        y!.height = max(self.height(y!.left),self.height(y!.right)) + 1;
 
-		/*
-		R:4(2)
-		L:3(0)
-		R:7(1)
-		L:6(0)
-		R:8(0) 
-		*/
-	}
+        // Return new root
+        return y;
+    }
+
+    // Function to right then left rotate subtree rooted with x
+    func rightLeftRotate(_ x : Node?) -> Node? {
+        x!.right = self.rightRotate(x!.right);
+        return self.leftRotate(x);
+    }
+
+    // Function to left then right rotate subtree rooted with x
+    func leftRightRotate(_ x : Node?) -> Node? {
+        x!.left = self.leftRotate(x!.left);
+        return self.rightRotate(x);
+    }
+
+    func delete(_ data : Int) {
+        self.root = self.delete(self.root,data);
+    }
+
+    func delete(_ node : Node?, _ data : Int) -> Node? {
+        guard let node = node else {
+            return nil;
+        }
+        if (node.data == data) {
+            if (node.left == nil && node.right == nil) {
+                return nil;
+            } else if (node.left == nil) {
+                return node.right;
+            } else if (node.right == nil) {
+                return node.left;
+            } else {
+                let minNode : Node? = self.findMin(node.right);
+                node.data = minNode!.data;
+                node.right = self.delete(node.right,minNode!.data);
+            }
+        } else {
+            if (node.data > data) {
+                node.left = self.delete(node.left,data);
+            } else {
+                node.right = self.delete(node.right,data);
+            }
+        }
+
+        node.height = max(self.height(node.left),self.height(node.right)) + 1;
+        let balance : Int = self.getBalance(node);
+
+        if (balance > 1) {
+            if (data >= node.left!.data) { // Left Left Case
+                return self.rightRotate(node);
+            }
+            if (data < node.left!.data) { // Left Right Case
+                return self.leftRightRotate(node);
+            }
+        }
+        if (balance < -1) {
+            if (data <= node.right!.data) { // Right Right Case
+                return self.leftRotate(node);
+            }
+            if (data > node.right!.data) { // Right Left Case
+                return self.rightLeftRotate(node);
+            }
+        }
+        return node;
+    }
+
+    func findMin(_ curr : Node?) -> Node? {
+        var curr : Node? = curr;
+		if curr == nil {
+            return nil;
+        }
+
+        while (curr!.left != nil) {
+            curr = curr!.left;
+        }
+        return curr;
+    }
 }
+
+let t : AVLTree = AVLTree();
+t.insert(1);
+t.insert(2);
+t.insert(3);
+t.insert(4);
+t.insert(5);
+t.insert(6);
+t.insert(7);
+t.insert(8);
+t.printTree();
+// 		R:4(3)
+// 		L:2(1)
+// 		|  L:1(0)
+// 		|  R:3(0)
+// 		R:6(2)
+// 		L:5(0)
+// 		R:7(1)
+// 		 R:8(0)
+t.delete(5);
+t.printTree();
+// 		R:4(2)
+// 		L:2(1)
+// 		|  L:1(0)
+// 		|  R:3(0)
+// 		R:7(1)
+// 		L:6(0)
+// 		R:8(0)
+t.delete(1);
+t.printTree();
+// 		R:4(2)
+// 		L:2(1)
+// 		|  R:3(0)
+// 		R:7(1)
+// 		L:6(0)
+// 		R:8(0)
+t.delete(2);
+t.printTree();

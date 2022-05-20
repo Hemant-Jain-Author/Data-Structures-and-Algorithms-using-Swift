@@ -66,7 +66,6 @@ class Queue<T> {
 	}
 }
 
-
 public class BinaryTree {
 	public class Node {
 		var value : Int
@@ -248,11 +247,11 @@ public func printDepthFirst() {
 
 	while let temp = stk.pop() {
 		print (temp.value, terminator:" ")
-		if temp.right != nil {
-			stk.push(temp.right!)
-		}
 		if temp.left != nil {
 			stk.push(temp.left!)
+		}
+		if temp.right != nil {
+			stk.push(temp.right!)
 		}
 	}
 	print()
@@ -905,6 +904,7 @@ private func trimOutsideRange(curr : Node?, min : Int, max : Int) -> Node? {
 
 public func printDataInRange(min : Int, max : Int) {
 	printDataInRange(curr : self.root, min : min, max : max)
+	print();
 }
 
 private func printDataInRange(curr : Node?, min : Int, max : Int) {
@@ -913,7 +913,7 @@ private func printDataInRange(curr : Node?, min : Int, max : Int) {
 	}
 	printDataInRange(curr : curr.left, min : min, max : max)
 	if curr.value >= min && curr.value <= max {
-		print(curr.value)
+		print(curr.value, terminator:" ")
 	}
 	printDataInRange(curr : curr.right, min : min, max : max)
 }
@@ -1169,26 +1169,6 @@ func main4() {
 
 }
 
-func main8() {
-	let t = BinaryTree();
-	t.add(value:2);
-	t.add(value:1);
-	t.add(value:3);
-	t.add(value:4);
-
-	print("Before delete operation.");
-	t.printInOrder();
-	t.deleteNode(value:2);
-	print("After delete operation.");
-	t.printInOrder();
-}
-/*
-Before delete operation.
-1 2 3 4 
-After delete operation.
-1 3 4 
-*/
-
 func main5() {
 	let t = BinaryTree();
 	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -1226,18 +1206,38 @@ func main6() {
 
 func main7() {
 	let t = BinaryTree();
-	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	let arr = [1, 2, 3, 4, 6, 7, 8, 9, 10]
 	t.createBinarySearchTree(arr);
 	print(t.ancestor(first:1, second:10)!.value);
-	// 5
+	// 6
 
 	print(t.ceilBST(val:5));
 	// 6
 
 	print(t.floorBST(val:5));
-	// 5
+	// 4
 
 }
+
+func main8() {
+	let t = BinaryTree();
+	t.add(value:2);
+	t.add(value:1);
+	t.add(value:3);
+	t.add(value:4);
+
+	print("Before delete operation.");
+	t.printInOrder();
+	t.deleteNode(value:2);
+	print("After delete operation.");
+	t.printInOrder();
+}
+/*
+Before delete operation.
+1 2 3 4 
+After delete operation.
+1 3 4 
+*/
 
 main1();
 main2();
@@ -1246,30 +1246,4 @@ main4();
 main5();
 main6();
 main7();
-
-
-/*
-var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-var t = BinaryTree.createBinarySearchTree(arr)
-t.printBreadthFirst()
-t.printDepthFirst()
-t.printInOrder()
-t.printPreOrder()
-t.printPostOrder()
-t.add(value:2)
-t.add(value:1)
-t.add(value:3)
-t.add(value:4)
-t.printPreOrder()
-t.printPostOrder()
-t.printInOrder()
-print(t.nthPreOrder(index:2))
-print(t.nthPostOrder(index:2))
-print(t.nthInOrder(index:2))
-t.printAllPath()
-print(t.findMax())
-print(t.findMin())
-var lst = [2, 1, 3, 4]
-BinaryTree.Sort(&lst)
-print(lst)
-*/
+main8();

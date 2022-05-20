@@ -1,118 +1,108 @@
-public class rmqST {
-	int segArr[];
-	int n;
+import Foundation;
 
-	rmqST(int input[]) {
-		n = input.length;
-		// Height of segment tree.
-		int x = (int) (Math.ceil(Math.log(n) / Math.log(2)));
-		//Maximum size of segment tree
-		int max_size = 2 * (int) Math.pow(2, x) - 1;
-		// Allocate memory for segment tree
-		segArr = new int[max_size];
-		constructST(input, 0, n - 1, 0);
-	}
+class rmqST {
+    var segArr : [Int];
+    var n : Int;
 
-	int constructST(int input[], int start, int end, int index) {
-		// Store it in current node of the segment tree and return
-		if (start == end) {
-			segArr[index] = input[start];
-			return input[start];
-		}
+    init(_ input : inout [Int]) {
+        self.n = input.count;
+        // Height of segment tree.
+        let x : Int = Int((ceil(log(Double(self.n)) / log(2))));
+        // Maximum size of segment tree
+        let max_size : Int = 2 * Int(pow(Double(2),Double(x))) - 1;
+        // Allocate memory for segment tree
+        self.segArr = Array(repeating: 0, count: max_size);
+        _ = self.constructST( &input,0,self.n - 1,0);
+    }
 
-		// If there are more than one elements, 
-		// then traverse left and right subtrees 
-		// and store the minimum of values in current node.
-		int mid = (start + end) / 2;
-		segArr[index] = min(constructST(input, start, mid, index * 2 + 1),
-				constructST(input, mid + 1, end, index * 2 + 2));
-		return segArr[index];
-	}
+    func constructST(_ input : inout [Int], _ start : Int, _ end : Int, _ index : Int) -> Int {
+        // Store it in current node of the segment tree and return
+        if (start == end) {
+            self.segArr[index] = input[start];
+            return input[start];
+        }
+        // If there are more than one elements,
+        // then traverse left and right subtrees
+        // and store the minimum of values in current node.
+        let mid : Int = (start + end) / 2;
+        self.segArr[index] = min(self.constructST( &input,start,mid,index * 2 + 1),self.constructST( &input,mid + 1,end,index * 2 + 2));
+        return self.segArr[index];
+    }
 
-	int min(int first, int second) {
-		if (first < second)
-			return first;
-		else
-			return second;
-	}
+    func getMin(_ start : Int, _ end : Int) -> Int {
+        // Check for error conditions.
+        if (start > end || start < 0 || end > self.n - 1) {
+            print("Invalid Input.");
+            return Int.max;
+        }
+        return self.getMinUtil(0,self.n - 1,start,end,0);
+    }
 
-	int getMin(int start, int end) {
-		// Check for error conditions.
-		if (start > end || start < 0 || end > n - 1) {
-			System.out.println("Invalid Input.");
-			return Integer.MAX_VALUE;
-		}
-		return getMinUtil(0, n - 1, start, end, 0);
-	}
+    func getMinUtil(_ segStart : Int, _ segEnd : Int, _ queryStart : Int, _ queryEnd : Int, _ index : Int) -> Int {
+        if (queryStart <= segStart && segEnd <= queryEnd) {
+            // complete overlapping case.
+            return self.segArr[index];
+        }
 
-	int getMinUtil(int segStart, int segEnd, int queryStart, int queryEnd, int index) {
-		if (queryStart <= segStart && segEnd <= queryEnd) // complete overlapping case.
-			return segArr[index];
+        if (segEnd < queryStart || queryEnd < segStart) {
+            // no overlapping case.
+            return Int.max;
+        }
 
-		if (segEnd < queryStart || queryEnd < segStart) // no overlapping case.
-			return Integer.MAX_VALUE;
+        // Segment tree is partly overlaps with the query range.
+        let mid : Int = (segStart + segEnd) / 2;
+        return min(self.getMinUtil(segStart,mid,queryStart,queryEnd,2 * index + 1),self.getMinUtil(mid + 1,segEnd,queryStart,queryEnd,2 * index + 2));
+    }
 
-		// Segment tree is partly overlaps with the query range.
-		int mid = (segStart + segEnd) / 2;
-		return min(getMinUtil(segStart, mid, queryStart, queryEnd, 2 * index + 1),
-				getMinUtil(mid + 1, segEnd, queryStart, queryEnd, 2 * index + 2));
-	}
+    func update(_ ind : Int, _ val : Int) {
+        // Check for error conditions.
+        if (ind < 0 || ind > self.n - 1) {
+            print("Invalid Input.");
+            return;
+        }
 
-	void update(int ind, int val) {
-		// Check for error conditions.
-		if (ind < 0 || ind > n - 1) {
-			System.out.println("Invalid Input.");
-			return;
-		}
+        // Update the values in segment tree
+        _ = self.updateUtil(0,self.n - 1,ind,val,0);
+    }
 
-		// Update the values in segment tree
-		updateUtil(0, n - 1, ind, val, 0);
-	}
+    // Always min inside valid range will be returned.
+    func updateUtil(_ segStart : Int, _ segEnd : Int, _ ind : Int, _ val : Int, _ index : Int) -> Int {
+        // Update index lies outside the range of current segment.
+        // So minimum will not change.
+        if (ind < segStart || ind > segEnd) {
+            return self.segArr[index];
+        }
 
-	// Always min inside valid range will be returned.
-	int updateUtil(int segStart, int segEnd, int ind, int val, int index) {
-		// Update index lies outside the range of current segment.
-		// So minimum will not change.
-		if (ind < segStart || ind > segEnd)
-			return segArr[index];
+        // If the input index is in range of this node, then update the
+        // value of the node and its children
+        if (segStart == segEnd) {
+            if (segStart == ind) {
+                // Index value need to be updated.
+                self.segArr[index] = val;
+                return val;
+            } else {
+                return self.segArr[index];
+            }
+        }
 
-		// If the input index is in range of this node, then update the
-		// value of the node and its children
-
-		if (segStart == segEnd) {
-			if (segStart == ind) { // Index value need to be updated.
-				segArr[index] = val;
-				return val;
-			} else {
-				return segArr[index]; // index value is not changed.
-			}
-		}
-
-		int mid = (segStart + segEnd) / 2;
-
-		// Current node value is updated with min. 
-		segArr[index] = min(updateUtil(segStart, mid, ind, val, 2 * index + 1),
-				updateUtil(mid + 1, segEnd, ind, val, 2 * index + 2));
-
-		// Value of diff is propagated to the parent node.
-		return segArr[index];
-	}
-
-	public static void main(String args[]) {
-		int arr[] = { 2, 3, 1, 7, 12, 5 };
-		rmqST tree = new rmqST(arr);
-		System.out.println("Min value in the range(1, 5): " + tree.getMin(1, 5));
-		System.out.println("Min value of all the elements: " + tree.getMin(0, arr.length - 1));
-
-		tree.update(2, -1);
-		System.out.println("Min value in the range(1, 5): " + tree.getMin(1, 5));
-		System.out.println("Min value of all the elements: " + tree.getMin(0, arr.length - 1));
-
-		tree.update(5, -2);
-		System.out.println("Min value in the range(0, 4): " + tree.getMin(0, 4));
-		System.out.println("Min value of all the elements: " + tree.getMin(0, arr.length - 1));
-	}
+        let mid : Int = (segStart + segEnd) / 2;
+        // Current node value is updated with min.
+        self.segArr[index] = min(self.updateUtil(segStart,mid,ind,val,2 * index + 1),self.updateUtil(mid + 1,segEnd,ind,val,2 * index + 2));
+        // Value of diff is propagated to the parent node.
+        return self.segArr[index];
+    }
 }
+
+var arr : [Int] = [2, 3, 1, 7, 12, 5];
+let tree : rmqST = rmqST(&arr);
+print("Min value in the range(1, 5): " + String(tree.getMin(1,5)));
+print("Min value of all the elements: " + String(tree.getMin(0,arr.count - 1)));
+tree.update(2,-1);
+print("Min value in the range(1, 5): " + String(tree.getMin(1,5)));
+print("Min value of all the elements: " + String(tree.getMin(0,arr.count - 1)));
+tree.update(5,-2);
+print("Min value in the range(0, 4): " + String(tree.getMin(0,4)));
+print("Min value of all the elements: " + String(tree.getMin(0,arr.count - 1)));
 
 /*
 Min value in the range(1, 5): 1

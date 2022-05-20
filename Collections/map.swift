@@ -1,29 +1,32 @@
-var dict: [String:Int] = [:]
+// Create a hash map.
+var hm :  [String:Int] =  [String:Int]();
 
-dict["Apple"] = 40
-dict["Banana"] = 30
-dict["Mango"] = 50
-for (key, val) in dict {
-	print("\(key) ->  \(val)")
-}
-if let val = dict["Apple"] {
-	print("Apples price: \(val)")
-} else {
-	print("Apples are out of chart.")
-}
- 
-dict["Apple"] = nil
+// Put elements into the map
+hm["Apple"] = 40;
+hm["Banana"] = 10;
+hm["Mango"] = 20;
+print("Size :: " + String(hm.count));
 
-if let val = dict["Apple"] {
-	print("Apples price: \(val)")
-} else {
-	print("Apples are out of chart.")
+for key in Array(hm.keys){
+	print(key + " cost : " + String(hm[key]!));
 }
+
+print("Grapes present :: " + String(hm.keys.contains("Grapes")));
+print("Apple present :: " + String(hm.keys.contains("Apple")));
+print(hm);
+
+hm["Apple"] = nil;
+print("Apple present :: " + String(hm.keys.contains("Apple")));
+print(hm);
 
 /*
-Mango ->  50
-Banana ->  30
-Apple ->  40
-Apples price: 40
-Apples are out of chart.
+Size :: 3
+Banana cost : 10
+Mango cost : 20
+Apple cost : 40
+Grapes present :: false
+Apple present :: true
+["Banana": 10, "Mango": 20, "Apple": 40]
+Apple present :: false
+["Mango": 20, "Banana": 10]
 */

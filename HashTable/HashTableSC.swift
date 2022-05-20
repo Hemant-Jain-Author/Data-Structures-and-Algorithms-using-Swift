@@ -3,8 +3,7 @@ class HashTableSC{
 		var value : Int
 		var next : Node?
 
-		init(value:Int, next:Node?)
-		{
+		init(value:Int, next:Node?) {
 			self.value = value
 			self.next = next
 		}

@@ -75,3 +75,7 @@ var id : [Character] = ["a", "b", "c", "d", "e"];
 var deadline : [Int] = [3, 1, 2, 4, 4];
 var profit : [Int] = [50, 40, 27, 31, 30];
 JobSequencing(&id, &deadline, &profit, 5);
+/* 
+Profit is :: 151
+Jobs selected are :: b e a d 
+ */

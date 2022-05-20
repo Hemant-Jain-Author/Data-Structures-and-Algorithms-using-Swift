@@ -2,16 +2,13 @@ import Foundation;
 
 var INF : Int = Int.max;
 
-func floydWarshall(_ graph : inout [[Int]], _ V : Int)
-{
+func floydWarshall(_ graph : inout [[Int]], _ V : Int) {
 	var dist : [[Int]] = Array(repeating: Array(repeating: 0, count: V), count: V);
 
 	var i : Int = 0;
-	while (i < V)
-	{
+	while (i < V) {
 		var j : Int = 0;
-		while (j < V)
-		{
+		while (j < V) {
 			dist[i][j] = graph[i][j];
 			j += 1;
 		}
@@ -20,16 +17,13 @@ func floydWarshall(_ graph : inout [[Int]], _ V : Int)
 	
 	var k : Int = 0;
 	// Pick intermediate vertices.
-	while (k < V)
-	{
+	while (k < V) {
 		var i : Int = 0;
 		// Pick source vertices one by one.
-		while (i < V)
-		{
+		while (i < V) {
 			var j : Int = 0;
 			// Pick destination vertices.
-			while (j < V)
-			{
+			while (j < V) {
 				// If we have shorter path from i to j via k.
 				// then update dist[i][j]
 				if (dist[i][k] != INF && dist[k][j] != INF && dist[i][k] + dist[k][j] < dist[i][j])
@@ -46,16 +40,12 @@ func floydWarshall(_ graph : inout [[Int]], _ V : Int)
 	printSolution( &dist,V);
 }
 
-func printSolution(_ dist : inout [[Int]], _ V : Int)
-{
+func printSolution(_ dist : inout [[Int]], _ V : Int) {
 	var i : Int = 0;
-	while (i < V)
-	{
+	while (i < V) {
 		var j : Int = 0;
-		while (j < V)
-		{
-			if (dist[i][j] == INF)
-			{print("INF ",terminator: "");
+		while (j < V) {
+			if (dist[i][j] == INF) {print("INF ",terminator: "");
 			}
 			else
 			{
@@ -77,4 +67,15 @@ var graph : [[Int]] =
 [INF, INF, 6, 4, 0, 3, 1],
 [INF, INF, 4, INF, 4, 0, 2],
 [INF, INF, INF, 4, 2, 3, 0]];
+
 floydWarshall( &graph,7);
+
+/* 
+0 2 4 3 6 8 7 
+2 0 3 1 4 7 5 
+4 3 0 2 5 4 6 
+3 1 2 0 3 6 4 
+7 5 6 4 0 3 1 
+8 7 4 6 4 0 2 
+7 5 6 4 2 3 0 
+ */

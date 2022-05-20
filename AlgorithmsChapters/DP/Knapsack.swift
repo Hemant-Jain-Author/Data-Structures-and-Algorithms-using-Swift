@@ -1,13 +1,11 @@
 import Foundation;
 
-func maxCost01Knapsack(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int
-{
+func maxCost01Knapsack(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int {
 	let n : Int = wt.count;
 	return maxCost01KnapsackUtil( &wt, &cost,n,capacity);
 }
 
-func maxCost01KnapsackUtil(_ wt : inout [Int], _ cost : inout [Int], _ n : Int, _ capacity : Int) -> Int
-{
+func maxCost01KnapsackUtil(_ wt : inout [Int], _ cost : inout [Int], _ n : Int, _ capacity : Int) -> Int {
 	// Base Case
 	if (n == 0 || capacity == 0) {
 		return 0;
@@ -24,15 +22,13 @@ func maxCost01KnapsackUtil(_ wt : inout [Int], _ cost : inout [Int], _ n : Int, 
 	return max(first,second);
 }
 
-func maxCost01KnapsackTD(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int
-{
+func maxCost01KnapsackTD(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int {
 	let n : Int = wt.count;
 	var dp : [[Int]] = Array(repeating: Array(repeating: 0, count: n + 1), count: capacity + 1);
 	return maxCost01KnapsackTD( &dp, &wt, &cost,n,capacity);
 }
 
-func maxCost01KnapsackTD(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inout [Int], _ i : Int, _ w : Int) -> Int
-{
+func maxCost01KnapsackTD(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inout [Int], _ i : Int, _ w : Int) -> Int {
 	if (w == 0 || i == 0) {
 		return 0;
 	}
@@ -45,8 +41,7 @@ func maxCost01KnapsackTD(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inou
 	// (1) ith item is included
 	// (2) ith item is not included
 	var first : Int = 0;
-	if (wt[i - 1] <= w)
-	{
+	if (wt[i - 1] <= w) {
 		first = maxCost01KnapsackTD( &dp, &wt, &cost,i - 1,w - wt[i - 1]) + cost[i - 1];
 	}
 	let second : Int = maxCost01KnapsackTD( &dp, &wt, &cost,i - 1,w);
@@ -54,25 +49,21 @@ func maxCost01KnapsackTD(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inou
 	return dp[w][i]
 }
 
-func maxCost01KnapsackBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int
-{
+func maxCost01KnapsackBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int {
 	let n : Int = wt.count;
 	var dp : [[Int]] = Array(repeating: Array(repeating: 0, count: n + 1), count: capacity + 1);
 
 	var w : Int = 1;
 	// Build table dp[][] in bottom up approach.
 	// Weights considered against capacity.
-	while (w <= capacity)
-	{
+	while (w <= capacity) {
 		var i : Int = 1;
-		while (i <= n)
-		{
+		while (i <= n) {
 			// Their are two cases:
 			// (1) ith item is included
 			// (2) ith item is not included
 			var first : Int = 0;
-			if (wt[i - 1] <= w)
-			{
+			if (wt[i - 1] <= w) {
 				first = dp[w - wt[i - 1]][i - 1] + cost[i - 1];
 			}
 			let second : Int = dp[w][i - 1];
@@ -85,16 +76,13 @@ func maxCost01KnapsackBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : 
 	return dp[capacity][n];
 }
 
-func printItems(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inout [Int], _ n : Int, _ capa : Int)
-{
+func printItems(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inout [Int], _ n : Int, _ capa : Int) {
 	var capacity : Int = capa;
 	var totalCost : Int = dp[capacity][n];
 	print("Selected items are:",terminator: "");
 	var i : Int = n - 1;
-	while (i > 0)
-	{
-		if (totalCost != dp[capacity][i - 1])
-		{
+	while (i > 0) {
+		if (totalCost != dp[capacity][i - 1]) {
 			print(" (wt:" + String(wt[i]) + ", cost:" + String(cost[i]) + ")",terminator: "");
 			capacity -= wt[i];
 			totalCost -= cost[i];
@@ -103,23 +91,19 @@ func printItems(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inout [Int], 
 	}
 }
 
-func KS01UnboundBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int
-{
+func KS01UnboundBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int {
 	let n : Int = wt.count;
 	var dp : [Int] = Array(repeating: 0, count: capacity + 1);
 	var w : Int = 1;
 	// Build table dp[] in bottom up approach.
 	// Weights considered against capacity.
-	while (w <= capacity)
-	{
+	while (w <= capacity) {
 		var i : Int = 1;
-		while (i <= n)
-		{
+		while (i <= n) {
 			// Their are two cases:
 			// (1) ith item is included
 			// (2) ith item is not included
-			if (wt[i - 1] <= w)
-			{
+			if (wt[i - 1] <= w) {
 				dp[w] = max(dp[w],dp[w - wt[i - 1]] + cost[i - 1]);
 			}
 			i += 1;
@@ -141,3 +125,10 @@ maxCost = maxCost01KnapsackBU( &wt, &cost,capacity);
 print("Maximum cost obtained = " + String(maxCost));
 maxCost = maxCost01KnapsackTD( &wt, &cost,capacity);
 print("Maximum cost obtained = " + String(maxCost));
+
+/* 
+Maximum cost obtained = 300
+Maximum cost obtained = 210
+Selected items are: (wt:30, cost:120) (wt:20, cost:90)Maximum cost obtained = 210
+Maximum cost obtained = 210
+ */
