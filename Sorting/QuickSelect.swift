@@ -33,7 +33,7 @@ func quickSelect(_ arr : inout [Int], _ start : Int, _ stop : Int, _ k : Int) {
 }
 
 func quickSelect(_ arr : inout [Int], _ k : Int) -> Int {
-    quickSelect( &arr,0,arr.count - 1,k);
+    quickSelect( &arr, 0, arr.count - 1, k - 1);
     return arr[k - 1];
 }
 
