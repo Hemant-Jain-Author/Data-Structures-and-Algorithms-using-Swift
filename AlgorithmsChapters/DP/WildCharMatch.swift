@@ -35,10 +35,10 @@ func matchExpUtilDP(_ exp : inout [Character], _ str : inout [Character], _ m : 
 	var lookup : [[Bool]] = Array(repeating: Array(repeating: false, count: n + 1), count: m + 1);
 	lookup[0][0] = true;
 
-	var i : Int = 1;
 	// empty exp and empty str match.
 	// 0 row will remain all false. empty exp can't match any str.
 	// '*' can match with empty string, column 0 update.
+	var i : Int = 1;
 	while (i <= m) {
 		if (exp[i - 1] == "*") {
 			lookup[i][0] = lookup[i - 1][0];
@@ -48,8 +48,8 @@ func matchExpUtilDP(_ exp : inout [Character], _ str : inout [Character], _ m : 
 		i += 1;
 	}
 
-	i = 1;
 	// Fill the table in bottom-up fashion
+	i = 1;
 	while (i <= m) {
 		var j : Int = 1;
 		while (j <= n) {
@@ -70,7 +70,7 @@ func matchExpUtilDP(_ exp : inout [Character], _ str : inout [Character], _ m : 
 	return lookup[m][n];
 }
 
-
+// Testing code.
 print("matchExp :: " + String(matchExp("*llo,?World?","Hello, World!")));
 print("matchExp :: " + String(matchExpDP("*llo,?World?","Hello, World!")));
     

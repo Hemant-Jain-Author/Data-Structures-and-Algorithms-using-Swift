@@ -55,9 +55,8 @@ func minCostBstBU(_ arr : inout [Int]) -> Int {
 	}
 
 	var l : Int = 1;
-	while (l < n) {
+	while (l < n) { // l is length of range.
 		var i : Int = 0, j : Int = i + l;
-		// l is length of range.
 		while (j < n) {
 			dp[i][j] = Int.max;
 			var k : Int = i;
@@ -73,6 +72,7 @@ func minCostBstBU(_ arr : inout [Int]) -> Int {
 	return dp[0][n - 1];
 }
 
+// Testing code.
 var arr : [Int] = [6, 2, 4];
 print("Total cost: " + String(minCostBstTD( &arr)));
 print("Total cost: " + String(minCostBstBU( &arr)));

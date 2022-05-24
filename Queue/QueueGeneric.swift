@@ -23,10 +23,7 @@ class Queue<T> {
 	}
 
 	public func front() -> T? {
-		if que.isEmpty { 
-			return nil 
-		}
-		return que.first!
+		return que.first
 	}
 }
 

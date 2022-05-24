@@ -25,6 +25,7 @@ func lis(_ arr : inout [Int]) -> Int {
 	return mx;
 }
 
+// Testing code.
 var arr : [Int] = [10, 12, 9, 23, 25, 55, 49, 70];
 print("Length of lis is " + String(LargestIncreasingSubseq.lis( &arr)));
 

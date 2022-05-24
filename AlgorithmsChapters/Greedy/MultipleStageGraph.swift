@@ -3,19 +3,19 @@ import Foundation;
 var INF : Int = 999;
 
 // Returns shortest distance from 0 to N-1.
-func shortestDist(_ graph : inout [[Int]], _ n : Int) -> Int
-{
+func shortestDist(_ graph : inout [[Int]], _ n : Int) -> Int {
     var dist : [Int] = Array(repeating: INF, count: n);
     var path : [Int] = Array(repeating: 0, count: n);
     var value : Int;
     path[0] = -1;
     dist[0] = 0;
     
-    var i : Int = 0;
+   
     // Calculating shortest path for the nodes
+    var i : Int = 0;
     while (i < n) {
+        // Check all the other nodes
         var j : Int = i;
-        // Check all nodes of next
         while (j < n) {
             // Reject if no edge exists
             if (graph[i][j] == INF) {

@@ -61,6 +61,7 @@ func maxProfitTC2(_ arr : inout [Int], _ t : Int) -> Int {
 	return dp[n - 1][1];
 }
 
+// Testing code.
 var arr : [Int] = [10, 12, 9, 23, 25, 55, 49, 70];
 print("Total profit: " + String(maxProfit( &arr)));
 print("Total profit: " + String(maxProfit2( &arr)));

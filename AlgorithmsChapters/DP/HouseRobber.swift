@@ -30,9 +30,11 @@ func maxRobbery2(_ house : inout [Int]) -> Int {
 	return max(dp[n - 1][1],dp[n - 1][0]);
 }
 
+// Testing code.
 var arr : [Int] = [10, 12, 9, 23, 25, 55, 49, 70];
 print("Total cash: " + String(maxRobbery( &arr)));
 print("Total cash: " + String(maxRobbery2( &arr)));
+
 /* 
 Total cash: 160
 Total cash: 160

@@ -2,6 +2,7 @@ import Foundation;
 
 class AVLTree {
     private var root : Node?;
+    
     class Node {
         var data : Int;
         var left : Node?;

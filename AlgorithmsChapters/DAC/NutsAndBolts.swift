@@ -50,6 +50,7 @@ func printArray(_ arr : inout [Int]) {
 	print();
 }
 
+// Testing code.
 var nuts : [Int] = [1, 2, 6, 5, 4, 3];
 var bolts : [Int] = [6, 4, 5, 1, 3, 2];
 makePairs( &nuts, &bolts);

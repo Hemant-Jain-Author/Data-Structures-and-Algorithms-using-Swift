@@ -2,8 +2,7 @@ import Foundation;
 
 func CircularTour(_ arr : inout [[Int]], _ n : Int) -> Int {
 	var i : Int = 0;
-	while (i < n)
-	{
+	while (i < n) {
 		var total : Int = 0;
 		var found : Bool = true;
 		var j : Int = 0;
@@ -31,8 +30,7 @@ func CircularTour2(_ arr : inout [[Int]], _ n : Int) -> Int {
 	var count : Int = 0;
 	var petrol : Int = 0;
 
-	while (que.count != n)
-	{
+	while (que.count != n) {
 		while (petrol >= 0 && que.count != n) {
 			que.append(nextPump);
 			petrol += (arr[nextPump][0] - arr[nextPump][1]);
@@ -47,8 +45,7 @@ func CircularTour2(_ arr : inout [[Int]], _ n : Int) -> Int {
 			return -1;
 		}
 	}
-	if (petrol >= 0)
-	{
+	if (petrol >= 0) {
 		return que.removeFirst();
 	}
 	else
@@ -58,8 +55,7 @@ func CircularTour2(_ arr : inout [[Int]], _ n : Int) -> Int {
 }
 
 // Testing code
-func main1()
-{
+func main1() {
 	var tour : [[Int]] = [[8, 6], [1, 4], [7, 6]];
 	print("Circular Tour : " + String(CircularTour( &tour,3)));
 	print("Circular Tour : " + String(CircularTour2( &tour,3)));
@@ -75,8 +71,7 @@ func convertXY(_ src : Int, _ dst : Int) -> Int {
 	var index : Int = 0;
 	var value : Int;
 	que.append(src);
-	while (que.count != 0)
-	{
+	while (que.count != 0) {
 		value = que.removeFirst();
 		arr[index] = value;
 		index += 1
@@ -95,17 +90,14 @@ func convertXY(_ src : Int, _ dst : Int) -> Int {
 }
 
 // Testing code
-func main2()
-{
+func main2() {
 	print("Steps count :: " + String(convertXY(2,7)));
 }
 // Steps count :: 3
 
-func maxSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int)
-{
+func maxSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) {
 	var i : Int = 0;
-	while (i < size - k + 1)
-	{
+	while (i < size - k + 1) {
 		var mx : Int = arr[i];
 		var j : Int = 1;
 		while (j < k) {
@@ -119,25 +111,23 @@ func maxSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int)
 	print();
 }
 
-func maxSlidingWindows2(_ arr : inout [Int], _ size : Int, _ k : Int)
-{
-	var que : [Int] = [Int]()
+func maxSlidingWindows2(_ arr : inout [Int], _ size : Int, _ k : Int) {
+	var deq : [Int] = [Int]()
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		// Remove out of range elements
-		if (que.count > 0 && que.first! <= i - k) {
-			que.removeFirst();
+		if (deq.count > 0 && deq.first! <= i - k) {
+			deq.removeFirst();
 		}
 		// Remove smaller values at left.
-		while (que.count > 0 && arr[que.last!] <= arr[i]) {                    
-			que.removeLast();
+		while (deq.count > 0 && arr[deq.last!] <= arr[i]) {                    
+			deq.removeLast();
 		}
-		que.append(i);
+		deq.append(i);
 		// Largest value in window of size k is at index que[0]
 		// It is displayed to the screen.
 		if (i >= (k - 1)) {
-			print(String(arr[que.first!]) + " ",terminator: "");
+			print(String(arr[deq.first!]) + " ",terminator: "");
 		}
 		i += 1;
 	}
@@ -146,8 +136,7 @@ func maxSlidingWindows2(_ arr : inout [Int], _ size : Int, _ k : Int)
 }
 
 // Testing code
-func main3()
-{
+func main3() {
 	var arr : [Int] = [11, 2, 75, 92, 59, 90, 55];
 	maxSlidingWindows( &arr,7,3);
 	maxSlidingWindows2( &arr,7,3);
@@ -157,23 +146,22 @@ func main3()
 // 75 92 92 92 90
 
 func minOfMaxSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
-	var que : [Int] = [Int]()
+	var deq : [Int] = [Int]()
 	var minVal : Int = 999999;
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		// Remove out of range elements
-		if (que.count > 0 && que.first! <= i - k) {
-			que.removeFirst();
+		if (deq.count > 0 && deq.first! <= i - k) {
+			deq.removeFirst();
 		}
 		// Remove smaller values at left.
-		while (que.count > 0 && arr[que.last!] <= arr[i]) {                    
-			que.removeFirst();
+		while (deq.count > 0 && arr[deq.last!] <= arr[i]) {                    
+			deq.removeLast();
 		}
-		que.append(i);
+		deq.append(i);
 		// window of size k
-		if (i >= (k - 1) && minVal > arr[que.first!]) {
-			minVal = arr[que.first!];
+		if (i >= (k - 1) && minVal > arr[deq.first!]) {
+			minVal = arr[deq.first!];
 		}
 		i += 1;
 	}
@@ -183,32 +171,29 @@ func minOfMaxSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int
 }
 
 // Testing code
-func main4()
-{
+func main4() {
 	var arr : [Int] = [11, 2, 75, 92, 59, 90, 55];
 	_ = minOfMaxSlidingWindows( &arr,7,3);
 }
 // Min of max is :: 75
 
-func maxOfMinSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int)
-{
-	var que : [Int] = [Int]()
+func maxOfMinSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) {
+	var deq : [Int] = [Int]()
 	var maxVal : Int = -999999;
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		// Remove out of range elements
-		if (que.count > 0 && que.first! <= i - k) {
-			que.removeFirst();
+		if (deq.count > 0 && deq.first! <= i - k) {
+			deq.removeFirst();
 		}
 		// Remove smaller values at left.
-		while (que.count > 0 && arr[que.last!] >= arr[i]) {                    
-			que.removeFirst();
+		while (deq.count > 0 && arr[deq.last!] >= arr[i]) {                    
+			deq.removeLast();
 		}
-		que.append(i);
+		deq.append(i);
 		// window of size k
-		if (i >= (k - 1) && maxVal < arr[que.first!]) {
-			maxVal = arr[que.first!];
+		if (i >= (k - 1) && maxVal < arr[deq.first!]) {
+			maxVal = arr[deq.first!];
 		}
 		i += 1;
 	}
@@ -216,19 +201,16 @@ func maxOfMinSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int)
 }
 
 // Testing code
-func main5()
-{
+func main5() {
 	var arr : [Int] = [11, 2, 75, 92, 59, 90, 55];
 	maxOfMinSlidingWindows( &arr,7,3);
 }
 
 // Max of min is :: 59
-func firstNegSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int)
-{
+func firstNegSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) {
 	var que : [Int] = [Int]()
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		// Remove out of range elements
 		if (que.count > 0 && que.first! <= i - k) {
 			que.removeFirst();
@@ -251,21 +233,18 @@ func firstNegSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int)
 }
 
 // Testing code
-func main6()
-{
+func main6() {
 	var arr : [Int] = [3, -2, -6, 10, -14, 50, 14, 21];
 	firstNegSlidingWindows( &arr,8,3);
 }
 // -2 -2 -6 -14 -14 NAN
 
-func rottenFruitUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ day : Int)
-{
+func rottenFruitUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ day : Int) {
 	let dir : [[Int]] = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 	var x : Int;
 	var y : Int;
 	var i : Int = 0;
-	while (i < 4)
-	{
+	while (i < 4) {
 		x = currCol + dir[i][0];
 		y = currRow + dir[i][1];
 		if (x >= 0 && x < maxCol && y >= 0 && y < maxRow && traversed[x][y] > day + 1 && arr[x][y] == 1) {
@@ -279,8 +258,7 @@ func rottenFruitUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int, _ cu
 func rottenFruit(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int {
 	var traversed : [[Int]] = Array(repeating: Array(repeating: 0, count: maxRow), count: maxCol);
 	var i : Int = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			traversed[i][j] = Int.max;
@@ -291,8 +269,7 @@ func rottenFruit(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int {
 	}
 	
 	i = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			if (arr[i][j] == 2) {
@@ -306,8 +283,7 @@ func rottenFruit(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int {
 	
 	var maxDay : Int = 0;
 	i = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			if (arr[i][j] == 1) {
@@ -333,8 +309,7 @@ class Fruit
 	var y : Int;
 	var day : Int;
 
-	init(_ a : Int, _ b : Int, _ d : Int)
-	{
+	init(_ a : Int, _ b : Int, _ d : Int) {
 		self.x = a;
 		self.y = b;
 		self.day = d;
@@ -346,8 +321,7 @@ func rottenFruit2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int 
 	let dir : [[Int]] = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 	var que : [Fruit] = [Fruit]()
 	var i : Int = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			traversed[i][j] = false;
@@ -365,8 +339,7 @@ func rottenFruit2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int 
 	var y : Int;
 	var day : Int;
 	var temp : Fruit?;
-	while (!que.isEmpty)
-	{
+	while (!que.isEmpty) {
 		temp = que.removeFirst();
 		var i : Int = 0;
 		while (i < 4) {
@@ -382,8 +355,7 @@ func rottenFruit2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int 
 		}
 	}
 	i = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			if (arr[i][j] == 1 && traversed[i][j] == false) {
@@ -397,22 +369,19 @@ func rottenFruit2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int 
 }
 
 // Testing code
-func main7()
-{
+func main7() {
 	var arr : [[Int]] = [[1, 0, 1, 1, 0], [2, 1, 0, 1, 0], [0, 0, 0, 2, 1], [0, 2, 0, 0, 1], [1, 1, 0, 0, 1]];
 	print("rottenFruit : " + String(rottenFruit( &arr,5,5)));
 	print("rottenFruit : " + String(rottenFruit2( &arr,5,5)));
 }
 // 3
 
-func stepsOfKnightUtil(_ size : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ dist : Int)
-{
+func stepsOfKnightUtil(_ size : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ dist : Int) {
 	let dir : [[Int]] = [[-2, -1], [-2, 1], [2, -1], [2, 1], [-1, -2], [1, -2], [-1, 2], [1, 2]];
 	var x : Int;
 	var y : Int;
 	var i : Int = 0;
-	while (i < 8)
-	{
+	while (i < 8) {
 		x = currCol + dir[i][0];
 		y = currRow + dir[i][1];
 		if (x >= 0 && x < size && y >= 0 && y < size && traversed[x][y] > dist + 1) {
@@ -426,8 +395,7 @@ func stepsOfKnightUtil(_ size : Int, _ currCol : Int, _ currRow : Int, _ travers
 func stepsOfKnight(_ size : Int, _ srcX : Int, _ srcY : Int, _ dstX : Int, _ dstY : Int) -> Int {
 	var traversed : [[Int]] = Array(repeating: Array(repeating: 0, count: size), count: size);
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		var j : Int = 0;
 		while (j < size) {
 			traversed[i][j] = Int.max;
@@ -445,8 +413,7 @@ class Knight
 	var x : Int;
 	var y : Int;
 	var cost : Int;
-	init(_ a : Int, _ b : Int, _ c : Int)
-	{
+	init(_ a : Int, _ b : Int, _ c : Int) {
 		self.x = a;
 		self.y = b;
 		self.cost = c;
@@ -458,8 +425,7 @@ func stepsOfKnight2(_ size : Int, _ srcX : Int, _ srcY : Int, _ dstX : Int, _ ds
 	let dir : [[Int]] = [[-2, -1], [-2, 1], [2, -1], [2, 1], [-1, -2], [1, -2], [-1, 2], [1, 2]];
 	var que : [Knight] = [Knight]()
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		var j : Int = 0;
 		while (j < size) {
 			traversed[i][j] = Int.max;
@@ -474,8 +440,7 @@ func stepsOfKnight2(_ size : Int, _ srcX : Int, _ srcY : Int, _ dstX : Int, _ ds
 	var y : Int;
 	var cost : Int;
 	var temp : Knight?;
-	while (!que.isEmpty)
-	{
+	while (!que.isEmpty) {
 		temp = que.removeFirst();
 		i = 0;
 		while (i < 8) {
@@ -493,23 +458,20 @@ func stepsOfKnight2(_ size : Int, _ srcX : Int, _ srcY : Int, _ dstX : Int, _ ds
 }
 
 // Testing code
-func main8()
-{
+func main8() {
 	print(stepsOfKnight(20,10,10,20,20));
 	print(stepsOfKnight2(20,10,10,20,20));
 }
 // 8
 // 8
 
-func distNearestFillUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ dist : Int)
-{
+func distNearestFillUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ dist : Int) {
 	// Range check
 	var x : Int;
 	var y : Int;
 	let dir : [[Int]] = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 	var i : Int = 0;
-	while (i < 4)
-	{
+	while (i < 4) {
 		x = currCol + dir[i][0];
 		y = currRow + dir[i][1];
 		if (x >= 0 && x < maxCol && y >= 0 && y < maxRow && traversed[x][y] > dist + 1) {
@@ -520,12 +482,10 @@ func distNearestFillUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int, 
 	}
 }
 
-func distNearestFill(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int)
-{
+func distNearestFill(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) {
 	var traversed : [[Int]] = Array(repeating: Array(repeating: 0, count: maxRow), count: maxCol);
 	var i : Int = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			traversed[i][j] = Int.max;
@@ -535,8 +495,7 @@ func distNearestFill(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int)
 	}
 	
 	i = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			if (arr[i][j] == 1) {
@@ -549,8 +508,7 @@ func distNearestFill(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int)
 	}
 	
 	i = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			print(String(traversed[i][j]) + " ",terminator: "");
@@ -566,22 +524,19 @@ class Node
 	var x : Int;
 	var y : Int;
 	var dist : Int;
-	init(_ a : Int, _ b : Int, _ d : Int)
-	{
+	init(_ a : Int, _ b : Int, _ d : Int) {
 		self.x = a;
 		self.y = b;
 		self.dist = d;
 	}
 }
 
-func distNearestFill2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int)
-{
+func distNearestFill2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) {
 	var traversed : [[Int]] = Array(repeating: Array(repeating: 0, count: maxRow), count: maxCol);
 	let dir : [[Int]] = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 	var que : [Node] = [Node]()
 	var i : Int = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			traversed[i][j] = Int.max;
@@ -598,8 +553,7 @@ func distNearestFill2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int)
 	var y : Int;
 	var dist : Int;
 	var temp : Node?;
-	while (!que.isEmpty)
-	{
+	while (!que.isEmpty) {
 		temp = que.removeFirst();
 		i = 0;
 		while (i < 4) {
@@ -615,8 +569,7 @@ func distNearestFill2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int)
 	}
 
 	i = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			print(String(traversed[i][j]) + " ",terminator: "");
@@ -628,8 +581,7 @@ func distNearestFill2(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int)
 }
 
 // Testing code
-func main9()
-{
+func main9() {
 	var arr : [[Int]] = [[1, 0, 1, 1, 0], [1, 1, 0, 1, 0], [0, 0, 0, 0, 1], [0, 0, 0, 0, 1], [0, 0, 0, 0, 1]];
 	distNearestFill( &arr,5,5);
 	distNearestFill2( &arr,5,5);
@@ -646,8 +598,7 @@ func findLargestIslandUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int
 	var y : Int;
 	var sum : Int = 1;
 	var i : Int = 0;
-	while (i < 8)
-	{
+	while (i < 8) {
 		x = currCol + dir[i][0];
 		y = currRow + dir[i][1];
 		if (x >= 0 && x < maxCol && y >= 0 && y < maxRow && traversed[x][y] == false && arr[x][y] == 1) {
@@ -664,8 +615,7 @@ func findLargestIsland(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) ->
 	var currVal : Int = 0;
 	var traversed : [[Bool]] = Array(repeating: Array(repeating: false, count: maxRow), count: maxCol);
 	var i : Int = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			traversed[i][j] = false;
@@ -675,8 +625,7 @@ func findLargestIsland(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) ->
 	}
 	
 	i = 0;
-	while (i < maxCol)
-	{
+	while (i < maxCol) {
 		var j : Int = 0;
 		while (j < maxRow) {
 			if (arr[i][j] == 1) {
@@ -695,46 +644,37 @@ func findLargestIsland(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) ->
 }
 
 // Testing code
-func main10()
-{
+func main10() {
 	var arr : [[Int]] = [[1, 0, 1, 1, 0], [1, 0, 0, 1, 0], [0, 1, 1, 1, 1], [0, 1, 0, 0, 0], [1, 1, 0, 0, 1]];
 	print("Largest Island : " + String(findLargestIsland( &arr,5,5)));
 }
 // Largest Island : 12
 
-func reverseStack(_ stk : inout [Int])
-{
+func reverseStack(_ stk : inout [Int]) {
 	var que : [Int] = [Int]()
-	while (!stk.isEmpty)
-	{
+	while (!stk.isEmpty) {
 		que.append(stk.removeLast());
 	}
-	while (!que.isEmpty)
-	{
+	while (!que.isEmpty) {
 		stk.append(que.removeFirst());
 	}
 }
 
-func reverseQueue(_ que : inout [Int])
-{
+func reverseQueue(_ que : inout [Int]) {
 	var stk :  [Int] =  [Int]();
-	while (!que.isEmpty)
-	{
+	while (!que.isEmpty) {
 		stk.append(que.removeFirst());
 	}
-	while (!stk.isEmpty)
-	{
+	while (!stk.isEmpty) {
 		que.append(stk.removeLast());
 	}
 }
 
 // Testing code
-func main11()
-{
+func main11() {
 	var stk :  [Int] =  [Int]();
 	var i : Int = 0;
-	while (i < 5)
-	{
+	while (i < 5) {
 		stk.append(i);
 		i += 1;
 	}
@@ -745,8 +685,7 @@ func main11()
 
 	var que : [Int] = [Int]()
 	i = 0;
-	while (i < 5)
-	{
+	while (i < 5) {
 		que.append(i);
 		i += 1;
 	}
@@ -759,14 +698,12 @@ func main11()
 func josephus(_ n : Int, _ k : Int) -> Int {
 	var que : [Int] = [Int]()
 	var i : Int = 0;
-	while (i < n)
-	{
+	while (i < n) {
 		que.append(i + 1);
 		i += 1;
 	}
 	
-	while (que.count > 1)
-	{
+	while (que.count > 1) {
 		i = 0;
 		while (i < k - 1) {
 			que.append(que.removeFirst());
@@ -778,8 +715,7 @@ func josephus(_ n : Int, _ k : Int) -> Int {
 }
 
 // Testing code
-func main12()
-{
+func main12() {
 	print("Position : " + String(josephus(11,5)));
 }
 // Position : 8

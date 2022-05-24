@@ -27,6 +27,7 @@ func nQueens(_ Q : inout [Int], _ k : Int, _ n : Int) {
 	}
 }
 
+// Testing code.
 var Q : [Int] = Array(repeating: 0, count: 8);
 nQueens( &Q,0,8);
 

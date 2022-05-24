@@ -65,7 +65,7 @@ func fastestWayTD(_ f : inout [[Int]], _ a : inout [[Int]], _ t : inout [[Int]],
 	f[1][i] = min(f[1][i - 1] + a[1][i],f[0][i - 1] + t[0][i - 1] + a[1][i]);
 }
 
-// Driver code
+// Testing code.
 var a : [[Int]] = [[7, 9, 3, 4, 8, 4],
 					[8, 5, 6, 4, 5, 7]];
 var t : [[Int]] = [[2, 3, 1, 3, 4],

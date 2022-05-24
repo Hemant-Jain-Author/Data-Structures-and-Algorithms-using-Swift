@@ -8,8 +8,8 @@ func findWays(_ n : Int, _ m : Int, _ V : Int) -> Int {
 		j += 1;
 	}
 
-	i = 2;
 	// i is number of dice, j is Value, k value of dice.
+	i = 2;
 	while (i <= n) {
 		j = 1;
 		while (j <= V) {
@@ -25,6 +25,7 @@ func findWays(_ n : Int, _ m : Int, _ V : Int) -> Int {
 	return dp[n][V];
 }
 
+// Testing code.
 print(String(findWays(3,6,6)) + " ",terminator: "");
 
 // 10

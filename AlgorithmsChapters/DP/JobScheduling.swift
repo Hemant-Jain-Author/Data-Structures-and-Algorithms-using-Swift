@@ -12,7 +12,7 @@ class Job {
 	}
 }
 
-func JobCompare(_ j1 : Job?, _ j2 : Job?) -> Bool {
+func jobCompare(_ j1 : Job?, _ j2 : Job?) -> Bool {
 	return j1!.stop < j2!.stop;
 }
 
@@ -45,7 +45,7 @@ func maxValueJobs(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n :
 		i += 1;
 	}
 	
-	act = act.sorted(by:JobCompare); // sort according to finish time.
+	act = act.sorted(by:jobCompare); // sort according to finish time.
 	return maxValueJobUtil( &act,n);
 }
 
@@ -60,14 +60,14 @@ func maxValueJobUtilTD(_ dp : inout [Int], _ arr : inout [Job?], _ n : Int) -> I
 	// Find Value when current job is included
 	var incl : Int = arr[n - 1]!.value;
 
-		var j : Int = n - 2;
-		while (j >= 0) {
-			if (arr[j]!.stop <= arr[n - 1]!.start) {
-				incl += maxValueJobUtilTD( &dp, &arr,j + 1);
-				break;
-			}
-			j -= 1;
+	var j : Int = n - 2;
+	while (j >= 0) {
+		if (arr[j]!.stop <= arr[n - 1]!.start) {
+			incl += maxValueJobUtilTD( &dp, &arr,j + 1);
+			break;
 		}
+		j -= 1;
+	}
 	// Find Value when current job is excluded
 	let excl : Int = maxValueJobUtilTD( &dp, &arr,n - 1);
 	dp[n - 1] = max(incl,excl);
@@ -82,7 +82,7 @@ func maxValueJobsTD(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n
 		act[i] = Job(s[i], f[i], v[i]);
 		i += 1;
 	}
-	act = act.sorted(by:JobCompare);
+	act = act.sorted(by:jobCompare);
 	// sort according to finish time.
 	var dp : [Int] = Array(repeating: 0, count: n);
 	return maxValueJobUtilTD( &dp, &act,n);
@@ -96,7 +96,7 @@ func maxValueJobsBU(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n
 		i += 1;
 	}
 	
-	act = act.sorted(by:JobCompare);
+	act = act.sorted(by:jobCompare);
 
 	// sort according to finish time.
 	var dp : [Int] = Array(repeating: 0, count: n);
@@ -120,6 +120,7 @@ func maxValueJobsBU(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n
 	return dp[n - 1];
 }
 
+// Testing code.
 var start : [Int] = [1, 5, 0, 3, 5, 6, 8];
 var finish : [Int] = [2, 6, 5, 4, 9, 7, 9];
 var value : [Int] = [2, 2, 4, 3, 10, 2, 8];

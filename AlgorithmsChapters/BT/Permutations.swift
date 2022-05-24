@@ -71,7 +71,6 @@ func permutation3(_ arr : inout [Int], _ i : Int, _ length : Int) {
 }
 	
 // Testing code
-
 var arr : [Int] = [1, 2, 3, 4];
 permutation( &arr,0,4);
 print();

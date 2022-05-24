@@ -94,6 +94,7 @@ func graphColouring(_ graph : inout [[Bool]], _ V : Int, _ m : Int) -> Bool {
 	return false;
 }
 
+// Testing code.
 var graph : [[Bool]] =
 [[false, true, false, false, true],
 [true, false, true, false, true],

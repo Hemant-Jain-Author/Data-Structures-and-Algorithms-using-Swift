@@ -7,8 +7,9 @@ func lbs(_ arr : inout [Int]) -> Int {
 	// Initialize LDS values for all indexes as 1.
 	var lds : [Int] = Array(repeating: 1, count: n);
 	var mx : Int = 0;
-	var i : Int = 0, j : Int;
+	
 	// Populating LIS values in bottom up manner.
+	var i : Int = 0, j : Int;
 	while (i < n) {
 		j = 0;
 		while (j < i) {
@@ -20,8 +21,8 @@ func lbs(_ arr : inout [Int]) -> Int {
 		i += 1;
 	}
 	
-	i = n - 1;
 	// Populating LDS values in bottom up manner.
+	i = n - 1;
 	while (i > 0) {
 		j = n - 1;
 		while (j > i) {
@@ -38,10 +39,10 @@ func lbs(_ arr : inout [Int]) -> Int {
 		mx = max(mx, lis[i] + lds[i] - 1);
 		i += 1;
 	}
-	
 	return mx;
 }
 
+// Testing code.
 var arr : [Int] = [1, 6, 3, 11, 1, 9, 5, 12, 3, 14, 6, 17, 3, 19, 2, 19];
 print("Length of lbs is " + String(LargestBitonicSubseq.lbs( &arr)));
 

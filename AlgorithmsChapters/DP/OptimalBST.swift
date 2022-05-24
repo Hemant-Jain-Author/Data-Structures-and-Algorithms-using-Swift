@@ -134,7 +134,7 @@ func optBstCostBU2(_ keys : inout [Int], _ freq : inout [Int]) -> Int {
 	return cost[0][n - 1];
 }
 
-
+// Testing code.
 var keys : [Int] = [9, 15, 25];
 var freq : [Int] = [30, 10, 40];
 print("OBST cost:" + String(optBstCost( &keys, &freq)));

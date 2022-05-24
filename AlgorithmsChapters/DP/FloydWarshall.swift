@@ -16,18 +16,14 @@ func floydWarshall(_ graph : inout [[Int]], _ V : Int) {
 	}
 	
 	var k : Int = 0;
-	// Pick intermediate vertices.
-	while (k < V) {
+	while (k < V) { // Pick intermediate vertices.
 		var i : Int = 0;
-		// Pick source vertices one by one.
-		while (i < V) {
+		while (i < V) { // Pick source vertices one by one.
 			var j : Int = 0;
-			// Pick destination vertices.
-			while (j < V) {
+			while (j < V) { // Pick destination vertices.
 				// If we have shorter path from i to j via k.
 				// then update dist[i][j]
-				if (dist[i][k] != INF && dist[k][j] != INF && dist[i][k] + dist[k][j] < dist[i][j])
-				{
+				if (dist[i][k] != INF && dist[k][j] != INF && dist[i][k] + dist[k][j] < dist[i][j]) {
 					dist[i][j] = dist[i][k] + dist[k][j];
 				}
 				j += 1;
@@ -46,9 +42,7 @@ func printSolution(_ dist : inout [[Int]], _ V : Int) {
 		var j : Int = 0;
 		while (j < V) {
 			if (dist[i][j] == INF) {print("INF ",terminator: "");
-			}
-			else
-			{
+			} else {
 				print(String(dist[i][j]) + " ",terminator: "");
 			}
 			j += 1;
@@ -58,9 +52,9 @@ func printSolution(_ dist : inout [[Int]], _ V : Int) {
 	}	
 }
 
+// Testing code.
 var graph : [[Int]] =
-[
-[0, 2, 4, INF, INF, INF, INF],
+[[0, 2, 4, INF, INF, INF, INF],
 [2, 0, 4, 1, INF, INF, INF],
 [4, 4, 0, 2, 8, 4, INF],
 [INF, 1, 2, 0, 3, INF, 6],

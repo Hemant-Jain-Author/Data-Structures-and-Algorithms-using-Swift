@@ -38,6 +38,7 @@ func JobSequencing(_ ids : inout [Character], _ deadlines : inout [Int], _ profi
         jobs.append(Job(ids[i], deadlines[i], profits[i]));
         i += 1;
     }
+    
     jobs.sort(by: >);// Decreasing order.
     
     var result : [Bool] = Array(repeating: false, count: maxDL);

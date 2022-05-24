@@ -1,8 +1,9 @@
 import Foundation;
 
+// Greedy may be wrong.
 func minCoins(_ coins : inout [Int], _ n : Int, _ value : Int) -> Int {
 	var val : Int = value;
-	// Greedy may be wrong.
+	
 	if (val <= 0) {
 		return 0;
 	}
@@ -23,9 +24,11 @@ func minCoins(_ coins : inout [Int], _ n : Int, _ value : Int) -> Int {
 	
 	return (val == 0) ? count : -1;
 }
+
+// Brute force.
 func minCoins2(_ coins : inout [Int], _ n : Int, _ value : Int) -> Int {
 	let val : Int = value;
-	// Brute force.
+	
 	if (val == 0) {
 		return 0;
 	}
@@ -57,8 +60,8 @@ func minCoinsTD(_ count : inout [Int], _ coins : inout [Int], _ n : Int, _ val :
 		return count[val];
 	}
 
-	var i : Int = 0;
 	// Recursion
+	var i : Int = 0;
 	while (i < n) {
 		// For all possible coins
 		if (coins[i] <= val) {
@@ -78,8 +81,9 @@ func minCoinsBU(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
 	var count : [Int] = Array(repeating: Int.max, count: val + 1);
 	count[0] = 0;
 
-	var i : Int = 1;
+	
 	// Base value.
+	var i : Int = 1;
 	while (i <= val) {
 
 		var j : Int = 0;
@@ -96,27 +100,28 @@ func minCoinsBU(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
 	
 	return (count[val] != Int.max) ? count[val] : -1;
 }
+
 func printCoinsUtil(_ cvalue : inout [Int], _ val : Int) {
 	if (val > 0) {
 		printCoinsUtil( &cvalue,val - cvalue[val]);
 		print(String(cvalue[val]) + " ",terminator: "");
 	}
 }
+
 func printCoins(_ cvalue : inout [Int], _ val : Int) {
 	print("Coins are : ",terminator: "");
 	printCoinsUtil( &cvalue,val);
 	print();
 }
+
+// DP bottom up approach.
 func minCoinsBU2(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
-	// DP bottom up approach.
 	var count : [Int] = Array(repeating: Int.max, count: val + 1);
 	var cvalue : [Int] = Array(repeating: Int.max, count: val + 1);
-	count[0] = 0;
+	count[0] = 0; // Base value.
 
 	var i : Int = 1;
-	// Base value.
 	while (i <= val) {
-
 		var j : Int = 0;
 		while (j < n) {
 			// For all coins smaller than or equal to i.
@@ -136,6 +141,7 @@ func minCoinsBU2(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
 	return count[val];
 }
 
+// Testing code.
 var coins : [Int] = [5, 6];
 let value : Int = 16;
 let n : Int = coins.count;

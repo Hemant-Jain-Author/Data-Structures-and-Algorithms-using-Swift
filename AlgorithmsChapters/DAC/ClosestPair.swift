@@ -105,6 +105,7 @@ func closestPairDC(_ arr : inout [[Double]]) -> Double {
 	return closestPairUtil( &p,0,n - 1, &q,n);
 }
 
+// Testing code.
 var arr : [[Double]] = [[648, 896], [269, 879], [250, 922], [453, 347], [213, 17]];
 print("Smallest distance is:" + String(closestPairBF( &arr)));
 print("Smallest distance is:" + String(closestPairDC( &arr)));

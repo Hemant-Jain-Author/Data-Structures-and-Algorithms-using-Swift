@@ -24,7 +24,6 @@ func minCostBU(_ cost : inout [[Int]], _ m : Int, _ n : Int) -> Int {
 		i += 1;
 	}
 
-
 	var j : Int = 1; // Initialize first row.
 	while (j < n) {
 		tc[0][j] = tc[0][j - 1] + cost[0][j];
@@ -44,7 +43,7 @@ func minCostBU(_ cost : inout [[Int]], _ m : Int, _ n : Int) -> Int {
 	return tc[m - 1][n - 1];
 }
 
-
+// Testing code.
 var cost : [[Int]] =
 [[1, 3, 4],
 [4, 7, 5],

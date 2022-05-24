@@ -32,6 +32,7 @@ func subsetSum(_ arr : inout [Int], _ n : Int, _ flags : inout [Bool], _ sum : I
 	subsetSum( &arr,n, &flags,sum,curr + 1,target);
 }
 
+// Testing code.
 var arr : [Int] = [15, 22, 14, 26, 32, 9, 16, 8];
 let target : Int = 53;
 let n : Int = arr.count;

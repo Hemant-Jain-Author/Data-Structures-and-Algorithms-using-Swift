@@ -34,8 +34,8 @@ func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int
 	
 	return ans;
 }
-func tsp(_ graph : inout [[Int]], _ n : Int) 
-{
+
+func tsp(_ graph : inout [[Int]], _ n : Int) {
 	var visited : [Bool] = Array(repeating: false, count: n);
 	var path : [Int] = Array(repeating: 0, count: n);
 	var ansPath : [Int] = Array(repeating: 0, count: n + 1);
@@ -54,10 +54,10 @@ func tsp(_ graph : inout [[Int]], _ n : Int)
 	}
 }
 
+// Testing code.
 let n : Int = 4;
 var graph : [[Int]] =
-[
-[0, 10, 15, 20],
+[[0, 10, 15, 20],
 [10, 0, 35, 25],
 [15, 35, 0, 30],
 [20, 25, 30, 0]];

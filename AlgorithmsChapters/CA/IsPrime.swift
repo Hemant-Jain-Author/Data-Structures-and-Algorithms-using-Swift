@@ -13,6 +13,7 @@ func isPrime(_ n : Int) -> Bool {
 	return answer;
 }
 
+// Testing code.
 print(isPrime(8));
 print(isPrime(11));
 /* 

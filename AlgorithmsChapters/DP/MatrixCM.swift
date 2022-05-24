@@ -5,11 +5,12 @@ func MatrixChainMulBruteForce(_ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 		return 0;
 	}
 	var min : Int = Int.max;
-	var k : Int = i;
+	
 	// place parenthesis at different places between
 	// first and last matrix, recursively calculate
 	// count of multiplications for each parenthesis
 	// placement and return the minimum count
+	var k : Int = i;
 	while (k < j) {
 		let count : Int = MatrixChainMulBruteForce( &p,i,k) + 
 		MatrixChainMulBruteForce( &p,k+1,j) + p[i-1]*p[k]*p[j];
@@ -59,9 +60,8 @@ func MatrixChainMulBU(_ p : inout [Int], _ n : Int) -> Int {
 	}
 
 	var l : Int = 1;
-	while (l < n) {
+	while (l < n) { // l is length of range.
 		var i : Int = 1, j : Int = i + l;
-		// l is length of range.
 		while (j < n) {
 			var k : Int = i;
 			while (k < j) {
@@ -105,9 +105,8 @@ func MatrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
 	}
 
 	var l : Int = 1;
-	while (l < n) {
+	while (l < n) {  // l is length of range.
 		var i : Int = 1, j : Int = i + l;
-		// l is length of range.
 		while (j < n) {
 			var k : Int = i;
 			while (k < j) {
@@ -123,7 +122,7 @@ func MatrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
 	return dp[1][n - 1];
 }
 
-// Driver Code
+// Testing code.
 var arr : [Int] = [1, 2, 3, 4];
 let n : Int = arr.count;
 print("Matrix Chain Multiplication is: " + String(MatrixChainMulBruteForce( &arr,n)));

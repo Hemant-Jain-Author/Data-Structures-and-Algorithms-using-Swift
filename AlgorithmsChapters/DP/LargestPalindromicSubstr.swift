@@ -36,6 +36,7 @@ func largestPalinSubstr(_ str : String) -> Int {
 	return max;
 }
 
+// Testing code.
 let str : String = "ABCAUCBCxxCBA";
 print("Max Palindromic Substrings len: " + String(LargestPalindromicSubstr.largestPalinSubstr(str)));
 

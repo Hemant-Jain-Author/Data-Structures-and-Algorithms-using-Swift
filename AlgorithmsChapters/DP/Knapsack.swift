@@ -53,9 +53,9 @@ func maxCost01KnapsackBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : 
 	let n : Int = wt.count;
 	var dp : [[Int]] = Array(repeating: Array(repeating: 0, count: n + 1), count: capacity + 1);
 
-	var w : Int = 1;
 	// Build table dp[][] in bottom up approach.
 	// Weights considered against capacity.
+	var w : Int = 1;
 	while (w <= capacity) {
 		var i : Int = 1;
 		while (i <= n) {
@@ -94,9 +94,10 @@ func printItems(_ dp : inout [[Int]], _ wt : inout [Int], _ cost : inout [Int], 
 func KS01UnboundBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -> Int {
 	let n : Int = wt.count;
 	var dp : [Int] = Array(repeating: 0, count: capacity + 1);
-	var w : Int = 1;
+	
 	// Build table dp[] in bottom up approach.
 	// Weights considered against capacity.
+	var w : Int = 1;
 	while (w <= capacity) {
 		var i : Int = 1;
 		while (i <= n) {
@@ -114,6 +115,7 @@ func KS01UnboundBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -
 	return dp[capacity];
 }
 
+// Testing code.
 var wt : [Int] = 	[10, 40, 20, 30];
 var cost : [Int] = 	[60, 40, 90, 120];
 let capacity : Int = 50;

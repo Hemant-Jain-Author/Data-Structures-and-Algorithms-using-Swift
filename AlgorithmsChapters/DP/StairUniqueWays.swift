@@ -34,6 +34,7 @@ func stairUniqueWaysBU2(_ n : Int) -> Int {
 	return ways[n - 1];
 }
 
+// Testing code.
 print("Unique way to reach top:: " + String(stairUniqueWaysBU(4)));
 print("Unique way to reach top:: " + String(stairUniqueWaysBU2(4)));
 

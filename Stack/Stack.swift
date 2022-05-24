@@ -15,10 +15,7 @@ class Stack {
 	}
 	
 	public func top() -> Int? {
-		if stk.isEmpty {
-			return nil
-		}
-		return stk.last!
+		return stk.last
 	}
 	
 	public var isEmpty : Bool {
@@ -40,13 +37,7 @@ s.push(2)
 s.push(3)
 
 while !s.isEmpty {
+	//print(s.top()!)
 	let temp : Int = s.pop()!
-	print(temp)
-}
-
-s.push(11)
-s.push(12)
-s.push(13)
-while let temp = s.pop() {
 	print(temp)
 }
