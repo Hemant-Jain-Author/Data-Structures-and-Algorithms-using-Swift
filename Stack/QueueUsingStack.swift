@@ -67,12 +67,6 @@ que.add(1)
 que.add(11)
 que.add(111)
 print(que.remove())
-
-
-que.add(2)
-que.add(21)
-que.add(211)
-print(que.remove())
 print(que.remove())
 print(que.remove())
 print(que.remove())

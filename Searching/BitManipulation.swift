@@ -80,8 +80,7 @@ print(rightMostBit(a));
 print(resetRightMostBit(a));
 print(isPowerOf2(a));
 var i : Int = 0;
-while (i < 10)
-{
+while (i < 10) {
     print(String(i) + " bit count : " + String(countBits(i)));
     i += 1;
 }

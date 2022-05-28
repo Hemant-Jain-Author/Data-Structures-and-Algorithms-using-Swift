@@ -3,6 +3,14 @@ class Stack<T> {
 	
 	public init() {}
 
+	public var isEmpty : Bool {
+		return stk.isEmpty
+	}
+	
+	public var count : Int {
+		return stk.count
+	}
+
 	public func push(_ value : T) {
 		stk.append(value)
 	}
@@ -15,22 +23,7 @@ class Stack<T> {
 	}
 	
 	public func top() -> T? {
-		if stk.isEmpty {
-			return nil
-		}
-		return stk.last!
-	}
-	
-	public func display() {
-		print(stk)	
-	}
-
-	public var isEmpty : Bool {
-		return stk.isEmpty
-	}
-	
-	public var count : Int {
-		return stk.count
+		return stk.last
 	}
 }
 
@@ -44,4 +37,3 @@ while !s.isEmpty {
 	let temp : Int = s.pop()!
 	print(temp)
 }
-

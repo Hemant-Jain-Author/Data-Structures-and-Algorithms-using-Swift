@@ -10,30 +10,25 @@ class DoublyCircularLinkedList {
         var next : Node?;
         var prev : Node?;
 
-        init(_ v : Int, _ nxt : Node? = nil, _ prv : Node? = nil)
-        {
+        init(_ v : Int, _ nxt : Node? = nil, _ prv : Node? = nil) {
             self.value = v;
             self.next = nxt;
             self.prev = prv;
         }
     }
     
-	func length() -> Int
-    {
+	func length() -> Int {
         return self.size;
     }
 	
     
-	func isEmpty() -> Bool
-    {
+	func isEmpty() -> Bool {
         return self.size == 0;
     }
 
     
-	func peekHead() -> Int
-    {
-        if (self.isEmpty())
-        {
+	func peekHead() -> Int {
+        if (self.isEmpty()) {
 			print("Empty List Error")
         }
         return self.head!.value;
@@ -47,9 +42,7 @@ func addHead(_ value : Int) {
 		self.head = newNode;
 		newNode!.next = newNode;
 		newNode!.prev = newNode;
-	}
-	else
-	{
+	} else {
 		newNode!.next = self.head;
 		newNode!.prev = self.head!.prev;
 		self.head!.prev = newNode;
@@ -66,9 +59,7 @@ func addTail(_ value : Int) {
 		self.tail = newNode;
 		newNode!.next = newNode;
 		newNode!.prev = newNode;
-	}
-	else
-	{
+	} else {
 		newNode!.next = self.tail!.next;
 		newNode!.prev = self.tail;
 		self.tail!.next = newNode;
@@ -151,6 +142,7 @@ func display() {
 }
 }
 
+// Testing code.
 func main1() {
 	let ll : DoublyCircularLinkedList = DoublyCircularLinkedList();
 	ll.addHead(1);
@@ -168,6 +160,7 @@ func main1() {
 // 3
 // true
 
+// Testing code.
 func main2() {
 	let ll : DoublyCircularLinkedList = DoublyCircularLinkedList();
 	ll.addTail(1);
@@ -186,6 +179,7 @@ func main2() {
 // 2
 // Empty List.
 
+// Testing code.
 func main3() {
 	let ll : DoublyCircularLinkedList = DoublyCircularLinkedList();
 	ll.addHead(1);
@@ -198,6 +192,7 @@ func main3() {
 // 3 2 1
 // 2 1
 
+// Testing code.
 func main4() {
 	let ll : DoublyCircularLinkedList = DoublyCircularLinkedList();
 	ll.addHead(1);

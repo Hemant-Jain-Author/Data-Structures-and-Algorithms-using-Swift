@@ -37,9 +37,3 @@ while !q.isEmpty {
 	let temp : Int = q.remove()!
 	print(temp)
 }
-q.add(11)
-q.add(12)
-q.add(13)
-while let temp = q.remove() {
-	print(temp)
-}

@@ -1,57 +1,22 @@
-class Counter<T: Hashable > {
-	var dict: [T:Int] = [:]
-
-	public var isEmpty : Bool {
-		return dict.count == 0
-	}
-
-	public func add(_ key : T) {
-		guard let val = dict[key] else {
-			dict[key] = 1
-			return
-		}
-		dict[key] = val + 1
-	}
-	
-	public func find(_ key : T) -> Bool {
-		let keyExists = dict[key] != nil
-		return keyExists
-	}
-	
-	public func get(_ key : T) -> (value:Int, flag:Bool) {
-		guard let val = dict[key] else {
-			return (0, false)
-		}
-		return (val, true)
-	}
-	
-	public func remove(_ key : T) {
-		guard let val = dict[key] else {
-			return
-		}
-		if(val == 1) {
-			dict[key] = nil
-		} else {
-			dict[key] = val - 1
-		}
-	}
-}
-
-
 func isAnagram(_ str1 : String, _ str2 : String) -> Bool {
-	let size1 = str1.count
-	let size2 = str2.count
-	if size1 != size2 {
+	if str1.count != str2.count {
 		return false
 	}
-	let cm = Counter<Character>()
+	var cntr : [Character:Int] = [Character:Int]();
 	for ch in str1 {
-		cm.add(ch)
+		if (cntr[ch] != nil) {
+			cntr[ch] = cntr[ch]! + 1
+		} else {
+			cntr[ch] = 1
+		}
 	}
 	for ch in str2 {
-		cm.remove(ch)
+		if (cntr[ch] == nil || cntr[ch]! == 0) {
+			return false
+		}
+		cntr[ch] = cntr[ch]! - 1
 	}
-	return cm.isEmpty
+	return true
 }
 
 func removeDuplicate(_ str : String) -> String {
@@ -67,7 +32,6 @@ func removeDuplicate(_ str : String) -> String {
 	}
 	return output
 }
-
 
 func findMissing(arr : [Int], start : Int, end : Int) -> (value:Int, flag:Bool) {
 	var hs = Set<Int>()
@@ -86,7 +50,7 @@ func findMissing(arr : [Int], start : Int, end : Int) -> (value:Int, flag:Bool) 
 
 func printRepeating(_ arr : [Int]) {
 	var hs = Set<Int>()
-	print("Repeating elements are :: ")
+	print("Repeating elements are :: ", terminator:"")
 	for val in arr {
 		if hs.contains(val) {
 			print(val, terminator:" ")
@@ -94,25 +58,24 @@ func printRepeating(_ arr : [Int]) {
 			hs.insert(val)
 		}
 	}
+	print()
 }
 
 func printFirstRepeating(_ arr : [Int]) {
-	let size = arr.count
-	let hs = Counter<Int>()
-	var i = 0
-	while i < size {
-		hs.add(arr[i])
-		i += 1
-	}
-	i = 0
-	while i < size {
-		hs.remove(arr[i])
-		if hs.find(arr[i]) {
-			print("First Repeating number is : ") 
-			print(arr[i])
-			return
+	var cntr : [Int:Int] = [Int:Int]();
+	for val in arr {
+		if (cntr[val] != nil) {
+			cntr[val] = cntr[val]! + 1
+		} else {
+			cntr[val] = 1
 		}
-		i += 1
+	}
+
+	for val in arr {
+		if (cntr[val]! > 1) {
+			print("First Repeating number is :", val)
+			return;
+		} 
 	}
 }
 
@@ -127,20 +90,39 @@ func hornerHash(key  : [Int], tableSize : Int) -> Int {
 	return h
 }
 
+// Testing code.
 let var1 = "hello"
 let var2 = "elloh"
 let var3 = "world"
-
 print("isAnagram : \(isAnagram(var1, var2))")
 print("isAnagram : \(isAnagram(var1, var3))")
+/*
+isAnagram : true
+isAnagram : false
+*/
 
+// Testing code.
 print(removeDuplicate(var1))
+/*
+helo
+*/
 
+// Testing code.
 let arr = [1, 2, 3, 5, 6, 7, 9, 8, 10]
-print("Missing number is :: ")
-print(findMissing(arr:arr, start:1, end:10))
+print("Missing number is ::", findMissing(arr:arr, start:1, end:10).value)
+/*
+Missing number is :: 4
+*/
 
+// Testing code.
 let arr1 = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1]
 printRepeating(arr1)
+/*
+Repeating elements are :: 4 1
+*/
 
+// Testing code.
 printFirstRepeating(arr1)
+/*
+First Repeating number is : 1
+*/

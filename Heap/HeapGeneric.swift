@@ -131,6 +131,7 @@ func HeapSort(_ array : inout [Int], _ inc : Bool) {
 	}
 }
 
+// Testing code.
 var hp = Heap<Int>(true);
 hp.add(1);
 hp.add(6);

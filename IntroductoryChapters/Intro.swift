@@ -7,6 +7,7 @@ func factorial(_ i : Int) -> Int {
 	return i * factorial(i-1)
 }
 
+// Testing code.
 print("factorial 5 is :: \(factorial(5))")
 
 /*
@@ -47,6 +48,7 @@ func TOHUtil(num : Int, from : String, to : String, temp : String) {
 	TOHUtil(num : num-1, from : temp, to : to, temp : from)
 }
 
+// Testing code.
 TowersOfHanoi(3)
 
 /*
@@ -67,6 +69,7 @@ func fibonacci(_ n : Int) -> Int {
 	return fibonacci(n-1) + fibonacci(n-2)
 }
 
+// Testing code.
 print(fibonacci(10));
 
 /*
@@ -87,6 +90,7 @@ func isPrime(_ n : Int) -> Bool {
 	return true
 }
 
+// Testing code.
 print("isPrime :: \(isPrime(23))")
 print("isPrime :: \(isPrime(5))")
 print("isPrime :: \(isPrime(7))")

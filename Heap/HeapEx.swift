@@ -223,6 +223,7 @@ func isMaxHeap(_ arr : inout [Int], _ size : Int) -> Bool
 	return true;
 }
 
+// Testing code.
 func main1()
 {
 	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -234,6 +235,7 @@ func main1()
 // Kth Smallest :: 5
 // Kth Smallest :: 5
 
+// Testing code.
 func main2()
 {
 	var arr3 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -361,6 +363,7 @@ func kSmallestProduct4(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 	return product;
 }
 
+// Testing code.
 func main3()
 {
 	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -373,10 +376,10 @@ func main3()
 	print("Kth Smallest product:: " + String(kSmallestProduct4( &arr4,8,3)));
 }
 
-// * Kth Smallest product:: 10 
-// * Kth Smallest product:: 10 
-// * Kth Smallest product:: 10
-// * Kth Smallest product:: 10
+// Kth Smallest product:: 10 
+// Kth Smallest product:: 10 
+// Kth Smallest product:: 10
+// Kth Smallest product:: 10
 
 func printLargerHalf(_ arr : inout [Int], _ size : Int)
 {
@@ -421,6 +424,7 @@ func printLargerHalf3(_ arr : inout [Int], _ size : Int)
 	print();
 }
 
+// Testing code.
 func main4()
 {
 	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -430,9 +434,9 @@ func main4()
 	var arr3 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
 	printLargerHalf3( &arr3,8);
 }
-// * 6 7 7 8 
-// * [6, 7, 7, 8] 
-// * 6 7 7 8
+// 6 7 7 8 
+// [6, 7, 7, 8] 
+// 6 7 7 8
 
 func sortK(_ arr : inout [Int], _ size : Int, _ k : Int)
 {
@@ -484,8 +488,8 @@ func main5()
 		i += 1;
 	}
 }
-// 1 4 5 9 10 50
 
+// 1 4 5 9 10 50
 
 main1();
 main2();

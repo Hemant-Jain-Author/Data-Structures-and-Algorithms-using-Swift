@@ -42,7 +42,7 @@ class Polynomial {
         let poly : Polynomial = Polynomial();
 
         while (p1 != nil || p2 != nil) {
-            if (p1 == nil || p1!.pow < p2!.pow) {
+            if (p1 == nil || (p2 != nil && p1!.pow < p2!.pow)) {
                 temp = Node(p2!.coeff, p2!.pow);
                 p2 = p2!.next;
             } else if (p2 == nil || p1!.pow > p2!.pow) {

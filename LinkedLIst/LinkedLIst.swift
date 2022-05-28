@@ -453,20 +453,14 @@ public func findIntersection(_ ll2 : List) -> Node? {
 	return head
 }
 
-    func compareList(_ ll : List?) -> Bool
-    {
+    func compareList(_ ll : List?) -> Bool {
         return self.compareList(self.head,ll!.head);
     }
 
-    func compareList(_ head1 : Node?, _ head2 : Node?) -> Bool
-    {
-        if (head1 == nil && head2 == nil)
-        {
+    func compareList(_ head1 : Node?, _ head2 : Node?) -> Bool {
+        if (head1 == nil && head2 == nil) {
             return true;
-        }
-        else
-        if ((head1 == nil) || (head2 == nil) || (head1!.value != head2!.value))
-        {
+        } else if ((head1 == nil) || (head2 == nil) || (head1!.value != head2!.value)) {
             return false;
         }
         else
@@ -479,17 +473,14 @@ public func findIntersection(_ ll2 : List) -> Node? {
     {
         var head1 : Node? = self.head;
         var head2 : Node? = ll2!.head;
-        while (head1 != nil && head2 != nil)
-        {
-            if (head1!.value != head2!.value)
-            {
+        while (head1 != nil && head2 != nil) {
+            if (head1!.value != head2!.value) {
                 return false;
             }
             head1 = head1!.next;
             head2 = head2!.next;
         }
-        if (head1 == nil && head2 == nil)
-        {
+        if (head1 == nil && head2 == nil) {
             return true;
         }
         return false;
@@ -497,14 +488,12 @@ public func findIntersection(_ ll2 : List) -> Node? {
 
     func nthNodeFromBeginning(_ index : Int) -> Int
     {
-        if (index > self.size() || index < 1)
-        {
+        if (index > self.size() || index < 1) {
             return Int.max;
         }
         var count : Int = 0;
         var curr : Node? = self.head;
-        while (curr != nil && count < index - 1)
-        {
+        while (curr != nil && count < index - 1) {
             count += 1;
             curr = curr!.next;
         }
@@ -516,19 +505,15 @@ public func findIntersection(_ ll2 : List) -> Node? {
         var curr : Node?;
         var end : Node? = nil;
         var temp : Int;
-        if (self.head == nil || self.head!.next == nil)
-        {
+        if (self.head == nil || self.head!.next == nil) {
             return;
         }
         var flag : Bool = true;
-        while (flag)
-        {
+        while (flag) {
             flag = false;
             curr = self.head;
-            while (!(curr!.next===end))
-            {
-                if (curr!.value > curr!.next!.value)
-                {
+            while (!(curr!.next===end)) {
+                if (curr!.value > curr!.next!.value) {
                     flag = true;
                     temp = curr!.value;
                     curr!.value = curr!.next!.value;
@@ -546,27 +531,22 @@ public func findIntersection(_ ll2 : List) -> Node? {
         var maxNode : Node?;
         var temp : Int;
         var max : Int;
-        if (self.head == nil || self.head!.next == nil)
-        {
+        if (self.head == nil || self.head!.next == nil) {
             return;
         }
-        while (!(self.head===end))
-        {
+        while (!(self.head===end)) {
             curr = self.head;
             max = curr!.value;
             maxNode = curr;
-            while (!(curr!.next===end))
-            {
-                if (max < curr!.next!.value)
-                {
+            while (!(curr!.next===end)) {
+                if (max < curr!.next!.value) {
                     maxNode = curr!.next;
                     max = curr!.next!.value;
                 }
                 curr = curr!.next;
             }
             end = curr;
-            if (curr!.value < max)
-            {
+            if (curr!.value < max) {
                 temp = curr!.value;
                 curr!.value = max;
                 maxNode!.value = temp;
@@ -578,18 +558,14 @@ public func findIntersection(_ ll2 : List) -> Node? {
         var curr : Node?;
         var stop : Node?;
         var temp : Int;
-        if (self.head == nil || self.head!.next == nil)
-        {
+        if (self.head == nil || self.head!.next == nil) {
             return;
         }
         stop = self.head!.next;
-        while (stop != nil)
-        {
+        while (stop != nil) {
             curr = self.head;
-            while (!(curr===stop))
-            {
-                if (curr!.value > stop!.value)
-                {
+            while (!(curr===stop)) {
+                if (curr!.value > stop!.value) {
                     temp = curr!.value;
                     curr!.value = stop!.value;
                     stop!.value = temp;
@@ -599,11 +575,10 @@ public func findIntersection(_ ll2 : List) -> Node? {
             stop = stop!.next;
         }
     }
-
 }
 
-func main1()
-{
+// Testing code.
+func main1() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -623,8 +598,8 @@ func main1()
 // Peek : 3
 // 3 2 1 4
 
-func main2()
-{
+// Testing code.
+func main2() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -638,8 +613,8 @@ func main2()
 // find : true
 // 2 1
 
-func main3()
-{
+// Testing code.
+func main3() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -659,8 +634,8 @@ func main3()
 // deleteNodes : true
 // 3 2
 
-func main4()
-{
+// Testing code.
+func main4() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -681,8 +656,8 @@ func main4()
 // 3 2 1 
 // 1 2 3
 
-func main5()
-{
+// Testing code.
+func main5() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -705,8 +680,8 @@ func main5()
 // compareList : false
 // compareList : false
 
-func main6()
-{
+// Testing code.
+func main6() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -722,8 +697,8 @@ func main6()
 // 2
 // 2
 
-func main7()
-{
+// Testing code.
+func main7() {
 	let ll : List = List();
 	ll.sortedInsert(1);
 	ll.sortedInsert(2);
@@ -740,8 +715,8 @@ func main7()
 // 1 1 2 2 3 3 
 // 1 2 3
 
-func main8()
-{
+// Testing code.
+func main8() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -760,8 +735,8 @@ func main8()
 // circular list loop found
 // loop not found
 
-func main9()
-{
+// Testing code.
+func main9() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -782,8 +757,8 @@ func main9()
 // 5 3 2 1 
 // Intersection:: 2
 
-func main10()
-{
+// Testing code.
+func main10() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(10);

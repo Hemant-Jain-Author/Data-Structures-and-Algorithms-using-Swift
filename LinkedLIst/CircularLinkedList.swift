@@ -174,8 +174,8 @@ public func display() {
 }
 }
 
-func main1()
-{
+// Testing code.
+func main1() {
     let ll : CircularLinkedList = CircularLinkedList();
     ll.addHead(1);
     ll.addHead(2);
@@ -192,8 +192,8 @@ func main1()
 // 3
 // true
 
-func main2()
-{
+// Testing code.
+func main2() {
     let ll : CircularLinkedList = CircularLinkedList();
     ll.addTail(1);
     ll.addTail(2);
@@ -202,8 +202,8 @@ func main2()
 }
 // 1 2 3
 
-func main3()
-{
+// Testing code.
+func main3() {
     let ll : CircularLinkedList = CircularLinkedList();
     ll.addHead(1);
     ll.addHead(2);
@@ -221,8 +221,8 @@ func main3()
 // 1
 // Empty List.
 
-func main4()
-{
+// Testing code.
+func main4() {
     let ll : CircularLinkedList = CircularLinkedList();
     ll.addHead(1);
     ll.addHead(2);
@@ -237,8 +237,8 @@ func main4()
 // 3 2 1
 // 1 2 3
 
-func main5()
-{
+// Testing code.
+func main5() {
     let ll : CircularLinkedList = CircularLinkedList();
     ll.addHead(1);
     ll.addHead(2);

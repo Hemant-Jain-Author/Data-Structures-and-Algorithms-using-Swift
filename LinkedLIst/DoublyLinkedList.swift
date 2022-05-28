@@ -202,8 +202,7 @@ public func sortedInsert(_ value : Int) {
 	}
 }
 
-func removeDuplicate()
-{
+func removeDuplicate() {
 	var curr : Node? = self.head;
 	while (curr != nil)
 	{
@@ -228,8 +227,7 @@ func removeDuplicate()
 }
 
 // Testing code.
-func main1()
-{
+func main1() {
 	let ll : DoublyLinkedList = DoublyLinkedList();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -246,8 +244,8 @@ func main1()
 // 2 1 
 // true
 
-func main2()
-{
+// Testing code.
+func main2() {
 	let ll : DoublyLinkedList = DoublyLinkedList();
 	ll.sortedInsert(1);
 	ll.sortedInsert(2);
@@ -264,8 +262,8 @@ func main2()
 // 	1 1 2 2 3 3 
 // 	1 2 3
 
-func main3()
-{
+// Testing code.
+func main3() {
 	let ll : DoublyLinkedList = DoublyLinkedList();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -280,8 +278,8 @@ func main3()
 // 	3 2 1 
 // 	1 2 3
 
-func main4()
-{
+// Testing code.
+func main4() {
 	let ll : DoublyLinkedList = DoublyLinkedList();
 	ll.addHead(1);
 	ll.addHead(2);
@@ -293,8 +291,8 @@ func main4()
 // 	3 2 1 
 // 	3 1
 
-func main5()
-{
+// Testing code.
+func main5() {
 	let ll : DoublyLinkedList = DoublyLinkedList();
 	ll.addHead(1);
 	ll.addHead(2);
