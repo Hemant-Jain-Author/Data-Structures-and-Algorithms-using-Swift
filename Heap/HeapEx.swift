@@ -448,13 +448,11 @@ func sortK(_ arr : inout [Int], _ size : Int, _ k : Int)
 		i += 1;
 	}
 	
-	var output : [Int] = Array(repeating: 0, count: size);
 	var index : Int = 0;
-
 	i = k;
 	while (i < size)
 	{
-		output[index] = pq.remove()!;
+		arr[index] = pq.remove()!;
 		index += 1
 		pq.add(arr[i]);
 		i += 1;
@@ -462,15 +460,8 @@ func sortK(_ arr : inout [Int], _ size : Int, _ k : Int)
 	
 	while (pq.length > 0)
 	{
-		output[index] = pq.remove()!;
+		arr[index] = pq.remove()!;
 		index += 1
-	}
-
-	i = 0;
-	while (i < size)
-	{
-		arr[i] = output[i];
-		i += 1;
 	}
 }
 
