@@ -10,9 +10,7 @@ func merge(_ arr : inout [Int], _ tempArray : inout [Int], _ lowerIndex : Int, _
         if (arr[lowerStart] < arr[upperStart]) {
             tempArray[count] = arr[lowerStart];
             lowerStart += 1
-        }
-        else
-        {
+        } else {
             tempArray[count] = arr[upperStart];
             upperStart += 1
         }
@@ -33,26 +31,26 @@ func merge(_ arr : inout [Int], _ tempArray : inout [Int], _ lowerIndex : Int, _
         arr[i] = tempArray[i];
         i += 1;
     }
-    
 }
 
 
-func mergeSrt(_ arr : inout [Int], _ tempArray : inout [Int], _ lowerIndex : Int, _ upperIndex : Int) {
+func mergeSortUtil(_ arr : inout [Int], _ tempArray : inout [Int], _ lowerIndex : Int, _ upperIndex : Int) {
     if (lowerIndex >= upperIndex) {
         return;
     }
     let middleIndex : Int = (lowerIndex + upperIndex) / 2;
-    mergeSrt( &arr, &tempArray,lowerIndex,middleIndex);
-    mergeSrt( &arr, &tempArray,middleIndex + 1,upperIndex);
+    mergeSortUtil( &arr, &tempArray,lowerIndex,middleIndex);
+    mergeSortUtil( &arr, &tempArray,middleIndex + 1,upperIndex);
     merge( &arr, &tempArray,lowerIndex,middleIndex,upperIndex);
 }
 
 func mergeSort(_ arr : inout [Int]) {
     let size : Int = arr.count;
     var tempArray : [Int] = Array(repeating: 0, count: size);
-    mergeSrt( &arr, &tempArray,0,size - 1);
+    mergeSortUtil( &arr, &tempArray,0,size - 1);
 }
 
+// Testing code.
 var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
 mergeSort(&data)
 print(data)

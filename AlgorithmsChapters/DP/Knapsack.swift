@@ -111,7 +111,6 @@ func KS01UnboundBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -
 		}
 		w += 1;
 	}
-	// printItems(dp, wt, cost, n, capacity);
 	return dp[capacity];
 }
 

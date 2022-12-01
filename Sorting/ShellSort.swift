@@ -4,7 +4,7 @@ func greater(_ value1 : Int, _ value2 : Int) -> Bool {
     return value1 > value2;
 }
 
-func ShellSort(_ arr : inout [Int]) {
+func shellSort(_ arr : inout [Int]) {
     let n : Int = arr.count;
     var gap : Int = n / 2; // Gap starts with n/2 and half in each iteration.
     while (gap > 0) {
@@ -28,5 +28,5 @@ func ShellSort(_ arr : inout [Int]) {
 }
 
 var array : [Int] = [36, 32, 11, 6, 19, 31, 17, 3];
-ShellSort( &array);
+shellSort( &array);
 print(array)

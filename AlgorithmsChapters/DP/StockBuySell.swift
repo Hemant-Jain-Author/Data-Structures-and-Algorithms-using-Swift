@@ -1,5 +1,5 @@
 import Foundation;
-func maxProfit(_ arr : inout [Int]) -> Int {
+func stockBuySellProfit(_ arr : inout [Int]) -> Int {
 	var buyProfit : Int = -arr[0]; // Buy stock profit
 	var sellProfit : Int = 0; // Sell stock profit
 	let n : Int = arr.count;
@@ -15,7 +15,7 @@ func maxProfit(_ arr : inout [Int]) -> Int {
 	return sellProfit;
 }
 
-func maxProfitTC(_ arr : inout [Int], _ t : Int) -> Int {
+func stockBuySellProfitTC(_ arr : inout [Int], _ t : Int) -> Int {
 	var buyProfit : Int = -arr[0];
 	var sellProfit : Int = 0;
 	let n : Int = arr.count;
@@ -31,7 +31,7 @@ func maxProfitTC(_ arr : inout [Int], _ t : Int) -> Int {
 	return sellProfit;
 }
 
-func maxProfit2(_ arr : inout [Int]) -> Int {
+func stockBuySellProfit2(_ arr : inout [Int]) -> Int {
 	let n : Int = arr.count;
 	var dp : [[Int]] = Array(repeating: Array(repeating: 0, count: 2), count: n);
 	dp[0][0] = -arr[0]; // Buy stock profit
@@ -46,7 +46,7 @@ func maxProfit2(_ arr : inout [Int]) -> Int {
 	return dp[n - 1][1];
 }
 
-func maxProfitTC2(_ arr : inout [Int], _ t : Int) -> Int {
+func stockBuySellProfitTC2(_ arr : inout [Int], _ t : Int) -> Int {
 	let n : Int = arr.count;
 	var dp : [[Int]] = Array(repeating: Array(repeating: 0, count: 2), count: n);
 	dp[0][0] = -arr[0];
@@ -63,10 +63,10 @@ func maxProfitTC2(_ arr : inout [Int], _ t : Int) -> Int {
 
 // Testing code.
 var arr : [Int] = [10, 12, 9, 23, 25, 55, 49, 70];
-print("Total profit: " + String(maxProfit( &arr)));
-print("Total profit: " + String(maxProfit2( &arr)));
-print("Total profit: " + String(maxProfitTC( &arr,2)));
-print("Total profit: " + String(maxProfitTC2( &arr,2)));
+print("Total profit: " + String(stockBuySellProfit( &arr)));
+print("Total profit: " + String(stockBuySellProfit2( &arr)));
+print("Total profit: " + String(stockBuySellProfitTC( &arr,2)));
+print("Total profit: " + String(stockBuySellProfitTC2( &arr,2)));
 
 /*
 Total profit: 69

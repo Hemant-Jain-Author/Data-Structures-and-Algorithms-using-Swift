@@ -31,7 +31,6 @@ func maxActivities(_ s : inout [Int], _ f : inout [Int], _ n : Int) {
 	i = 0;
 	// The first activity at index 0 is always gets selected.
 	print("Activities are : (" + String(act[i]!.start) + "," + String(act[i]!.stop) + ")",terminator: "");
-
 	var j : Int = 1;
 	while (j < n) {
 		// Find next activity whose start time is greater than or equal

@@ -4,7 +4,6 @@ var INF : Int = Int.max;
 
 func floydWarshall(_ graph : inout [[Int]], _ V : Int) {
 	var dist : [[Int]] = Array(repeating: Array(repeating: 0, count: V), count: V);
-
 	var i : Int = 0;
 	while (i < V) {
 		var j : Int = 0;

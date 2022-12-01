@@ -1,6 +1,6 @@
 import Foundation;
 
-func LCSubStr(_ st1 : String, _ st2 : String) -> Int {
+func LCSubSeq(_ st1 : String, _ st2 : String) -> Int {
 	var X : [Character] = Array(st1);
 	let Y : [Character] = Array(st2);
 	let m : Int = st1.count;
@@ -47,7 +47,7 @@ func PrintLCS(_ p : inout [[Int]], _ X : inout [Character], _ i : Int, _ j : Int
 // Testing code.
 let X : String = "carpenter";
 let Y : String = "sharpener";
-print(LCSubStr(X,Y));
+print(LCSubSeq(X,Y));
 
 /* 
 arpener

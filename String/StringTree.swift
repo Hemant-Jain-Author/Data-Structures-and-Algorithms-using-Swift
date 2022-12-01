@@ -99,6 +99,7 @@ class StringTree {
 
 }
 
+// Testing code.
 var tt = StringTree()
 tt.insert("banana")
 tt.insert("apple")

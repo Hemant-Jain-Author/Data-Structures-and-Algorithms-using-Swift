@@ -107,7 +107,6 @@ func kmp(text : String, pattern : String) -> Int {
 }
 
 func kmpFindCount(text : String, pattern : String) -> Int {
-	
 	var i = 0, j = 0
 	var count = 0
 	let n = text.count

@@ -93,6 +93,7 @@ func convertXY(_ src : Int, _ dst : Int) -> Int {
 func main2() {
 	print("Steps count :: " + String(convertXY(2,7)));
 }
+
 // Steps count :: 3
 
 func maxSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) {
@@ -175,6 +176,7 @@ func main4() {
 	var arr : [Int] = [11, 2, 75, 92, 59, 90, 55];
 	_ = minOfMaxSlidingWindows( &arr,7,3);
 }
+
 // Min of max is :: 75
 
 func maxOfMinSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) {
@@ -207,6 +209,7 @@ func main5() {
 }
 
 // Max of min is :: 59
+
 func firstNegSlidingWindows(_ arr : inout [Int], _ size : Int, _ k : Int) {
 	var que : [Int] = [Int]()
 	var i : Int = 0;
@@ -237,6 +240,7 @@ func main6() {
 	var arr : [Int] = [3, -2, -6, 10, -14, 50, 14, 21];
 	firstNegSlidingWindows( &arr,8,3);
 }
+
 // -2 -2 -6 -14 -14 NAN
 
 func rottenFruitUtil(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ day : Int) {
@@ -303,8 +307,7 @@ func rottenFruit(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) -> Int {
 	return maxDay;
 }
 
-class Fruit
-{
+class Fruit {
 	var x : Int;
 	var y : Int;
 	var day : Int;
@@ -374,7 +377,9 @@ func main7() {
 	print("rottenFruit : " + String(rottenFruit( &arr,5,5)));
 	print("rottenFruit : " + String(rottenFruit2( &arr,5,5)));
 }
-// 3
+
+// rottenFruit : 3
+// rottenFruit : 3
 
 func stepsOfKnightUtil(_ size : Int, _ currCol : Int, _ currRow : Int, _ traversed : inout [[Int]], _ dist : Int) {
 	let dir : [[Int]] = [[-2, -1], [-2, 1], [2, -1], [2, 1], [-1, -2], [1, -2], [-1, 2], [1, 2]];
@@ -408,8 +413,7 @@ func stepsOfKnight(_ size : Int, _ srcX : Int, _ srcY : Int, _ dstX : Int, _ dst
 	return traversed[dstX - 1][dstY - 1];
 }
 
-class Knight
-{
+class Knight {
 	var x : Int;
 	var y : Int;
 	var cost : Int;
@@ -462,6 +466,7 @@ func main8() {
 	print(stepsOfKnight(20,10,10,20,20));
 	print(stepsOfKnight2(20,10,10,20,20));
 }
+
 // 8
 // 8
 
@@ -519,8 +524,7 @@ func distNearestFill(_ arr : inout [[Int]], _ maxCol : Int, _ maxRow : Int) {
 	}
 }
 
-class Node
-{
+class Node {
 	var x : Int;
 	var y : Int;
 	var dist : Int;
@@ -586,6 +590,7 @@ func main9() {
 	distNearestFill( &arr,5,5);
 	distNearestFill2( &arr,5,5);
 }
+
 // 0 1 0 0 1 
 // 0 0 1 0 1 
 // 1 1 2 1 0 
@@ -648,6 +653,7 @@ func main10() {
 	var arr : [[Int]] = [[1, 0, 1, 1, 0], [1, 0, 0, 1, 0], [0, 1, 1, 1, 1], [0, 1, 0, 0, 0], [1, 1, 0, 0, 1]];
 	print("Largest Island : " + String(findLargestIsland( &arr,5,5)));
 }
+
 // Largest Island : 12
 
 func reverseStack(_ stk : inout [Int]) {
@@ -695,6 +701,11 @@ func main11() {
 	print(que);
 }
 
+// [0, 1, 2, 3, 4]
+// [4, 3, 2, 1, 0]
+// [0, 1, 2, 3, 4]
+// [4, 3, 2, 1, 0]
+
 func josephus(_ n : Int, _ k : Int) -> Int {
 	var que : [Int] = [Int]()
 	var i : Int = 0;
@@ -718,6 +729,7 @@ func josephus(_ n : Int, _ k : Int) -> Int {
 func main12() {
 	print("Position : " + String(josephus(11,5)));
 }
+
 // Position : 8
 
 main1();

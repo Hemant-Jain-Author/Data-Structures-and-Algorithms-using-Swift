@@ -25,6 +25,7 @@ class BTree {
         self.max = dg;  // Max number of children.
         self.min = dg / 2;
     }
+    
     func printTree() {
         self.printTree(self.root,"");
         print();
@@ -217,6 +218,7 @@ class BTree {
             }
         }
     }
+    
     func remove(_ node : Node?, _ key : Int) {
         let index : Int = self.findKey(node,key);
         if (node!.leaf) {

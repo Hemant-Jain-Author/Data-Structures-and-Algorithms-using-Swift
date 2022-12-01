@@ -3,37 +3,30 @@ import Foundation;
 // Greedy may be wrong.
 func minCoins(_ coins : inout [Int], _ n : Int, _ value : Int) -> Int {
 	var val : Int = value;
-	
 	if (val <= 0) {
 		return 0;
 	}
 	var count : Int = 0;
 	coins = coins.sorted();
-
 	var i : Int = n - 1;
 	while (i >= 0 && val > 0) {
 		if (coins[i] <= val) {
 			count += 1;
 			val -= coins[i];
-		}
-		else
-		{
+		} else {
 			i -= 1;
 		}
 	}
-	
 	return (val == 0) ? count : -1;
 }
 
 // Brute force.
 func minCoins2(_ coins : inout [Int], _ n : Int, _ value : Int) -> Int {
 	let val : Int = value;
-	
 	if (val == 0) {
 		return 0;
 	}
 	var count : Int = Int.max;
-
 	var i : Int = 0;
 	while (i < n) {
 		if (coins[i] <= val) {
@@ -44,7 +37,6 @@ func minCoins2(_ coins : inout [Int], _ n : Int, _ value : Int) -> Int {
 		}
 		i += 1;
 	}
-	
 	return (count != Int.max) ? count : -1;
 }
 
@@ -63,8 +55,7 @@ func minCoinsTD(_ count : inout [Int], _ coins : inout [Int], _ n : Int, _ val :
 	// Recursion
 	var i : Int = 0;
 	while (i < n) {
-		// For all possible coins
-		if (coins[i] <= val) {
+		if (coins[i] <= val) { // For all possible coins
 			// check validity of a sub-problem
 			let subCount : Int = minCoinsTD( &count, &coins,n,val - coins[i]);
 			if (subCount != Int.max && count[val] > (subCount + 1)) {
@@ -73,7 +64,6 @@ func minCoinsTD(_ count : inout [Int], _ coins : inout [Int], _ n : Int, _ val :
 		}
 		i += 1;
 	}
-	
 	return count[val];
 }
 func minCoinsBU(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
@@ -81,11 +71,9 @@ func minCoinsBU(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
 	var count : [Int] = Array(repeating: Int.max, count: val + 1);
 	count[0] = 0;
 
-	
 	// Base value.
 	var i : Int = 1;
 	while (i <= val) {
-
 		var j : Int = 0;
 		while (j < n) {
 			// For all coins smaller than or equal to i.
@@ -94,10 +82,8 @@ func minCoinsBU(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
 			}
 			j += 1;
 		}
-		
 		i += 1;
 	}
-	
 	return (count[val] != Int.max) ? count[val] : -1;
 }
 
@@ -119,7 +105,6 @@ func minCoinsBU2(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
 	var count : [Int] = Array(repeating: Int.max, count: val + 1);
 	var cvalue : [Int] = Array(repeating: Int.max, count: val + 1);
 	count[0] = 0; // Base value.
-
 	var i : Int = 1;
 	while (i <= val) {
 		var j : Int = 0;

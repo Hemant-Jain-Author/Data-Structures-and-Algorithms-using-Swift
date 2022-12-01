@@ -9,14 +9,11 @@ func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int
 	if (pSize == n) {
 		if (graph[curr][0] > 0 && ans > pCost + graph[curr][0]) {
 			ans = pCost + graph[curr][0];
-
 			var i : Int = 0;
-			while (i <= n)
-			{
+			while (i <= n) {
 				ansPath[i] = path[i % n];
 				i += 1;
 			}
-			
 		}
 		return ans;
 	}
@@ -31,7 +28,6 @@ func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int
 		}
 		i += 1;
 	}
-	
 	return ans;
 }
 

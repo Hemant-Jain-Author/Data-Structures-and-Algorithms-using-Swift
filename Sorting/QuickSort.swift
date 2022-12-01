@@ -31,6 +31,7 @@ func quickSort(_ arr : inout [Int]) {
     quickSort( &arr,0,size - 1);
 }
 
+// Testing Code.
 var data = [9, 1, 8, 2, 7, 3, 6, 4, 5]
 quickSort(&data)
 print(data)

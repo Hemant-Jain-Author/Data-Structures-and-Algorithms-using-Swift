@@ -4,7 +4,7 @@ func greater(_ value1 : Int, _ value2 : Int) -> Bool {
     return value1 > value2;
 }
 
-func InsertionSort(_ arr : inout [Int]) {
+func insertionSort(_ arr : inout [Int]) {
     let size : Int = arr.count;
     var temp : Int;
     var j : Int;
@@ -21,6 +21,7 @@ func InsertionSort(_ arr : inout [Int]) {
     }
 }
 
+// Testing Code.
 var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-InsertionSort( &array);
+insertionSort( &array);
 print(array)

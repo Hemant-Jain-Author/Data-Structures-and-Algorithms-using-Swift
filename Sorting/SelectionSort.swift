@@ -4,7 +4,7 @@ func greater(_ value1 : Int, _ value2 : Int) -> Bool {
     return value1 > value2;
 }
 
-func SelectionSort(_ arr : inout [Int]) {
+func selectionSort(_ arr : inout [Int]) {
     // sorted array created in reverse order.
     let size : Int = arr.count;
     var j : Int;
@@ -24,7 +24,7 @@ func SelectionSort(_ arr : inout [Int]) {
     }
 }
 
-func SelectionSort2(_ arr : inout [Int]) {
+func selectionSort2(_ arr : inout [Int]) {
     // sorted array created in forward direction
     let size : Int = arr.count;
     var j : Int;
@@ -45,9 +45,9 @@ func SelectionSort2(_ arr : inout [Int]) {
 }
 
 var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-SelectionSort(&array);
+selectionSort(&array);
 print(array);
 print();
 var array2 : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-SelectionSort2(&array2);
+selectionSort2(&array2);
 print(array2);

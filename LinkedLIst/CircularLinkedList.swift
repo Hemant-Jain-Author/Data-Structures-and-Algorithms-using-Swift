@@ -12,8 +12,7 @@ class CircularLinkedList {
         }
     }
     
-    public func length() -> Int
-    {
+    public func length() -> Int {
         return self.size;
     }
     

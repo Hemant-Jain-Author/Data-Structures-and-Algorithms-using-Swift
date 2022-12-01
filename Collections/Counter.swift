@@ -37,6 +37,7 @@ class Counter<T: Hashable > {
 	}
 }
 
+// Testing Code.
 let mp = Counter<String>()
 mp.add("a")
 mp.add("b")

@@ -10,7 +10,6 @@ func gridUniqueWays(_ m : Int, _ n : Int) -> Int {
 		dp[i][0] = dp[i - 1][0];
 		i += 1;
 	}
-
 	
 	// Initialize first row.
 	var j : Int = 1;

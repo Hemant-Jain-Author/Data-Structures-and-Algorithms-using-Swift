@@ -4,14 +4,14 @@ func tohUtil(_ num : Int, _ from : Character, _ to : Character, _ temp : Charact
 	if (num < 1) {
 		return;
 	}
-	tohUtil(num - 1,from,temp,to);
+	tohUtil(num - 1, from, temp, to);
 	print("Move disk " + String(num) + " from peg " + String(from) + " to peg " + String(to));
-	tohUtil(num - 1,temp,to,from);
+	tohUtil(num - 1, temp, to, from);
 }
 
 func toh(_ num : Int) {
 	print("The sequence of moves involved in the Tower of Hanoi are :");
-	tohUtil(num,"A","C","B");
+	tohUtil(num,"A", "C", "B");
 }
 
 toh(3);

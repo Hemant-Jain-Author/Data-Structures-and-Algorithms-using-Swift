@@ -763,7 +763,6 @@ func isHeapUtil(_ curr : Node?, _ parentValue : Int) -> Bool {
 	if (curr.value < parentValue) {
 		return false;
 	}
-
 	return (self.isHeapUtil(curr.left, curr.value) && 
 	        self.isHeapUtil(curr.right, curr.value));
 }
@@ -921,7 +920,6 @@ private func printDataInRange(curr : Node?, min : Int, max : Int) {
 public func floorBST(val : Int) -> Int {
 	var curr = self.root
 	var floor = Int.max
-
 	while curr != nil {
 		if curr!.value == val {
 			floor = curr!.value
@@ -939,7 +937,6 @@ public func floorBST(val : Int) -> Int {
 public func ceilBST(val : Int) -> Int {
 	var curr = self.root
 	var ceil = Int.min
-
 	while curr != nil {
 		if curr!.value == val {
 			ceil = curr!.value
@@ -962,7 +959,6 @@ private func findMaxBT(curr : Node?) -> Int {
 	guard let curr = curr else {
 		return Int.min
 	}
-
 	let mx = curr.value
 	let left = findMaxBT(curr : curr.left)
 	let right = findMaxBT(curr : curr.right)
@@ -980,8 +976,7 @@ public func searchBT(curr : Node?, value : Int) -> Bool {
 	
 	if (curr.value == value) ||
 		searchBT(curr : curr.left, value : value) ||
-		searchBT(curr : curr.right, value : value) 
-	{
+		searchBT(curr : curr.right, value : value) {
 		return true
 	}
 	return false
@@ -1150,7 +1145,6 @@ func main4() {
 
 	/*
 	1 2 3 4 5 6 7 8 9 10 
-
 	*/
 	print(t.find(value:3));
 	print(t.find(value:16));
@@ -1166,7 +1160,6 @@ func main4() {
 	true
 	true
 	*/
-
 }
 
 func main5() {

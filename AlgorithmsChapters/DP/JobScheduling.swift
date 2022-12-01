@@ -38,7 +38,6 @@ func maxValueJobUtil(_ arr : inout [Job?], _ n : Int) -> Int {
 
 func maxValueJobs(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int {
 	var act : [Job?] = Array(repeating: nil, count: n);
-
 	var i : Int = 0;
 	while (i < n) {
 		act[i] = Job(s[i], f[i], v[i]);
@@ -59,7 +58,6 @@ func maxValueJobUtilTD(_ dp : inout [Int], _ arr : inout [Job?], _ n : Int) -> I
 	}
 	// Find Value when current job is included
 	var incl : Int = arr[n - 1]!.value;
-
 	var j : Int = n - 2;
 	while (j >= 0) {
 		if (arr[j]!.stop <= arr[n - 1]!.start) {
@@ -76,7 +74,6 @@ func maxValueJobUtilTD(_ dp : inout [Int], _ arr : inout [Job?], _ n : Int) -> I
 
 func maxValueJobsTD(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int {
 	var act : [Job?] = Array(repeating: nil, count: n);
-
 	var i : Int = 0;
 	while (i < n) {
 		act[i] = Job(s[i], f[i], v[i]);
@@ -89,7 +86,6 @@ func maxValueJobsTD(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n
 }
 func maxValueJobsBU(_ s : inout [Int], _ f : inout [Int], _ v : inout [Int], _ n : Int) -> Int {
 	var act : [Job?] = Array(repeating: nil, count: n);
-
 	var i : Int = 0;
 	while (i < n) {
 		act[i] = Job(s[i], f[i], v[i]);

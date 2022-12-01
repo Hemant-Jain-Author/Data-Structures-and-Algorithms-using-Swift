@@ -28,7 +28,6 @@ func fastestWayBU(_ a : inout [[Int]], _ t : inout [[Int]], _ e : inout [Int], _
 	f[0][0] = e[0] + a[0][0];
 	f[1][0] = e[1] + a[1][0];
 
-	
 	// Fill the tables f1[] and f2[] using
 	// bottom up approach.
 	var i : Int = 1;

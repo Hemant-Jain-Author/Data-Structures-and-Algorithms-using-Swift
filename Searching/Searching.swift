@@ -394,7 +394,6 @@ func findMissingNumber5(_ arr : inout [Int], _ size : Int) -> Int {
 		sum -= arr[i];
 		i += 1;
 	}
-
 	return sum;
 }
 
@@ -3040,7 +3039,6 @@ func maxSubArraySum(_ a : inout [Int], _ size : Int) -> Int {
 		}
 		i += 1;
 	}
-	
 	return maxSoFar;
 }
 

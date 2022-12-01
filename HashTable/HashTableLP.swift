@@ -5,7 +5,7 @@ class HashTable {
 	var Flags : [NodeState]
 	var tableSize : Int
 
-	enum NodeState{
+	enum NodeState {
 		case EmptyNode
 		case LazyDeleted
 		case FilledNode

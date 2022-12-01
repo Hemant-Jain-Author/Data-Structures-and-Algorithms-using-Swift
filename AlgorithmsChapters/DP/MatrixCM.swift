@@ -1,6 +1,6 @@
 import Foundation;
 
-func MatrixChainMulBruteForce(_ p : inout [Int], _ i : Int, _ j : Int) -> Int {
+func matrixChainMulBruteForce(_ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 	if (i == j) {
 		return 0;
 	}
@@ -12,8 +12,8 @@ func MatrixChainMulBruteForce(_ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 	// placement and return the minimum count
 	var k : Int = i;
 	while (k < j) {
-		let count : Int = MatrixChainMulBruteForce( &p,i,k) + 
-		MatrixChainMulBruteForce( &p,k+1,j) + p[i-1]*p[k]*p[j];
+		let count : Int = matrixChainMulBruteForce( &p,i,k) + 
+		matrixChainMulBruteForce( &p,k+1,j) + p[i-1]*p[k]*p[j];
 
 		if (count < min) {
 			min = count;
@@ -23,35 +23,36 @@ func MatrixChainMulBruteForce(_ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 	return min; // Return minimum count
 }
 
-func MatrixChainMulBruteForce(_ p : inout [Int], _ n : Int) -> Int {
-	return MatrixChainMulBruteForce( &p, 1, n - 1);
+func matrixChainMulBruteForce(_ p : inout [Int], _ n : Int) -> Int {
+	return matrixChainMulBruteForce( &p, 1, n - 1);
 }
 
-func MatrixChainMulTD(_ p : inout [Int], _ n : Int) -> Int {
+func matrixChainMulTD(_ p : inout [Int], _ n : Int) -> Int {
 	var dp : [[Int]] = Array(repeating: Array(repeating: Int.max, count: n), count: n);
 	var i : Int = 1;
 	while (i < n) {
 		dp[i][i] = 0;
 		i += 1;
 	}
-	return MatrixChainMulTD( &dp, &p,1,n - 1);
+	return matrixChainMulTD( &dp, &p,1,n - 1);
 }
 
 // Function for matrix chain multiplication
-func MatrixChainMulTD(_ dp : inout [[Int]], _ p : inout [Int], _ i : Int, _ j : Int) -> Int {
+func matrixChainMulTD(_ dp : inout [[Int]], _ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 	// Base Case
 	if (dp[i][j] != Int.max) {
 		return dp[i][j];
 	}
+	// Recursion
 	var k : Int = i;
 	while (k < j) {
-		dp[i][j] = min(dp[i][j],MatrixChainMulTD( &dp, &p,i,k) + MatrixChainMulTD( &dp, &p,k + 1,j) + p[i - 1] * p[k] * p[j]);
+		dp[i][j] = min(dp[i][j],matrixChainMulTD( &dp, &p,i,k) + matrixChainMulTD( &dp, &p,k + 1,j) + p[i - 1] * p[k] * p[j]);
 		k += 1;
 	}
 	return dp[i][j];
 }
 
-func MatrixChainMulBU(_ p : inout [Int], _ n : Int) -> Int {
+func matrixChainMulBU(_ p : inout [Int], _ n : Int) -> Int {
 	var dp : [[Int]] = Array(repeating: Array(repeating: Int.max, count: n), count: n);
 	var i : Int = 1;
 	while (i < n) {
@@ -93,7 +94,7 @@ func PrintOptimalParenthesis(_ n : Int, _ pos : inout [[Int]]) {
 	print("");
 }
 
-func MatrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
+func matrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
 	var dp : [[Int]] = Array(repeating: Array(repeating: Int.max, count: n), count: n);
 	var pos : [[Int]] = Array(repeating: Array(repeating: Int.max, count: n), count: n);
 
@@ -125,10 +126,10 @@ func MatrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
 // Testing code.
 var arr : [Int] = [1, 2, 3, 4];
 let n : Int = arr.count;
-print("Matrix Chain Multiplication is: " + String(MatrixChainMulBruteForce( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(MatrixChainMulTD( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(MatrixChainMulBU( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(MatrixChainMulBU2( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(matrixChainMulBruteForce( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(matrixChainMulTD( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(matrixChainMulBU( &arr,n)));
+print("Matrix Chain Multiplication is: " + String(matrixChainMulBU2( &arr,n)));
 
 /*
 Matrix Chain Multiplication is: 18

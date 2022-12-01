@@ -67,6 +67,7 @@ class TST {
 	}
 }
 
+// Testing code.
 let tt = TST()
 tt.insert("banana")
 tt.insert("apple")

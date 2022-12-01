@@ -156,10 +156,19 @@ class MedianHeap{
 }
 
 // Testing code
-var arr = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1, 9, 2, 8, 3, 7, 4, 6, 5, 10, 10]
+var arr = [1, 9, 2, 8, 3, 7, 4, 6]
 var hp = MedianHeap()
 
 for value in arr {
 	hp.insert(value)
 	print("Median after insertion of \(value) is  \(hp.getMedian())")
 }
+
+// Median after insertion of 1 is  1
+// Median after insertion of 9 is  5
+// Median after insertion of 2 is  2
+// Median after insertion of 8 is  5
+// Median after insertion of 3 is  3
+// Median after insertion of 7 is  5
+// Median after insertion of 4 is  4
+// Median after insertion of 6 is  5

@@ -50,6 +50,7 @@ class Stack {
 	}
 }
 
+// Testing code.
 let stk : Stack = Stack();
 stk.push(1);
 stk.push(2);

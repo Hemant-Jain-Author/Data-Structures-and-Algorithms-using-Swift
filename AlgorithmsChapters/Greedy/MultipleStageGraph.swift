@@ -10,7 +10,6 @@ func shortestDist(_ graph : inout [[Int]], _ n : Int) -> Int {
     path[0] = -1;
     dist[0] = 0;
     
-   
     // Calculating shortest path for the nodes
     var i : Int = 0;
     while (i < n) {

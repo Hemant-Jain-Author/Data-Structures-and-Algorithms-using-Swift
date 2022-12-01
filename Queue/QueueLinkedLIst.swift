@@ -70,6 +70,7 @@ class Queue<T> {
 	}
 }
 
+// Testing code.
 let que : Queue<Int> = Queue<Int>();
 que.add(1);
 que.add(2);

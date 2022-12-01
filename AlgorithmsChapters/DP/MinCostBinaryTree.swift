@@ -10,7 +10,6 @@ func maxVal(_ maxi: inout [[Int]], _ i : Int, _ j : Int) -> Int {
 		maxi[i][j] = max(maxi[i][j], max(maxVal( &maxi,i,k), maxVal( &maxi,k + 1,j)));
 		k += 1;
 	}
-	
 	return maxi[i][j];
 }
 

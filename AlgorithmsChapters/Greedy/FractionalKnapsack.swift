@@ -1,6 +1,6 @@
 import Foundation;
 
-class Items  {
+class Items {
     var wt : Int;
     var cost : Int;
     var density : Double;

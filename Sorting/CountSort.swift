@@ -1,6 +1,6 @@
 import Foundation;
 
-func CountSort(_ arr : inout [Int], _ lowerRange : Int, _ upperRange : Int) {
+func countSort(_ arr : inout [Int], _ lowerRange : Int, _ upperRange : Int) {
     var j : Int;
     let size : Int = arr.count;
     let range : Int = upperRange - lowerRange;
@@ -23,6 +23,7 @@ func CountSort(_ arr : inout [Int], _ lowerRange : Int, _ upperRange : Int) {
     }
 }
 
+// Testing Code.
 var array : [Int] = [23, 24, 22, 21, 26, 25, 27, 28, 21, 21];
-CountSort( &array,20,30);
+countSort( &array,20,30);
 print(array)

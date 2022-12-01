@@ -41,7 +41,7 @@ func countSort(_ arr : inout [Int], _ n : Int, _ dividend : Int) {
     }
 }
 
-func RadixSort(_ arr : inout [Int]) {
+func radixSort(_ arr : inout [Int]) {
     let n : Int = arr.count;
     let m : Int = getMax( &arr,n);
     var div : Int = 1;
@@ -53,6 +53,7 @@ func RadixSort(_ arr : inout [Int]) {
     }
 }
 
+// Testing Code.
 var array : [Int] = [100, 49, 65, 91, 702, 29, 4, 55];
-RadixSort( &array);
+radixSort( &array);
 print(array)

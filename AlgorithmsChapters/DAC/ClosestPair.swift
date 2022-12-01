@@ -49,7 +49,6 @@ func stripMin(_ q : inout [Point?], _ n : Int, _ d : inout Double) -> Double {
 		}
 		i += 1;
 	}
-
 	return min;
 }
 
@@ -78,7 +77,6 @@ func closestPairUtil(_ p : inout [Point?], _ start : Int, _ stop : Int, _ q : in
 		}
 		i += 1;
 	}
-
 	// Find the closest points in strip and compare with d.
 	return min(d, stripMin( &strip,j,&d));
 }

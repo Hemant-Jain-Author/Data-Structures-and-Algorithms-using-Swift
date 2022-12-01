@@ -204,6 +204,7 @@ class AVLTree {
     }
 }
 
+// Testing code.
 let t : AVLTree = AVLTree();
 t.insert(1);
 t.insert(2);

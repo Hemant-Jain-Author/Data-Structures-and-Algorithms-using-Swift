@@ -20,13 +20,12 @@ func quickSelect(_ arr : inout [Int], _ start : Int, _ stop : Int, _ k : Int) {
             arr.swapAt(upper,lower);
         }
     }
-    arr.swapAt(upper,start);
+    arr.swapAt(upper,start); 
     // upper is the pivot position
     if (k < upper) {
         quickSelect( &arr,start,upper - 1,k);
     }
-    // pivot -1 is the upper for
-    // left sub array.
+    // pivot -1 is the upper for left sub array.
     if (k > upper) {
         quickSelect( &arr,upper + 1,stop,k);
     }
@@ -37,6 +36,6 @@ func quickSelect(_ arr : inout [Int], _ k : Int) -> Int {
     return arr[k - 1];
 }
 
+// Testing Code.
 var array : [Int] = [3, 4, 2, 1, 6, 5, 7, 8];
 print("value at index 5 is : " + String(quickSelect( &array,5)));
-

@@ -3,6 +3,14 @@ class Stack<T> {
 	
 	public init() {}
 
+	public var isEmpty : Bool {
+		return stk.isEmpty
+	}
+	
+	public var count : Int {
+		return stk.count
+	}
+
 	public func push(_ value : T) {
 		stk.append(value)
 	}
@@ -15,22 +23,7 @@ class Stack<T> {
 	}
 	
 	public func top() -> T? {
-		if stk.isEmpty {
-			return nil
-		}
-		return stk.last!
-	}
-	
-	public func display() {
-		print(stk)	
-	}
-
-	public var isEmpty : Bool {
-		return stk.isEmpty
-	}
-	
-	public var count : Int {
-		return stk.count
+		return stk.last
 	}
 }
 
@@ -45,19 +38,16 @@ class QueueUsingStack {
 	}
 
 	public func remove() -> Int {
-		var value : Int
-		if stk2.isEmpty == false {
-			value = stk2.pop()!
-			return value
+		if stk1.isEmpty == true && stk2.isEmpty == true {
+			return 0
 		}
 
-		while stk1.isEmpty == false {
-			value = stk1.pop()!
-			stk2.push(value)
+		if stk2.isEmpty == true {
+			while stk1.isEmpty == false {
+				stk2.push(stk1.pop()!)
+			}
 		}
-
-		value = stk2.pop()!
-		return value
+		return stk2.pop()!
 	}
 }
 
@@ -66,8 +56,6 @@ var que = QueueUsingStack()
 que.add(1)
 que.add(11)
 que.add(111)
-print(que.remove())
-print(que.remove())
 print(que.remove())
 print(que.remove())
 print(que.remove())

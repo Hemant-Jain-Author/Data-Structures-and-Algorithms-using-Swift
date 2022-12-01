@@ -14,7 +14,6 @@ print("factorial 5 is :: \(factorial(5))")
 factorial 5 is :: 120
 */
 
-
 func printInt(_ number : Int, _ base : Int) {
 	let conversion = Array("0123456789ABCDEF");
 	let digit : Int = (number % base);

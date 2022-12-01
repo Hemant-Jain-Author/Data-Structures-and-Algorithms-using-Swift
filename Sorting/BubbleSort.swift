@@ -15,7 +15,7 @@ func bubbleSort(_ arr : inout [Int]) {
         var j : Int = 0;
         while (j < size - i - 1) {
             if greater(arr[j],arr[j + 1]) {
-                arr.swapAt(j, j+1) // Swapping
+                arr.swapAt(j, j+1) 
             }
             j += 1;
         }
@@ -32,7 +32,7 @@ func bubbleSort2(_ arr : inout [Int]) {
         var j : Int = 0;
         while (j < size - i - 1) {
             if greater(arr[j],arr[j + 1]) {
-                arr.swapAt(j, j+1) // Swapping
+                arr.swapAt(j, j+1)
                 swapped = 1;
             }
             j += 1;
@@ -41,6 +41,7 @@ func bubbleSort2(_ arr : inout [Int]) {
     }
 }
 
+// Testing Code.
 var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 bubbleSort( &array);
 print(array)

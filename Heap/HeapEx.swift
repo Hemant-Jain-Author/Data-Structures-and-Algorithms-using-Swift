@@ -184,6 +184,24 @@ func kthLargest(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 	return value;
 }
 
+// Testing code.
+func main1()
+{
+	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
+	print("Kth Smallest :: " + String(kthSmallest( &arr,arr.count,3)));
+	var arr2 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
+	print("Kth Smallest :: " + String(kthSmallest2( &arr2,arr2.count,3)));
+	var arr3 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
+	print("Kth Smallest :: " + String(kthSmallest3( &arr3,arr3.count,3)));
+	var arr4 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
+	print("Kth Largest :: " + String(kthLargest( &arr4,arr4.count,3)));
+}
+
+// Kth Smallest :: 5
+// Kth Smallest :: 5
+// Kth Smallest :: 5
+// Kth Largest :: 7
+
 func isMinHeap(_ arr : inout [Int], _ size : Int) -> Bool
 {
 	var lchild : Int;
@@ -223,17 +241,7 @@ func isMaxHeap(_ arr : inout [Int], _ size : Int) -> Bool
 	return true;
 }
 
-// Testing code.
-func main1()
-{
-	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
-	print("Kth Smallest :: " + String(kthSmallest( &arr,arr.count,3)));
-	var arr2 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
-	print("Kth Smallest :: " + String(kthSmallest2( &arr2,arr2.count,3)));
-}
 
-// Kth Smallest :: 5
-// Kth Smallest :: 5
 
 // Testing code.
 func main2()

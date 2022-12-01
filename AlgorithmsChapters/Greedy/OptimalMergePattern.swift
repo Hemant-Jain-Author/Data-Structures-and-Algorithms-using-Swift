@@ -130,12 +130,9 @@ class Heap {
     }
 }
 
-
 func merge(_ lists : inout [Int], _ size : Int) -> Int {
     let pq = Heap(true);
     var i : Int = 0;
-
-    i = 0;
     while (i < size) {
         pq.add(lists[i]);
         i += 1;
@@ -143,14 +140,12 @@ func merge(_ lists : inout [Int], _ size : Int) -> Int {
     
     var total : Int = 0;
     var value : Int = 0;
-
     while (pq.length() > 1) {
         value = pq.remove();
         value += pq.remove();
         pq.add(value);
         total += value;
     }
-
     return total;
 }
 

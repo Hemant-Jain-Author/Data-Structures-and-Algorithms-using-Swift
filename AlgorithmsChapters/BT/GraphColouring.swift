@@ -16,8 +16,7 @@ func isSafe2(_ graph : inout [[Bool]], _ colour : inout [Int], _ V : Int) -> Boo
 		while (i < V) {
 			var j : Int = i + 1;
 			while (j < V) {
-				if (graph[i][j] && colour[j] == colour[i])
-				{
+				if (graph[i][j] && colour[j] == colour[i]) {
 					return false;
 				}
 				j += 1;
@@ -44,7 +43,6 @@ func graphColouring2(_ graph : inout [[Bool]], _ V : Int, _ m : Int, _ colour : 
 		}
 		j += 1;
 	}
-
 	return false;
 }
 

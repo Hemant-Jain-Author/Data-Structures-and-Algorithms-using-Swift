@@ -12,12 +12,12 @@ class List {
 		}
 	}
 
-	public func size() -> Int {
-		return self.count
+	public func length() -> Int {
+		return self.size
 	}
 
 	public func isEmpty() -> Bool {
-		return (self.count == 0)
+		return (self.size == 0)
 	}
 
 	public func peek() -> (value : Int, flag : Bool) {
@@ -31,7 +31,7 @@ class List {
 	
 public func addHead(_ value : Int) {
 	self.head = Node(value, self.head)
-	self.count += 1
+	self.size += 1
 }
 
 public func addTail(_ value : Int) {
@@ -100,7 +100,7 @@ public func removeHead() -> (value : Int, flag : Bool) {
 	}
 	let value = head.value
 	self.head = head.next
-	self.count -= 1
+	self.size -= 1
 	return (value, true)
 }
 
@@ -112,13 +112,13 @@ public func deleteNode(_ delValue : Int) -> Bool {
 	}
 	if delValue == self.head!.value {
 		self.head = self.head!.next
-		self.count -= 1
+		self.size -= 1
 		return true
 	}
 	while temp!.next != nil {
 		if temp!.next!.value == delValue {
 			temp!.next = temp!.next!.next
-			self.count -= 1
+			self.size -= 1
 			return true
 		}
 		temp = temp!.next
@@ -149,7 +149,7 @@ public func deleteNodes(_ delValue : Int) -> Bool {
 
 public func freeList() {
 	self.head = nil
-	self.count = 0
+	self.size = 0
 }
 
 public func reverse() {
@@ -258,7 +258,7 @@ public func findLength() -> Int {
 }
 
 public func nthNodeFromBegining(_ index : Int) -> (value : Int, flag : Bool) {
-	if index > self.size() || index < 1 {
+	if index > self.length() || index < 1 {
 		print("TooFewNodes")
 		return (0, false)
 	}
@@ -272,7 +272,7 @@ public func nthNodeFromBegining(_ index : Int) -> (value : Int, flag : Bool) {
 }
 
 public func nthNodeFromEnd(_ index : Int) -> (value : Int, flag : Bool) {
-	let size = self.count
+	let size = self.size
 	if size != 0 && size < index {
 		print("TooFewNodes")
 		return (0, false)
@@ -417,8 +417,17 @@ public func loopPointDetect() -> Node? {
 	return nil
 }
 
+public func link(_ ll2 : List, _ n : Int) {
+	var i : Int = 0;
+	var tempHead = head	
+	while i < n {
+		i += 1
+		tempHead = tempHead!.next
+	}
+	ll2.head = tempHead
+}
 
-public func findIntersection(_ ll2 : List) -> Node? {
+public func findIntersection(_ ll2 : List) -> Int {
 	var head = self.head;
 	var head2 = ll2.head;
 	var l1 = 0
@@ -450,7 +459,7 @@ public func findIntersection(_ ll2 : List) -> Node? {
 		head = head!.next
 		head2 = head2!.next
 	}
-	return head
+	return head!.value
 }
 
     func compareList(_ ll : List?) -> Bool {
@@ -486,9 +495,8 @@ public func findIntersection(_ ll2 : List) -> Node? {
         return false;
     }
 
-    func nthNodeFromBeginning(_ index : Int) -> Int
-    {
-        if (index > self.size() || index < 1) {
+    func nthNodeFromBeginning(_ index : Int) -> Int {
+        if (index > self.length() || index < 1) {
             return Int.max;
         }
         var count : Int = 0;
@@ -584,7 +592,7 @@ func main1() {
 	ll.addHead(2);
 	ll.addHead(3);
 	ll.display();
-	print("Size : " + String(ll.size()));
+	print("Size : " + String(ll.length()));
 	print("Size : " + String(ll.findLength()));
 	print("Is empty : " + String(ll.isEmpty()));
 	//print("Peek : " + String(ll.peek()));
@@ -740,19 +748,20 @@ func main9() {
 	let ll : List = List();
 	ll.addHead(1);
 	ll.addHead(2);
-	let ll2 : List = List();
-	ll2.addHead(3);
-	ll2.head!.next = ll.head;
+	ll.addHead(3);
 	ll.addHead(4);
+
+	let ll2 : List = List();
+	ll.link(ll2, 2);
 	ll2.addHead(5);
+	ll2.addHead(6);
 	ll.display();
 	ll2.display();
-	let nd : List.Node? = ll.findIntersection(ll2);
-	if (nd != nil)
-	{
-		print("Intersection:: " + String(nd!.value));
-	}
+	
+	let val : Int = ll.findIntersection(ll2);
+	print("Intersection:: " + String(val));
 }
+
 // 4 2 1 
 // 5 3 2 1 
 // Intersection:: 2
@@ -771,8 +780,45 @@ func main10() {
 	ll.addHead(6);
 	ll.addHead(8);
 	ll.display();
-	// ll.bubbleSort();
-	// ll.selectionSort();
+	ll.bubbleSort();
+	ll.display();
+}
+
+// 8 6 4 5 3 2 7 9 10 1 
+// 1 2 3 4 5 6 7 8 9 10 
+
+// Testing code.
+func main11() {
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(10);
+	ll.addHead(9);
+	ll.addHead(7);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.addHead(5);
+	ll.addHead(4);
+	ll.addHead(6);
+	ll.addHead(8);
+	ll.display();
+	ll.selectionSort();
+	ll.display();
+}
+
+// Testing code.
+func main12() {
+	let ll : List = List();
+	ll.addHead(1);
+	ll.addHead(10);
+	ll.addHead(9);
+	ll.addHead(7);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.addHead(5);
+	ll.addHead(4);
+	ll.addHead(6);
+	ll.addHead(8);
+	ll.display();
 	ll.insertionSort();
 	ll.display();
 }
@@ -787,3 +833,5 @@ main7();
 main8();
 main9();
 main10();
+main11();
+main12();

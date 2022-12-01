@@ -145,8 +145,7 @@ class GraphAM {
 			print("Vertex " + String(i) + " is connected to : ",terminator: "");
 			var j : Int = 0;
 			while (j < self.count) {
-				if (self.adj[i][j] != 0)
-				{print(String(j) + "(cost: " + String(self.adj[i][j]) + ") ",terminator: "");
+				if (self.adj[i][j] != 0) {print(String(j) + "(cost: " + String(self.adj[i][j]) + ") ",terminator: "");
 				}
 				j += 1;
 			}
@@ -198,11 +197,9 @@ class GraphAM {
 			var dest : Int = 0;
 			while (dest < self.count) {
 				let cost : Int = self.adj[src][dest];
-				if (cost != 0)
-				{
+				if (cost != 0) {
 					let alt : Int = cost + dist[src];
-					if (dist[dest] > alt && visited[dest] == false)
-					{
+					if (dist[dest] > alt && visited[dest] == false) {
 						dist[dest] = alt;
 						previous[dest] = src;
 						node = Edge(src, dest, alt);
@@ -263,10 +260,8 @@ class GraphAM {
 			var dest : Int = 0;
 			while (dest < self.count) {
 				let cost : Int = self.adj[source][dest];
-				if (cost != 0)
-				{
-					if (dist[dest] > cost && visited[dest] == false)
-					{
+				if (cost != 0) {
+					if (dist[dest] > cost && visited[dest] == false) {
 						dist[dest] = cost;
 						previous[dest] = source;
 						node = Edge(source, dest, cost);
@@ -286,9 +281,7 @@ class GraphAM {
 			if (dist[i] == Int.max) {
 				output += ("(" + String(i) + ", Unreachable) ");
 				isMst = false;
-			}
-			else
-			if (previous[i] != i) {
+			} else if (previous[i] != i) {
 				output += ("(" + String(previous[i]) + "->" + String(i) + " @ " + String(dist[i]) + ") ");
 				sum += dist[i];
 			}
@@ -317,8 +310,7 @@ class GraphAM {
 			if (pSize == 0 || (self.adj[path[pSize - 1]][vertex] == 1 && added[vertex] == 0)) {
 				path[pSize] = vertex;
 				added[vertex] = 1;
-				if (self.hamiltonianPathUtil( &path,pSize+1, &added))
-				{
+				if (self.hamiltonianPathUtil( &path,pSize+1, &added)) {
 					return true;
 				}
 				added[vertex] = 0;
@@ -364,8 +356,7 @@ class GraphAM {
 			if (pSize == 0 || (self.adj[path[pSize - 1]][vertex] == 1 && added[vertex] == 0)) {
 				path[pSize] = vertex;
 				added[vertex] = 1;
-				if (self.hamiltonianCycleUtil( &path,pSize+1, &added))
-				{
+				if (self.hamiltonianCycleUtil( &path,pSize+1, &added)) {
 					return true;
 				}
 				added[vertex] = 0;
@@ -508,12 +499,11 @@ func main5() {
 	let count : Int = 5;
 	let gph : GraphAM? = GraphAM(count);
 	let adj : [[Int]] =
-	[
-	[0, 1, 0, 1, 0],
-	[1, 0, 1, 1, 0],
-	[0, 1, 0, 0, 1],
-	[1, 1, 0, 0, 1],
-	[0, 1, 1, 1, 0]];
+	[[0, 1, 0, 1, 0],
+	 [1, 0, 1, 1, 0],
+	 [0, 1, 0, 0, 1],
+	 [1, 1, 0, 0, 1],
+	 [0, 1, 1, 1, 0]];
 
 	var i : Int = 0;
 	while (i < count) {
@@ -530,12 +520,11 @@ func main5() {
 	print("hamiltonianCycle : " + String(gph!.hamiltonianCycle()));
 	let gph2 : GraphAM? = GraphAM(count);
 	let adj2 : [[Int]] =
-	[
-	[0, 1, 0, 1, 0],
-	[1, 0, 1, 1, 0],
-	[0, 1, 0, 0, 1],
-	[1, 1, 0, 0, 0],
-	[0, 1, 1, 0, 0]];
+	[[0, 1, 0, 1, 0],
+	 [1, 0, 1, 1, 0],
+	 [0, 1, 0, 0, 1],
+	 [1, 1, 0, 0, 0],
+	 [0, 1, 1, 0, 0]];
 
 	i = 0;
 	while (i < count) {

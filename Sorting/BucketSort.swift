@@ -21,8 +21,9 @@ func bucketSort(_ arr : inout [Int], _ maxValue : Int, _ numBucket : Int) {
     }
     
     let div : Int = Int(ceil(Double(maxValue) / Double(numBucket)));
-    i = 0;
+    
     // Add elements into the buckets
+    i = 0;
     while (i < length) {
         if (arr[i] < 0 || arr[i] > maxValue) {
             print("Value out of range.");
@@ -37,8 +38,8 @@ func bucketSort(_ arr : inout [Int], _ maxValue : Int, _ numBucket : Int) {
         i += 1;
     }
     
-    i = 0;
     // Sort the elements of each bucket.
+    i = 0;
     while (i < numBucket) {
         bucket[i] = bucket[i].sorted(by: <);
         i += 1;
@@ -62,6 +63,7 @@ func bucketSort(_ arr : inout [Int], _ maxValue : Int, _ numBucket : Int) {
     }
 }
 
+// Testing Code.
 var array : [Int] = [1, 34, 7, 99, 5, 23, 45, 88, 77, 19, 91, 100];
 let maxValue : Int = 100;
 bucketSort( &array,maxValue);

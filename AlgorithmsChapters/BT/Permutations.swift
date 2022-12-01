@@ -48,12 +48,14 @@ func permutation2(_ arr : inout [Int], _ i : Int, _ length : Int) {
 	}
 	return;
 }
+
 func isValid2(_ arr : inout [Int], _ i : Int) -> Bool {
 	if (i < 1 || abs(arr[i] - arr[i - 1]) >= 2) {
 		return true;
 	}
 	return false;
 }
+
 func permutation3(_ arr : inout [Int], _ i : Int, _ length : Int) {
 	if (length == i) {
 		print(arr);

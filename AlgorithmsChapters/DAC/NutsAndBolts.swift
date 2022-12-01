@@ -38,7 +38,6 @@ func partition(_ arr : inout [Int], _ low : Int, _ high : Int, _ pivot : Int) ->
 		}
 		j += 1;
 	}
-
 	swap( &arr,i,high);
 	return i;
 }

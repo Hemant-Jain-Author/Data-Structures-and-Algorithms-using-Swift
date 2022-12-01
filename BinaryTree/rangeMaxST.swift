@@ -1,6 +1,5 @@
 import Foundation;
-class rangeMaxST
-{
+class rangeMaxST {
     var segArr : [Int];
     var n : Int;
 

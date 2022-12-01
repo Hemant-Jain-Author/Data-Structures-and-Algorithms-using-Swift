@@ -26,6 +26,7 @@ class Queue {
     }
 }
 
+// Testing code.
 let que : Queue = Queue();
 que.add(1);
 que.add(2);

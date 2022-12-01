@@ -9,12 +9,11 @@ func orEx(_ a : Int, _ b : Int) -> Int {
 func xorEx(_ a : Int, _ b : Int) -> Int {
     return a ^ b;
 }
-func leftShiftEx(_ a : Int) -> Int {
-    // multiply by 2
+func leftShiftEx(_ a : Int) -> Int { // multiply by 2
     return a << 1;
 }
-func rightShiftEx(_ a : Int) -> Int {
-    // divide by 2
+func rightShiftEx(_ a : Int) -> Int { // divide by 2
+    
     return a >> 1;
 }
 func bitReversalEx(_ a : Int) -> Int {
