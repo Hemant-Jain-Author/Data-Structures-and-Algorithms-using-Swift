@@ -30,3 +30,5 @@ func shellSort(_ arr : inout [Int]) {
 var array : [Int] = [36, 32, 11, 6, 19, 31, 17, 3];
 shellSort( &array);
 print(array)
+
+// [3, 6, 11, 17, 19, 31, 32, 36]

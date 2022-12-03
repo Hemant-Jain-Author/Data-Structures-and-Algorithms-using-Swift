@@ -57,3 +57,5 @@ func radixSort(_ arr : inout [Int]) {
 var array : [Int] = [100, 49, 65, 91, 702, 29, 4, 55];
 radixSort( &array);
 print(array)
+
+// [4, 29, 49, 55, 65, 91, 100, 702]

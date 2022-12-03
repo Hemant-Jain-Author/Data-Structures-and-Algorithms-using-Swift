@@ -81,8 +81,11 @@ func main1() {
     partition012_( &arr3,arr3.count);
     print(arr3);
 }
-// 	[ 0 0 0 0 0 0 1 1 1 1 1 1 ]
-// 	[ 0 0 0 0 0 1 1 1 1 1 2 2 ]
+/* 
+[0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2]
+[0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2] 
+*/
 
 func rangePartition(_ arr : inout [Int], _ size : Int, _ lower : Int, _ higher : Int) {
     var start : Int = 0;
@@ -108,7 +111,7 @@ func main2() {
     rangePartition( &arr,arr.count,9,12);
     print(arr);
 }
-// 	[ 1 2 3 4 5 6 7 8 10 12 9 11 14 13 15 16 17 18 ]
+// 	[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 9, 11, 14, 13, 15, 16, 17, 18]
 
 func minSwaps(_ arr : inout [Int], _ size : Int, _ val : Int) -> Int {
     var swapCount : Int = 0;
@@ -174,15 +177,18 @@ func separateEvenAndOdd2(_ data : inout [Int], _ size : Int) {
 
 // Testing code
 func main4() {
-    var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-    separateEvenAndOdd( &array,array.count);
-    print(array);
+var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+separateEvenAndOdd( &array,array.count);
+print(array);
     var array2 : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
     separateEvenAndOdd2( &array2,array2.count);
     print(array2);
 }
-// [ 4 6 8 2 7 3 1 9 5 ]
-
+/* 
+[8, 2, 6, 4, 5, 3, 7, 1, 9]
+[4, 6, 8, 2, 7, 3, 1, 9, 5]
+*/
+ 
 func absGreater(_ value1 : Int, _ value2 : Int, _ ref : Int) -> Bool {
     return (abs(value1 - ref) > abs(value2 - ref));
 }
@@ -203,12 +209,12 @@ func absBubbleSort(_ arr : inout [Int], _ size : Int, _ ref : Int) {
 
 // Testing code
 func main5() {
-    var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-    let ref : Int = 5;
-    absBubbleSort( &array,array.count,ref);
-    print(array);
+var array : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+let ref : Int = 5;
+absBubbleSort( &array,array.count,ref);
+print(array);
 }
-// 	[ 5 6 4 7 3 8 2 9 1 ]
+// 	[5, 6, 4, 7, 3, 8, 2, 9, 1]
 
 func eqGreater(_ value1 : Int, _ value2 : Int, _ A : Int) -> Bool {
     return (A * value1 * value1) > (A * value2 * value2);
@@ -223,7 +229,6 @@ func arrayReduction(_ arr : inout [Int], _ size : Int) {
         if (arr[i] - reduction > 0) {
             reduction = arr[i];
             count += 1;
-            print(size - i);
         }
         i += 1;
     }
@@ -325,8 +330,10 @@ func main8() {
     print(arr1);
     print(arr2);
 }
-// 	[ 1 2 3 5 8 9 ]
-// 	[ 10 13 15 20 ]
+/* 
+[1, 2, 3, 5, 8, 9]
+[10, 13, 15, 20]
+*/
 
 func checkReverse(_ arr : inout [Int], _ size : Int) -> Bool {
     var start : Int = -1;
@@ -428,7 +435,11 @@ func main10() {
 /* 
 Union:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 Intersection:  [2, 5, 8]
- */
+*/
+
+
+
+
 main1();
 main2();
 main3();
@@ -439,3 +450,249 @@ main7();
 main8();
 main9();
 main10();
+
+func rotateArray(_ a : inout [Int], _ n : Int, _ k : Int) {
+    reverseArray( &a,0,k - 1);
+    reverseArray( &a,k,n - 1);
+    reverseArray( &a,0,n - 1);
+}
+
+func reverseArray(_ a : inout [Int], _ start : Int, _ end : Int) {
+    var i : Int = start,j   = end;
+    while (i < j) {
+        let temp : Int = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+        i += 1;
+        j -= 1;
+    }
+}
+
+// Testing code.
+func main11() {
+    var arr : [Int] = [1, 2, 3, 4, 5, 6];
+    rotateArray( &arr,arr.count,2);
+    print(arr);
+}
+
+// [3, 4, 5, 6, 1, 2] 
+
+func waveArray2(_ arr : inout [Int]) {
+    let size : Int = arr.count;
+    var i : Int = 1;
+    // Odd elements are lesser than even elements.
+    while (i < size) {
+        if ((i - 1) >= 0 && arr[i] > arr[i - 1]) {
+            arr.swapAt(i,i-1);
+        }
+        if ((i + 1) < size && arr[i] > arr[i + 1]) {
+            arr.swapAt(i,i + 1);
+        }
+        i += 2;
+        }
+}
+
+func waveArray(_ arr : inout [Int]) {
+    let size : Int = arr.count;
+    arr = arr.sorted(by: <);
+    var i : Int = 0;
+    while (i < size - 1) {
+        arr.swapAt(i,i + 1);
+        i += 2;
+    }
+}
+
+// Testing code.
+func main12() {
+    var arr : [Int] = [8, 1, 2, 3, 4, 5, 6, 4, 2];
+    waveArray( &arr);
+    print(arr);
+    var arr2 : [Int] = [8, 1, 2, 3, 4, 5, 6, 4, 2];
+    waveArray2( &arr2);
+    print(arr2);
+}
+
+// [2, 1, 3, 2, 4, 4, 6, 5, 8]
+// [8, 1, 3, 2, 5, 4, 6, 2, 4]
+
+func indexArray(_ arr : inout [Int], _ size : Int) {
+    var i : Int = 0;
+    while (i < size) {
+        var curr : Int = i;
+        var value : Int = -1;
+        // swaps to move elements in the proper position.
+        while (arr[curr] != -1 && arr[curr] != curr) {
+            let temp : Int = arr[curr];
+            arr[curr] = value;
+            value = temp
+            curr = temp
+        }
+        // check if some swaps happened.
+        if (value != -1) {
+            arr[curr] = value;
+        }
+        i += 1;
+    }
+}
+func indexArray2(_ arr : inout [Int], _ size : Int) {
+    var i : Int = 0;
+    while (i < size) {
+        while (arr[i] != -1 && arr[i] != i) {
+            // swap arr[i] and arr[arr[i]] 
+            let temp : Int = arr[i];
+            arr[i] = arr[temp];
+            arr[temp] = temp;
+        }
+        i += 1;
+    }
+}
+
+// Testing code.
+func main13() {
+    var arr : [Int] = [8, -1, 6, 1, 9, 3, 2, 7, 4, -1];
+    var size : Int = arr.count;
+    indexArray( &arr,size);
+    print(arr);
+    var arr2 : [Int] = [8, -1, 6, 1, 9, 3, 2, 7, 4, -1];
+    size = arr2.count;
+    indexArray( &arr2,size);
+    print(arr2);
+}
+
+// [-1, 1, 2, 3, 4, -1, 6, 7, 8, 9]
+// [-1, 1, 2, 3, 4, -1, 6, 7, 8, 9]
+
+
+func sort1toN(_ arr : inout [Int], _ size : Int) {
+    var curr : Int;
+    var value : Int;
+    var next : Int;
+    var i : Int = 0;
+    while (i < size) {
+        curr = i;
+        value = -1;
+        // swaps to move elements in the proper position.
+        while (curr >= 0 && curr < size && arr[curr] != curr + 1) {
+            next = arr[curr];
+            arr[curr] = value;
+            value = next;
+            curr = next - 1;
+        }
+        i += 1;
+    }
+}
+
+func sort1toN2(_ arr : inout [Int], _ size : Int) {
+    var temp : Int;
+    var i : Int = 0;
+    while (i < size) {
+        while (arr[i] != i + 1 && arr[i] > 1) {
+            temp = arr[i];
+            arr[i] = arr[temp - 1];
+            arr[temp - 1] = temp;
+        }
+        i += 1;
+    }
+}
+
+// Testing code.
+func main14() {
+    var arr : [Int] = [8, 5, 6, 1, 9, 3, 2, 7, 4, 10];
+    let size : Int = arr.count;
+    sort1toN2( &arr,size);
+    print(arr);
+    var arr2 : [Int] = [8, 5, 6, 1, 9, 3, 2, 7, 4, 10];
+    let size2 : Int = arr.count;
+    sort1toN( &arr2,size2);
+    print(arr2);
+}
+
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+func maxMinArr(_ arr : inout [Int], _ size : Int) {
+    let aux : [Int] = arr;
+    var start : Int = 0;
+    var stop : Int = size - 1;
+    var i : Int = 0;
+    while (i < size) {
+        if (i % 2 == 0) {
+            arr[i] = aux[stop];
+            stop -= 1;
+        } else {
+            arr[i] = aux[start];
+            start += 1;
+        }
+        i += 1;
+    }
+}
+
+func reverseArr(_ arr : inout [Int], _ str : Int, _ stp : Int) {
+    var start = str, stop = stp
+    while (start < stop) {
+        arr.swapAt(start,stop);
+        start += 1;
+        stop -= 1;
+    }
+}
+
+func maxMinArr2(_ arr : inout [Int], _ size : Int) {
+    var i : Int = 0;
+    while (i < (size - 1)) {
+        reverseArr( &arr,i,size - 1);
+        i += 1;
+    }
+}
+
+// Testing code.
+func main15() {
+    var arr : [Int] = [1, 2, 3, 4, 5, 6, 7];
+    let size : Int = arr.count;
+    maxMinArr( &arr,size);
+    print(arr);
+    var arr2 : [Int] = [1, 2, 3, 4, 5, 6, 7];
+    let size2 : Int = arr.count;
+    maxMinArr( &arr2,size2);
+    print(arr2);
+}
+
+// [7, 1, 6, 2, 5, 3, 4]
+// [7, 1, 6, 2, 5, 3, 4]
+
+func maxCircularSum(_ arr : inout [Int], _ size : Int) -> Int {
+    var sumAll : Int = 0;
+    var currVal : Int = 0;
+    var maxVal : Int;
+    var i : Int = 0;
+    while (i < size) {
+        sumAll += arr[i];
+        currVal += (i * arr[i]);
+        i += 1;
+    }
+    maxVal = currVal;
+
+    i = 1;
+    while (i < size) {
+        currVal = (currVal + sumAll) - (size * arr[size - i]);
+        if (currVal > maxVal) {
+            maxVal = currVal;
+        }
+        i += 1;
+    }
+    return maxVal;
+}
+
+// Testing code.
+func main16() {
+    var arr : [Int] = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+    print("MaxCirculrSum : " + String(maxCircularSum( &arr,arr.count)));
+}
+
+// MaxCirculrSum : 290
+
+main11();
+main12();
+main13();
+main14();
+main15();
+main16();

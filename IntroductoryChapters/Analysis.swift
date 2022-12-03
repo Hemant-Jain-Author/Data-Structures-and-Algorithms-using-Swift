@@ -90,26 +90,6 @@ func fun6(_ n : Int) -> Int {
 
 func fun7(_ n : Int) -> Int {
 	var m : Int = 0
-	var i : Int = 1
-	while i < n {
-		m += 1
-		i = i * 2
-	}
-	return m
-}
-
-func fun8(_ n : Int) -> Int {
-	var m : Int = 0
-	var i : Int = n
-	while i > 0 {
-		m += 1
-		i = i / 2
-	}
-	return m
-}
-
-func fun9(_ n : Int) -> Int {
-	var m : Int = 0
 	var i : Int = n
 	while i > 0 {
 		var j : Int = 0 
@@ -122,7 +102,7 @@ func fun9(_ n : Int) -> Int {
 	return m
 }
 
-func fun10(_ n : Int) -> Int {
+func fun8(_ n : Int) -> Int {
 	var m : Int = 0
 	var i : Int = 1
 	while i <= n {
@@ -132,6 +112,26 @@ func fun10(_ n : Int) -> Int {
 			j+=1
 		}
 		i *= 2
+	}
+	return m
+}
+
+func fun9(_ n : Int) -> Int {
+	var m : Int = 0
+	var i : Int = 1
+	while i < n {
+		m += 1
+		i = i * 2
+	}
+	return m
+}
+
+func fun10(_ n : Int) -> Int {
+	var m : Int = 0
+	var i : Int = n
+	while i > 0 {
+		m += 1
+		i = i / 2
 	}
 	return m
 }
@@ -195,10 +195,10 @@ print("N = 100, Number of instructions in O(n^3):: \(fun3(100))");
 print("N = 100, Number of instructions in O(n^3):: \(fun4(100))");
 print("N = 100, Number of instructions in O(n^2):: \(fun5(100))");
 print("N = 100, Number of instructions in O(n^2):: \(fun6(100))");
-print("N = 100, Number of instructions in O(log(n)):: \(fun7(100))");
-print("N = 100, Number of instructions in O(log(n)):: \(fun8(100))");
-print("N = 100, Number of instructions in O(n):: \(fun9(100))");
-print("N = 100, Number of instructions in O(n):: \(fun10(100))");
+print("N = 100, Number of instructions in O(n):: \(fun7(100))");
+print("N = 100, Number of instructions in O(n):: \(fun8(100))");
+print("N = 100, Number of instructions in O(log(n)):: \(fun9(100))");
+print("N = 100, Number of instructions in O(log(n)):: \(fun10(100))");
 print("N = 100, Number of instructions in O(n^2):: \(fun11(100))");
 print("N = 100, Number of instructions in O(n^(3/2)):: \(fun12(100))");
 print("N = 100, Number of instructions in O(n):: \(fun13(100))");
@@ -210,10 +210,10 @@ N = 100, Number of instructions in O(n^3):: 1000000
 N = 100, Number of instructions in O(n^3):: 166650
 N = 100, Number of instructions in O(n^2):: 4950
 N = 100, Number of instructions in O(n^2):: 4950
-N = 100, Number of instructions in O(log(n)):: 7
-N = 100, Number of instructions in O(log(n)):: 7
 N = 100, Number of instructions in O(n):: 197
 N = 100, Number of instructions in O(n):: 134
+N = 100, Number of instructions in O(log(n)):: 7
+N = 100, Number of instructions in O(log(n)):: 7
 N = 100, Number of instructions in O(n^2):: 20000
 N = 100, Number of instructions in O(n^(3/2)):: 1000
 N = 100, Number of instructions in O(n):: 100

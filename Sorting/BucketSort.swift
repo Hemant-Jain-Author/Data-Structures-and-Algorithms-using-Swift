@@ -3,10 +3,10 @@ import Foundation;
 // Allowed values from 0 to maxValue.
 func bucketSort(_ arr : inout [Int], _ maxValue : Int) {
     let numBucket : Int = 5;
-    bucketSort( &arr,maxValue,numBucket);
+    bucketSortUtil( &arr,maxValue,numBucket);
 }
 
-func bucketSort(_ arr : inout [Int], _ maxValue : Int, _ numBucket : Int) {
+func bucketSortUtil(_ arr : inout [Int], _ maxValue : Int, _ numBucket : Int) {
     let length : Int = arr.count;
     if (length == 0) {
         return;
@@ -66,5 +66,7 @@ func bucketSort(_ arr : inout [Int], _ maxValue : Int, _ numBucket : Int) {
 // Testing Code.
 var array : [Int] = [1, 34, 7, 99, 5, 23, 45, 88, 77, 19, 91, 100];
 let maxValue : Int = 100;
-bucketSort( &array,maxValue);
+bucketSort( &array, maxValue);
 print(array);
+
+// [1, 5, 7, 19, 23, 34, 45, 77, 88, 91, 99, 100]

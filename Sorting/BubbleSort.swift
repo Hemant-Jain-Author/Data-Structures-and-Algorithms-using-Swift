@@ -49,3 +49,8 @@ print(array)
 var array2 : [Int] = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 bubbleSort2( &array2);
 print(array2)
+
+/*
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+*/

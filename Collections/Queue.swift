@@ -7,20 +7,16 @@ que.append(3)
 print("Queue :", que)
 print("Size :", que.count)
 print("IsEmpty :", que.isEmpty)
-print("First :", que.first!)
 
-var temp : Int;
-while !que.isEmpty {
-	temp = que.removeFirst()
-	print(temp)
-}
+print("First :", que.first!) // Queue Front
+print("RemoveFirst :", que.removeFirst()) // Queue Remove
+print("Queue :", que)
 
 /* 
 Queue : [1, 2, 3]
 Size : 3
 IsEmpty : false
 First : 1
-1
-2
-3
+RemoveFirst : 1
+Queue : [2, 3]
  */

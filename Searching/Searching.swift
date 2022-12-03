@@ -741,7 +741,7 @@ func findPair(_ arr : inout [Int], _ size : Int, _ value : Int) -> Bool {
 		var j : Int = i + 1;
 		while (j < size) {
 			if ((arr[i] + arr[j]) == value) {
-				print("The pair is : " + String(arr[i]) + ", " + String(arr[j]));
+				print("The pair is : " + String(arr[i]) + " & " + String(arr[j]));
 				return true;
 			}
 			j += 1;
@@ -759,7 +759,7 @@ func findPair2(_ arr : inout [Int], _ size : Int, _ value : Int) -> Bool {
 	while (first < second) {
 		curr = arr[first] + arr[second];
 		if (curr == value) {
-			print("The pair is " + String(arr[first]) + ", " + String(arr[second]));
+			print("The pair is : " + String(arr[first]) + " & " + String(arr[second]));
 			return true;
 		} else if (curr < value) {
 			first += 1;
@@ -775,7 +775,7 @@ func findPair3(_ arr : inout [Int], _ size : Int, _ value : Int) -> Bool {
 	var i : Int = 0;
 	while (i < size) {
 		if (hs.contains(value - arr[i])) {
-			print("The pair is : " + String(arr[i]) + ", " + String((value - arr[i])));
+			print("The pair is : " + String(arr[i]) + " & " + String((value - arr[i])));
 			return true;
 		}
 		hs.insert(arr[i]);
@@ -789,7 +789,7 @@ func findPair4(_ arr : inout [Int], _ size : Int, _ range : Int, _ value : Int) 
 	var i : Int = 0;
 	while (i < size) {
 		if (count[value - arr[i]] > 0) {
-			print("The pair is : " + String(arr[i]) + ", " + String((value - arr[i])));
+			print("The pair is : " + String(arr[i]) + " & " + String((value - arr[i])));
 			return true;
 		}
 		count[arr[i]] += 1;
@@ -805,10 +805,10 @@ func main10() {
 	_ = findPair3( &first,first.count,8);
 	_ = findPair4( &first,first.count,9,8);
 }
-// The pair is : 1, 7 
-// The pair is 1, 7 
-// The pair is : 5, 3  
-// The pair is : 5, 3
+// The pair is : 1 & 7
+// The pair is : 1 & 7
+// The pair is : 5 & 3
+// The pair is : 5 & 3
 
 func findPairTwoLists(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int], _ size2 : Int, _ value : Int) -> Bool {
 	var i : Int = 0;
@@ -816,7 +816,7 @@ func findPairTwoLists(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int],
 		var j : Int = 0;
 		while (j < size2) {
 			if ((arr1[i] + arr2[j]) == value) {
-				print("The pair is : " + String(arr1[i]) + ", " + String(arr2[j]));
+				print("The pair is : " + String(arr1[i]) + " & " + String(arr2[j]));
 				return true;
 			}
 			j += 1;
@@ -831,7 +831,7 @@ func findPairTwoLists2(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int]
 	var i : Int = 0;
 	while (i < size1) {
 		if (binarySearch( &arr2,size2,value - arr1[i])) {
-			print("The pair is " + String(arr1[i]) + ", " + String((value - arr1[i])));
+			print("The pair is : " + String(arr1[i]) + " & " + String((value - arr1[i])));
 			return true;
 		}
 		i += 1;
@@ -848,7 +848,7 @@ func findPairTwoLists3(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int]
 	while (first < size1 && second >= 0) {
 		curr = arr1[first] + arr2[second];
 		if (curr == value) {
-			print("The pair is " + String(arr1[first]) + ", " + String(arr2[second]));
+			print("The pair is : " + String(arr1[first]) + " & " + String(arr2[second]));
 			return true;
 		} else if (curr < value) {
 			first += 1;
@@ -870,7 +870,7 @@ func findPairTwoLists4(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int]
 	i = 0;
 	while (i < size1) {
 		if (hs.contains(value - arr1[i])) {
-			print("The pair is : " + String(arr1[i]) + ", " + String((value - arr1[i])));
+			print("The pair is : " + String(arr1[i]) + " & " + String((value - arr1[i])));
 			return true;
 		}
 		i += 1;
@@ -890,7 +890,7 @@ func findPairTwoLists5(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int]
 	i = 0;
 	while (i < size1) {
 		if (count[value - arr1[i]] != 0) {
-			print("The pair is : " + String(arr1[i]) + ", " + String((value - arr1[i])));
+			print("The pair is : " + String(arr1[i]) + " & " + String((value - arr1[i])));
 			return true;
 		}
 		i += 1;
@@ -907,11 +907,17 @@ func main10A() {
 	print(findPairTwoLists4( &first,first.count, &second,second.count,8));
 	print(findPairTwoLists5( &first,first.count, &second,second.count,9,8));
 }
-// The pair is : 1, 7 true 
-// The pair is 1, 7 true 
-// The pair is 1, 7 true 
-// The pair is : 1, 7 true 
-// The pair is : 1, 7 true
+// The pair is : 1 & 7
+// true
+// The pair is : 1 & 7
+// true
+// The pair is : 1 & 7
+// true
+// The pair is : 1 & 7
+// true
+// The pair is : 1 & 7
+// true
+
 
 func findDifference(_ arr : inout [Int], _ size : Int, _ value : Int) -> Bool {
 	var i : Int = 0;
@@ -919,14 +925,13 @@ func findDifference(_ arr : inout [Int], _ size : Int, _ value : Int) -> Bool {
 		var j : Int = i + 1;
 		while (j < size) {
 			if (abs(arr[i] - arr[j]) == value) {
-				print("The pair is:: " + String(arr[i]) + " & " + String(arr[j]));
+				print("The pair is : " + String(arr[i]) + " & " + String(arr[j]));
 				return true;
 			}
 			j += 1;
 		}
 		i += 1;
 	}
-	
 	return false;
 }
 
@@ -938,7 +943,7 @@ func findDifference2(_ arr : inout [Int], _ size : Int, _ value : Int) -> Bool {
 	while (first < size && second < size) {
 		diff = abs(arr[first] - arr[second]);
 		if (diff == value) {
-			print("The pair is::" + String(arr[first]) + " & " + String(arr[second]));
+			print("The pair is : " + String(arr[first]) + " & " + String(arr[second]));
 			return true;
 		} else if (diff > value) {
 			first += 1;
@@ -954,9 +959,9 @@ func main11() {
 	print(findDifference( &first,first.count,6));
 	print(findDifference2( &first,first.count,6));
 }
-// The pair is:: 1 & 7 
-// true 
-// The pair is::1 & 7 
+// The pair is:: 1 & 7
+// true
+// The pair is : 1 & 7
 // true
 
 func findMinDiff(_ arr : inout [Int], _ size : Int) -> Int {
@@ -986,7 +991,6 @@ func findMinDiff2(_ arr : inout [Int], _ size : Int) -> Int {
 		}
 		i += 1;
 	}
-	
 	return diff;
 }
 
@@ -995,6 +999,7 @@ func main12() {
 	print("findMinDiff : " + String(findMinDiff( &second,second.count)));
 	print("findMinDiff : " + String(findMinDiff2( &second,second.count)));
 }
+// findMinDiff : 1
 // findMinDiff : 1
 
 func minDiffPair(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int], _ size2 : Int) -> Int {
@@ -1015,7 +1020,7 @@ func minDiffPair(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int], _ si
 		}
 		i += 1;
 	}
-	print("The pair is :: " + String(first) + " & " + String(second));
+	print("The pair is : " + String(first) + " & " + String(second));
 	print("Minimum difference is :: " + String(diff));
 	return diff;
 }
@@ -1043,7 +1048,7 @@ func minDiffPair2(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int], _ s
 			j += 1;
 		}
 	}
-	print("The pair is :: " + String(first) + " & " + String(second));
+	print("The pair is : " + String(first) + " & " + String(second));
 	print("Minimum difference is :: " + String(minDiff));
 	return minDiff;
 }
@@ -1054,7 +1059,9 @@ func main13() {
 	_ = minDiffPair( &first,first.count, &second,second.count);
 	_ = minDiffPair( &first,first.count, &second,second.count);
 }
-// The pair is :: 4 & 4
+// The pair is : 4 & 4
+// Minimum difference is :: 0
+// The pair is : 4 & 4
 // Minimum difference is :: 0
 
 func closestPair(_ arr : inout [Int], _ size : Int, _ value : Int) {
@@ -1076,7 +1083,7 @@ func closestPair(_ arr : inout [Int], _ size : Int, _ value : Int) {
 		}
 		i += 1;
 	}
-	print("closest pair is :: " + String(first) + " " + String(second));
+	print("closest pair is : " + String(first) + " & " + String(second));
 }
 
 func closestPair2(_ arr : inout [Int], _ size : Int, _ value : Int) {
@@ -1104,7 +1111,7 @@ func closestPair2(_ arr : inout [Int], _ size : Int, _ value : Int) {
 			stop -= 1;
 		}
 	}
-	print("closest pair is :: " + String(first) + " " + String(second));
+	print("closest pair is : " + String(first) + " & " + String(second));
 }
 
 func main14() {
@@ -1112,8 +1119,8 @@ func main14() {
 	closestPair( &first,first.count,47);
 	closestPair2( &first,first.count,47);
 }
-// closest pair is :: 3 50 
-// closest pair is :: 3 50
+// closest pair is : 3 & 50
+// closest pair is : 3 & 50
 
 func sumPairRestArray(_ arr : inout [Int], _ size : Int) -> Bool {
 	var total : Int;

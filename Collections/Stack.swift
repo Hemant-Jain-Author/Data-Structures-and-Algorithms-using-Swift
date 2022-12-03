@@ -7,20 +7,16 @@ stk.append(3)
 print("Stack :", stk)
 print("Size :", stk.count)
 print("IsEmpty :", stk.isEmpty)
-print("Top :", stk.last!)
 
-var temp : Int;
-while !stk.isEmpty {
-	temp = stk.removeLast()
-	print(temp)
-}
+print("Top :", stk.last!) // Stack Top
+print("Pop :", stk.removeLast()) // Stack Pop
+print("Stack :", stk)
 
 /* 
 Stack : [1, 2, 3]
 Size : 3
 IsEmpty : false
 Top : 3
-3
-2
-1
- */
+Pop : 3
+Stack : [1, 2]
+*/
