@@ -29,7 +29,9 @@ class DoublyLinkedList {
 		}
 		return self.head!.value
 	}
-	
+	/* Other methods */
+}
+
 public func addHead(_ value : Int) {
 	let newNode = Node(value, nil, nil)
 	if self.size == 0 {
@@ -228,15 +230,15 @@ func removeDuplicate() {
 
 // Testing code.
 func main1() {
-	let ll : DoublyLinkedList = DoublyLinkedList();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.display();
-	print("length : " + String(ll.length()));
-	print("isEmpty : " + String(ll.isEmpty()));
-	_ = ll.removeHead();
-	ll.display();
+let ll : DoublyLinkedList = DoublyLinkedList();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.display();
+print("length : " + String(ll.length()));
+print("isEmpty : " + String(ll.isEmpty()));
+_ = ll.removeHead();
+ll.display();
 }
 // 3 2 1 
 // length : 3
@@ -246,17 +248,17 @@ func main1() {
 
 // Testing code.
 func main2() {
-	let ll : DoublyLinkedList = DoublyLinkedList();
-	ll.sortedInsert(1);
-	ll.sortedInsert(2);
-	ll.sortedInsert(3);
-	ll.display();
-	ll.sortedInsert(1);
-	ll.sortedInsert(2);
-	ll.sortedInsert(3);
-	ll.display();
-	ll.removeDuplicate();
-	ll.display();
+let ll : DoublyLinkedList = DoublyLinkedList();
+ll.sortedInsert(1);
+ll.sortedInsert(2);
+ll.sortedInsert(3);
+ll.display();
+ll.sortedInsert(1);
+ll.sortedInsert(2);
+ll.sortedInsert(3);
+ll.display();
+ll.removeDuplicate();
+ll.display();
 }
 // 	1 2 3 
 // 	1 1 2 2 3 3 
@@ -264,15 +266,15 @@ func main2() {
 
 // Testing code.
 func main3() {
-	let ll : DoublyLinkedList = DoublyLinkedList();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.display();
-	let l2 : DoublyLinkedList = ll.copyList();
-	l2.display();
-	let l3 : DoublyLinkedList = ll.copyListReversed();
-	l3.display();
+let ll : DoublyLinkedList = DoublyLinkedList();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.display();
+let l2 : DoublyLinkedList = ll.copyList();
+l2.display();
+let l3 : DoublyLinkedList = ll.copyListReversed();
+l3.display();
 }
 // 	3 2 1 
 // 	3 2 1 
@@ -280,26 +282,26 @@ func main3() {
 
 // Testing code.
 func main4() {
-	let ll : DoublyLinkedList = DoublyLinkedList();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.display();
-	_ = ll.removeNode(2);
-	ll.display();
+let ll : DoublyLinkedList = DoublyLinkedList();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.display();
+_ = ll.removeNode(2);
+ll.display();
 }
 // 	3 2 1 
 // 	3 1
 
 // Testing code.
 func main5() {
-	let ll : DoublyLinkedList = DoublyLinkedList();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.display();
-	ll.reverseList();
-	ll.display();
+let ll : DoublyLinkedList = DoublyLinkedList();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.display();
+ll.reverseList();
+ll.display();
 }
 // 	3 2 1
 // 	1 2 3

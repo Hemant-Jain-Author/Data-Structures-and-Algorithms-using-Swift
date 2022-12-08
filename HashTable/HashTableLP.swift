@@ -17,18 +17,17 @@ class HashTable {
 		self.Values = Array(repeating:0, count:(tSize + 1))
 		self.Flags = Array(repeating:NodeState.EmptyNode, count:(tSize + 1))
 	}
-	//other function 
+
+	/* Other Methods */ 
 
 	func computeHash(key : Int) -> Int {
-		// This is most simple hash function
-		// more complex hash function can be used
 		return key % self.tableSize
 	}
-	
+		
 	func resolverFun(index : Int) -> Int {
 		return index
 	}
-	
+		
 	func add(_ key : Int, _ value : Int) -> Bool {
 		var hashValue = self.computeHash(key : key)
 		var i = 0
@@ -45,14 +44,14 @@ class HashTable {
 		}
 		return false
 	}
-
+	
 	func add(_ value : Int) -> Bool {
 		return add(value, value);
 	}
-	
+		
 	func find(_ key : Int) -> Bool {
 		var hashValue = self.computeHash(key : key)
-
+	
 		var i = 0
 		while  i < self.tableSize {
 			if self.Flags[hashValue] == NodeState.EmptyNode {
@@ -67,7 +66,7 @@ class HashTable {
 		}
 		return false
 	}
-
+	
 	func get(_ key : Int) -> Int {
 		var hashValue = self.computeHash(key : key)
 		var i = 0
@@ -84,7 +83,7 @@ class HashTable {
 		}
 		return -1
 	}
-	
+		
 	func remove(_ key : Int) -> Bool {
 		var hashValue = self.computeHash(key : key)
 		var i = 0
@@ -102,9 +101,9 @@ class HashTable {
 		}
 		return false
 	}
-	
+		
 	func display() {
-		print("Hash Table contains :: ", terminator: "")
+		print("Hash Table contains : ", terminator: "")
 		var i = 0
 		while i < self.tableSize {
 			if self.Flags[i] == NodeState.FilledNode {
@@ -128,7 +127,7 @@ _ = ht.remove(2)
 print("Find key 2 : \(ht.find(2))")
 
 /*
-Hash Table contains :: ( 1 => 10) ( 2 => 20) ( 3 => 30) 
+Hash Table contains : ( 1 => 10) ( 2 => 20) ( 3 => 30) 
 Find key 2 : true
 Value at key 2 : 20
 Find key 2 : false

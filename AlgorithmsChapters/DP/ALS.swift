@@ -65,16 +65,15 @@ func fastestWayTD(_ f : inout [[Int]], _ a : inout [[Int]], _ t : inout [[Int]],
 }
 
 // Testing code.
-var a : [[Int]] = [[7, 9, 3, 4, 8, 4],
-					[8, 5, 6, 4, 5, 7]];
-var t : [[Int]] = [[2, 3, 1, 3, 4],
-					[2, 1, 2, 2, 1]];
+var a : [[Int]] = [[7, 9, 3, 4, 8, 4],[8, 5, 6, 4, 5, 7]];
+var t : [[Int]] = [[2, 3, 1, 3, 4],[2, 1, 2, 2, 1]];
 var e : [Int] = [2, 4];
 var x : [Int] = [3, 2];
 let n : Int = 6;
 print(fastestWayBU2( &a, &t, &e, &x,n));
 print(fastestWayBU( &a, &t, &e, &x,n));
 print(fastestWayTD( &a, &t, &e, &x,n));
+
 /*
 38
 38

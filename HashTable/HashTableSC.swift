@@ -77,7 +77,7 @@ class HashTableSC{
 	}
 	
 	func display() {
-		print("Hash Table contains :: ", terminator: "")
+		print("Hash Table contains : ", terminator: "")
 		var i = 0
 		while i < self.tableSize {
 			var head = self.listArray[i]
@@ -91,8 +91,6 @@ class HashTableSC{
 	}
 }
 
-
-
 // Testing code
 var ht = HashTableSC()
 ht.add(1, 10)
@@ -105,7 +103,7 @@ _ = ht.remove(2)
 print("Find key 2 : \(ht.find(2))")
 
 /*
-Hash Table contains :: ( 1 => 10) ( 2 => 20) ( 3 => 30) 
+Hash Table contains : ( 1 => 10) ( 2 => 20) ( 3 => 30) 
 Find key 2 : true
 Value at key 2 : 20
 Find key 2 : false

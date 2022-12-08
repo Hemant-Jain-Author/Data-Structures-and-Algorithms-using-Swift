@@ -1,6 +1,7 @@
 
 
 class Stack<T> {
+
 	var head : Node?
 	var count : Int
 
@@ -27,7 +28,7 @@ class Stack<T> {
 		return self.count == 0
 	}
 	
-	public func peek() -> T? {
+	public func top() -> T? {
 		if self.isEmpty() {
 			print("Stack Empty Error")
 			return nil
@@ -68,6 +69,10 @@ var s = Stack<Int>()
 s.push(1)
 s.push(2)
 s.push(3)
-print("Stack pop : " + String(s.pop()!));
-print("Stack pop : " + String(s.pop()!));
+s.display()
+print(s.pop()!)
+print(s.pop()!)
 
+// Stack :: 3 2 1 
+// 3
+// 2

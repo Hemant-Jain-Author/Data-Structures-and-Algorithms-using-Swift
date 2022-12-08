@@ -118,18 +118,19 @@ func KS01UnboundBU(_ wt : inout [Int], _ cost : inout [Int], _ capacity : Int) -
 var wt : [Int] = 	[10, 40, 20, 30];
 var cost : [Int] = 	[60, 40, 90, 120];
 let capacity : Int = 50;
-var maxCost : Int = KS01UnboundBU( &wt, &cost,capacity);
-print("Maximum cost obtained = " + String(maxCost));
-maxCost = maxCost01Knapsack( &wt, &cost,capacity);
-print("Maximum cost obtained = " + String(maxCost));
+var maxCost = maxCost01Knapsack( &wt, &cost,capacity);
+print("Maximum cost obtained =", maxCost);
 maxCost = maxCost01KnapsackBU( &wt, &cost,capacity);
-print("Maximum cost obtained = " + String(maxCost));
+print("Maximum cost obtained =", maxCost);
 maxCost = maxCost01KnapsackTD( &wt, &cost,capacity);
-print("Maximum cost obtained = " + String(maxCost));
+print("Maximum cost obtained =", maxCost);
+maxCost : Int = KS01UnboundBU( &wt, &cost,capacity);
+print("Maximum cost obtained =", maxCost);
 
 /* 
 Maximum cost obtained = 300
 Maximum cost obtained = 210
-Selected items are: (wt:30, cost:120) (wt:20, cost:90)Maximum cost obtained = 210
+Selected items are: (wt:30, cost:120) (wt:20, cost:90)
+Maximum cost obtained = 210
 Maximum cost obtained = 210
  */

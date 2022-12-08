@@ -18,35 +18,22 @@ func makePairs(_ nuts : inout [Int], _ bolts : inout [Int], _ low : Int, _ high 
 	}
 }
 
-func swap(_ arr : inout [Int], _ first : Int, _ second : Int) {
-	let temp : Int = arr[first];
-	arr[first] = arr[second];
-	arr[second] = temp;
-}
-
 // Partition method similar to quick sort algorithm.
 func partition(_ arr : inout [Int], _ low : Int, _ high : Int, _ pivot : Int) -> Int {
 	var i : Int = low;
 	var j : Int = low;
 	while (j < high) {
 		if (arr[j] < pivot) {
-			swap( &arr,i,j);
+			arr.swapAt(i,j);
 			i += 1;
 		} else if (arr[j] == pivot) {
-			swap( &arr,high,j);
+			arr.swapAt(high,j);
 			j -= 1;
 		}
 		j += 1;
 	}
-	swap( &arr,i,high);
+	arr.swapAt(i,high);
 	return i;
-}
-
-func printArray(_ arr : inout [Int]) {
-	for i in arr {
-		print(String(i), terminator: " ");
-	}
-	print();
 }
 
 // Testing code.

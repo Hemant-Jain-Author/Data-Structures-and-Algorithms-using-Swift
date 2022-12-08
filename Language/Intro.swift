@@ -225,27 +225,6 @@ func binarySearch(data : [Int], value : Int) -> Bool {
 	return false
 }
 
-func rotateArray(_ data :inout [Int], _ k : Int) {
-	let n = data.count
-	reverseArray(&data, 0, k-1)
-	reverseArray(&data, k, n-1)
-	reverseArray(&data, 0, n-1)
-}
-
-func reverseArray( _ data : inout [Int], _ start : Int, _ end : Int) {
-	var i = start
-	var j = end
-	while i < j {
-		data.swapAt(i, j)
-		i+=1
-		j-=1
-	}
-}
-
-var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-rotateArray(&arr, 4)
-print(arr)
-
 
 func reverseArray2(data : inout [Int]) {
 	var i = 0
@@ -288,32 +267,6 @@ var point = coord(x:10, y:10)
 print("X axis coord value is  \(point.x)")
 print("Y axis coord value is  \(point.y)")
 
-class Student  {
-	var rollNo : Int
-	var firstName : String 
-	var lastName : String
-
-	public init(rollNo:Int, firstName:String,lastName:String) {
-		self.rollNo = rollNo
-		self.firstName = firstName
-		self.lastName = lastName
-	}
-
-	func getFirstName() -> String {
-		return self.firstName
-	}
-
-	func getLastName() -> String {
-		return self.lastName
-	}
-
-	func getRollNo() -> Int {
-		return self.rollNo
-	}
-}
-
-var ptrStud = Student(rollNo:1, firstName:"hemant",lastName:"jain")
-print("Student Name: \(ptrStud.getFirstName()) \(ptrStud.getLastName()) Roll No: \(ptrStud.getRollNo())")
 
 func sum(_ num1 : Int, _ num2 : Int) -> Int {
 	let result = num1 + num2

@@ -61,7 +61,6 @@ class StringTree {
 	
 	public func find(_ value : String) -> Bool {
 		let ret = self.findUtil(curr : self.root, value : value)
-		print("find \(value) Return \(ret)")
 		return ret
 	}
 	
@@ -104,18 +103,6 @@ var tt = StringTree()
 tt.insert("banana")
 tt.insert("apple")
 tt.insert("mango")
-tt.insert("banana")
-tt.insert("apple")
-tt.insert("mango")
-print("Search results for apple, banana, grapes and mango :")
-print(tt.find("apple"))
-print(tt.find("banana"))
-print(tt.find("banan"))
-print(tt.find("applkhjkhkj"))
-print(tt.find("grapes"))
-print(tt.find("mango"))
-
-print("frequency returned ::  \(tt.frequency("apple"))")
-print("frequency returned ::  \(tt.frequency("banana"))")
-print("frequency returned ::  \(tt.frequency("mango"))")
-print("frequency returned ::  \(tt.frequency("hemant"))")
+print("Apple Found :", tt.find("apple"))
+print("Banana Found :", tt.find("banana"))
+print("Grapes Found :", tt.find("grapes"))

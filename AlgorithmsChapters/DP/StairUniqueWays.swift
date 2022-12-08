@@ -35,8 +35,8 @@ func stairUniqueWaysBU2(_ n : Int) -> Int {
 }
 
 // Testing code.
-print("Unique way to reach top:: " + String(stairUniqueWaysBU(4)));
-print("Unique way to reach top:: " + String(stairUniqueWaysBU2(4)));
+print("Unique way to reach top::" , stairUniqueWaysBU(4));
+print("Unique way to reach top::", stairUniqueWaysBU2(4));
 
 /*
 Unique way to reach top:: 5

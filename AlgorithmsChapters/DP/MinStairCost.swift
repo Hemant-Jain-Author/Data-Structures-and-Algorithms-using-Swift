@@ -21,7 +21,7 @@ func minStairCost(_ cost : inout [Int], _ n : Int) -> Int {
 // Testing code.
 var a : [Int] = [1, 5, 6, 3, 4, 7, 9, 1, 2, 11];
 let n : Int = a.count;
-print("minStairCost : " + String(minStairCost( &a,n)),terminator: "");
+print("minStairCost :", minStairCost( &a,n));
 
 /*
 minStairCost : 18

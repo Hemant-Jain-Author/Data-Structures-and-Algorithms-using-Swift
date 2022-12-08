@@ -1,7 +1,8 @@
 import Foundation;
 
-class PriorityQueue < T: Comparable > {
-    private var size : Int; // Number of elements in PriorityQueue
+
+class Heap < T: Comparable > {
+    private var size : Int; // Number of elements in Heap
     private var arr : [T?]; // The Heap array
     private var isMinHeap : Bool;
 
@@ -69,7 +70,7 @@ class PriorityQueue < T: Comparable > {
 
     func peek() -> T? {
         if (self.isEmpty) {
-            print("PriorityQueue empty exception.");
+            print("Heap empty exception.");
 			return nil
         }
         return self.arr[0];
@@ -83,7 +84,7 @@ class PriorityQueue < T: Comparable > {
 
     func remove() -> T? {
         if (self.isEmpty) {
-            print("PriorityQueue empty exception.")
+            print("Heap empty exception.")
 			return nil;
         }
         let value = self.arr[0];
@@ -95,7 +96,6 @@ class PriorityQueue < T: Comparable > {
     }
 
     func display() {
-        print("PriorityQueue : ",terminator: "");
 		var i : Int = 0;
 		while (i < self.size) {
 			print(self.arr[i]!, terminator: " ");
@@ -142,10 +142,11 @@ class GraphAM {
     func printGraph() {
         var i : Int = 0;
 		while (i < self.count) {
-			print("Vertex " + String(i) + " is connected to : ",terminator: "");
+			print("Vertex \(i) is connected to : ",terminator: "");
 			var j : Int = 0;
 			while (j < self.count) {
-				if (self.adj[i][j] != 0) {print(String(j) + "(cost: " + String(self.adj[i][j]) + ") ",terminator: "");
+				if (self.adj[i][j] != 0) {
+					print("\(j) (cost: \(self.adj[i][j]))",terminator: " ");
 				}
 				j += 1;
 			}
@@ -186,7 +187,7 @@ class GraphAM {
         dist[source] = 0;
         previous[source] = source;
 
-        let queue = PriorityQueue<Edge>(true);
+        let queue = Heap<Edge>(true);
 		var node : Edge = Edge(source, source, 0);
         queue.add(node);
 
@@ -248,7 +249,7 @@ class GraphAM {
         dist[source] = 0;
         previous[source] = source;
 
-        let queue = PriorityQueue<Edge>(true);
+        let queue = Heap<Edge>(true);
         var node : Edge = Edge(source, source, 0);
         queue.add(node);
 
@@ -386,12 +387,12 @@ class GraphAM {
 
 // Testing code.
 func main1() {
-	let gph : GraphAM = GraphAM(4);
-	gph.addUndirectedEdge(0,1);
-	gph.addUndirectedEdge(0,2);
-	gph.addUndirectedEdge(1,2);
-	gph.addUndirectedEdge(2,3);
-	gph.printGraph();
+let gph : GraphAM = GraphAM(4);
+gph.addUndirectedEdge(0,1);
+gph.addUndirectedEdge(0,2);
+gph.addUndirectedEdge(1,2);
+gph.addUndirectedEdge(2,3);
+gph.printGraph();
 }
 
 // Vertex 0 is connected to : 1(cost: 1) 2(cost: 1) 
@@ -425,21 +426,24 @@ func main2() {
 // Testing code.
 func main3() {
 	let gph : GraphAM = GraphAM(9);
-	gph.addUndirectedEdge(0,2,1);
-	gph.addUndirectedEdge(1,2,5);
-	gph.addUndirectedEdge(1,3,7);
-	gph.addUndirectedEdge(1,4,9);
-	gph.addUndirectedEdge(3,2,2);
-	gph.addUndirectedEdge(3,5,4);
-	gph.addUndirectedEdge(4,5,6);
-	gph.addUndirectedEdge(4,6,3);
-	gph.addUndirectedEdge(5,7,1);
-	gph.addUndirectedEdge(6,7,7);
-	gph.addUndirectedEdge(7,8,17);
+	gph.addUndirectedEdge(0,1,4);
+	gph.addUndirectedEdge(0,7,8);
+	gph.addUndirectedEdge(1,2,8);
+	gph.addUndirectedEdge(1,7,11);
+	gph.addUndirectedEdge(2,3,7);
+	gph.addUndirectedEdge(2,8,2);
+	gph.addUndirectedEdge(2,5,4);
+	gph.addUndirectedEdge(3,4,9);
+	gph.addUndirectedEdge(3,5,14);
+	gph.addUndirectedEdge(4,5,10);
+	gph.addUndirectedEdge(5,6,2);
+	gph.addUndirectedEdge(6,7,1);
+	gph.addUndirectedEdge(6,8,6);
+	gph.addUndirectedEdge(7,8,7);
 	gph.dijkstra(0);
 }
 
-// Shortest Paths: (0->2->1 @ 6) (0->2 @ 1) (0->2->3 @ 3) (0->2->3->5->4 @ 13) (0->2->3->5 @ 7) (0->2->3->5->7->6 @ 15) (0->2->3->5->7 @ 8) (0->2->3->5->7->8 @ 25)
+// Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21) (0->7->6->5 @ 11) (0->7->6 @ 9) (0->7 @ 8) (0->1->2->8 @ 14) 
 
 // Testing code.
 func main4() {

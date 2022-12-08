@@ -38,4 +38,4 @@ print("Total cash: " + String(maxRobbery2( &arr)));
 /* 
 Total cash: 160
 Total cash: 160
- */
+*/

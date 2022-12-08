@@ -31,5 +31,5 @@ let que : Queue = Queue();
 que.add(1);
 que.add(2);
 que.add(3);
-print("Queue remove : " + String(que.remove()));
-print("Queue remove : " + String(que.remove()));
+print("Queue remove :", que.remove()!);
+print("Queue remove :", que.remove()!);

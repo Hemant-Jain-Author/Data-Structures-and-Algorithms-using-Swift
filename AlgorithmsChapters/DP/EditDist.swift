@@ -25,7 +25,7 @@ func editDist(_ str1 : String, _ str2 : String, _ m : Int, _ n : Int) -> Int {
 	// (3) Replace last char of first with second.
 	return 1 + min(editDist(str1,str2,m,n - 1), // Insert
 	editDist(str1,str2,m - 1,n), // Remove
-	editDist(str1,str2,m - 1,n - 1));
+	editDist(str1,str2,m - 1,n - 1)); // Replace
 }
 
 func editDistDP(_ str1 : String, _ str2 : String) -> Int {

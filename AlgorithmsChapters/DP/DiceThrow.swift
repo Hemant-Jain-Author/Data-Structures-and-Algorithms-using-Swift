@@ -26,6 +26,6 @@ func findWays(_ n : Int, _ m : Int, _ V : Int) -> Int {
 }
 
 // Testing code.
-print(String(findWays(3,6,6)) + " ",terminator: "");
+print(findWays(3,6,6));
 
 // 10

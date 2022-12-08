@@ -1,30 +1,46 @@
-func matchExpUtil(_ exp : inout [Character], _ str : inout [Character], _ i : Int, _ j : Int) -> Bool {
-	if i == exp.count && j == str.count {
-		return true
+import Foundation
+
+func strcmp(_ str1 : String, _ str2 : String) -> Int {
+	let a = Array(str1)
+	let b = Array(str2)
+	var index = 0
+	let len1 = a.count
+	let len2 = b.count
+	let minlen : Int = (len1 < len2) ? len1 : len2;
+
+	while index < minlen && a[index] == b[index] {
+		index += 1
 	}
-	if (i == exp.count && j != str.count) || (i != exp.count && j == str.count) {
-		return false
+
+	if index == len1 && index == len2 {
+		return 0
+	} else if len1 == index {
+		return -1
+	} else if len2 == index {
+		return 1
 	}
-	if exp[i] == "?" || exp[i] == str[j] {
-		return matchExpUtil(&exp, &str, i+1, j+1)
+
+	if (a[index] > b[index]) {
+		return 1
+	} else {
+		return -1
 	}
-	if exp[i] == "*" {
-		return matchExpUtil(&exp, &str, i+1, j) || 
-		matchExpUtil(&exp, &str, i, j+1) || 
-		matchExpUtil(&exp, &str, i+1, j+1)
-	}
-	return false
 }
 
-func matchExp(_ exp : String, _ str : String) -> Bool {
-	var ex = Array(exp)
-	var st = Array(str)
-	return matchExpUtil(&ex, &st, 0, 0)
-}
 
-func match(_ src : String, _ ptn : String) -> Bool {
-	var source = Array(src)
-	var pattern = Array(ptn)
+// Testing Code
+func main1() {
+print(strcmp("apple","appke"));
+print(strcmp("apple","apple"));
+print(strcmp("apple","appme"));
+}
+// 	1
+// 	0
+// 	-1
+
+func matchPattern(_ src : String, _ ptn : String) -> Bool {
+	let source = Array(src)
+	let pattern = Array(ptn)
 	var iSource = 0
 	var iPattern = 0
 	let sourceLen = source.count
@@ -41,46 +57,57 @@ func match(_ src : String, _ ptn : String) -> Bool {
 	return false
 }
 
+// Testing Code
+func main2() {
+	print(matchPattern("harrypottermustnotgotoschool","potterschool"));
+}
+// true
+
 func isPrime(_ n : Int) -> Bool {
-	var answer = false
-	if n > 1 {
-		answer = true
-	}
-	var i = 2
-	while i*i <= n {
-		if n%i == 0 {
-			answer = false
-			break
-		}
-		i += 1
-	}
-	return answer
+	var answer : Bool = (n > 1) ? true : false;
+    var i : Int = 2;
+    while (i * i <= n) {
+        if (n % i == 0) {
+            answer = false;
+            break;
+        }
+        i += 1;
+    }
+	return answer;
 }
 
-/*
-func myAtoi(str : String) -> Int {
-	value = 0
-	size = str.count
-	while i = 0; i < size; i += 1 {
-		ch = str[i]
-		ch2 = "0"[0]
-		value = (value ,  3) + (value ,  1) + (Int)(ch-ch2)
-	}
-	return value
+func main3() {
+	print("Prime numbers under 10 :: ",terminator: "");
+    var i : Int = 0;
+    while (i < 10) {
+        if (isPrime(i)) {
+			print(String(i) + " ",terminator: "");
+        }
+        i += 1;
+    }
+	print();
 }
-*/
+// Prime numbers under 10 :: 2 3 5 7
+
+
 func isUniqueChar(_ str : String) -> Bool {
 	var mp : [Character: Bool] = [:]
 	for char in str {
 		if mp[char] != false {
-			print("Duplicate detected!")
 			return false
 		}
 		mp[char] = true
 	}
-	print("No duplicate detected!")
 	return true
 }
+
+func main5() {
+	print("isUniqueChar :", isUniqueChar("aple"))
+	print("isUniqueChar :", isUniqueChar("apple"))
+}
+// 	No duplicate detected!
+// 	Duplicate detected!
+
 
 func isPermutation(_ s1 : String, _ s2 : String) -> Bool {
 	var count : [Character:Int] = [:]
@@ -107,8 +134,14 @@ func isPermutation(_ s1 : String, _ s2 : String) -> Bool {
 	return true
 }
 
+func main7() {
+	print(isPermutation("apple","plepa"));
+}
+// 	is permutation return true
+// 	true
+
 func isPalindrome(_ st : String) -> Bool {
-	var str = Array(st)
+	let str = Array(st)
 	var i = 0
 	var j = str.count - 1
 	while i < j && str[i] == str[j] {
@@ -116,12 +149,19 @@ func isPalindrome(_ st : String) -> Bool {
 		j -= 1
 	}
 	if i < j {
-		print("String is not a Palindrome",terminator:"")
+		print("String is not a Palindrome")
 		return false
 	}
-	print("String is a Palindrome",terminator:"")
+	print("String is a Palindrome")
 	return true
 }
+
+func main8() {
+	_ = isPalindrome("hello");
+	_ = isPalindrome("oyo");
+}
+// 	String is not a Palindrome
+// 	String is a Palindrome
 
 func pow(_ x : Int, _ n : Int) -> Int {
 	var value : Int
@@ -136,40 +176,10 @@ func pow(_ x : Int, _ n : Int) -> Int {
 	}
 }
 
-func strcmp(_ str1 : String, _ str2 : String) -> Int {
-	var a = Array(str1)
-	var b = Array(str2)
-	var index = 0
-	let len1 = a.count
-	let len2 = b.count
-	var minlen = len1
-	if len1 > len2 {
-		minlen = len2
-	}
-
-	while index < minlen && a[index] == b[index] {
-		index += 1
-	}
-
-	if index == len1 && index == len2 {
-		return 0
-	} else if len1 == index {
-		return -1
-	} else if len2 == index {
-		return 1
-	}
-	if (a[index] > b[index]) {
-		return 1
-	} else {
-		return 0
-	}
+func main9() {
+	print(pow(5,2));
 }
-
-// func reverseString(a : String) -> String {
-// 	var chars = []Int(a)
-// 	reverseStringUtil(chars)
-// 	return String(chars)
-// }
+// 25
 
 func reverseString(_ a : String) -> String {
 	var arr = Array(a)
@@ -215,6 +225,13 @@ func reverseWords(_ st : String) -> String {
 	return String(str)
 }
 
+func main11() {
+print(reverseString("apple"));
+print(reverseWords("hello world"));
+}
+// 	elppa
+// 	world hello
+
 func printAnagram(_ a : String) {
 	let n = a.count
 	var arr = Array(a)
@@ -237,6 +254,17 @@ func printAnagramUtil(_ a : inout [Character], _ max : Int, _ n : Int) {
 		i += 1
 	}
 }
+
+
+func main12() {
+printAnagram("123");
+}
+// 	123
+// 	132
+// 	213
+// 	231
+// 	321
+// 	312
 
 func shuffle(_ str : String) -> String {
 	var arr = Array(str)
@@ -267,29 +295,48 @@ func shuffle(_ str : String) -> String {
 	return String(arr)
 }
 
-
-// Testing code.
-var str = "my name is hemant jain"
-str = reverseWords(str)
-print(str)
-print(matchExp("*world?", "hello worldi"))
-var i = 1
-while i < 100 {
-	print("\(i) is prime : \(isPrime(i))")
-	i += 1
+func main13() {
+	print(shuffle("ABCDE12345"));
 }
-print(isUniqueChar("aple"))
-print(isPalindrome("aplelpa"))
-print(isPalindrome("applppe"))
-print(isPalindrome("apllpa"))
-print(isPermutation("apllpa", "pllpaa"))
-print(isPermutation("apllpa", "apllpaa"))
-print(pow(2, 10))
-printAnagram("12345")
-print(shuffle("aaaabbbb"))
-print(strcmp("a", "b"))
-print(strcmp("b", "a"))
-print(strcmp("a", "a"))
-print(strcmp("ba", "baaa"))
-print(strcmp("bad", "bae"))
-print(strcmp("bad", "baa"))
+// A1B2C3D4E5
+
+func matchExp(_ exp : String, _ str : String) -> Bool {
+	var ex = Array(exp)
+	var st = Array(str)
+	return matchExpUtil(&ex, &st, 0, 0)
+}
+
+func matchExpUtil(_ exp : inout [Character], _ str : inout [Character], _ i : Int, _ j : Int) -> Bool {
+	if i == exp.count && j == str.count {
+		return true
+	}
+	if (i == exp.count && j != str.count) || (i != exp.count && j == str.count) {
+		return false
+	}
+	if exp[i] == "?" || exp[i] == str[j] {
+		return matchExpUtil(&exp, &str, i+1, j+1)
+	}
+	if exp[i] == "*" {
+		return matchExpUtil(&exp, &str, i+1, j) || 
+		matchExpUtil(&exp, &str, i, j+1) || 
+		matchExpUtil(&exp, &str, i+1, j+1)
+	}
+	return false
+}
+
+func main10() {
+	print(matchExp("*llo,?World?","Hello, World!"));
+}
+// true
+
+main1();
+main2();
+main3();
+main5();
+main7();
+main8();
+main9();
+main11();
+main12();
+main13();
+main10();

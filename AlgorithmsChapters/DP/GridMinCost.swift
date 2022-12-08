@@ -44,11 +44,7 @@ func minCostBU(_ cost : inout [[Int]], _ m : Int, _ n : Int) -> Int {
 }
 
 // Testing code.
-var cost : [[Int]] =
-[[1, 3, 4],
-[4, 7, 5],
-[1, 5, 3]];
-
+var cost : [[Int]] = [[1, 3, 4],[4, 7, 5],[1, 5, 3]];
 print(minCost( &cost,3,3));
 print(minCostBU( &cost,3,3));
 

@@ -461,8 +461,7 @@ func reverseArray(_ a : inout [Int], _ start : Int, _ end : Int) {
     var i : Int = start,j   = end;
     while (i < j) {
         let temp : Int = a[i];
-        a[i] = a[j];
-        a[j] = temp;
+        a.swapAt(i, j)
         i += 1;
         j -= 1;
     }

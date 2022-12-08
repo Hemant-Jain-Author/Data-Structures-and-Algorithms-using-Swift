@@ -1,7 +1,7 @@
 class Queue<T> {
-	var head : Node?
-	var tail : Node?
-	var count : Int
+
+	var tail : Node? = nil
+	var count : Int = 0
 
 	class Node {
 		var value : T
@@ -14,7 +14,7 @@ class Queue<T> {
 	}
 
 	public init() {
-		self.head = nil
+		self.tail = nil
 		self.count = 0
 	}
 
@@ -26,21 +26,38 @@ class Queue<T> {
 		return self.count == 0
 	}
 	
-	public func peek() -> T? {
+	public func front() -> T? {
 		if self.isEmpty() {
 			print("QueueEmptyException")
 			return nil
 		}
-	
-		return self.head!.value
+		return self.tail!.next!.value
 	}
+
+		public func display() {
+		if self.isEmpty() {
+			print("Queue is empty.")
+			return
+		}
+		var temp : Node? = self.tail!.next;
+        print("Queue is : ",terminator: "");
+        var i : Int = 0;
+        while (i < self.count) {
+            print(temp!.value, terminator: " ");
+            temp = temp!.next;
+            i += 1;
+        }
+        print();
+	}
+	/* Other Methods */
 	
 	public func add(_ value : T) {
 		let temp = Node(value)
-		if self.head == nil {
-			self.head = temp
+		if self.tail == nil {
 			self.tail = temp
+			temp.next = temp
 		} else {
+			temp.next = self.tail!.next;
 			self.tail!.next = temp
 			self.tail = temp
 		}
@@ -52,21 +69,17 @@ class Queue<T> {
 			print("QueueEmptyException")
 			return nil
 		}
-	
-		let value = self.head!.value
-		self.head = self.head!.next
+
+		var value : T;
+        if (self.tail === self.tail!.next) {
+            value = self.tail!.value;
+            self.tail = nil;
+        } else {
+            value = self.tail!.next!.value;
+            self.tail!.next = self.tail!.next!.next;
+        }
 		self.count -= 1
 		return value
-	}
-	
-	public func display() {
-		var temp = self.head
-		print("Queue :: ", terminator:"")
-		while temp != nil {
-			
-			print(temp!.value, terminator:" ")
-			temp = temp!.next
-		}
 	}
 }
 
@@ -75,5 +88,16 @@ let que : Queue<Int> = Queue<Int>();
 que.add(1);
 que.add(2);
 que.add(3);
-print("Queue remove : " + String(que.remove()!));
-print("Queue remove : " + String(que.remove()!));
+que.display()
+print("IsEmpty :", que.isEmpty());
+print("Size :", que.size());
+print("Queue remove :", que.remove()!);
+print("Queue remove :", que.remove()!);
+
+/*
+Queue : 1 2 3 
+IsEmpty : false
+Size : 3
+Queue remove : 1
+Queue remove : 2
+*/

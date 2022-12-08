@@ -7,8 +7,7 @@ func lis(_ arr : inout [Int]) -> Int {
 	// Populating LIS values in bottom up manner.
 	var i : Int = 0;
 	while (i < n) {
-		lis[i] = 1;
-		// Initialize LIS values for all indexes as 1.
+		lis[i] = 1; // Initialize LIS values for all indexes as 1.
 		var j : Int = 0;
 		while (j < i) {
 			if (arr[j] < arr[i] && lis[i] < lis[j] + 1) {
@@ -27,6 +26,6 @@ func lis(_ arr : inout [Int]) -> Int {
 
 // Testing code.
 var arr : [Int] = [10, 12, 9, 23, 25, 55, 49, 70];
-print("Length of lis is " + String(LargestIncreasingSubseq.lis( &arr)));
+print("Length of lis is", lis( &arr));
 
 // Length of lis is 6

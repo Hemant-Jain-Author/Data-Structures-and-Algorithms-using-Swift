@@ -38,15 +38,7 @@ class TST {
 	
 	func find(_ word : String) -> Bool {
 		let str : [Character] = Array(word.lowercased())
-
-		let ret = self.findUtil(curr : self.root, word : str, wordIndex : 0)
-		print(word,terminator:" ")
-		if ret {
-			print(" Found ",terminator:" ")
-		} else {
-			print(" Not Found ",terminator:" ")
-		}
-		return ret
+		return self.findUtil(curr : self.root, word : str, wordIndex : 0)
 	}
 
 	func findUtil(curr : Node?, word : [Character], wordIndex : Int) -> Bool {
@@ -72,8 +64,6 @@ let tt = TST()
 tt.insert("banana")
 tt.insert("apple")
 tt.insert("mango")
-print("Search results for apple, banana, grapes and mango :")
-print(tt.find("apple"))
-print(tt.find("banana"))
-print(tt.find("mango"))
-print(tt.find("grapes"))
+print("Apple Found :", tt.find("apple"))
+print("Banana Found :", tt.find("banana"))
+print("Grapes Found :", tt.find("grapes"))

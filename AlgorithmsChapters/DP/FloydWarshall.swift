@@ -42,7 +42,7 @@ func printSolution(_ dist : inout [[Int]], _ V : Int) {
 		while (j < V) {
 			if (dist[i][j] == INF) {print("INF ",terminator: "");
 			} else {
-				print(String(dist[i][j]) + " ",terminator: "");
+				print(String(dist[i][j]), terminator: " ");
 			}
 			j += 1;
 		}

@@ -90,7 +90,7 @@ func minCoinsBU(_ coins : inout [Int], _ n : Int, _ val : Int) -> Int {
 func printCoinsUtil(_ cvalue : inout [Int], _ val : Int) {
 	if (val > 0) {
 		printCoinsUtil( &cvalue,val - cvalue[val]);
-		print(String(cvalue[val]) + " ",terminator: "");
+		print(String(cvalue[val]), terminator: " ");
 	}
 }
 

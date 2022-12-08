@@ -58,7 +58,6 @@ stk.push(3);
 print("Stack pop : ", stk.pop());
 print("Stack pop : ", stk.pop());
 
-
 /*
 Stack pop : 3
 Stack pop : 2

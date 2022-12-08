@@ -2,12 +2,14 @@ class Stack<T> {
 	var stk = [T]()
 	
 	public init() {}
+    
+    /* Other methods */
 
-	public var isEmpty : Bool {
+	public func isEmpty() -> Bool {
 		return stk.isEmpty
 	}
 	
-	public var count : Int {
+	public func size() -> Int {
 		return stk.count
 	}
 
@@ -25,15 +27,23 @@ class Stack<T> {
 	public func top() -> T? {
 		return stk.last
 	}
+
+	public func display() {
+		print(stk)
+	}
+
 }
 
-
+// Testing code
 var s = Stack<Int>()
 s.push(1)
 s.push(2)
 s.push(3)
+s.display()
+print(s.pop()!)
+print(s.pop()!)
 
-while !s.isEmpty {
-	let temp : Int = s.pop()!
-	print(temp)
-}
+
+// [1, 2, 3]
+// 3
+// 2

@@ -126,67 +126,57 @@ func kthSmallest(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 }
 
 func kthSmallest2(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
-	let pq = Heap<Int>(true);
+	let hp = Heap<Int>(true);
 	var i : Int = 0;
-	while (i < size)
-	{
-		pq.add(arr[i]);
+	while (i < size) {
+		hp.add(arr[i]);
 		i += 1;
 	}
-	
 	i = 0;
-	while (i < k - 1)
-	{
-		_ = pq.remove();
+	while (i < k - 1) {
+		_ = hp.remove();
 		i += 1;
 	}
-	
-	return pq.peek()!;
+	return hp.peek()!;
 }
 
 func kthSmallest3(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
-	let pq = Heap<Int>(false);
+	let hp = Heap<Int>(false);
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		if (i < k) {
-			pq.add(arr[i]);
-		}
-		else
-		{
-			if (pq.peek()! > arr[i]) {
-				pq.add(arr[i]);
-				_ = pq.remove();
+			hp.add(arr[i]);
+		} else {
+			if (hp.peek()! > arr[i]) {
+				hp.add(arr[i]);
+				_ = hp.remove();
 			}
 		}
 		i += 1;
 	}
 	
-	return pq.peek()!;
+	return hp.peek()!;
 }
 
 func kthLargest(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 	var value : Int = 0;
-	let pq = Heap<Int>(false);
+	let hp = Heap<Int>(false);
 	var i : Int = 0;
-	while (i < size)
-	{
-		pq.add(arr[i]);
+	while (i < size) {
+		hp.add(arr[i]);
 		i += 1;
 	}
 	
 	i = 0;
-	while (i < k)
-	{
-		value = pq.remove()!;
+	while (i < k) {
+		value = hp.remove()!;
 		i += 1;
 	}
 	return value;
 }
 
 // Testing code.
-func main1()
-{
+func main1() {
 	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
 	print("Kth Smallest :: " + String(kthSmallest( &arr,arr.count,3)));
 	var arr2 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -209,8 +199,7 @@ func isMinHeap(_ arr : inout [Int], _ size : Int) -> Bool
 	
 	var parent : Int = 0;
 	// last element index size - 1
-	while (parent < (size / 2 + 1))
-	{
+	while (parent < (size / 2 + 1)) {
 		lchild = parent * 2 + 1;
 		rchild = parent * 2 + 2;
 		// heap property check.
@@ -228,8 +217,7 @@ func isMaxHeap(_ arr : inout [Int], _ size : Int) -> Bool
 	var rchild : Int;
 	var parent : Int = 0;
 	// last element index size - 1
-	while (parent < (size / 2 + 1))
-	{
+	while (parent < (size / 2 + 1)) {
 		lchild = parent * 2 + 1;
 		rchild = lchild + 1;
 		// heap property check.
@@ -244,8 +232,7 @@ func isMaxHeap(_ arr : inout [Int], _ size : Int) -> Bool
 
 
 // Testing code.
-func main2()
-{
+func main2() {
 	var arr3 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
 	print("isMaxHeap :: " + String(isMaxHeap( &arr3,arr3.count)));
 	var arr4 : [Int] = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -258,8 +245,7 @@ func kSmallestProduct(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 	arr = arr.sorted(by: <);
 	var product : Int = 1;
 	var i : Int = 0;
-	while (i < k)
-	{
+	while (i < k) {
 		product *= arr[i];
 		i += 1;
 	}
@@ -267,28 +253,24 @@ func kSmallestProduct(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 	return product;
 }
 
-func swap(_ arr : inout [Int], _ i : Int, _ j : Int)
-{
+func swap(_ arr : inout [Int], _ i : Int, _ j : Int) {
 	let temp : Int = arr[i];
 	arr[i] = arr[j];
 	arr[j] = temp;
 }
 
-func quickSelectUtil(_ arr : inout [Int], _ lower : Int, _ upper : Int, _ k : Int)
-{
+func quickSelectUtil(_ arr : inout [Int], _ lower : Int, _ upper : Int, _ k : Int) {
 	var lower = lower
 	var upper = upper
 
-	if (upper <= lower)
-	{
+	if (upper <= lower) {
 		return;
 	}
 	
 	let pivot : Int = arr[lower];
 	let start : Int = lower;
 	let stop : Int = upper;
-	while (lower < upper)
-	{
+	while (lower < upper) {
 		while (lower < upper && arr[lower] <= pivot) {
 			lower += 1;
 		}
@@ -301,13 +283,11 @@ func quickSelectUtil(_ arr : inout [Int], _ lower : Int, _ upper : Int, _ k : In
 	}
 	swap( &arr,upper,start);
 	// upper is the pivot position
-	if (k < upper)
-	{
+	if (k < upper) {
 		quickSelectUtil( &arr,start,upper - 1,k);
 	}
 	// pivot -1 is the upper for left sub array.
-	if (k > upper)
-	{
+	if (k > upper) {
 		quickSelectUtil( &arr,upper + 1,stop,k);
 	}
 }
@@ -316,8 +296,7 @@ func kSmallestProduct3(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 	quickSelectUtil( &arr,0,size - 1,k);
 	var product : Int = 1;
 	var i : Int = 0;
-	while (i < k)
-	{
+	while (i < k) {
 		product *= arr[i];
 		i += 1;
 	}
@@ -325,37 +304,32 @@ func kSmallestProduct3(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 }
 
 func kSmallestProduct2(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
-	let pq = Heap<Int>(true);
+	let hp = Heap<Int>(true);
 	var i : Int = 0;
 	var product : Int = 1;
-	while (i < size)
-	{
-		pq.add(arr[i]);
+	while (i < size) {
+		hp.add(arr[i]);
 		i += 1;
 	}
 	
 	i = 0;
-	while (i < size && i < k)
-	{
-		product *= pq.remove()!;
+	while (i < size && i < k) {
+		product *= hp.remove()!;
 		i += 1;
 	}
 	return product;
 }
 
 func kSmallestProduct4(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
-	let pq = Heap<Int>(false);
+	let hp = Heap<Int>(false);
 	var i : Int = 0;
-	while (i < size)
-	{
+	while (i < size) {
 		if (i < k) {
-			pq.add(arr[i]);
-		}
-		else
-		{
-			if (pq.peek()! > arr[i]) {
-				pq.add(arr[i]);
-				_ = pq.remove();
+			hp.add(arr[i]);
+		} else {
+			if (hp.peek()! > arr[i]) {
+				hp.add(arr[i]);
+				_ = hp.remove();
 			}
 		}
 		i += 1;
@@ -363,19 +337,17 @@ func kSmallestProduct4(_ arr : inout [Int], _ size : Int, _ k : Int) -> Int {
 	
 	var product : Int = 1;
 	i = 0;
-	while (i < k)
-	{
-		product *= pq.remove()!;
+	while (i < k) {
+		product *= hp.remove()!;
 		i += 1;
 	}
 	return product;
 }
 
 // Testing code.
-func main3()
-{
-	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
-	print("Kth Smallest product:: " + String(kSmallestProduct( &arr,8,3)));
+func main3() {
+var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
+print("Kth Smallest product:: " + String(kSmallestProduct( &arr,8,3)));
 	var arr2 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
 	print("Kth Smallest product:: " + String(kSmallestProduct2( &arr2,8,3)));
 	var arr3 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -389,52 +361,44 @@ func main3()
 // Kth Smallest product:: 10
 // Kth Smallest product:: 10
 
-func printLargerHalf(_ arr : inout [Int], _ size : Int)
-{
+func printLargerHalf(_ arr : inout [Int], _ size : Int) {
 	arr = arr.sorted(by: <);
 	var i : Int = size / 2;
-	while (i < size)
-	{
-		print(String(arr[i]) + " ",terminator: "");
+	while (i < size) {
+		print(String(arr[i]), terminator: " ");
 		i += 1;
 	}
 	print();
 }
 
-func printLargerHalf2(_ arr : inout [Int], _ size : Int)
-{
-	let pq = Heap<Int>(true);
+func printLargerHalf2(_ arr : inout [Int], _ size : Int) {
+	let hp = Heap<Int>(true);
 	var i : Int = 0;
-	while (i < size)
-	{
-		pq.add(arr[i]);
+	while (i < size) {
+		hp.add(arr[i]);
 		i += 1;
 	}
 	
 	i = 0;
-	while (i < size / 2)
-	{
-		_ = pq.remove();
+	while (i < size / 2) {
+		_ = hp.remove();
 		i += 1;
 	}
-	pq.display();
+	hp.display();
 }
 
-func printLargerHalf3(_ arr : inout [Int], _ size : Int)
-{
+func printLargerHalf3(_ arr : inout [Int], _ size : Int) {
 	quickSelectUtil( &arr,0,size - 1,size / 2);
 	var i : Int = size / 2;
-	while (i < size)
-	{
-		print(String(arr[i]) + " ",terminator: "");
+	while (i < size) {
+		print(String(arr[i]), terminator: " ");
 		i += 1;
 	}
 	print();
 }
 
 // Testing code.
-func main4()
-{
+func main4() {
 	var arr : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
 	printLargerHalf( &arr,8);
 	var arr2 : [Int] = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -446,49 +410,39 @@ func main4()
 // [6, 7, 7, 8] 
 // 6 7 7 8
 
-func sortK(_ arr : inout [Int], _ size : Int, _ k : Int)
-{
-	let pq = Heap<Int>(true);
+func sortK(_ arr : inout [Int], _ size : Int, _ k : Int) {
+	let hp = Heap<Int>(true);
 	var i : Int = 0;
-	while (i < k)
-	{
-		pq.add(arr[i]);
+	while (i < k) {
+		hp.add(arr[i]);
 		i += 1;
 	}
 	
 	var index : Int = 0;
 	i = k;
-	while (i < size)
-	{
-		arr[index] = pq.remove()!;
+	while (i < size) {
+		arr[index] = hp.remove()!;
 		index += 1
-		pq.add(arr[i]);
+		hp.add(arr[i]);
 		i += 1;
 	}
 	
-	while (pq.length > 0)
-	{
-		arr[index] = pq.remove()!;
+	while (hp.length > 0) {
+		arr[index] = hp.remove()!;
 		index += 1
 	}
 }
 
 // Testing Code
-func main5()
-{
+func main5() {
 	let k : Int = 3;
 	var arr : [Int] = [1, 5, 4, 10, 50, 9];
 	let size : Int = arr.count;
 	sortK( &arr,size,k);
-	var i : Int = 0;
-	while (i < size)
-	{
-		print(String(arr[i]) + " ",terminator: "");
-		i += 1;
-	}
+	print(arr);
 }
 
-// 1 4 5 9 10 50
+// [1, 4, 5, 9, 10, 50]
 
 main1();
 main2();

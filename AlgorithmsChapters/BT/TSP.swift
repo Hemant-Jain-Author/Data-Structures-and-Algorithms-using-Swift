@@ -1,7 +1,7 @@
 import Foundation;
 
 // Function to find the minimum weight Hamiltonian Cycle
-func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int, _ pCost : Int, _ visited : inout [Bool], _ ans : inout Int, _ ansPath : inout [Int]) -> Int {
+func tspUtil(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int, _ pCost : Int, _ visited : inout [Bool], _ ans : inout Int, _ ansPath : inout [Int]) -> Int {
 	if (pCost > ans) {
 		return ans;
 	}
@@ -23,7 +23,7 @@ func tsp(_ graph : inout [[Int]], _ n : Int, _ path : inout [Int], _ pSize : Int
 		if (visited[i] == false && graph[curr][i] > 0) {
 			visited[i] = true;
 			path[pSize] = i;
-			ans = tsp( &graph,n, &path,pSize + 1,pCost + graph[curr][i], &visited, &ans, &ansPath);
+			ans = tspUtil( &graph,n, &path,pSize + 1,pCost + graph[curr][i], &visited, &ans, &ansPath);
 			visited[i] = false;
 		}
 		i += 1;
@@ -38,14 +38,13 @@ func tsp(_ graph : inout [[Int]], _ n : Int) {
 	path[0] = 0;
 	visited[0] = true;
 	var ans : Int = Int.max;
-
-	ans = tsp( &graph,n, &path, 1, 0, &visited, &ans, &ansPath);
+	ans = tspUtil( &graph,n, &path, 1, 0, &visited, &ans, &ansPath);
 
 	print("Path length : " + String(ans));
 	print("Path : ",terminator: "");
 	var i : Int = 0;
 	while (i <= n) {
-		print(String(ansPath[i]) + " ",terminator: "");
+		print(String(ansPath[i]), terminator: " ");
 		i += 1;
 	}
 }

@@ -51,7 +51,7 @@ class BTree {
 		while (i < node!.n) {
 			if (node!.leaf == false) {self.printInOrder(node!.arr[i]);
 			}
-			print(String(node!.keys[i]) + " ",terminator: "");
+			print(String(node!.keys[i]) ,terminator: " ");
 			i += 1;
 		}
 

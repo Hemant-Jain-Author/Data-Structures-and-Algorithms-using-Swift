@@ -30,63 +30,63 @@ class rangeMaxST {
         return self.segArr[index];
     }
 
-    func getMax(_ start : Int, _ end : Int) -> Int {
-        // Check for error conditions.
-        if (start > end || start < 0 || end > self.n - 1) {
-            print("Invalid Input.");
-            return Int.min;
-        }
-        return self.getMaxUtil(0,self.n - 1,start,end,0);
+func getMax(_ start : Int, _ end : Int) -> Int {
+    // Check for error conditions.
+    if (start > end || start < 0 || end > self.n - 1) {
+        print("Invalid Input.");
+        return Int.min;
     }
+    return self.getMaxUtil(0,self.n - 1,start,end,0);
+}
 
-    func getMaxUtil(_ segStart : Int, _ segEnd : Int, _ queryStart : Int, _ queryEnd : Int, _ index : Int) -> Int {
-        if (queryStart <= segStart && segEnd <= queryEnd) { // complete overlapping case.
-            return self.segArr[index];
-        }
-		
-        if (segEnd < queryStart || queryEnd < segStart) {  // no overlapping case.
-            return Int.min;
-        }
-
-        // Segment tree is partly overlaps with the query range.
-        let mid : Int = (segStart + segEnd) / 2;
-        return max(self.getMaxUtil(segStart,mid,queryStart,queryEnd,2 * index + 1),self.getMaxUtil(mid + 1,segEnd,queryStart,queryEnd,2 * index + 2));
-    }
-
-    func update(_ ind : Int, _ val : Int) {
-        // Check for error conditions.
-        if (ind < 0 || ind > self.n - 1) {
-            print("Invalid Input.");
-            return;
-        }
-        // Update the values in segment tree
-        _ = self.updateUtil(0,self.n - 1,ind,val,0);
-    }
-
-    // Always min inside valid range will be returned.
-    func updateUtil(_ segStart : Int, _ segEnd : Int, _ ind : Int, _ val : Int, _ index : Int) -> Int {
-        // Update index lies outside the range of current segment.
-        // So minimum will not change.
-        if (ind < segStart || ind > segEnd) {
-            return self.segArr[index];
-        }
-        // If the input index is in range of this node, then update the
-        // value of the node and its children
-        if (segStart == segEnd) {
-            if (segStart == ind) {
-                // Index value need to be updated.
-                self.segArr[index] = val;
-                return val;
-            } else {
-                return self.segArr[index];
-            }
-        }
-        let mid : Int = (segStart + segEnd) / 2;
-        // Current node value is updated with min.
-        self.segArr[index] = max(self.updateUtil(segStart,mid,ind,val,2 * index + 1),self.updateUtil(mid + 1,segEnd,ind,val,2 * index + 2));
-        // Value of diff is propagated to the parent node.
+func getMaxUtil(_ segStart : Int, _ segEnd : Int, _ queryStart : Int, _ queryEnd : Int, _ index : Int) -> Int {
+    if (queryStart <= segStart && segEnd <= queryEnd) { // complete overlapping case.
         return self.segArr[index];
     }
+	
+    if (segEnd < queryStart || queryEnd < segStart) {  // no overlapping case.
+        return Int.min;
+    }
+
+    // Segment tree is partly overlaps with the query range.
+    let mid : Int = (segStart + segEnd) / 2;
+    return max(self.getMaxUtil(segStart,mid,queryStart,queryEnd,2 * index + 1),self.getMaxUtil(mid + 1,segEnd,queryStart,queryEnd,2 * index + 2));
+}
+
+func update(_ ind : Int, _ val : Int) {
+    // Check for error conditions.
+    if (ind < 0 || ind > self.n - 1) {
+        print("Invalid Input.");
+        return;
+    }
+    // Update the values in segment tree
+    _ = self.updateUtil(0,self.n - 1,ind,val,0);
+}
+
+// Always min inside valid range will be returned.
+func updateUtil(_ segStart : Int, _ segEnd : Int, _ ind : Int, _ val : Int, _ index : Int) -> Int {
+    // Update index lies outside the range of current segment.
+    // So minimum will not change.
+    if (ind < segStart || ind > segEnd) {
+        return self.segArr[index];
+    }
+    // If the input index is in range of this node, then update the
+    // value of the node and its children
+    if (segStart == segEnd) {
+        if (segStart == ind) {
+            // Index value need to be updated.
+            self.segArr[index] = val;
+            return val;
+        } else {
+            return self.segArr[index];
+        }
+    }
+    let mid : Int = (segStart + segEnd) / 2;
+    // Current node value is updated with min.
+    self.segArr[index] = max(self.updateUtil(segStart,mid,ind,val,2 * index + 1),self.updateUtil(mid + 1,segEnd,ind,val,2 * index + 2));
+    // Value of diff is propagated to the parent node.
+    return self.segArr[index];
+}
 }
 
 var arr : [Int] = [1, 8, 2, 7, 3, 6, 4, 5];

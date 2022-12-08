@@ -2,10 +2,8 @@ import Foundation;
 
 func lbs(_ arr : inout [Int]) -> Int {
 	let n : Int = arr.count;
-	// Initialize LIS values for all indexes as 1.
-	var lis : [Int] = Array(repeating: 1, count: n);
-	// Initialize LDS values for all indexes as 1.
-	var lds : [Int] = Array(repeating: 1, count: n);
+	var lis : [Int] = Array(repeating: 1, count: n);// Initialize LIS values for all indexes as 1.
+	var lds : [Int] = Array(repeating: 1, count: n); // Initialize LDS values for all indexes as 1.
 	var mx : Int = 0;
 	
 	// Populating LIS values in bottom up manner.
@@ -44,6 +42,6 @@ func lbs(_ arr : inout [Int]) -> Int {
 
 // Testing code.
 var arr : [Int] = [1, 6, 3, 11, 1, 9, 5, 12, 3, 14, 6, 17, 3, 19, 2, 19];
-print("Length of lbs is " + String(LargestBitonicSubseq.lbs( &arr)));
+print("Length of lbs is", lbs( &arr));
 
 // Length of lbs is 8

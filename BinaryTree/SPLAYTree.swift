@@ -247,7 +247,7 @@ class SPLAYTree {
         // In order
         if (node != nil) {
             self.printInOrder(node!.left);
-            print(String(node!.data) + " ",terminator: "");
+            print(String(node!.data) ,terminator: " ");
             self.printInOrder(node!.right);
         }
     }   

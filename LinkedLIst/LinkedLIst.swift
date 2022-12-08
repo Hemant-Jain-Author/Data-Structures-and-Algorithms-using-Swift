@@ -28,7 +28,7 @@ class List {
 		return (head.value, true)
 	}
 	// Other Methods.
-	
+
 public func addHead(_ value : Int) {
 	self.head = Node(value, self.head)
 	self.size += 1
@@ -194,6 +194,7 @@ public func removeDuplicate() {
 		}
 	}
 }
+
 public func copyListReversed() -> List {
 	var tempNode : Node? = nil
 	var tempNode2 : Node? = nil
@@ -246,6 +247,25 @@ private func compareListUtil(head1 : Node?, head2 : Node?) -> Bool {
 		return compareListUtil(head1 : head1!.next, head2 : head2!.next)
 	}
 }
+
+
+func compareList2(_ ll2 : List) -> Bool {
+    var head1 : Node? = self.head;
+    var head2 : Node? = ll2.head;
+    while (head1 != nil && head2 != nil) {
+        if (head1!.value != head2!.value) {
+            return false;
+        }
+        head1 = head1!.next;
+        head2 = head2!.next;
+    }
+    if (head1 == nil && head2 == nil) {
+        return true;
+    }
+    return false;
+}
+
+
 
 public func findLength() -> Int {
 	var curr = self.head
@@ -312,15 +332,13 @@ public func makeLoop() {
 		temp = temp!.next
 	}
 }
+
 /*
-func loopDetect() -> Bool
-{
+func loopDetect() -> Bool {
 	var curr : Node? = self.head;
 	let hs : Set<Node> = Set<Node>();
-	while (curr != nil)
-	{
-		if (hs.contains(curr))
-		{
+	while (curr != nil) {
+		if (hs.contains(curr)) {
 			print("loop found");
 			return true;
 		}
@@ -331,6 +349,7 @@ func loopDetect() -> Bool
 	return false;
 }
 */
+
 public func loopDetect2() -> Bool {
 	var slowPtr = self.head
 	var fastPtr = self.head
@@ -461,40 +480,6 @@ public func findIntersection(_ ll2 : List) -> Int {
 	}
 	return head!.value
 }
-
-    func compareList(_ ll : List?) -> Bool {
-        return self.compareList(self.head,ll!.head);
-    }
-
-    func compareList(_ head1 : Node?, _ head2 : Node?) -> Bool {
-        if (head1 == nil && head2 == nil) {
-            return true;
-        } else if ((head1 == nil) || (head2 == nil) || (head1!.value != head2!.value)) {
-            return false;
-        }
-        else
-        {
-            return self.compareList(head1!.next,head2!.next);
-        }
-    }
-
-    func compareList2(_ ll2 : List?) -> Bool
-    {
-        var head1 : Node? = self.head;
-        var head2 : Node? = ll2!.head;
-        while (head1 != nil && head2 != nil) {
-            if (head1!.value != head2!.value) {
-                return false;
-            }
-            head1 = head1!.next;
-            head2 = head2!.next;
-        }
-        if (head1 == nil && head2 == nil) {
-            return true;
-        }
-        return false;
-    }
-
     func nthNodeFromBeginning(_ index : Int) -> Int {
         if (index > self.length() || index < 1) {
             return Int.max;
@@ -593,9 +578,8 @@ func main1() {
 	ll.addHead(3);
 	ll.display();
 	print("Size : " + String(ll.length()));
-	print("Size : " + String(ll.findLength()));
 	print("Is empty : " + String(ll.isEmpty()));
-	//print("Peek : " + String(ll.peek()));
+	print("Size : " + String(ll.findLength()));
 	ll.addTail(4);
 	ll.display();
 }
@@ -623,18 +607,18 @@ func main2() {
 
 // Testing code.
 func main3() {
-	let ll : List = List();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(1);
-	ll.addHead(3);
-	ll.display();
-	print("deleteNode : " + String(ll.deleteNode(2)));
-	ll.display();
-	print("deleteNodes : " + String(ll.deleteNodes(1)));
-	ll.display();
+let ll : List = List();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(1);
+ll.addHead(3);
+ll.display();
+print("deleteNode : " + String(ll.deleteNode(2)));
+ll.display();
+print("deleteNodes : " + String(ll.deleteNodes(1)));
+ll.display();
 }
 // 3 1 2 1 2 1 
 // deleteNode : true
@@ -644,19 +628,19 @@ func main3() {
 
 // Testing code.
 func main4() {
-	let ll : List = List();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.display();
+let ll : List = List();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.display();
 	ll.reverse();
 	ll.display();
 	ll.reverseRecurse();
 	ll.display();
-	let l2 : List = ll.copyList();
-	l2.display();
-	let l3 : List = ll.copyListReversed();
-	l3.display();
+let l2 : List = ll.copyList();
+l2.display();
+let l3 : List = ll.copyListReversed();
+l3.display();
 }
 // 3 2 1 
 // 1 2 3 
@@ -666,16 +650,16 @@ func main4() {
 
 // Testing code.
 func main5() {
-	let ll : List = List();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.display();
-	let l2 : List = ll.copyList();
-	l2.display();
-	let l3 : List = ll.copyListReversed();
-	l3.display();
-	print("compareList : " + String(ll.compareList(l2)));
+let ll : List = List();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.display();
+let l2 : List = ll.copyList();
+l2.display();
+let l3 : List = ll.copyListReversed();
+l3.display();
+print("compareList : " + String(ll.compareList(l2)));
 	print("compareList : " + String(ll.compareList2(l2)));
 	print("compareList : " + String(ll.compareList(l3)));
 	print("compareList : " + String(ll.compareList2(l3)));
@@ -690,14 +674,13 @@ func main5() {
 
 // Testing code.
 func main6() {
-	let ll : List = List();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.addHead(4);
-	ll.display();
+let ll : List = List();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.addHead(4);
 	print(ll.nthNodeFromBeginning(2));
-	print(ll.nthNodeFromEnd(2));
+print(ll.nthNodeFromEnd(2));
 	print(ll.nthNodeFromEnd2(2));
 }
 // 3 2 1 
@@ -707,17 +690,16 @@ func main6() {
 
 // Testing code.
 func main7() {
-	let ll : List = List();
-	ll.sortedInsert(1);
-	ll.sortedInsert(2);
-	ll.sortedInsert(3);
-	ll.display();
-	ll.sortedInsert(1);
-	ll.sortedInsert(2);
-	ll.sortedInsert(3);
-	ll.display();
-	ll.removeDuplicate();
-	ll.display();
+let ll : List = List();
+ll.sortedInsert(1);
+ll.sortedInsert(2);
+ll.sortedInsert(3);
+ll.sortedInsert(1);
+ll.sortedInsert(2);
+ll.sortedInsert(3);
+ll.display();
+ll.removeDuplicate();
+ll.display();
 }
 // 1 2 3 
 // 1 1 2 2 3 3 
@@ -725,18 +707,18 @@ func main7() {
 
 // Testing code.
 func main8() {
-	let ll : List = List();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.display();
-	ll.makeLoop();
-	//print(ll.loopDetect());
-	print(ll.loopDetect2());
-	print(ll.reverseListLoopDetect());
-	print(ll.loopTypeDetect());
-	ll.removeLoop();
-	print(ll.reverseListLoopDetect());
+let ll : List = List();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.display();
+ll.makeLoop();
+//print(ll.loopDetect());
+print(ll.loopDetect2());
+print(ll.reverseListLoopDetect());
+print(ll.loopTypeDetect());
+ll.removeLoop();
+print(ll.loopDetect2());
 }
 // 3 2 1 
 // loop found
@@ -745,25 +727,25 @@ func main8() {
 
 // Testing code.
 func main9() {
-	let ll : List = List();
-	ll.addHead(1);
-	ll.addHead(2);
-	ll.addHead(3);
-	ll.addHead(4);
+let ll : List = List();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.addHead(4);
 
-	let ll2 : List = List();
-	ll.link(ll2, 2);
-	ll2.addHead(5);
-	ll2.addHead(6);
-	ll.display();
-	ll2.display();
-	
-	let val : Int = ll.findIntersection(ll2);
-	print("Intersection:: " + String(val));
+let ll2 : List = List();
+ll.link(ll2, 2);
+ll2.addHead(5);
+ll2.addHead(6);
+ll.display();
+ll2.display();
+
+let val : Int = ll.findIntersection(ll2);
+print("Intersection:: " + String(val));
 }
 
-// 4 2 1 
-// 5 3 2 1 
+// 4 3 2 1 
+// 6 5 2 1 
 // Intersection:: 2
 
 // Testing code.

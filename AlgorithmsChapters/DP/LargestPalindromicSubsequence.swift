@@ -29,6 +29,6 @@ func largestPalindromicSubseq(_ str : String) -> Int {
 
 // Testing code.
 let str : String = "ABCAUCBCxxCBA";
-print("Largest Palindromic Subseq: " + String(LargestPalindromicSubsequence.largestPalindromicSubseq(str)));
+print("Largest Palindromic Subseq:", largestPalindromicSubseq(str));
 
 // Largest Palindromic Subseq: 9

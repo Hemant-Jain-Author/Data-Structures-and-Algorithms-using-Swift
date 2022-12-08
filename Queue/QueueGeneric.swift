@@ -3,11 +3,11 @@ class Queue<T> {
 
 	public init() {}
 
-	public var isEmpty: Bool {
+	public func isEmpty() -> Bool {
 		return que.count == 0
 	}
 
-	public var count: Int {
+	public func size() -> Int {
 		return que.count
 	}
 	
@@ -25,15 +25,28 @@ class Queue<T> {
 	public func front() -> T? {
 		return que.first
 	}
+
+	public func display() {
+		print("Queue :", que)
+	}
 }
 
 
 // Testing code
-var q = Queue<Int>()
-q.add(1)
-q.add(2)
-q.add(3)
-while !q.isEmpty {
-	let temp : Int = q.remove()!
-	print(temp)
-}
+var que  = Queue<Int>()
+que.add(1)
+que.add(2)
+que.add(3)
+que.display()
+print("IsEmpty :", que.isEmpty());
+print("Size :", que.size());
+print("Queue remove :" ,que.remove()!);
+print("Queue remove :" ,que.remove()!);
+
+/*
+Queue : [1, 2, 3]
+IsEmpty : false
+Size : 3
+Queue remove : 1
+Queue remove : 2
+*/

@@ -3,14 +3,12 @@ import Foundation;
 func gridUniqueWays(_ m : Int, _ n : Int) -> Int {
 	var dp : [[Int]] = Array(repeating: Array(repeating: 0, count: n), count: m);
 	dp[0][0] = 1;
-
 	// Initialize first column.
 	var i : Int = 1;
 	while (i < m) {
 		dp[i][0] = dp[i - 1][0];
 		i += 1;
 	}
-	
 	// Initialize first row.
 	var j : Int = 1;
 	while (j < n) {

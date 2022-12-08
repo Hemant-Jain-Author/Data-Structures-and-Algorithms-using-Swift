@@ -2,6 +2,16 @@ class Stack<T> {
 	var stk = [T]()
 	
 	public init() {}
+    
+    /* Other methods */
+
+	public func isEmpty() -> Bool {
+		return stk.isEmpty
+	}
+	
+	public func size() -> Int {
+		return stk.count
+	}
 
 	public func push(_ value : T) {
 		stk.append(value)
@@ -15,35 +25,24 @@ class Stack<T> {
 	}
 	
 	public func top() -> T? {
-		if stk.isEmpty {
-			return nil
-		}
-		return stk.last!
-	}
-	
-	public func display() {
-		print(stk)	
+		return stk.last
 	}
 
-	public var isEmpty : Bool {
-		return stk.isEmpty
-	}
-	
-	public var count : Int {
-		return stk.count
+	public func display() {
+		print(stk)
 	}
 }
 
 class Queue<T> {
-	fileprivate var que = [T]()
+	private var que = [T]()
 
 	public init() {}
 
-	public var isEmpty: Bool {
-		return count == 0
+	public func isEmpty() -> Bool {
+		return que.isEmpty
 	}
 
-	public var count: Int {
+	public func size() -> Int {
 		return que.count
 	}
 	
@@ -59,10 +58,11 @@ class Queue<T> {
 	}
 
 	public func front() -> T? {
-		if que.isEmpty { 
-			return nil 
-		}
-		return que.first!
+		return que.first
+	}
+
+	public func display() {
+		print("Queue :", que)
 	}
 }
 
@@ -77,19 +77,9 @@ public class BinaryTree {
 			self.left = nil
 			self.right = nil
 		}
-
-		public init(_ value : Int, _ lc : Node?, _ rc : Node?) {
-			self.value = value
-			self.left = lc
-			self.right = rc
-		}
 	}
 
-	private var root : Node?
-
-	init() {
-		self.root = nil
-	}
+	private var root : Node? = nil
 
 	// Other Methods
 
@@ -265,10 +255,10 @@ func printLevelOrderLineByLine() {
 		que1.add(self.root!);
 	}
 
-	while (!que1.isEmpty || !que2.isEmpty) {
-		while (!que1.isEmpty ) {
+	while (!que1.isEmpty() || !que2.isEmpty()) {
+		while (!que1.isEmpty() ) {
 			let temp = que1.remove()!
-			print(String(temp.value) + " ",terminator: "");
+			print(String(temp.value) ,terminator: " ");
 			if (temp.left != nil) {
 				que2.add(temp.left!);
 			}
@@ -277,9 +267,9 @@ func printLevelOrderLineByLine() {
 			}
 		}
 		print();
-		while (!que2.isEmpty ) {
+		while (!que2.isEmpty() ) {
 			let temp = que2.remove()!
-			print(String(temp.value) + " ",terminator: "");
+			print(String(temp.value) ,terminator: " ");
 			if (temp.left != nil) {
 				que1.add(temp.left!);
 			}
@@ -299,11 +289,11 @@ func printLevelOrderLineByLine2() {
 		que.add(self.root!);
 	}
 
-	while (que.count != 0) {
-		count = que.count;
+	while (que.size() != 0) {
+		count = que.size();
 		while (count > 0) {
 			temp = que.remove()!;
-			print(String(temp.value) + " ",terminator: "");
+			print(String(temp.value) ,terminator: " ");
 			if (temp.left != nil) {
 				que.add(temp.left!);
 			}
@@ -325,10 +315,10 @@ func printSpiralTree() {
 		stk1.push(self.root!);
 	}
 
-	while (stk1.count != 0 || stk2.count != 0) {
-		while (stk1.count != 0) {
+	while (stk1.size() != 0 || stk2.size() != 0) {
+		while (stk1.size() != 0) {
 			temp = stk1.pop()!;
-			print(String(temp.value) + " ",terminator: "");
+			print(String(temp.value) ,terminator: " ");
 			if (temp.right != nil) {
 				stk2.push(temp.right!);
 			}
@@ -337,9 +327,9 @@ func printSpiralTree() {
 			}
 		}
 
-		while (stk2.count != 0) {
+		while (stk2.size() != 0) {
 			temp = stk2.pop()!;
-			print(String(temp.value) + " ",terminator: "");
+			print(String(temp.value) ,terminator: " ");
 			if (temp.left != nil) {
 				stk1.push(temp.left!);
 			}
@@ -646,9 +636,7 @@ private func sumAllBT(curr : Node?) -> Int {
 	guard let curr = curr else {
 		return 0
 	}
-	let rightSum = sumAllBT(curr : curr.right)
-	let leftSum = sumAllBT(curr : curr.left)
-	return rightSum + leftSum + curr.value
+	return sumAllBT(curr : curr.right) + sumAllBT(curr : curr.left) + curr.value
 }
 
 public func isBST3() -> Bool {
@@ -716,7 +704,7 @@ private func isBST2(curr : Node?, count : inout Int) -> Bool {
 		que.add(self.root!);
 	}
 
-	while (que.count != 0) {
+	while (que.size() != 0) {
 		temp = que.remove()!;
 		if (temp.left != nil) {
 			if (noChild == 1) {
@@ -901,20 +889,20 @@ private func trimOutsideRange(curr : Node?, min : Int, max : Int) -> Node? {
 	return curr
 }
 
-public func printDataInRange(min : Int, max : Int) {
-	printDataInRange(curr : self.root, min : min, max : max)
+public func printInRange(min : Int, max : Int) {
+	printInRange(curr : self.root, min : min, max : max)
 	print();
 }
 
-private func printDataInRange(curr : Node?, min : Int, max : Int) {
+private func printInRange(curr : Node?, min : Int, max : Int) {
 	guard let curr = curr else {
 		return
 	}
-	printDataInRange(curr : curr.left, min : min, max : max)
+	printInRange(curr : curr.left, min : min, max : max)
 	if curr.value >= min && curr.value <= max {
 		print(curr.value, terminator:" ")
 	}
-	printDataInRange(curr : curr.right, min : min, max : max)
+	printInRange(curr : curr.right, min : min, max : max)
 }
 
 public func floorBST(val : Int) -> Int {
@@ -1001,34 +989,25 @@ public func createBinarySearchTreeUtil(arr : [Int], start : Int, end : Int) -> N
 }
 
 func main1() {
-	let t = BinaryTree();
-	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-	t.createCompleteBinaryTree(arr:arr);
+let t = BinaryTree();
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+t.createCompleteBinaryTree(arr:arr);
 	t.printPreOrder();
 	// 1 2 4 8 9 5 10 3 6 7 
 
 	t.printPostOrder();
 	// 8 9 4 10 5 2 6 7 3 1 
 
-	t.printInOrder();
-	// 8 4 9 2 10 5 1 6 3 7 
-/*
-	t.iterativePreOrder();
-	// 1 2 4 8 9 5 10 3 6 7 
+t.printInOrder();
+// 8 4 9 2 10 5 1 6 3 7 
 
-	t.iterativePostOrder();
-	// 8 9 4 10 5 2 6 7 3 1 
-
-	t.iterativeInOrder();
-	// 8 4 9 2 10 5 1 6 3 7 
-*/
-	t.printBreadthFirst();
+t.printBreadthFirst();
 	// 1 2 3 4 5 6 7 8 9 10 
 
-	t.printDepthFirst();
+t.printDepthFirst();
 	// 1 3 7 6 2 5 10 4 9 8
 
-	t.printLevelOrderLineByLine();
+t.printLevelOrderLineByLine();
 	/*
 	1 
 	2 3 
@@ -1044,12 +1023,12 @@ func main1() {
 	8 9 10 
 	*/
 
-	t.printSpiralTree();
+t.printSpiralTree();
 	// 1 2 3 7 6 5 4 8 9 10 
 
-	t.nthInOrder(index :2);
-	t.nthPostOrder(index :2);
-	t.nthPreOrder(index :2);
+t.nthInOrder(index :2);
+t.nthPostOrder(index :2);
+t.nthPreOrder(index :2);
 
 	/*
 	4
@@ -1057,7 +1036,7 @@ func main1() {
 	2
 	*/
 
-	t.printAllPath();
+t.printAllPath();
 
 	/*
 [1, 3, 7]
@@ -1069,32 +1048,32 @@ func main1() {
 }
 
 func main2() {
-	let t = BinaryTree();
-	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-	t.createCompleteBinaryTree(arr:arr);
+let t = BinaryTree();
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+t.createCompleteBinaryTree(arr:arr);
 
-	print(t.numNodes());
+print(t.numNodes());
 	// 10
 
-	print(t.sumAllBT());
+print(t.sumAllBT());
 	// 55
 
-	print(t.numLeafNodes());
+print(t.numLeafNodes());
 	// 5
 
-	print(t.numFullNodesBT());
+print(t.numFullNodesBT());
 	// 4
 
-	print(t.searchBT(value:9));
+print(t.searchBT(value:9));
 	// true
 
-	print(t.findMaxBT());
+print(t.findMaxBT());
 	// 10
 
-	print(t.treeDepth());
+print(t.treeDepth());
 	// 4
 
-	print(t.maxLengthPathBT());
+print(t.maxLengthPathBT());
 	// 6
 }
 
@@ -1103,23 +1082,23 @@ func main3() {
 	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 	t.createCompleteBinaryTree(arr:arr);
 
-	let t2 = t.copyTree();
+let t2 = t.copyTree();
 	t2.printInOrder();
 	/*
 8 4 9 2 10 5 1 6 3 7 
 	*/
-	let t3 = t.copyMirrorTree();
-	t3.printInOrder();
+let t3 = t.copyMirrorTree();
+t3.printInOrder();
 	/*
 7 3 6 1 5 10 2 9 4 8
 	*/
-	print(t.isEqual(t2:t2));
+print(t.isEqual(t2:t2));
 	/*
 	true
 	*/
-	print(t.isHeap());
+print(t.isHeap());
 	print(t.isHeap2());
-	print(t.isCompleteTree());
+print(t.isCompleteTree());
 	print(t.isCompleteTree2());
 	/*
 	true
@@ -1130,31 +1109,31 @@ func main3() {
 }
 
 func main4() {
-	let t = BinaryTree();
-    t.add(value:6);
-    t.add(value:4);
-    t.add(value:2);
-    t.add(value:5);
-    t.add(value:1);
-    t.add(value:3);
-    t.add(value:8);
-    t.add(value:7);
-    t.add(value:9);
-    t.add(value:10);
-	t.printInOrder();
+let t = BinaryTree();
+t.add(value:6);
+t.add(value:4);
+t.add(value:2);
+t.add(value:5);
+t.add(value:1);
+t.add(value:3);
+t.add(value:8);
+t.add(value:7);
+t.add(value:9);
+t.add(value:10);
+t.printInOrder();
 
 	/*
 	1 2 3 4 5 6 7 8 9 10 
 	*/
-	print(t.find(value:3));
-	print(t.find(value:16));
+print(t.find(value:3));
+print(t.find(value:16));
 	/*
 	true
 	false
 	*/
 	print(t.isBST());
 	print(t.isBST2());
-	print(t.isBST3());
+print(t.isBST3());
 	/*
 	true
 	true
@@ -1163,14 +1142,14 @@ func main4() {
 }
 
 func main5() {
-	let t = BinaryTree();
-	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-	t.createBinarySearchTree(arr);
-	print(t.findMin());
-	print(t.findMax());
-	print(t.lcaBST(3, 4));
-	print(t.lcaBST(1, 4));
-	print(t.lcaBST(10, 4));
+let t = BinaryTree();
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+t.createBinarySearchTree(arr);
+print(t.findMin());
+print(t.findMax());
+print(t.lcaBST(3, 4));
+print(t.lcaBST(1, 4));
+print(t.lcaBST(10, 4));
 }
 
 /*
@@ -1185,10 +1164,10 @@ func main6() {
 	let t = BinaryTree();
 	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 	t.createBinarySearchTree(arr);
-	t.printInOrder();
-	t.printDataInRange(min:4, max:7);
-	t.trimOutsideRange(min:4, max:7);
-	t.printInOrder();
+t.printInOrder();
+t.printInRange(min:4, max:7);
+t.trimOutsideRange(min:4, max:7);
+t.printInOrder();
 }
 
 /*
@@ -1199,15 +1178,19 @@ func main6() {
 
 func main7() {
 	let t = BinaryTree();
-	let arr = [1, 2, 3, 4, 6, 7, 8, 9, 10]
+let arr = [1, 2, 3, 4, 6, 7, 8, 9, 10]
 	t.createBinarySearchTree(arr);
+	t.printInOrder();
+	t.deleteNode(value : 6);
+	t.printInOrder();
+	
 	print(t.ancestor(first:1, second:10)!.value);
 	// 6
 
 	print(t.ceilBST(val:5));
 	// 6
 
-	print(t.floorBST(val:5));
+print(t.floorBST(val:5));
 	// 4
 
 }
@@ -1221,7 +1204,7 @@ func main8() {
 
 	print("Before delete operation.");
 	t.printInOrder();
-	t.deleteNode(value:2);
+t.deleteNode(value:2);
 	print("After delete operation.");
 	t.printInOrder();
 }

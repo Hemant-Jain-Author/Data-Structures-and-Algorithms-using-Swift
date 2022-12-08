@@ -37,7 +37,6 @@ func matrixChainMulTD(_ p : inout [Int], _ n : Int) -> Int {
 	return matrixChainMulTD( &dp, &p,1,n - 1);
 }
 
-// Function for matrix chain multiplication
 func matrixChainMulTD(_ dp : inout [[Int]], _ p : inout [Int], _ i : Int, _ j : Int) -> Int {
 	// Base Case
 	if (dp[i][j] != Int.max) {
@@ -126,10 +125,10 @@ func matrixChainMulBU2(_ p : inout [Int], _ n : Int) -> Int {
 // Testing code.
 var arr : [Int] = [1, 2, 3, 4];
 let n : Int = arr.count;
-print("Matrix Chain Multiplication is: " + String(matrixChainMulBruteForce( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(matrixChainMulTD( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(matrixChainMulBU( &arr,n)));
-print("Matrix Chain Multiplication is: " + String(matrixChainMulBU2( &arr,n)));
+print("Matrix Chain Multiplication is: ", matrixChainMulBruteForce( &arr,n));
+print("Matrix Chain Multiplication is: ", matrixChainMulTD( &arr,n));
+print("Matrix Chain Multiplication is: ", matrixChainMulBU( &arr,n));
+print("Matrix Chain Multiplication is: ", matrixChainMulBU2( &arr,n));
 
 /*
 Matrix Chain Multiplication is: 18

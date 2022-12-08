@@ -270,7 +270,7 @@ func removeDuplicates(_ array : inout [Int], _ size : Int) -> [Int] {
 		}
 		i += 1;
 	}
-	return Array(array[0...(j + 1)])
+	return Array(array[0...j])
 }
 
 func removeDuplicates2(_ arr : inout [Int], _ size : Int) -> [Int] {
@@ -285,29 +285,22 @@ func removeDuplicates2(_ arr : inout [Int], _ size : Int) -> [Int] {
 		}
 		i += 1;
 	}
-	return Array(arr[0...j])
+	return Array(arr[0...j-1])
 }
 
 func main4() {
 	var first : [Int] = [1, 3, 5, 3, 9, 1, 30];
 	let ret : [Int] = removeDuplicates( &first,first.count);
-	var i : Int = 0;
-	while (i < ret.count) {
-		print(String(ret[i]) + " ",terminator: "");
-		i += 1;
-	}
+	print(ret)
 	
-	print();
 	var first2 : [Int] = [1, 3, 5, 3, 9, 1, 30];
 	let ret2 : [Int] = removeDuplicates2( &first2,first2.count);
-	i = 0;
-	while (i < ret2.count) {
-		print(String(ret2[i]) + " ",terminator: "");
-		i += 1;
-	}
-	print();
+	print(ret2)
 }
-// 1 3 5 9 30
+
+// [1, 3, 5, 9, 30]
+// [1, 3, 5, 9, 30]
+
 
 func findMissingNumber(_ arr : inout [Int], _ size : Int) -> Int {
 	var j : Int;
@@ -1365,9 +1358,7 @@ smallerThenTripletCount:: 4
 */
 
 func apTriplets(_ arr : inout [Int], _ size : Int) {
-	var i : Int = 1;
-	var j : Int;
-	var k : Int;
+	var i : Int = 1, j : Int, k : Int;
 	while (i < size - 1) {
 		j = i - 1;
 		k = i + 1;
@@ -1395,9 +1386,7 @@ func main20() {
 // AP Triplet:: 10 14 18
 
 func gpTriplets(_ arr : inout [Int], _ size : Int) {
-	var i : Int = 1;
-	var j : Int;
-	var k : Int;
+	var i : Int = 1, j : Int, k : Int;
 	while (i < size - 1) {
 		j = i - 1;
 		k = i + 1;
@@ -1426,9 +1415,7 @@ func main21() {
 // GP Triplet:: 4 8 16
 
 func numberOfTriangles(_ arr : inout [Int], _ size : Int) -> Int {
-	var i : Int = 0;
-	var j : Int;
-	var k : Int;
+	var i : Int = 0, j : Int, k : Int;
 	var count : Int = 0;
 	while (i < (size - 2)) {
 		j = i + 1;
@@ -1448,9 +1435,7 @@ func numberOfTriangles(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func numberOfTriangles2(_ arr : inout [Int], _ size : Int) -> Int {
-	var i : Int = 0;
-	var j : Int;
-	var k : Int;
+	var i : Int = 0, j : Int, k : Int;
 	var count : Int = 0;
 	arr = arr.sorted(by: <);
 	while (i < (size - 2)) {
@@ -1471,17 +1456,15 @@ func numberOfTriangles2(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func main22() {
-	var arr : [Int] = [1, 2, 3, 4, 5];
-	print(numberOfTriangles( &arr,arr.count));
+var arr : [Int] = [1, 2, 3, 4, 5];
+print(numberOfTriangles( &arr,arr.count));
 	print(numberOfTriangles2( &arr,arr.count));
 }
 // 3 
 // 3
 
 func getMax(_ arr : inout [Int], _ size : Int) -> Int {
-	var mx : Int = arr[0];
-	var count : Int = 1;
-	var maxCount : Int = 1;
+	var mx : Int = arr[0], count : Int = 1, maxCount : Int = 1;
 	var i : Int = 0;
 	while (i < size) {
 		count = 1;
@@ -1503,10 +1486,8 @@ func getMax(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func getMax2(_ arr : inout [Int], _ size : Int) -> Int {
-	var mx : Int = arr[0];
-	var maxCount : Int = 1;
-	var curr : Int = arr[0];
-	var currCount : Int = 1;
+	var mx : Int = arr[0], maxCount : Int = 1;
+	var curr : Int = arr[0], currCount : Int = 1;
 	arr = arr.sorted(by: <);
 	var i : Int = 1;
 	while (i < size) {
@@ -1527,8 +1508,7 @@ func getMax2(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func getMax3(_ arr : inout [Int], _ size : Int, _ range : Int) -> Int {
-	var mx : Int = arr[0];
-	var maxCount : Int = 1;
+	var mx : Int = arr[0], maxCount : Int = 1;
 	var count : [Int] = Array(repeating: 0, count: range);
 	var i : Int = 0;
 	while (i < size) {
@@ -1543,8 +1523,8 @@ func getMax3(_ arr : inout [Int], _ size : Int, _ range : Int) -> Int {
 }
 
 func main23() {
-	var first : [Int] = [1, 30, 5, 13, 9, 31, 5];
-	print(getMax( &first,first.count));
+var first : [Int] = [1, 30, 5, 13, 9, 31, 5];
+print(getMax( &first,first.count));
 	print(getMax2( &first,first.count));
 	print(getMax3( &first,first.count,50));
 }
@@ -1553,9 +1533,7 @@ func main23() {
 // 5
 
 func getMajority(_ arr : inout [Int], _ size : Int) -> Int {
-	var mx : Int = 0;
-	var count : Int = 0;
-	var maxCount : Int = 0;
+	var mx : Int = 0, count : Int = 0, maxCount : Int = 0;
 	var i : Int = 0;
 	while (i < size) {
 		var j : Int = i + 1;
@@ -1582,10 +1560,9 @@ func getMajority(_ arr : inout [Int], _ size : Int) -> Int {
 
 func getMajority2(_ arr : inout [Int], _ size : Int) -> Int {
 	let majIndex : Int = size / 2;
-	var candidate : Int;
+	var candidate : Int, count : Int = 0;
 	arr = arr.sorted(by: <);
 	candidate = arr[majIndex];
-	var count : Int = 0;
 	var i : Int = 0;
 	while (i < size) {
 		if (arr[i] == candidate) {
@@ -1602,9 +1579,7 @@ func getMajority2(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func getMajority3(_ arr : inout [Int], _ size : Int) -> Int {
-	var majIndex : Int = 0;
-	var count : Int = 1;
-	var candidate : Int;
+	var majIndex : Int = 0, count : Int = 1, candidate : Int;
 	var i : Int = 1;
 	while (i < size) {
 		if (arr[majIndex] == arr[i]) {
@@ -1638,8 +1613,8 @@ func getMajority3(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func main24() {
-	var first : [Int] = [1, 5, 5, 13, 5, 31, 5];
-	print(getMajority( &first,first.count));
+var first : [Int] = [1, 5, 5, 13, 5, 31, 5];
+print(getMajority( &first,first.count));
 	print(getMajority2( &first,first.count));
 	print(getMajority3( &first,first.count));
 }
@@ -1658,8 +1633,8 @@ func getMedian2(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func main25() {
-	var first : [Int] = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
-	print(getMedian( &first,first.count));
+var first : [Int] = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
+print(getMedian( &first,first.count));
 	print(getMedian( &first,first.count));
 }
 // 6
@@ -1672,14 +1647,12 @@ func searchBitonicArrayMax(_ arr : inout [Int], _ size : Int) -> Int {
 		}
 		i += 1;
 	}
-
 	print("error not a bitonic array");
 	return 0;
 }
 
 func searchBitonicArrayMax2(_ arr : inout [Int], _ size : Int) -> Int {
-	var start : Int = 0;
-	var end : Int = size - 1;
+	var start : Int = 0, end : Int = size - 1;
 	var mid : Int = (start + end) / 2;
 	var maximaFound : Int = 0;
 	if (size < 3) {
@@ -1719,9 +1692,7 @@ func searchBitonicArray(_ arr : inout [Int], _ size : Int, _ key : Int) -> Int {
 }
 
 func findMaxBitonicArray(_ arr : inout [Int], _ size : Int) -> Int {
-	var start : Int = 0;
-	var end : Int = size - 1;
-	var mid : Int;
+	var start : Int = 0, end : Int = size - 1, mid : Int;
 	if (size < 3) {
 		print("error");
 		return -1;
@@ -1744,18 +1715,17 @@ func findMaxBitonicArray(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func main26() {
-	var first : [Int] = [1, 5, 10, 13, 20, 30, 8, 7, 6];
-	print(searchBitonicArrayMax( &first,first.count));
+var first : [Int] = [1, 5, 10, 13, 20, 30, 8, 7, 6];
+print(searchBitonicArrayMax( &first,first.count));
 	print(searchBitonicArrayMax2( &first,first.count));
-	print(searchBitonicArray( &first,first.count,7));
+print(searchBitonicArray( &first,first.count,7));
 }
 // 30
 // 30
 // 7
 
 func findKeyCount(_ arr : inout [Int], _ size : Int, _ key : Int) -> Int {
-	var count : Int = 0;
-	var i : Int = 0;
+	var count : Int = 0, i : Int = 0;
 	while (i < size) {
 		if (arr[i] == key) {
 			count += 1;
@@ -1806,8 +1776,8 @@ func findKeyCount2(_ arr : inout [Int], _ size : Int, _ key : Int) -> Int {
 }
 
 func main27() {
-	var first : [Int] = [1, 5, 10, 13, 20, 30, 8, 7, 6];
-	print(findKeyCount( &first,first.count,6));
+var first : [Int] = [1, 5, 10, 13, 20, 30, 8, 7, 6];
+print(findKeyCount( &first,first.count,6));
 	print(findKeyCount2( &first,first.count,6));
 }
 // 1 
@@ -1860,16 +1830,14 @@ func isMajority(_ arr : inout [Int], _ size : Int) -> Bool {
 }
 
 func main28() {
-	var arr : [Int] = [3, 3, 3, 3, 4, 5, 10];
-	print(isMajority( &arr,arr.count));
+var arr : [Int] = [3, 3, 3, 3, 4, 5, 10];
+print(isMajority( &arr,arr.count));
 	print(isMajority2( &arr,arr.count));
 }
 // true
 
 func maxProfit(_ stocks : inout [Int], _ size : Int) -> Int {
-	var maxProfit : Int = 0;
-	var buy : Int = 0;
-	var sell : Int = 0;
+	var maxProfit : Int = 0, buy : Int = 0, sell : Int = 0;
 	var i : Int = 0;
 	while (i < size - 1) {
 		var j : Int = i + 1;
@@ -1890,11 +1858,8 @@ func maxProfit(_ stocks : inout [Int], _ size : Int) -> Int {
 }
 
 func maxProfit2(_ stocks : inout [Int], _ size : Int) -> Int {
-	var buy : Int = 0;
-	var sell : Int = 0;
-	var curMin : Int = 0;
-	var currProfit : Int = 0;
-	var maxProfit : Int = 0;
+	var buy : Int = 0, sell : Int = 0, curMin : Int = 0;
+	var currProfit : Int = 0, maxProfit : Int = 0;
 	var i : Int = 0;
 	while (i < size) {
 		if (stocks[i] < stocks[curMin]) {
@@ -1915,8 +1880,8 @@ func maxProfit2(_ stocks : inout [Int], _ size : Int) -> Int {
 }
 
 func main29() {
-	var first : [Int] = [10, 150, 6, 67, 61, 16, 86, 6, 67, 78, 150, 3, 28, 143];
-	print(maxProfit( &first,first.count));
+var first : [Int] = [10, 150, 6, 67, 61, 16, 86, 6, 67, 78, 150, 3, 28, 143];
+print(maxProfit( &first,first.count));
 	print(maxProfit2( &first,first.count));
 }
 // Purchase day is- 2 at price 6 
@@ -1925,8 +1890,7 @@ func main29() {
 
 func findMedian(_ arrFirst : inout [Int], _ sizeFirst : Int, _ arrSecond : inout [Int], _ sizeSecond : Int) -> Int {
 	let medianIndex : Int = ((sizeFirst + sizeSecond) + (sizeFirst + sizeSecond) % 2) / 2; // ceiling function.
-	var i : Int = 0;
-	var j : Int = 0;
+	var i : Int = 0, j : Int = 0;
 	var count : Int = 0;
 	while (count < medianIndex - 1) {
 		if (i < sizeFirst - 1 && arrFirst[i] < arrSecond[j]) {
@@ -1945,9 +1909,9 @@ func findMedian(_ arrFirst : inout [Int], _ sizeFirst : Int, _ arrSecond : inout
 }
 
 func main30() {
-	var first : [Int] = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
-	var second : [Int] = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
-	print(findMedian( &first,first.count, &second,second.count));
+var first : [Int] = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
+var second : [Int] = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
+print(findMedian( &first,first.count, &second,second.count));
 }
 // 6
 
@@ -1986,8 +1950,8 @@ func binarySearch01Util(_ arr : inout [Int], _ start : Int, _ end : Int) -> Int 
 }
 
 func main31() {
-	var first : [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1];
-	print(search01( &first,first.count));
+var first : [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1];
+print(search01( &first,first.count));
 	print(binarySearch01( &first,first.count));
 }
 // 8
@@ -2025,8 +1989,8 @@ func rotationMax2(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func main32() {
-	var first : [Int] = [34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34];
-	print(rotationMax( &first,first.count));
+var first : [Int] = [34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34];
+print(rotationMax( &first,first.count));
 	print(rotationMax2( &first,first.count));
 }
 // 77
@@ -2077,8 +2041,8 @@ func countRotation(_ arr : inout [Int], _ size : Int) -> Int {
 }
 
 func main34() {
-	var first : [Int] = [34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34];
-	print(countRotation( &first,first.count));
+var first : [Int] = [34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34];
+print(countRotation( &first,first.count));
 }
 // 3
 
@@ -2122,8 +2086,8 @@ func binarySearchRotateArray(_ arr : inout [Int], _ size : Int, _ key : Int) -> 
 }
 
 func main35() {
-	var first : [Int] = [34, 56, 77, 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
-	print(searchRotateArray( &first,first.count,20));
+var first : [Int] = [34, 56, 77, 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
+print(searchRotateArray( &first,first.count,20));
 	print(binarySearchRotateArray( &first,first.count,20));
 	print(countRotation( &first,first.count));
 	print(first[findRotationMax( &first,first.count)]);
@@ -2148,26 +2112,19 @@ func minAbsDiffAdjCircular(_ arr : inout [Int], _ size : Int) -> Int {
 
 // Testing code
 func main36() {
-	var arr : [Int] = [5, 29, 18, 51, 11];
-	print(minAbsDiffAdjCircular( &arr,arr.count));
+var arr : [Int] = [5, 29, 18, 51, 11];
+print(minAbsDiffAdjCircular( &arr,arr.count));
 }
 // 6
-
-func swapch(_ arr : inout [Character], _ first : Int, _ second : Int) {
-	let temp : Character = arr[first];
-	arr[first] = arr[second];
-	arr[second] = temp;
-}
 
 func transformArrayAB1(_ str : String, _ size : Int) -> String {
 	var arr : [Character] = Array(str);
 	let N : Int = size / 2;
-	var j : Int;
-	var i : Int = 1;
+	var i : Int = 1, j : Int;
 	while (i < N) {
 		j = 0;
 		while (j < i) {
-			swapch( &arr,N - i + 2 * j,N - i + 2 * j + 1);
+			arr.swapAt(N - i + 2 * j, N - i + 2 * j + 1);
 			j += 1;
 		}
 		i += 1;
@@ -2177,9 +2134,9 @@ func transformArrayAB1(_ str : String, _ size : Int) -> String {
 
 // Testing code
 func main37() {
-	var str : String = "aaaabbbb";
-	str = transformArrayAB1( str,str.count);
-	print(str);
+var str : String = "aaaabbbb";
+str = transformArrayAB1( str,str.count);
+print(str);
 }
 // abababab
 
@@ -2275,9 +2232,9 @@ func checkPermutation3(_ array1 : inout [Character], _ size1 : Int, _ array2 : i
 
 // Testing code
 func main38() {
-	var str1 : [Character] = [Character] ();
-	var str2 : [Character] = [Character] ();
-	print(checkPermutation( &str1,str1.count, &str2,str2.count));
+var str1 : [Character] = [Character] ();
+var str2 : [Character] = [Character] ();
+print(checkPermutation( &str1,str1.count, &str2,str2.count));
 	print(checkPermutation2( &str1,str1.count, &str2,str2.count));
 	print(checkPermutation3( &str1,str1.count, &str2,str2.count));
 }
@@ -2395,8 +2352,8 @@ func isAP3(_ arr : inout [Int], _ size : Int) -> Bool {
 
 // Testing code
 func main39() {
-	var arr : [Int] = [20, 25, 15, 5, 0, 10, 35, 30];
-	print(isAP( &arr,arr.count));
+var arr : [Int] = [20, 25, 15, 5, 0, 10, 35, 30];
+print(isAP( &arr,arr.count));
 	print(isAP2( &arr,arr.count));
 	print(isAP3( &arr,arr.count));
 }
@@ -2430,8 +2387,8 @@ func findBalancedPoint(_ arr : inout [Int], _ size : Int) -> Int {
 
 // Testing code
 func main40() {
-	var arr : [Int] = [-7, 1, 5, 2, -4, 3, 0];
-	print(findBalancedPoint( &arr,arr.count));
+var arr : [Int] = [-7, 1, 5, 2, -4, 3, 0];
+print(findBalancedPoint( &arr,arr.count));
 }
 // 3
 
@@ -2510,8 +2467,8 @@ func closestNumber(_ arr : inout [Int], _ size : Int, _ num : Int) -> Int {
 
 // Testing code
 func main42() {
-	var arr : [Int] = [2, 4, 8, 16];
-	print(closestNumber( &arr,arr.count,9));
+var arr : [Int] = [2, 4, 8, 16];
+print(closestNumber( &arr,arr.count,9));
 }
 // 8
 
@@ -2620,8 +2577,8 @@ func frequencyCounts4(_ arr : inout [Int], _ size : Int) {
 
 // Testing code
 func main44() {
-	var arr : [Int] = [1, 2, 2, 2, 1];
-	frequencyCounts( &arr,arr.count);
+var arr : [Int] = [1, 2, 2, 2, 1];
+frequencyCounts( &arr,arr.count);
 	frequencyCounts2( &arr,arr.count);
 	frequencyCounts3( &arr,arr.count);
 	frequencyCounts4( &arr,arr.count);
@@ -2646,8 +2603,7 @@ func kLargestElements(_ arrIn : inout [Int], _ size : Int, _ k : Int) {
 			print(String(arrIn[i]) + " ",terminator: "");
 		}
 		i += 1;
-	}
-	
+	}	
 	print();
 }
 
@@ -2673,8 +2629,8 @@ func kLargestElements2(_ arrIn : inout [Int], _ size : Int, _ k : Int) {
 
 // Testing code
 func main45() {
-	var arr : [Int] = [10, 50, 30, 60, 15];
-	kLargestElements( &arr,arr.count,2);
+var arr : [Int] = [10, 50, 30, 60, 15];
+kLargestElements( &arr,arr.count,2);
 	kLargestElements2( &arr,arr.count,2);
 }
 // 50 60 
@@ -2689,7 +2645,6 @@ func fixPoint(_ arr : inout [Int], _ size : Int) -> Int {
 		}
 		i += 1;
 	}
-	
 	// fix point not found so return invalid index
 	return -1;
 }
@@ -2715,17 +2670,15 @@ func fixPoint2(_ arr : inout [Int], _ size : Int) -> Int {
 
 // Testing code
 func main46() {
-	var arr : [Int] = [-10, -2, 0, 3, 11, 12, 35, 51, 200];
-	print(fixPoint( &arr,arr.count));
+var arr : [Int] = [-10, -2, 0, 3, 11, 12, 35, 51, 200];
+print(fixPoint( &arr,arr.count));
 	print(fixPoint2( &arr,arr.count));
 }
 // 3 
 // 3
 
 func subArraySums(_ arr : inout [Int], _ size : Int, _ value : Int) {
-	var start : Int = 0;
-	var end : Int = 0;
-	var sum : Int = 0;
+	var start : Int = 0, end : Int = 0,sum : Int = 0;
 	while (start < size && end < size) {
 		if (sum < value) {
 			sum += arr[end];
@@ -2743,8 +2696,8 @@ func subArraySums(_ arr : inout [Int], _ size : Int, _ value : Int) {
 
 // Testing code
 func main47() {
-	var arr : [Int] = [15, 5, 5, 20, 10, 5, 5, 20, 10, 10];
-	subArraySums( &arr,arr.count,20);
+var arr : [Int] = [15, 5, 5, 20, 10, 5, 5, 20, 10, 10];
+subArraySums( &arr,arr.count,20);
 	print();
 }
 // (0 to 1) (3 to 3) (4 to 6) (7 to 7) (8 to 9)
@@ -2762,8 +2715,7 @@ func maxConSub(_ arr : inout [Int], _ size : Int) -> Int {
 			maximum = currMax;
 		}
 		i += 1;
-	}
-	
+	}	
 	print(maximum);
 	return maximum;
 }
@@ -2824,11 +2776,11 @@ func maxConSubArr2(_ A : inout [Int], _ sizeA : Int, _ B : inout [Int], _ sizeB 
 
 // Testing code
 func main48() {
-	var arr : [Int] = [1, 2, -3, 4, 5, -10, 6, 7];
-	_ = maxConSub( &arr,arr.count);
-	var arr2 : [Int] = [1, 2, 3, 4, 5, -10, 6, 7, 3];
-	var arr3 : [Int] = [1, 3];
-	_ = maxConSubArr( &arr2,arr2.count, &arr3,arr3.count);
+var arr : [Int] = [1, 2, -3, 4, 5, -10, 6, 7];
+_ = maxConSub( &arr,arr.count);
+var arr2 : [Int] = [1, 2, 3, 4, 5, -10, 6, 7, 3];
+var arr3 : [Int] = [1, 3];
+_ = maxConSubArr( &arr2,arr2.count, &arr3,arr3.count);
 	_ = maxConSubArr2( &arr2,arr2.count, &arr3,arr3.count);
 }
 // 13 
@@ -2873,10 +2825,8 @@ func rainWater(_ arr : inout [Int], _ size : Int) -> Int {
 
 func rainWater2(_ arr : inout [Int], _ size : Int) -> Int {
 	var water : Int = 0;
-	var leftMax : Int = 0;
-	var rightMax : Int = 0;
-	var left : Int = 0;
-	var right : Int = size - 1;
+	var leftMax : Int = 0, rightMax : Int = 0;
+	var left : Int = 0, right : Int = size - 1;
 	while (left <= right) {
 		if (arr[left] < arr[right]) {
 			if (arr[left] > leftMax) {
@@ -2900,8 +2850,8 @@ func rainWater2(_ arr : inout [Int], _ size : Int) -> Int {
 
 // Testing code
 func main49() {
-	var arr : [Int] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
-	_ = rainWater( &arr,arr.count);
+var arr : [Int] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+_ = rainWater( &arr,arr.count);
 	_ = rainWater2( &arr,arr.count);
 }
 // Water : 6 
@@ -2935,8 +2885,7 @@ func main50() {
 
 func arrayIndexMaxDiff(_ arr : inout [Int], _ size : Int) -> Int {
 	var maxDiff : Int = -1;
-	var j : Int;
-	var i : Int = 0;
+	var i : Int = 0, j : Int;
 	while (i < size) {
 		j = size - 1;
 		while (i < j) {
@@ -2954,7 +2903,6 @@ func arrayIndexMaxDiff(_ arr : inout [Int], _ size : Int) -> Int {
 func arrayIndexMaxDiff2(_ arr : inout [Int], _ size : Int) -> Int {
 	var rightMax : [Int] = Array(repeating: 0, count: size);
 	rightMax[size - 1] = arr[size - 1];
-
 	var i : Int = size - 2;
 	while (i >= 0) {
 		rightMax[i] = max(rightMax[i + 1],arr[i]);
@@ -2979,19 +2927,16 @@ func arrayIndexMaxDiff2(_ arr : inout [Int], _ size : Int) -> Int {
 
 // Testing code
 func main51() {
-	var arr : [Int] = [33, 9, 10, 3, 2, 60, 30, 33, 1];
-	print("arrayIndexMaxDiff : " + String(arrayIndexMaxDiff( &arr,arr.count)));
+var arr : [Int] = [33, 9, 10, 3, 2, 60, 30, 33, 1];
+print("arrayIndexMaxDiff : " + String(arrayIndexMaxDiff( &arr,arr.count)));
 	print("arrayIndexMaxDiff : " + String(arrayIndexMaxDiff2( &arr,arr.count)));
 }
 // arrayIndexMaxDiff : 7
 // arrayIndexMaxDiff : 7
 
 func maxPathSum(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int], _ size2 : Int) -> Int {
-	var i : Int = 0;
-	var j : Int = 0;
-	var result : Int = 0;
-	var sum1 : Int = 0;
-	var sum2 : Int = 0;
+	var i : Int = 0, j : Int = 0;
+	var result : Int = 0, sum1 : Int = 0, sum2 : Int = 0;
 	while (i < size1 && j < size2) {
 		if (arr1[i] < arr2[j]) {
 			sum1 += arr1[i];
@@ -3025,9 +2970,9 @@ func maxPathSum(_ arr1 : inout [Int], _ size1 : Int, _ arr2 : inout [Int], _ siz
 
 // Testing code
 func main52() {
-	var arr1 : [Int] = [12, 13, 18, 20, 22, 26, 70];
-	var arr2 : [Int] = [11, 15, 18, 19, 20, 26, 30, 31];
-	print("Max Path Sum:: " + String(maxPathSum( &arr1,arr1.count, &arr2,arr2.count)));
+var arr1 : [Int] = [12, 13, 18, 20, 22, 26, 70];
+var arr2 : [Int] = [11, 15, 18, 19, 20, 26, 30, 31];
+print("Max Path Sum:: " + String(maxPathSum( &arr1,arr1.count, &arr2,arr2.count)));
 }
 // Max Path Sum:: 201
 
@@ -3051,8 +2996,8 @@ func maxSubArraySum(_ a : inout [Int], _ size : Int) -> Int {
 
 // Testing code
 func main53() {
-	var arr : [Int] = [1, -2, 3, 4, -4, 6, -4, 3, 2];
-	print("Max sub array sum :" + String(maxSubArraySum( &arr,9)));
+var arr : [Int] = [1, -2, 3, 4, -4, 6, -4, 3, 2];
+print("Max sub array sum :" + String(maxSubArraySum( &arr,9)));
 }
 
 main1();

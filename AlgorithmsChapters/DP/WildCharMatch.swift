@@ -71,8 +71,8 @@ func matchExpUtilDP(_ exp : inout [Character], _ str : inout [Character], _ m : 
 }
 
 // Testing code.
-print("matchExp :: " + String(matchExp("*llo,?World?","Hello, World!")));
-print("matchExp :: " + String(matchExpDP("*llo,?World?","Hello, World!")));
+print("matchExp ::", matchExp("*llo,?World?","Hello, World!"));
+print("matchExp ::", matchExpDP("*llo,?World?","Hello, World!"));
     
 /*
 matchExp :: true
