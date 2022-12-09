@@ -30,9 +30,9 @@ func strcmp(_ str1 : String, _ str2 : String) -> Int {
 
 // Testing Code
 func main1() {
-print(strcmp("apple","appke"));
-print(strcmp("apple","apple"));
-print(strcmp("apple","appme"));
+	print(strcmp("apple","appke"));
+	print(strcmp("apple","apple"));
+	print(strcmp("apple","appme"));
 }
 // 	1
 // 	0
@@ -76,6 +76,7 @@ func isPrime(_ n : Int) -> Bool {
 	return answer;
 }
 
+// Testing Code
 func main3() {
 	print("Prime numbers under 10 :: ",terminator: "");
     var i : Int = 0;
@@ -101,6 +102,7 @@ func isUniqueChar(_ str : String) -> Bool {
 	return true
 }
 
+// Testing Code
 func main5() {
 	print("isUniqueChar :", isUniqueChar("aple"))
 	print("isUniqueChar :", isUniqueChar("apple"))
@@ -134,6 +136,7 @@ func isPermutation(_ s1 : String, _ s2 : String) -> Bool {
 	return true
 }
 
+// Testing Code
 func main7() {
 	print(isPermutation("apple","plepa"));
 }
@@ -156,6 +159,7 @@ func isPalindrome(_ st : String) -> Bool {
 	return true
 }
 
+// Testing Code
 func main8() {
 	_ = isPalindrome("hello");
 	_ = isPalindrome("oyo");
@@ -176,6 +180,7 @@ func pow(_ x : Int, _ n : Int) -> Int {
 	}
 }
 
+// Testing Code
 func main9() {
 	print(pow(5,2));
 }
@@ -225,39 +230,35 @@ func reverseWords(_ st : String) -> String {
 	return String(str)
 }
 
+// Testing Code
 func main11() {
-print(reverseString("apple"));
-print(reverseWords("hello world"));
+	print(reverseString("apple"));
+	print(reverseWords("hello world"));
 }
 // 	elppa
 // 	world hello
 
 func printAnagram(_ a : String) {
-	let n = a.count
 	var arr = Array(a)
-	printAnagramUtil(&arr, n, n)
+	printAnagramUtil(&arr, 0, a.count)
 }
 
-func printAnagramUtil(_ a : inout [Character], _ max : Int, _ n : Int) {
-	if max == 1 {
+func printAnagramUtil(_ a : inout [Character], _ i : Int, _ length : Int) {
+	if length == i {
 		print(String(a))
+		return
 	}
-	var i = -1
-	while i < max-1 {
-		if i != -1 {
-			a.swapAt(i,max-1)
-		}
-		printAnagramUtil(&a, max-1, n)
-		if i != -1 {
-			a.swapAt(i,max-1)
-		}
-		i += 1
+	for j in i...length-1 {
+		a.swapAt(i,j)
+		printAnagramUtil(&a, i+1, length)
+		a.swapAt(i,j)
 	}
 }
 
 
+// Testing Code
 func main12() {
-printAnagram("123");
+	printAnagram("123");
 }
 // 	123
 // 	132
@@ -295,6 +296,7 @@ func shuffle(_ str : String) -> String {
 	return String(arr)
 }
 
+// Testing Code
 func main13() {
 	print(shuffle("ABCDE12345"));
 }
@@ -324,6 +326,7 @@ func matchExpUtil(_ exp : inout [Character], _ str : inout [Character], _ i : In
 	return false
 }
 
+// Testing Code
 func main10() {
 	print(matchExp("*llo,?World?","Hello, World!"));
 }
