@@ -11,10 +11,10 @@ for ele in arr {
 }
 print()
 
-var i = 0;
+var i = 0
 while (i < arr.count) {
     print(arr[i], terminator: " ")
-    i += 1;
+    i += 1
 }
 print()
 

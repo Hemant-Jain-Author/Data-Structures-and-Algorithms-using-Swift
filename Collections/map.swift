@@ -2,9 +2,9 @@
 var hm :  [String:Int] =  [String:Int]()
 
 // Put elements into the map
-hm["Apple"] = 40;
-hm["Banana"] = 10;
-hm["Mango"] = 20;
+hm["Apple"] = 40
+hm["Banana"] = 10
+hm["Mango"] = 20
 print("Size :: " + String(hm.count))
 print(hm)
 
@@ -15,7 +15,7 @@ for key in Array(hm.keys){
 print("Grapes present :: " + String(hm.keys.contains("Grapes")))
 print("Apple present :: " + String(hm.keys.contains("Apple")))
 
-hm["Apple"] = nil;
+hm["Apple"] = nil
 print("Apple present :: " + String(hm.keys.contains("Apple")))
 print(hm)
 

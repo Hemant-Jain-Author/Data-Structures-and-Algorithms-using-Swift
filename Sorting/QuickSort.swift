@@ -1,4 +1,4 @@
-import Foundation;
+import Foundation
 
 func quickSortUtil(_ arr : inout [Int], _ start : Int, _ stop : Int) {
     if stop <= start {
@@ -11,24 +11,24 @@ func quickSortUtil(_ arr : inout [Int], _ start : Int, _ stop : Int) {
 
     while (lower < upper) {
         while (arr[lower] <= pivot && lower < upper) {
-            lower += 1;
+            lower += 1
         }
         while (arr[upper] > pivot && lower <= upper) {
-            upper -= 1;
+            upper -= 1
         }
         if (lower < upper) {
-            arr.swapAt(upper,lower);
+            arr.swapAt(upper,lower)
         }
     }
     
-    arr.swapAt(upper, start); // upper is the pivot position
-    quickSortUtil( &arr,start,upper - 1); // pivot -1 is the upper for left sub array.
-    quickSortUtil( &arr,upper + 1,stop);
+    arr.swapAt(upper, start) // upper is the pivot position
+    quickSortUtil( &arr,start,upper - 1) // pivot -1 is the upper for left sub array.
+    quickSortUtil( &arr,upper + 1,stop)
 }
 
 func quickSort(_ arr : inout [Int]) {
-    let size : Int = arr.count;
-    quickSortUtil( &arr,0,size - 1);
+    let size : Int = arr.count
+    quickSortUtil( &arr,0,size - 1)
 }
 
 // Testing Code.

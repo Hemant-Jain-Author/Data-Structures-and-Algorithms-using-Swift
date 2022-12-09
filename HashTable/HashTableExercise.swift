@@ -2,7 +2,7 @@ func isAnagram(_ str1 : String, _ str2 : String) -> Bool {
 	if str1.count != str2.count {
 		return false
 	}
-	var cntr : [Character:Int] = [Character:Int]();
+	var cntr : [Character:Int] = [Character:Int]()
 	for ch in str1 {
 		if (cntr[ch] != nil) {
 			cntr[ch] = cntr[ch]! + 1
@@ -94,7 +94,7 @@ Repeating elements are :: 4 1
 */
 
 func printFirstRepeating(_ arr : [Int]) {
-	var cntr : [Int:Int] = [Int:Int]();
+	var cntr : [Int:Int] = [Int:Int]()
 	for val in arr {
 		if (cntr[val] != nil) {
 			cntr[val] = cntr[val]! + 1
@@ -106,7 +106,7 @@ func printFirstRepeating(_ arr : [Int]) {
 	for val in arr {
 		if (cntr[val]! > 1) {
 			print("First Repeating number is :", val)
-			return;
+			return
 		} 
 	}
 }

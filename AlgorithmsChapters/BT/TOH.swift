@@ -1,21 +1,21 @@
-import Foundation;
+import Foundation
 // Towers Of Hanoi problem.
 func tohUtil(_ num : Int, _ from : Character, _ to : Character, _ temp : Character) {
 	if (num < 1) {
-		return;
+		return
 	}
-	tohUtil(num - 1, from, temp, to);
-	print("Move disk " + String(num) + " from peg " + String(from) + " to peg " + String(to));
-	tohUtil(num - 1, temp, to, from);
+	tohUtil(num - 1, from, temp, to)
+	print("Move disk " + String(num) + " from peg " + String(from) + " to peg " + String(to))
+	tohUtil(num - 1, temp, to, from)
 }
 
 func toh(_ num : Int) {
-	print("The sequence of moves involved in the Tower of Hanoi are :");
-	tohUtil(num,"A", "C", "B");
+	print("The sequence of moves involved in the Tower of Hanoi are :")
+	tohUtil(num,"A", "C", "B")
 }
 
 // Testing code.
-toh(3);
+toh(3)
 
 /*
 The sequence of moves involved in the Tower of Hanoi are :

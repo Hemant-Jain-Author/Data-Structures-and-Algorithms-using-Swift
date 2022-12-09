@@ -1,271 +1,271 @@
-import Foundation;
+import Foundation
 
 class SPLAYTree {
-    private var root : Node?;
+    private var root : Node?
 
     class Node {
-        var data : Int;
-        var left : Node?;
-        var right : Node?;
-        var parent : Node?;
+        var data : Int
+        var left : Node?
+        var right : Node?
+        var parent : Node?
 
         init(_ d : Int, _ l : Node?, _ r : Node?) {
-            self.data = d;
-            self.left = l;
-            self.right = r;
-            self.parent = nil;
+            self.data = d
+            self.left = l
+            self.right = r
+            self.parent = nil
         }
     }
 
     init() {
-        self.root = nil;
+        self.root = nil
     }
 
     func printTree() {
-        self.printTree(self.root,"",false);
-        print();
+        self.printTree(self.root,"",false)
+        print()
     }
 
     func printTree(_ node : Node?, _ indent : String, _ isLeft : Bool) {
         if (node == nil) {
-            return;
+            return
         }
-		var indent = indent;
+		var indent = indent
         if (isLeft) {
-            print(indent + "L:",terminator: "");
-            indent += "|  ";
+            print(indent + "L:",terminator: "")
+            indent += "|  "
         } else {
-            print(indent + "R:",terminator: "");
-            indent += "   ";
+            print(indent + "R:",terminator: "")
+            indent += "   "
         }
 
-        print(node!.data);
-        self.printTree(node!.left,indent,true);
-        self.printTree(node!.right,indent,false);
+        print(node!.data)
+        self.printTree(node!.left,indent,true)
+        self.printTree(node!.right,indent,false)
     }
 
     // Function to right rotate subtree rooted with x
     func rightRotate(_ x : Node?) -> Node? {
-        let y : Node? = x!.left;
-        let T : Node? = y!.right;
+        let y : Node? = x!.left
+        let T : Node? = y!.right
 
         // Rotation
-        y!.parent = x!.parent;
-        y!.right = x;
-        x!.parent = y;
-        x!.left = T;
+        y!.parent = x!.parent
+        y!.right = x
+        x!.parent = y
+        x!.left = T
 
         if (T != nil) {
-            T!.parent = x;
+            T!.parent = x
         }
 
         if (y!.parent != nil && y!.parent!.left === x) {
-            y!.parent!.left = y;
+            y!.parent!.left = y
         } else if (y!.parent != nil && y!.parent!.right === x) {
-            y!.parent!.right = y;
+            y!.parent!.right = y
         }
 
         // Return new root
-        return y;
+        return y
     }
 
     // Function to left rotate subtree rooted with x
     func leftRotate(_ x : Node?) -> Node? {
-        let y : Node? = x!.right;
-        let T : Node? = y!.left;
+        let y : Node? = x!.right
+        let T : Node? = y!.left
 
         // Rotation
-        y!.parent = x!.parent;
-        y!.left = x;
-        x!.parent = y;
-        x!.right = T;
+        y!.parent = x!.parent
+        y!.left = x
+        x!.parent = y
+        x!.right = T
 
         if (T != nil) {
-            T!.parent = x;
+            T!.parent = x
         }
 
         if (y!.parent != nil && y!.parent!.left === x) {
-            y!.parent!.left = y;
+            y!.parent!.left = y
         } else if (y!.parent != nil && y!.parent!.right === x) {
-            y!.parent!.right = y;
+            y!.parent!.right = y
         }
 
         // Return new root
-        return y;
+        return y
     }
 
     func parent(_ node : Node?) -> Node? {
         if (node == nil || node!.parent == nil) {
-            return nil;
+            return nil
         }
-        return node!.parent;
+        return node!.parent
     }
 
     func splay(_ node : Node?) {
-        var parent : Node?;
-        var grand : Node?;
-		var node = node;
+        var parent : Node?
+        var grand : Node?
+		var node = node
 
         while (!(node===self.root)) {
-            parent = self.parent(node);
-            grand = self.parent(parent);
+            parent = self.parent(node)
+            grand = self.parent(parent)
             if (parent == nil) { // rotations had created new root, always last condition.
-                self.root = node;
+                self.root = node
             } else if (grand == nil) { // single rotation case.
                 if (parent!.left === node) {
-                    node = self.rightRotate(parent);
+                    node = self.rightRotate(parent)
                 } else {
-                    node = self.leftRotate(parent);
+                    node = self.leftRotate(parent)
                 }
             } else if (grand!.left === parent && parent!.left === node) {  // Zig Zig case.
-                _ = self.rightRotate(grand);
-                node = self.rightRotate(parent);
+                _ = self.rightRotate(grand)
+                node = self.rightRotate(parent)
             } else if (grand!.right === parent && parent!.right === node) {  // Zag Zag case.
-                _ = self.leftRotate(grand);
-                node = self.leftRotate(parent);
+                _ = self.leftRotate(grand)
+                node = self.leftRotate(parent)
             } else if (grand!.left === parent && parent!.right === node) {  // Zig Zag case.
-                _ = self.leftRotate(parent);
-                node = self.rightRotate(grand);
+                _ = self.leftRotate(parent)
+                node = self.rightRotate(grand)
             } else if (grand!.right === parent && parent!.left === node) {  // Zag Zig case.
-                _ = self.rightRotate(parent);
-                node = self.leftRotate(grand);
+                _ = self.rightRotate(parent)
+                node = self.leftRotate(grand)
             }
         }
     }
 
     func find(_ data : Int) -> Bool {
-        var curr : Node? = self.root;
+        var curr : Node? = self.root
         while (curr != nil) {
             if (curr!.data == data) {
-                self.splay(curr);
-                return true;
+                self.splay(curr)
+                return true
             } else if (curr!.data > data) {
-                curr = curr!.left;
+                curr = curr!.left
             } else {
-                curr = curr!.right;
+                curr = curr!.right
             }
         }
-        return false;
+        return false
     }
 
     func insert(_ data : Int) {
-        let newNode : Node? = Node(data, nil, nil);
+        let newNode : Node? = Node(data, nil, nil)
         if (self.root == nil) {
-            self.root = newNode;
-            return;
+            self.root = newNode
+            return
         }
 
-        var node : Node? = self.root;
-        var parent : Node? = nil;
+        var node : Node? = self.root
+        var parent : Node? = nil
         while (node != nil) {
-            parent = node;
+            parent = node
             if (node!.data > data) {
-                node = node!.left;
+                node = node!.left
             } else if (node!.data < data) {
-                node = node!.right;
+                node = node!.right
             } else {
-                self.splay(node);
+                self.splay(node)
                 // duplicate insertion not allowed but splaying for it.
-                return;
+                return
             }
         }
 
-        newNode!.parent = parent;
+        newNode!.parent = parent
         if (parent!.data > data) {
-            parent!.left = newNode;
+            parent!.left = newNode
         } else {
-            parent!.right = newNode;
+            parent!.right = newNode
         }
-        self.splay(newNode);
+        self.splay(newNode)
     }
     func findMinNode(_ curr : Node?) -> Node? {
-        var node : Node? = curr;
+        var node : Node? = curr
         if (node == nil) {
-            return nil;
+            return nil
         }
 
         while (node!.left != nil) {
-            node = node!.left;
+            node = node!.left
         }
-        return node;
+        return node
     }
 
     func delete(_ data : Int) {
-        var node : Node? = self.root;
-        var parent : Node? = nil;
-        var next : Node? = nil;
-		var data = data;
+        var node : Node? = self.root
+        var parent : Node? = nil
+        var next : Node? = nil
+		var data = data
         while (node != nil) {
             if (node!.data == data) {
-                parent = node!.parent;
+                parent = node!.parent
                 if (node!.left == nil && node!.right == nil) {
-                    next = nil;
+                    next = nil
                 } else if (node!.left == nil) {
-                    next = node!.right;
+                    next = node!.right
                 } else if (node!.right == nil) {
-                    next = node!.left;
+                    next = node!.left
                 }
                 if (node!.left == nil || node!.right == nil) {
                     if (node === self.root) {
-                        self.root = next;
-                        return;
+                        self.root = next
+                        return
                     }
 
                     if (parent!.left === node) {
-                        parent!.left = next;
+                        parent!.left = next
                     } else {
-                        parent!.right = next;
+                        parent!.right = next
                     }
 
                     if (next != nil) {
-                        next!.parent = parent;
+                        next!.parent = parent
                     }
-                    break;
+                    break
                 }
 
-                let minNode : Node? = self.findMinNode(node!.right);
-                data = minNode!.data;
-                node!.data = data;
-                node = node!.right;
+                let minNode : Node? = self.findMinNode(node!.right)
+                data = minNode!.data
+                node!.data = data
+                node = node!.right
             } else if (node!.data > data) {
-                parent = node;
-                node = node!.left;
+                parent = node
+                node = node!.left
             } else {
-                parent = node;
-                node = node!.right;
+                parent = node
+                node = node!.right
             }
         }
-        self.splay(parent);
+        self.splay(parent)
     }
 
     func printInOrder() {
-        self.printInOrder(self.root);
-        print();
+        self.printInOrder(self.root)
+        print()
     }
 
     func printInOrder(_ node : Node?) {
         // In order
         if (node != nil) {
-            self.printInOrder(node!.left);
-            print(String(node!.data) ,terminator: " ");
-            self.printInOrder(node!.right);
+            self.printInOrder(node!.left)
+            print(String(node!.data) ,terminator: " ")
+            self.printInOrder(node!.right)
         }
     }   
 }
 
-let tree : SPLAYTree = SPLAYTree();
-tree.insert(5);
-tree.insert(4);
-tree.insert(6);
-tree.insert(3);
-tree.insert(2);
-tree.insert(1);
-tree.insert(3);
-tree.printTree();
-print("Value 2 found: " + String(tree.find(2)));
-tree.delete(2);
-tree.delete(5);
-tree.printTree();
+let tree : SPLAYTree = SPLAYTree()
+tree.insert(5)
+tree.insert(4)
+tree.insert(6)
+tree.insert(3)
+tree.insert(2)
+tree.insert(1)
+tree.insert(3)
+tree.printTree()
+print("Value 2 found: " + String(tree.find(2)))
+tree.delete(2)
+tree.delete(5)
+tree.printTree()
 
 /* 
 R:3

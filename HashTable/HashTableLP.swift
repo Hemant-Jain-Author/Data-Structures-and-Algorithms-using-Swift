@@ -46,7 +46,7 @@ class HashTable {
 	}
 	
 	func add(_ value : Int) -> Bool {
-		return add(value, value);
+		return add(value, value)
 	}
 		
 	func find(_ key : Int) -> Bool {

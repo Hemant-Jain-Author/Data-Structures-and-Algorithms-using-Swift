@@ -38,10 +38,10 @@ que.add(1)
 que.add(2)
 que.add(3)
 que.display()
-print("IsEmpty :", que.isEmpty());
-print("Size :", que.size());
-print("Queue remove :" ,que.remove()!);
-print("Queue remove :" ,que.remove()!);
+print("IsEmpty :", que.isEmpty())
+print("Size :", que.size())
+print("Queue remove :" ,que.remove()!)
+print("Queue remove :" ,que.remove()!)
 
 /*
 Queue : [1, 2, 3]

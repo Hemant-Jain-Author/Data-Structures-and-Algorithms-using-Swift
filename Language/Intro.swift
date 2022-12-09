@@ -35,7 +35,7 @@ func fibonacci(n : Int) -> Int {
 	return fibonacci(n : n-1) + fibonacci(n : n-2)
 }
 
-print(fibonacci(10));
+print(fibonacci(10))
 
 func isPrime(n : Int) -> Bool {
 	if( n < 1){
@@ -55,19 +55,19 @@ print("\(isPrime(n: 23))")
 print("\(isPrime(n: 5))")
 print("\(isPrime(n: 7))")
 
-
+/*
 int gcd(int m, int n) {
 if (n == 0)
-return m;
+return m
 if (m == 0)
-return n;
+return n
 }
-return (gcd(n, m % n));
+return (gcd(n, m % n))
 // Testing code.
 public static void main(String[] args) {
-System.out.println("Gcd is:: " + gcd(5, 2));
+System.out.println("Gcd is:: " + gcd(5, 2))
 }
-
+*/
 
 
 

@@ -39,15 +39,15 @@ class Queue<T> {
 			print("Queue is empty.")
 			return
 		}
-		var temp : Node? = self.tail!.next;
-        print("Queue is : ",terminator: "");
-        var i : Int = 0;
+		var temp : Node? = self.tail!.next
+        print("Queue is : ",terminator: "")
+        var i : Int = 0
         while (i < self.count) {
-            print(temp!.value, terminator: " ");
-            temp = temp!.next;
-            i += 1;
+            print(temp!.value, terminator: " ")
+            temp = temp!.next
+            i += 1
         }
-        print();
+        print()
 	}
 	/* Other Methods */
 	
@@ -57,7 +57,7 @@ class Queue<T> {
 			self.tail = temp
 			temp.next = temp
 		} else {
-			temp.next = self.tail!.next;
+			temp.next = self.tail!.next
 			self.tail!.next = temp
 			self.tail = temp
 		}
@@ -70,13 +70,13 @@ class Queue<T> {
 			return nil
 		}
 
-		var value : T;
+		var value : T
         if (self.tail === self.tail!.next) {
-            value = self.tail!.value;
-            self.tail = nil;
+            value = self.tail!.value
+            self.tail = nil
         } else {
-            value = self.tail!.next!.value;
-            self.tail!.next = self.tail!.next!.next;
+            value = self.tail!.next!.value
+            self.tail!.next = self.tail!.next!.next
         }
 		self.count -= 1
 		return value
@@ -84,15 +84,15 @@ class Queue<T> {
 }
 
 // Testing code.
-let que : Queue<Int> = Queue<Int>();
-que.add(1);
-que.add(2);
-que.add(3);
+let que : Queue<Int> = Queue<Int>()
+que.add(1)
+que.add(2)
+que.add(3)
 que.display()
-print("IsEmpty :", que.isEmpty());
-print("Size :", que.size());
-print("Queue remove :", que.remove()!);
-print("Queue remove :", que.remove()!);
+print("IsEmpty :", que.isEmpty())
+print("Size :", que.size())
+print("Queue remove :", que.remove()!)
+print("Queue remove :", que.remove()!)
 
 /*
 Queue : 1 2 3 

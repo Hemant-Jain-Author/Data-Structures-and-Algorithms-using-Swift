@@ -15,18 +15,18 @@ factorial 5 is :: 120
 */
 
 func printInt(_ number : Int, _ base : Int) {
-	let conversion = Array("0123456789ABCDEF");
-	let digit : Int = (number % base);
-	let number = number / base;
+	let conversion = Array("0123456789ABCDEF")
+	let digit : Int = (number % base)
+	let number = number / base
 	
 	if (number != 0) {
-		printInt(number, base);
+		printInt(number, base)
 	}
-	print(conversion[digit], terminator:"");
+	print(conversion[digit], terminator:"")
 }
 
 // Testing code.
-printInt(500, 16);
+printInt(500, 16)
 
 /*
 1F4
@@ -69,7 +69,7 @@ func fibonacci(_ n : Int) -> Int {
 }
 
 // Testing code.
-print(fibonacci(10));
+print(fibonacci(10))
 
 /*
 55
@@ -102,16 +102,16 @@ isPrime :: true
 
 func gcd(_ m : Int, _ n : Int) -> Int {
 	if (n == 0) {
-		return m;
+		return m
 	}
 	if (m == 0) {
-		return n;
+		return n
 	}
-	return gcd(n, m % n);
+	return gcd(n, m % n)
 }
 
 // Testing code.
-print("Gcd is ::", gcd(5, 2));
+print("Gcd is ::", gcd(5, 2))
 
 /*
 Gcd is :: 1

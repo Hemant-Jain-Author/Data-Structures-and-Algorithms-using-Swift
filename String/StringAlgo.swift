@@ -6,7 +6,7 @@ func strcmp(_ str1 : String, _ str2 : String) -> Int {
 	var index = 0
 	let len1 = a.count
 	let len2 = b.count
-	let minlen : Int = (len1 < len2) ? len1 : len2;
+	let minlen : Int = (len1 < len2) ? len1 : len2
 
 	while index < minlen && a[index] == b[index] {
 		index += 1
@@ -30,9 +30,9 @@ func strcmp(_ str1 : String, _ str2 : String) -> Int {
 
 // Testing Code
 func main1() {
-	print(strcmp("apple","appke"));
-	print(strcmp("apple","apple"));
-	print(strcmp("apple","appme"));
+	print(strcmp("apple","appke"))
+	print(strcmp("apple","apple"))
+	print(strcmp("apple","appme"))
 }
 // 	1
 // 	0
@@ -59,34 +59,34 @@ func matchPattern(_ src : String, _ ptn : String) -> Bool {
 
 // Testing Code
 func main2() {
-	print(matchPattern("harrypottermustnotgotoschool","potterschool"));
+	print(matchPattern("harrypottermustnotgotoschool","potterschool"))
 }
 // true
 
 func isPrime(_ n : Int) -> Bool {
-	var answer : Bool = (n > 1) ? true : false;
-    var i : Int = 2;
+	var answer : Bool = (n > 1) ? true : false
+    var i : Int = 2
     while (i * i <= n) {
         if (n % i == 0) {
-            answer = false;
-            break;
+            answer = false
+            break
         }
-        i += 1;
+        i += 1
     }
-	return answer;
+	return answer
 }
 
 // Testing Code
 func main3() {
-	print("Prime numbers under 10 :: ",terminator: "");
-    var i : Int = 0;
+	print("Prime numbers under 10 :: ",terminator: "")
+    var i : Int = 0
     while (i < 10) {
         if (isPrime(i)) {
-			print(String(i) + " ",terminator: "");
+			print(String(i) + " ",terminator: "")
         }
-        i += 1;
+        i += 1
     }
-	print();
+	print()
 }
 // Prime numbers under 10 :: 2 3 5 7
 
@@ -138,7 +138,7 @@ func isPermutation(_ s1 : String, _ s2 : String) -> Bool {
 
 // Testing Code
 func main7() {
-	print(isPermutation("apple","plepa"));
+	print(isPermutation("apple","plepa"))
 }
 // 	is permutation return true
 // 	true
@@ -161,8 +161,8 @@ func isPalindrome(_ st : String) -> Bool {
 
 // Testing Code
 func main8() {
-	_ = isPalindrome("hello");
-	_ = isPalindrome("oyo");
+	_ = isPalindrome("hello")
+	_ = isPalindrome("oyo")
 }
 // 	String is not a Palindrome
 // 	String is a Palindrome
@@ -182,7 +182,7 @@ func pow(_ x : Int, _ n : Int) -> Int {
 
 // Testing Code
 func main9() {
-	print(pow(5,2));
+	print(pow(5,2))
 }
 // 25
 
@@ -232,8 +232,8 @@ func reverseWords(_ st : String) -> String {
 
 // Testing Code
 func main11() {
-	print(reverseString("apple"));
-	print(reverseWords("hello world"));
+	print(reverseString("apple"))
+	print(reverseWords("hello world"))
 }
 // 	elppa
 // 	world hello
@@ -258,7 +258,7 @@ func printAnagramUtil(_ a : inout [Character], _ i : Int, _ length : Int) {
 
 // Testing Code
 func main12() {
-	printAnagram("123");
+	printAnagram("123")
 }
 // 	123
 // 	132
@@ -298,7 +298,7 @@ func shuffle(_ str : String) -> String {
 
 // Testing Code
 func main13() {
-	print(shuffle("ABCDE12345"));
+	print(shuffle("ABCDE12345"))
 }
 // A1B2C3D4E5
 
@@ -328,18 +328,18 @@ func matchExpUtil(_ exp : inout [Character], _ str : inout [Character], _ i : In
 
 // Testing Code
 func main10() {
-	print(matchExp("*llo,?World?","Hello, World!"));
+	print(matchExp("*llo,?World?","Hello, World!"))
 }
 // true
 
-main1();
-main2();
-main3();
-main5();
-main7();
-main8();
-main9();
-main11();
-main12();
-main13();
-main10();
+main1()
+main2()
+main3()
+main5()
+main7()
+main8()
+main9()
+main11()
+main12()
+main13()
+main10()

@@ -189,19 +189,19 @@ func fun13(_ n : Int) -> Int {
 	return m
 }
 
-print("N = 100, Number of instructions in O(n):: \(fun1(100))");
-print("N = 100, Number of instructions in O(n^2):: \(fun2(100))");
-print("N = 100, Number of instructions in O(n^3):: \(fun3(100))");
-print("N = 100, Number of instructions in O(n^3):: \(fun4(100))");
-print("N = 100, Number of instructions in O(n^2):: \(fun5(100))");
-print("N = 100, Number of instructions in O(n^2):: \(fun6(100))");
-print("N = 100, Number of instructions in O(n):: \(fun7(100))");
-print("N = 100, Number of instructions in O(n):: \(fun8(100))");
-print("N = 100, Number of instructions in O(log(n)):: \(fun9(100))");
-print("N = 100, Number of instructions in O(log(n)):: \(fun10(100))");
-print("N = 100, Number of instructions in O(n^2):: \(fun11(100))");
-print("N = 100, Number of instructions in O(n^(3/2)):: \(fun12(100))");
-print("N = 100, Number of instructions in O(n):: \(fun13(100))");
+print("N = 100, Number of instructions in O(n):: \(fun1(100))")
+print("N = 100, Number of instructions in O(n^2):: \(fun2(100))")
+print("N = 100, Number of instructions in O(n^3):: \(fun3(100))")
+print("N = 100, Number of instructions in O(n^3):: \(fun4(100))")
+print("N = 100, Number of instructions in O(n^2):: \(fun5(100))")
+print("N = 100, Number of instructions in O(n^2):: \(fun6(100))")
+print("N = 100, Number of instructions in O(n):: \(fun7(100))")
+print("N = 100, Number of instructions in O(n):: \(fun8(100))")
+print("N = 100, Number of instructions in O(log(n)):: \(fun9(100))")
+print("N = 100, Number of instructions in O(log(n)):: \(fun10(100))")
+print("N = 100, Number of instructions in O(n^2):: \(fun11(100))")
+print("N = 100, Number of instructions in O(n^(3/2)):: \(fun12(100))")
+print("N = 100, Number of instructions in O(n):: \(fun13(100))")
 
 /*
 N = 100, Number of instructions in O(n):: 100

@@ -1,35 +1,35 @@
-import Foundation;
+import Foundation
 
 func feasible(_ Q : inout [Int], _ k : Int) -> Bool {
-	var i : Int = 0;
+	var i : Int = 0
 	while (i < k) {
 		if (Q[k] == Q[i] || abs(Q[i] - Q[k]) == abs(i - k)) {
-			return false;
+			return false
 		}
-		i += 1;
+		i += 1
 	}
-	return true;
+	return true
 }
 
 func nQueens(_ Q : inout [Int], _ k : Int, _ n : Int) {
 	if (k == n) {
-		print(Q);
-		return;
+		print(Q)
+		return
 	}
 
-	var i : Int = 0;
+	var i : Int = 0
 	while (i < n) {
-		Q[k] = i;
+		Q[k] = i
 		if (feasible( &Q,k)) {
-			nQueens( &Q,k + 1,n);
+			nQueens( &Q,k + 1,n)
 		}
-		i += 1;
+		i += 1
 	}
 }
 
 // Testing code.
-var Q : [Int] = Array(repeating: 0, count: 8);
-nQueens( &Q,0,8);
+var Q : [Int] = Array(repeating: 0, count: 8)
+nQueens( &Q,0,8)
 
 /* 
 [0, 4, 7, 5, 2, 6, 1, 3]
