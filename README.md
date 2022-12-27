@@ -1,6 +1,9 @@
 # Data-Structures-and-Algorithms-using-Swift
 
-**This is the code repository for book "Data Structures & Algorithms Using Swift".**
+**This is the code repository of book "Data Structures & Algorithms Using Swift".**
+
+![alt text](https://m.media-amazon.com/images/P/B0BPGX31BJ.jpg)
+
 
 **About The Book**
 - This textbook provides in depth coverage of various Data Structures and Algorithms.
@@ -35,6 +38,4 @@
 - Chapter 18: Dynamic Programming
 - Chapter 19: Backtracking
 - Chapter 20: Complexity Theory
-
-![alt text](https://m.media-amazon.com/images/P/B0BPGX31BJ.jpg)
 
